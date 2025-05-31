@@ -30,12 +30,7 @@ npm install
 ```
 
 3. **Configurer l'environnement**
-Créer un fichier `.env` à la racine avec :
-```env
-MONGODB_URI="mongodb+srv://<user>:<password>@cluster0.mongodb.net/eurinhash?retryWrites=true&w=majority"
-NEXT_PUBLIC_SITE_URL="https://eurinhash.com"
-NODE_ENV="production"
-```
+Créer un fichier `.env` à la racine avec les variables d'environnement nécessaires.
 
 4. **Générer le client Prisma**
 ```bash
@@ -58,7 +53,7 @@ Le site sera accessible sur [http://localhost:3000](http://localhost:3000)
 
 - Le site est déployé sur [eurinhash.com](https://eurinhash.com)
 - Utilisez un hébergeur compatible Next.js (Vercel, OVH, etc.)
-- Configurez les variables d'environnement de production (notamment `MONGODB_URI`)
+- Configurez les variables d'environnement de production
 - Assurez-vous que le fichier `.env` n'est **jamais** commité (il est dans `.gitignore`)
 
 ## Sécurité & RGPD
