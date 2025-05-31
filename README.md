@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# EurinHash - Hub Central de l'Innovation Digitale
 
-## Getting Started
+Ce projet est la page "Coming Soon" du site [eurinhash.com](https://eurinhash.com), dédiée à l'innovation digitale : cybersécurité, cloud, IA, formation et architecture de solutions.
 
-First, run the development server:
+## Fonctionnalités principales
+- Compte à rebours avant lancement
+- Formulaire d'inscription à la newsletter (avec gestion des doublons)
+- Popups stylisés de succès et d'erreur
+- Design moderne, responsive, mode sombre
+- Données stockées de façon sécurisée (MongoDB via Prisma)
 
+## Technologies utilisées
+- [Next.js 14](https://nextjs.org/)
+- [React 18](https://react.dev/)
+- [Tailwind CSS 3](https://tailwindcss.com/)
+- [Prisma ORM](https://www.prisma.io/)
+- [MongoDB Atlas](https://www.mongodb.com/atlas)
+
+## Installation locale
+
+1. **Cloner le dépôt**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repo-url>
+cd eurinhash-cs
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Installer les dépendances**
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Configurer l'environnement**
+Créer un fichier `.env` à la racine avec :
+```env
+MONGODB_URI="mongodb+srv://<user>:<password>@cluster0.mongodb.net/eurinhash?retryWrites=true&w=majority"
+NEXT_PUBLIC_SITE_URL="https://eurinhash.com"
+NODE_ENV="production"
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. **Générer le client Prisma**
+```bash
+npx prisma generate
+```
 
-## Learn More
+5. **Pousser le schéma Prisma**
+```bash
+npx prisma db push
+```
 
-To learn more about Next.js, take a look at the following resources:
+6. **Lancer le serveur local**
+```bash
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Le site sera accessible sur [http://localhost:3000](http://localhost:3000)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Déploiement en production
 
-## Deploy on Vercel
+- Le site est déployé sur [eurinhash.com](https://eurinhash.com)
+- Utilisez un hébergeur compatible Next.js (Vercel, OVH, etc.)
+- Configurez les variables d'environnement de production (notamment `MONGODB_URI`)
+- Assurez-vous que le fichier `.env` n'est **jamais** commité (il est dans `.gitignore`)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Sécurité & RGPD
+- Les emails sont uniques et stockés chiffrés dans MongoDB
+- Consentement explicite requis pour l'inscription
+- Aucune donnée partagée avec des tiers
+- Droit de suppression/modification sur demande
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Personnalisation
+- Les couleurs, polices et textes sont facilement modifiables dans `tailwind.config.js` et `app/globals.css`
+- Les popups sont dans `app/components/SuccessAlert.tsx` et `app/components/ErrorAlert.tsx`
+
+## Contact
+Pour toute question ou suggestion : contact@eurinhash.com
+
+---
+
+© 2024 EurinHash. Tous droits réservés.
