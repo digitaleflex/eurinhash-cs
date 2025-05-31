@@ -1,6 +1,8 @@
 import { Orbitron, Inter } from 'next/font/google';
 import './globals.css'
 import type { Metadata } from 'next'
+import Navigation from './components/Navigation';
+import Footer from './components/Footer';
 
 const orbitron = Orbitron({ 
   subsets: ['latin'],
@@ -24,7 +26,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <body className={`${inter.variable} ${orbitron.variable} font-sans`}>{children}</body>
+      <body className={`${inter.variable} ${orbitron.variable} font-sans`}>
+        <Navigation />
+        <div className="pt-20 min-h-screen flex flex-col">
+          {children}
+        </div>
+        <Footer />
+      </body>
     </html>
   )
 }
