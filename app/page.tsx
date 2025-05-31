@@ -1,5 +1,5 @@
 'use client';
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import SuccessAlert from './components/SuccessAlert';
@@ -17,6 +17,7 @@ export default function Home() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -184,10 +185,41 @@ export default function Home() {
       <header className="fixed w-full bg-[#0A0F2C]/80 backdrop-blur-sm z-50">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="logo-text text-2xl font-bold">EurinHash</div>
-          <div className="space-x-6">
+          
+          {/* Menu Hamburger pour Mobile */}
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden text-white p-2"
+            aria-label="Menu"
+          >
+            <svg 
+              className="w-6 h-6" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              {isMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+
+          {/* Menu Desktop */}
+          <div className="hidden md:flex space-x-6">
             <a href="#" className="hover:text-[#007CF0] transition-colors">Accueil</a>
             <a href="#" className="hover:text-[#007CF0] transition-colors">À propos</a>
             <a href="#" className="hover:text-[#007CF0] transition-colors">Contact</a>
+          </div>
+
+          {/* Menu Mobile */}
+          <div className={`md:hidden absolute top-full left-0 right-0 bg-[#0A0F2C]/95 backdrop-blur-sm transition-all duration-300 ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+            <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+              <a href="#" className="hover:text-[#007CF0] transition-colors py-2">Accueil</a>
+              <a href="#" className="hover:text-[#007CF0] transition-colors py-2">À propos</a>
+              <a href="#" className="hover:text-[#007CF0] transition-colors py-2">Contact</a>
+            </div>
           </div>
         </nav>
       </header>
@@ -288,14 +320,30 @@ export default function Home() {
       </section>
 
       {/* Social Links */}
-      <section className="py-20">
+      <section className="py-12 md:py-20">
         <div className="container mx-auto px-4 text-center">
           <h2 className="section-title">Connectez-vous avec nous</h2>
-          <div className="flex justify-center space-x-8">
-            <a href="#" className="text-2xl hover:text-[#007CF0] transition-colors">LinkedIn</a>
-            <a href="#" className="text-2xl hover:text-[#007CF0] transition-colors">GitHub</a>
-            <a href="#" className="text-2xl hover:text-[#007CF0] transition-colors">WhatsApp</a>
-            <a href="#" className="text-2xl hover:text-[#007CF0] transition-colors">Email</a>
+          <div className="flex flex-col items-center gap-4 md:flex-row md:justify-center md:space-x-8 md:gap-0 max-w-full overflow-x-auto py-4">
+            <a href="https://www.linkedin.com/in/eurindalemeida/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-2xl hover:text-[#007CF0] transition-colors">
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-9h3v9zm-1.5-10.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm15.5 10.268h-3v-4.604c0-1.099-.021-2.513-1.531-2.513-1.531 0-1.767 1.197-1.767 2.434v4.683h-3v-9h2.881v1.233h.041c.401-.761 1.381-1.563 2.845-1.563 3.042 0 3.604 2.003 3.604 4.605v4.725z"/></svg>
+              LinkedIn
+            </a>
+            <a href="https://github.com/digitaleflex" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-2xl hover:text-[#007CF0] transition-colors">
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.418-1.305.762-1.605-2.665-.305-5.466-1.334-5.466-5.93 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.553 3.297-1.23 3.297-1.23.653 1.653.242 2.873.119 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.803 5.624-5.475 5.921.43.372.823 1.102.823 2.222 0 1.606-.014 2.898-.014 3.293 0 .322.216.694.825.576 4.765-1.588 8.199-6.084 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              GitHub
+            </a>
+            <a href="https://wa.me/22962265246" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-2xl hover:text-[#007CF0] transition-colors">
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.16 1.6 5.97L0 24l6.26-1.64A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.19-1.24-6.19-3.48-8.52zM12 22c-1.85 0-3.68-.5-5.26-1.44l-.38-.22-3.72.98.99-3.62-.25-.37A9.94 9.94 0 0 1 2 12c0-5.52 4.48-10 10-10s10 4.48 10 10-4.48 10-10 10zm5.2-7.6c-.28-.14-1.65-.81-1.9-.9-.25-.09-.43-.14-.61.14-.18.28-.7.9-.86 1.08-.16.18-.32.2-.6.07-.28-.14-1.18-.44-2.25-1.41-.83-.74-1.39-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.13-.13.28-.34.42-.51.14-.17.18-.29.28-.48.09-.19.05-.36-.02-.5-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47-.16-.01-.35-.01-.54-.01-.19 0-.5.07-.76.34-.26.27-1 1-1 2.43s1.02 2.82 1.16 3.02c.14.2 2.01 3.07 4.88 4.19.68.29 1.21.46 1.62.59.68.22 1.3.19 1.79.12.55-.08 1.65-.67 1.88-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.18-.53-.32z"/></svg>
+              WhatsApp
+            </a>
+            <a href="mailto:eurinhash@gmail.com" className="flex items-center gap-2 text-2xl hover:text-[#007CF0] transition-colors">
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 2l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+              Email
+            </a>
+            <a href="https://www.facebook.com/eurincode" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-2xl hover:text-[#007CF0] transition-colors">
+              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.325 24h11.495v-9.294H9.691v-3.622h3.129V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.325-.592 1.325-1.326V1.326C24 .592 23.405 0 22.675 0"/></svg>
+              Facebook
+            </a>
           </div>
         </div>
       </section>
