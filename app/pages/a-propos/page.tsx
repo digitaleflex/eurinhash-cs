@@ -63,7 +63,7 @@ export default function About() {
           <h2 className="text-2xl md:text-3xl font-bold">Derrière EurinHash : Eurin HASH</h2>
         </div>
         <p className="text-gray-200 mb-2">
-          <strong>Architecte de solutions digitales. Expert cloud & cybersécurité. Formateur. Visionnaire.</strong>
+          <strong>Architecte de solutions digitales. Spécialiste cloud & cybersécurité. Formateur. Visionnaire.</strong>
         </p>
         <p className="text-gray-200 mb-2">
           Je m'appelle <strong>Eurin HASH</strong>. Entrepreneur numérique, passionné par la technologie, j'ai fondé EurinHash pour :
