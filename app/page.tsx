@@ -6,47 +6,44 @@ import SuccessAlert from './components/SuccessAlert';
 import ErrorAlert from './components/ErrorAlert';
 
 export default function Home() {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0
-  });
-
   const [showNewsletter, setShowNewsletter] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Date de lancement fixe (5 juin 2025)
-  const launchDate = new Date('2025-06-05T00:00:00');
+  // Date de référence : 5 juin 2025
+  const baseDate = new Date('2025-06-05T00:00:00Z');
+
+  // Date de lancement officielle : 90 jours après la date de référence
+  const launchDate = new Date(baseDate);
+  launchDate.setDate(baseDate.getDate() + 90);
+
+  // Fonction pour calculer le temps restant
+  const calculateTimeLeft = () => {
+    const now = new Date();
+    const difference = launchDate.getTime() - now.getTime();
+    
+    if (difference <= 0) {
+      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    }
+
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((difference / 1000 / 60) % 60);
+    const seconds = Math.floor((difference / 1000) % 60);
+
+    return { days, hours, minutes, seconds };
+  };
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
-    const calculateTimeLeft = () => {
-      const now = new Date();
-      const difference = launchDate.getTime() - now.getTime();
-      
-      if (difference <= 0) {
-        return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-      }
-
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((difference / 1000 / 60) % 60);
-      const seconds = Math.floor((difference / 1000) % 60);
-        
-        return { days, hours, minutes, seconds };
-    };
-
-    // Mettre à jour immédiatement
-    setTimeLeft(calculateTimeLeft());
-
-    // Mettre à jour toutes les secondes
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
+    // Nettoyer l'intervalle lors du démontage du composant
     return () => clearInterval(timer);
   }, []);
 
@@ -244,7 +241,7 @@ export default function Home() {
           </div>
           <div className="mt-8 p-4 bg-[#0A0F2C]/50 rounded-xl border border-[#007CF0]/30 inline-block">
             <div className="text-[#007CF0] font-semibold mb-1">Date officielle de lancement</div>
-            <div className="text-2xl font-orbitron text-white">5 juin 2025</div>
+            <div className="text-2xl font-orbitron text-white">{launchDate.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</div>
           </div>
         </div>
       </section>
