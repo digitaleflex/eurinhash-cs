@@ -7,10 +7,10 @@ import ErrorAlert from './components/ErrorAlert';
 
 export default function Home() {
   const [timeLeft, setTimeLeft] = useState({
-    days: 89,
-    hours: 12,
-    minutes: 43,
-    seconds: 21
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
   });
 
   const [showNewsletter, setShowNewsletter] = useState(false);
@@ -19,27 +19,32 @@ export default function Home() {
   const [errorMessage, setErrorMessage] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Date de lancement fixe (5 juin 2025)
+  const launchDate = new Date('2025-06-05T00:00:00');
+
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        let { days, hours, minutes, seconds } = prev;
-        seconds--;
-        
-        if (seconds < 0) {
-          seconds = 59;
-          minutes--;
-        }
-        if (minutes < 0) {
-          minutes = 59;
-          hours--;
-        }
-        if (hours < 0) {
-          hours = 23;
-          days--;
-        }
+    const calculateTimeLeft = () => {
+      const now = new Date();
+      const difference = launchDate.getTime() - now.getTime();
+      
+      if (difference <= 0) {
+        return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+      }
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((difference / 1000 / 60) % 60);
+      const seconds = Math.floor((difference / 1000) % 60);
         
         return { days, hours, minutes, seconds };
-      });
+    };
+
+    // Mettre à jour immédiatement
+    setTimeLeft(calculateTimeLeft());
+
+    // Mettre à jour toutes les secondes
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
     }, 1000);
 
     return () => clearInterval(timer);
@@ -236,6 +241,10 @@ export default function Home() {
               <div className="text-4xl font-bold">{timeLeft.seconds}</div>
               <div className="text-sm text-gray-400">Secondes</div>
             </div>
+          </div>
+          <div className="mt-8 p-4 bg-[#0A0F2C]/50 rounded-xl border border-[#007CF0]/30 inline-block">
+            <div className="text-[#007CF0] font-semibold mb-1">Date officielle de lancement</div>
+            <div className="text-2xl font-orbitron text-white">5 juin 2025</div>
           </div>
         </div>
       </section>
