@@ -1,2 +1,5 @@
 {
+    "WillLuke.nextjs.addTypesOnSave": true,
+    "WillLuke.nextjs.hasPrompted": true,
+    "typescript.autoClosingTags": false
 }
