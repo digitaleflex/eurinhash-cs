@@ -13,7 +13,8 @@ const nextConfig = {
     serverActions: {
       allowedOrigins: ['localhost:3000'],
     },
-    optimizeCss: true,
+    // Disable CSS optimization to avoid missing 'critters' dependency during export
+    optimizeCss: false,
     optimizePackageImports: ['lucide-react'],
   },
   // Performance optimizations
