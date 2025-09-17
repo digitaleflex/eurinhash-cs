@@ -1,4 +1,5 @@
 import Container from '../ui/Container';
+import Navigation from '../Navigation';
 
 interface PageLayoutProps {
   children: React.ReactNode;

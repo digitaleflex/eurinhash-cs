@@ -51,7 +51,7 @@ export default function CTASection({
         </div>
         {secondaryButton && (
           <Button
-            variant="outline"
+          variant="secondary"
             size="lg"
             onClick={secondaryButton.onClick}
           >

@@ -68,7 +68,7 @@ export default function ProfileSwitcher({ currentProfile }: ProfileSwitcherProps
 
         {/* Switch button */}
         <Button
-          variant="outline"
+          variant="secondary"
           size="sm"
           onClick={() => setShowModal(true)}
           icon={<span>🔄</span>}
@@ -140,7 +140,7 @@ export default function ProfileSwitcher({ currentProfile }: ProfileSwitcherProps
         <div className="border-t border-gray-600/30 pt-4">
           <div className="flex flex-col sm:flex-row gap-3 justify-between items-center">
             <Button
-              variant="outline"
+              variant="secondary"
               size="sm"
               onClick={handleResetPreferences}
               className="text-gray-400 hover:text-white"

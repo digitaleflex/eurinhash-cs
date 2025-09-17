@@ -8,10 +8,10 @@ export const dynamic = 'force-dynamic';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email, interest, consent } = body;
+    const { email, consent, source } = body as { email?: string; consent?: boolean; source?: string };
 
     // Validation basique
-    if (!email || !interest || !consent) {
+    if (!email || consent !== true) {
       return Response.json(
         { error: 'Tous les champs sont requis' },
         { status: 400 }
@@ -34,10 +34,11 @@ export async function POST(request: NextRequest) {
     const subscriber = await prisma.subscriber.create({
       data: {
         email,
-        interest,
-        consent,
+        gdprConsent: Boolean(consent),
+        marketingConsent: Boolean(consent),
+        source: (source as any) ?? 'HOMEPAGE',
         ipAddress: request.headers.get('x-forwarded-for') || 'unknown',
-        userAgent: request.headers.get('user-agent') || 'unknown'
+        userAgent: request.headers.get('user-agent') || 'unknown',
       }
     });
 

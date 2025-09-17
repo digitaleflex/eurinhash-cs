@@ -125,7 +125,7 @@ export default function ProgramCard({
 
       {/* Expand/Collapse button */}
       <Button
-        variant="outline"
+        variant="secondary"
         size="sm"
         onClick={() => setIsExpanded(!isExpanded)}
         className="w-full mb-4"

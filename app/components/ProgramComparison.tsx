@@ -39,10 +39,9 @@ export default function ProgramComparison() {
       {/* Program selection */}
       <Grid cols={3} className="lg:grid-cols-5">
         {FORMATION_PROGRAMS.map((program) => (
-          <Card
+          <div
             key={program.id}
-            hover
-            className={`cursor-pointer transition-all duration-300 ${
+            className={`cursor-pointer transition-all duration-300 bg-[#1A1F3C]/80 backdrop-blur-sm border rounded-xl p-6 hover:border-[#007CF0]/50 hover:scale-105 ${
               selectedPrograms.includes(program.id)
                 ? 'border-[#00C48C] bg-[#00C48C]/10 scale-105'
                 : 'border-gray-600/30'
@@ -61,7 +60,7 @@ export default function ProgramComparison() {
                 {selectedPrograms.includes(program.id) ? 'Sélectionné' : 'Sélectionner'}
               </Badge>
             </div>
-          </Card>
+          </div>
         ))}
       </Grid>
 
@@ -189,7 +188,7 @@ export default function ProgramComparison() {
       {selectedPrograms.length > 0 && (
         <div className="text-center">
           <Button
-            variant="outline"
+            variant="secondary"
             onClick={() => {
               setSelectedPrograms([]);
               setShowComparison(false);
