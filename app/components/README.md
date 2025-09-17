@@ -15,6 +15,7 @@ components/
 ## Composants UI de Base
 
 ### Button
+
 ```tsx
 import { Button } from './ui';
 
@@ -24,6 +25,7 @@ import { Button } from './ui';
 ```
 
 ### Card
+
 ```tsx
 import { Card } from './ui';
 
@@ -33,6 +35,7 @@ import { Card } from './ui';
 ```
 
 ### Grid & Flex
+
 ```tsx
 import { Grid, Flex } from './ui';
 
@@ -49,6 +52,7 @@ import { Grid, Flex } from './ui';
 ```
 
 ### Typography
+
 ```tsx
 import { Heading, Text } from './ui';
 
@@ -64,6 +68,7 @@ import { Heading, Text } from './ui';
 ## Composants de Layout
 
 ### PageLayout
+
 ```tsx
 import { PageLayout } from './layout';
 
@@ -73,6 +78,7 @@ import { PageLayout } from './layout';
 ```
 
 ### PageHeader
+
 ```tsx
 import { PageHeader } from './layout';
 
@@ -87,6 +93,7 @@ import { PageHeader } from './layout';
 ```
 
 ### ContentSection
+
 ```tsx
 import { ContentSection } from './layout';
 
@@ -103,6 +110,7 @@ import { ContentSection } from './layout';
 ## Composants Métier
 
 ### FeatureList
+
 ```tsx
 import { FeatureList } from './common';
 
@@ -119,6 +127,7 @@ const features = [
 ```
 
 ### StatsList
+
 ```tsx
 import { StatsList } from './common';
 
@@ -135,6 +144,7 @@ const stats = [
 ```
 
 ### CTASection
+
 ```tsx
 import { CTASection } from './common';
 
@@ -152,6 +162,7 @@ import { CTASection } from './common';
 ## Formulaires
 
 ### Input
+
 ```tsx
 import { Input } from './ui';
 
@@ -165,6 +176,7 @@ import { Input } from './ui';
 ```
 
 ### Form
+
 ```tsx
 import { Form } from './ui';
 
@@ -189,6 +201,7 @@ const fields = [
 ```
 
 ### Modal
+
 ```tsx
 import { Modal } from './ui';
 
