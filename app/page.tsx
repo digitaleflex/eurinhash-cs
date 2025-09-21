@@ -25,16 +25,16 @@ export default function Home() {
             J’apporte des outils et un savoir‑faire cloud pour créer des expériences web
             rapides, sécurisées et personnalisées.
           </p>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-5 py-3 text-sm font-medium transition hover:shadow-[0_10px_40px_-10px] hover:shadow-foreground/30"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium transition hover:shadow-[0_10px_40px_-10px] hover:shadow-foreground/30 w-full sm:w-auto min-h-[44px]"
             >
               Démarrer un projet
             </a>
             <a
               href="/projects"
-              className="inline-flex items-center gap-2 rounded-full border border-foreground/20 px-5 py-3 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-foreground/20 px-6 py-3 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent w-full sm:w-auto min-h-[44px]"
             >
               Voir mes projets
             </a>
