@@ -6,8 +6,8 @@ import { Navigation } from "@/components/navigation";
 import { Logo } from "@/components/logo";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { ThemeScript } from "@/components/theme-script";
 import { MobileNav } from "@/components/mobile-nav";
+
 import "./globals.css";
 
 const geistSans = Inter({
@@ -32,12 +32,16 @@ export default function RootLayout({
     <html lang="fr" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <ThemeScript />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground min-h-screen flex flex-col`}
       >
-        <ThemeProvider defaultTheme="light" storageKey="eurinhash-theme">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <header className="border-b border-border sticky top-0 z-50 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="mx-auto w-full max-w-6xl px-6 py-4 flex items-center justify-between">
               <Logo />
@@ -50,7 +54,9 @@ export default function RootLayout({
               </div>
             </div>
           </header>
-          <main className="flex-1">{children}</main>
+          <main className="flex-1">
+            {children}
+          </main>
           <footer className="border-t border-border">
             <div className="mx-auto w-full max-w-6xl px-6 py-8">
               <div className="flex flex-col md:flex-row items-center justify-between gap-6">
