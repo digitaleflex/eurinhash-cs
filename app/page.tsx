@@ -1,3 +1,6 @@
+import { Building2, Factory } from "lucide-react";
+import Image from "next/image";
+
 export default function Home() {
   return (
     <main className="relative isolate">
@@ -58,7 +61,16 @@ export default function Home() {
               En savoir plus
             </a>
           </div>
-          <div className="h-64 bg-gradient-to-tr from-accent/40 to-transparent rounded-2xl shadow-inner" />
+          <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden shadow-lg">
+            <Image
+              src="/eurin-photo.webp"
+              alt="Eurin Hash - Consultant IT & Entrepreneur Numérique"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              priority
+            />
+          </div>
         </div>
       </section>
 
@@ -95,29 +107,80 @@ export default function Home() {
 
       {/* === PROJECTS === */}
       <section className="py-24 md:py-32 bg-background">
-        <div className="mx-auto max-w-6xl px-6 md:px-8 text-center">
-          <h2 className="text-3xl font-bold tracking-tight mb-12">Projets récents</h2>
-          <div className="grid gap-8 md:grid-cols-3">
-            {[
-              { name: "FlexPress Core", desc: "CMS WordPress conteneurisé" },
-              { name: "Plateforme Attestations", desc: "Solution Next.js sécurisée" },
-              { name: "Hashcode Profilage", desc: "Plateforme communautaire IT" },
-            ].map((project) => (
-              <div
-                key={project.name}
-                className="p-8 rounded-2xl border border-foreground/10 bg-muted hover:shadow-lg transition"
-              >
-                <h3 className="text-xl font-semibold mb-3">{project.name}</h3>
-                <p className="text-muted-foreground">{project.desc}</p>
+        <div className="mx-auto max-w-6xl px-6 md:px-8">
+          <h2 className="text-3xl font-bold tracking-tight mb-12 text-center">Projets récents</h2>
+          
+          {/* Projets Clients */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-semibold mb-8 flex items-center gap-2">
+              <Building2 className="h-6 w-6 text-accent" />
+              Projets Clients
+            </h3>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <div className="p-6 rounded-2xl border border-foreground/10 bg-muted hover:shadow-lg transition">
+                <h4 className="text-lg font-semibold mb-2">Calendrier Divin – Sainte Adoration</h4>
+                <p className="text-sm text-muted-foreground mb-3">Application web spirituelle</p>
+                <p className="text-sm mb-3">Développement complet (backend Node.js, frontend React, PWA, IA spirituelle, calendrier liturgique, système de temps divin)</p>
+                <p className="text-xs text-accent font-medium">2023 – 2024</p>
               </div>
-            ))}
+              
+              <div className="p-6 rounded-2xl border border-foreground/10 bg-muted hover:shadow-lg transition">
+                <h4 className="text-lg font-semibold mb-2">Plateforme d'attestations – Ferme St André</h4>
+                <p className="text-sm text-muted-foreground mb-3">Application Next.js pour gestion documentaire</p>
+                <p className="text-sm mb-3">Conception et déploiement d'une solution sécurisée de gestion des attestations et certificats</p>
+                <p className="text-xs text-accent font-medium">2024</p>
+              </div>
+              
+              <div className="p-6 rounded-2xl border border-foreground/10 bg-muted hover:shadow-lg transition">
+                <h4 className="text-lg font-semibold mb-2">Site web – Ferme agro-piscicole St André</h4>
+                <p className="text-sm text-muted-foreground mb-3">Site vitrine professionnel</p>
+                <p className="text-sm mb-3">Développement et mise en ligne du site institutionnel de la ferme</p>
+                <p className="text-xs text-accent font-medium">2024</p>
+              </div>
+            </div>
           </div>
-          <a
-            href="/projects"
-            className="mt-10 inline-block rounded-full border border-foreground/20 px-5 py-3 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
-          >
-            Voir tous les projets
-          </a>
+
+          {/* Projets Internes */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-semibold mb-8 flex items-center gap-2">
+              <Factory className="h-6 w-6 text-accent" />
+              Projets Internes E-FLEX
+            </h3>
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="p-6 rounded-2xl border border-foreground/10 bg-muted hover:shadow-lg transition">
+                <h4 className="text-lg font-semibold mb-2">Infrastructure VPS interne E-Flex</h4>
+                <p className="text-sm text-muted-foreground mb-3">Infrastructure DevOps interne</p>
+                <p className="text-sm mb-3">Déploiement et gestion de serveurs VPS sécurisés, containerisation Docker, routage Traefik, administration via Portainer, CI/CD GitHub, monitoring via Uptime Kuma + alertes Telegram</p>
+                <p className="text-xs text-accent font-medium">Début 20/01/2024 – en cours</p>
+              </div>
+              
+              <div className="p-6 rounded-2xl border border-foreground/10 bg-muted hover:shadow-lg transition">
+                <h4 className="text-lg font-semibold mb-2">FlexPress Core</h4>
+                <p className="text-sm text-muted-foreground mb-3">Projet open-source, CMS conteneurisé</p>
+                <p className="text-sm mb-3">Développement d'un socle WordPress open-source, optimisé pour la production et modulaire</p>
+                <div className="flex items-center justify-between">
+                  <p className="text-xs text-accent font-medium">Début 15/06/2025 – en cours</p>
+                  <a 
+                    href="https://github.com/eurinhash/flexpress-core" 
+                    className="text-xs text-accent hover:underline"
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    GitHub FlexPress Core
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <a
+              href="/projects"
+              className="inline-block rounded-full border border-foreground/20 px-5 py-3 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
+            >
+              Voir tous les projets
+            </a>
+          </div>
         </div>
       </section>
 

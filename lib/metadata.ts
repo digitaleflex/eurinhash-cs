@@ -7,9 +7,9 @@ export const siteConfig = {
   url: "https://eurinhash.dev",
   ogImage: "https://eurinhash.dev/og-image.jpg",
   links: {
-    email: "contact@eurinhash.dev",
-    linkedin: "https://linkedin.com/in/eurinhash",
-    github: "https://github.com/eurinhash",
+    email: "contact@eurinhash.com",
+    linkedin: "https://linkedin.com/in/eurinalmeida",
+    github: "https://github.com/digitaleflex",
   },
 }
 
