@@ -56,7 +56,7 @@ export default function SkillsPage() {
 
   return (
     <main className="relative isolate">
-      <section className="mx-auto max-w-6xl px-6 md:px-8 py-24 md:py-32">
+      <section className="mx-auto max-w-6xl px-6 md:px-8 py-16 sm:py-20 md:py-28">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
             Mes Compétences

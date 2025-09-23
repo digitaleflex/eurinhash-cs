@@ -4,7 +4,7 @@ export default function VisionPage() {
   return (
     <main className="relative isolate">
       {/* Hero Quote */}
-      <section className="mx-auto max-w-4xl px-6 md:px-8 py-24 md:py-32 text-center">
+      <section className="mx-auto max-w-4xl px-6 md:px-8 py-16 sm:py-20 md:py-28 text-center">
         <blockquote className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-8">
           « La technologie doit se faire oublier : puissante, rapide, fluide. »
         </blockquote>
@@ -14,7 +14,7 @@ export default function VisionPage() {
       </section>
 
       {/* Vision détaillée */}
-      <section className="py-24 bg-muted">
+      <section className="py-16 sm:py-20 bg-muted">
         <div className="mx-auto max-w-4xl px-6 md:px-8">
           <h2 className="text-3xl font-bold tracking-tight mb-12 text-center">Ma Vision</h2>
           
@@ -59,7 +59,7 @@ export default function VisionPage() {
       </section>
 
       {/* Principes */}
-      <section className="py-24">
+      <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-6 md:px-8">
           <h2 className="text-3xl font-bold tracking-tight mb-12 text-center">Mes Principes</h2>
           
@@ -128,7 +128,7 @@ export default function VisionPage() {
       </section>
 
       {/* Impact */}
-      <section className="py-24 bg-muted">
+      <section className="py-16 sm:py-20 bg-muted">
         <div className="mx-auto max-w-4xl px-6 md:px-8 text-center">
           <h2 className="text-3xl font-bold tracking-tight mb-8">L'Impact que je veux créer</h2>
           

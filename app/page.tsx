@@ -5,12 +5,12 @@ export default function Home() {
   return (
     <main className="relative isolate">
       {/* === HERO === */}
-      <section className="relative isolate">
+      <section className="relative isolate overflow-hidden">
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:64px_64px]" />
           <div className="absolute left-1/2 top-1/2 h-[700px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-[50%] bg-[radial-gradient(closest-side,rgba(59,130,246,0.18),transparent_60%)]" />
         </div>
-        <div className="mx-auto max-w-6xl px-6 md:px-8 py-24 md:py-32">
+        <div className="mx-auto max-w-6xl px-6 md:px-8 py-16 sm:py-20 md:py-28">
           <div className="flex flex-col items-center text-center gap-8">
             <svg
               className="h-16 w-16 text-foreground/80 transition duration-300 hover:rotate-3"
@@ -26,16 +26,16 @@ export default function Home() {
               J’apporte des outils et un savoir-faire cloud pour créer des expériences web
               rapides, sécurisées et personnalisées.
             </p>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full max-w-md">
               <a
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-5 py-3 text-sm font-medium transition hover:shadow-[0_10px_40px_-10px] hover:shadow-foreground/30"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-foreground text-background px-5 py-3 text-sm font-medium transition hover:shadow-[0_10px_40px_-10px] hover:shadow-foreground/30 w-full sm:w-auto"
               >
                 Démarrer un projet
               </a>
               <a
                 href="/projects"
-                className="inline-flex items-center gap-2 rounded-full border border-foreground/20 px-5 py-3 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-foreground/20 px-5 py-3 text-sm font-medium text-foreground transition hover:border-accent hover:text-accent w-full sm:w-auto"
               >
                 Voir mes projets
               </a>
@@ -45,7 +45,7 @@ export default function Home() {
       </section>
 
       {/* === ABOUT === */}
-      <section className="py-24 md:py-32 bg-background">
+      <section className="py-16 sm:py-20 md:py-28 bg-background">
         <div className="mx-auto max-w-5xl px-6 md:px-8 grid md:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-3xl font-bold tracking-tight mb-4">Qui suis-je ?</h2>
@@ -75,7 +75,7 @@ export default function Home() {
       </section>
 
       {/* === SERVICES === */}
-      <section className="py-24 md:py-32 bg-muted">
+      <section className="py-16 sm:py-20 md:py-28 bg-muted">
         <div className="mx-auto max-w-6xl px-6 md:px-8 text-center">
           <h2 className="text-3xl font-bold tracking-tight mb-12">Mes expertises</h2>
           <div className="grid gap-8 md:grid-cols-3">
@@ -106,7 +106,7 @@ export default function Home() {
       </section>
 
       {/* === PROJECTS === */}
-      <section className="py-24 md:py-32 bg-background">
+      <section className="py-16 sm:py-20 md:py-28 bg-background">
         <div className="mx-auto max-w-6xl px-6 md:px-8">
           <h2 className="text-3xl font-bold tracking-tight mb-12 text-center">Projets récents</h2>
           
@@ -185,7 +185,7 @@ export default function Home() {
       </section>
 
       {/* === VISION === */}
-      <section className="py-24 md:py-32 bg-muted">
+      <section className="py-16 sm:py-20 md:py-28 bg-muted">
         <div className="mx-auto max-w-3xl px-6 md:px-8 text-center">
           <h2 className="text-3xl font-bold tracking-tight mb-6">Ma vision</h2>
           <p className="text-lg text-muted-foreground">
@@ -197,7 +197,7 @@ export default function Home() {
       </section>
 
       {/* === CONTACT === */}
-      <section className="py-24 md:py-32 bg-background">
+      <section className="py-16 sm:py-20 md:py-28 bg-background">
         <div className="mx-auto max-w-4xl px-6 md:px-8 text-center">
           <h2 className="text-3xl font-bold tracking-tight mb-6">
             Discutons de votre projet
@@ -216,3 +216,4 @@ export default function Home() {
     </main>
   );
 }
+

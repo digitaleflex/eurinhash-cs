@@ -5,7 +5,7 @@ export default function AboutPage() {
   return (
     <main className="relative isolate">
       {/* Hero Section */}
-      <section className="mx-auto max-w-4xl px-6 md:px-8 py-24 md:py-32">
+      <section className="mx-auto max-w-4xl px-6 md:px-8 py-16 sm:py-20 md:py-28">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
             Eurin Hash
@@ -30,12 +30,12 @@ export default function AboutPage() {
         {/* Bio */}
         <div className="prose prose-lg mx-auto text-center max-w-3xl">
           <p className="text-lg leading-relaxed mb-6">
-            Passionné par l'innovation technologique et l'entrepreneuriat, je conçois des solutions 
+            Passionné par l’innovation technologique et l’entrepreneuriat, je conçois des solutions 
             cloud et web au croisement de performance et simplicité. Mon approche privilégie 
             la clarté, la sécurité et la durabilité des systèmes.
           </p>
           <p className="text-lg leading-relaxed mb-8">
-            Fondateur d'E-FLEX, j'accompagne les entreprises dans leur transformation numérique 
+            Fondateur d’E-FLEX, j’accompagne les entreprises dans leur transformation numérique 
             tout en formant la prochaine génération de talents IT. Ma vision : une technologie 
             accessible, souveraine et conçue pour durer.
           </p>
@@ -43,7 +43,7 @@ export default function AboutPage() {
       </section>
 
       {/* Parcours */}
-      <section className="py-24 bg-muted">
+      <section className="py-16 sm:py-20 bg-muted">
         <div className="mx-auto max-w-4xl px-6 md:px-8">
           <h2 className="text-3xl font-bold tracking-tight mb-12 text-center">Mon parcours</h2>
           <div className="space-y-8">
@@ -51,7 +51,7 @@ export default function AboutPage() {
               <h3 className="text-xl font-semibold mb-2">2024 - Présent</h3>
               <h4 className="text-lg font-medium text-accent mb-2">Fondateur & CEO - E-FLEX</h4>
               <p className="text-muted-foreground">
-                Création et développement d'une société de conseil IT spécialisée dans les solutions cloud, 
+                Création et développement d’une société de conseil IT spécialisée dans les solutions cloud, 
                 le développement web et la formation technologique.
               </p>
             </div>
@@ -78,7 +78,7 @@ export default function AboutPage() {
       </section>
 
       {/* Valeurs */}
-      <section className="py-24">
+      <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-6 md:px-8">
           <h2 className="text-3xl font-bold tracking-tight mb-12 text-center">Mes valeurs</h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -89,7 +89,7 @@ export default function AboutPage() {
               <h3 className="text-xl font-semibold mb-3">Clarté</h3>
               <p className="text-muted-foreground">
                 Des solutions simples, compréhensibles et efficaces. 
-                La complexité technique ne doit jamais nuire à l'expérience utilisateur.
+                La complexité technique ne doit jamais nuire à l’expérience utilisateur.
               </p>
             </div>
             
@@ -119,13 +119,13 @@ export default function AboutPage() {
       </section>
 
       {/* Contact CTA */}
-      <section className="py-24 bg-muted">
+      <section className="py-16 sm:py-20 bg-muted">
         <div className="mx-auto max-w-3xl px-6 md:px-8 text-center">
           <h2 className="text-3xl font-bold tracking-tight mb-6">
             Travaillons ensemble
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Vous avez un projet, une idée ou simplement envie d'échanger ? 
+            Vous avez un projet, une idée ou simplement envie d’échanger ? 
             Je serais ravi de discuter avec vous.
           </p>
           <a

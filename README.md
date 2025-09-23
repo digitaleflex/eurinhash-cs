@@ -20,6 +20,32 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Database & Supabase
+
+Env vars:
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+
+Setup:
+- `npm i`
+- Create `contact_messages` table in Supabase
+
+SQL for table:
+```sql
+create table if not exists contact_messages (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz default now(),
+  name text not null,
+  email text not null,
+  subject text,
+  message text not null,
+  status text not null default 'new'
+);
+```
+
+API test:
+- POST `/api/contact` with `{ name, email, subject?, message }`
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
