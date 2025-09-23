@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getSupabaseAdmin } from '@/lib/supabase';
+import { prisma } from '@/lib/prisma';
 
 export async function POST(request: Request) {
   try {
@@ -9,21 +9,25 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    const supabase = getSupabaseAdmin();
-    const { error } = await supabase.from('contact_messages').insert({
-      name,
-      email,
-      subject: subject ?? null,
-      message,
-      status: 'new',
+    // Utiliser Prisma avec l'extension Accelerate
+    const contactMessage = await prisma.contactMessage.create({
+      data: {
+        name,
+        email,
+        subject: subject ?? null,
+        message,
+        status: 'new',
+      },
     });
 
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
-
-    return NextResponse.json({ ok: true });
-  } catch (err: any) {
-    return NextResponse.json({ error: err?.message ?? 'Unexpected error' }, { status: 500 });
+    return NextResponse.json({ 
+      ok: true, 
+      id: contactMessage.id,
+      message: 'Message envoyé avec succès' 
+    });
+  } catch (err: unknown) {
+    console.error('Erreur Prisma:', err);
+    const errorMessage = err instanceof Error ? err.message : 'Unexpected error';
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
