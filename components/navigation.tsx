@@ -9,7 +9,6 @@ const navigationItems = [
   { href: '/about', label: 'À propos' },
   { href: '/projects', label: 'Projets' },
   { href: '/skills', label: 'Compétences' },
-  { href: '/blog', label: 'Blog' },
   { href: '/vision', label: 'Vision' },
   { href: '/contact', label: 'Contact' },
 ]

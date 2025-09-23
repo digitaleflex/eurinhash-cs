@@ -135,9 +135,6 @@ body {
 }
 
 /* Optimisations de performance */
-* {
-    will-change: auto;
-}
 
 .gpu-accelerated {
     transform: translateZ(0);

@@ -10,7 +10,6 @@ const navigationItems = [
   { href: '/about', label: 'À propos' },
   { href: '/projects', label: 'Projets' },
   { href: '/skills', label: 'Compétences' },
-  { href: '/blog', label: 'Blog' },
   { href: '/vision', label: 'Vision' },
   { href: '/contact', label: 'Contact' },
 ]
@@ -43,7 +42,7 @@ export function MobileNav() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  prefetch={true}
+                  prefetch={false}
                   onClick={() => setIsOpen(false)}
                   className={cn(
                     "px-4 py-3 rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground min-h-[44px] flex items-center",

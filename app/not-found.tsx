@@ -72,7 +72,6 @@ export default function NotFound() {
               { href: '/about', label: 'À propos' },
               { href: '/projects', label: 'Projets' },
               { href: '/skills', label: 'Compétences' },
-              { href: '/blog', label: 'Blog' },
               { href: '/contact', label: 'Contact' },
             ].map((link) => (
               <Link

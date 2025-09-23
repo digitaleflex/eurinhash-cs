@@ -1,5 +1,8 @@
 import { Code2, Cloud, Brain, Database, Shield, Zap, Users, Lightbulb, BookOpen, Search, Award } from "lucide-react";
 
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 export default function SkillsPage() {
   const technicalSkills = [
     {
@@ -60,7 +63,7 @@ export default function SkillsPage() {
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Un ensemble de compétences techniques et humaines au service de vos projets,
-            acquises par la pratique et l'expérience terrain.
+            acquises par la pratique et l&#39;expérience terrain.
           </p>
         </div>
 

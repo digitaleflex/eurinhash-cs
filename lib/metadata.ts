@@ -2,10 +2,10 @@ import { Metadata } from 'next'
 
 export const siteConfig = {
   name: "Eurin Hash",
-  title: "Eurin Hash - Développeur Full Stack & Expert Cloud",
+  title: "Eurin Hash - Développeur Full Stack & Specialiste Cloud",
   description: "Développeur passionné spécialisé dans les solutions web modernes, l'architecture cloud et l'expérience utilisateur. Création d'applications performantes et sécurisées.",
-  url: "https://eurinhash.dev",
-  ogImage: "https://eurinhash.dev/og-image.jpg",
+  url: "https://eurinhash.com",
+  ogImage: "https://eurinhash.com/og-image.jpg",
   links: {
     email: "contact@eurinhash.com",
     linkedin: "https://linkedin.com/in/eurinalmeida",

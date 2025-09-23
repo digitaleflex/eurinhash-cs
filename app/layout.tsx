@@ -7,8 +7,6 @@ import { Logo } from "@/components/logo";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { MobileNav } from "@/components/mobile-nav";
-import { ServiceWorkerRegistration } from "@/components/service-worker";
-import { ResourcePreloader } from "@/components/resource-preloader";
 
 import "./globals.css";
 
@@ -45,8 +43,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ServiceWorkerRegistration />
-          <ResourcePreloader />
           <header className="border-b border-border sticky top-0 z-50 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="mx-auto w-full max-w-6xl px-6 py-4 flex items-center justify-between">
               <Logo />
