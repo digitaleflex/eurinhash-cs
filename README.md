@@ -1,27 +1,20 @@
-# EurinHash - Hub Central de l'Innovation Digitale
+# Portfolio Eurin Hash
 
-Ce projet est la page "Coming Soon" du site [eurinhash.com](https://eurinhash.com), dédiée à l'innovation digitale : cybersécurité, cloud, IA, formation et architecture de solutions.
+Portfolio professionnel d'Eurin Hash - Développeur Full Stack & Expert Cloud
 
-## Fonctionnalités principales
-- Compte à rebours avant lancement
-- Formulaire d'inscription à la newsletter (avec gestion des doublons)
-- Popups stylisés de succès et d'erreur
-- Design moderne, responsive, mode sombre
-- Données stockées de façon sécurisée (MongoDB via Prisma)
+## 🚀 Démarrage rapide
 
-## Technologies utilisées
-- [Next.js 14](https://nextjs.org/)
-- [React 18](https://react.dev/)
-- [Tailwind CSS 3](https://tailwindcss.com/)
-- [Prisma ORM](https://www.prisma.io/)
-- [MongoDB Atlas](https://www.mongodb.com/atlas)
+### Prérequis
+- Node.js 18+ 
+- npm ou yarn
+- Compte Supabase
 
-## Installation locale
+### Installation
 
-1. **Cloner le dépôt**
+1. **Cloner le projet**
 ```bash
-git clone <repo-url>
-cd eurinhash-cs
+git clone https://github.com/digitaleflex/eurinhash-cs.git
+cd eurinhas-cs
 ```
 
 2. **Installer les dépendances**
@@ -29,46 +22,103 @@ cd eurinhash-cs
 npm install
 ```
 
-3. **Configurer l'environnement**
-Créer un fichier `.env` à la racine avec les variables d'environnement nécessaires.
+3. **Configuration de la base de données**
 
-4. **Générer le client Prisma**
-```bash
-npx prisma generate
+Créer un fichier `.env.local` à la racine du projet :
+```env
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url_here
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key_here
+
+# Database URL (if using Prisma with Supabase)
+DATABASE_URL=your_database_url_here
 ```
 
-5. **Pousser le schéma Prisma**
+4. **Configuration de la base de données Prisma**
 ```bash
-npx prisma db push
+# Générer le client Prisma
+npm run db:generate
+
+# Pousser le schéma vers la base de données
+npm run db:push
 ```
 
-6. **Lancer le serveur local**
+5. **Démarrer le serveur de développement**
 ```bash
 npm run dev
 ```
 
-Le site sera accessible sur [http://localhost:3000](http://localhost:3000)
+Le site sera accessible sur [http://localhost:3001](http://localhost:3001)
 
-## Déploiement en production
+## 🛠️ Scripts disponibles
 
-- Le site est déployé sur [eurinhash.com](https://eurinhash.com)
-- Utilisez un hébergeur compatible Next.js (Vercel, OVH, etc.)
-- Configurez les variables d'environnement de production
-- Assurez-vous que le fichier `.env` n'est **jamais** commité (il est dans `.gitignore`)
+- `npm run dev` - Serveur de développement (port 3001)
+- `npm run dev:turbo` - Serveur avec Turbopack (port 8080)
+- `npm run build` - Build de production
+- `npm run start` - Serveur de production
+- `npm run lint` - Linter ESLint
+- `npm run db:generate` - Générer le client Prisma
+- `npm run db:push` - Pousser le schéma vers la DB
+- `npm run db:migrate` - Migrations Prisma
+- `npm run db:studio` - Interface Prisma Studio
 
-## Sécurité & RGPD
-- Les emails sont uniques et stockés chiffrés dans MongoDB
-- Consentement explicite requis pour l'inscription
-- Aucune donnée partagée avec des tiers
-- Droit de suppression/modification sur demande
+## 📁 Structure du projet
 
-## Personnalisation
-- Les couleurs, polices et textes sont facilement modifiables dans `tailwind.config.js` et `app/globals.css`
-- Les popups sont dans `app/components/SuccessAlert.tsx` et `app/components/ErrorAlert.tsx`
+```
+├── app/                    # Pages Next.js App Router
+│   ├── contact/           # Page de contact
+│   ├── api/               # API Routes
+│   └── ...
+├── components/            # Composants réutilisables
+│   ├── contact-form.tsx   # Formulaire de contact
+│   └── ...
+├── lib/                   # Utilitaires
+│   ├── supabase.ts        # Configuration Supabase
+│   └── ...
+├── prisma/                # Schéma de base de données
+│   └── schema.prisma      # Modèle de données
+└── public/                # Assets statiques
+```
 
-## Contact
-Pour toute question ou suggestion : contact@eurinhash.com
+## 🗄️ Base de données
+
+Le projet utilise Supabase avec Prisma ORM. Le schéma inclut :
+
+- **ContactMessage** : Messages du formulaire de contact
+  - id, name, email, subject, message, status, createdAt, updatedAt
+
+## 🔧 Configuration Supabase
+
+1. Créer un projet sur [supabase.com](https://supabase.com)
+2. Récupérer l'URL et la clé de service
+3. Créer la table `contact_messages` avec le schéma Prisma
+4. Configurer les variables d'environnement
+
+## 📧 Fonctionnalités
+
+- ✅ Page d'accueil responsive
+- ✅ Formulaire de contact fonctionnel
+- ✅ Intégration Supabase
+- ✅ Design moderne avec Tailwind CSS
+- ✅ Animations Framer Motion
+- ✅ Thème sombre/clair
+- ✅ SEO optimisé
+
+## 🚀 Déploiement
+
+Le projet est optimisé pour le déploiement sur Vercel :
+
+1. Connecter le repository GitHub
+2. Configurer les variables d'environnement
+3. Déployer automatiquement
+
+## 📞 Contact
+
+- **Email** : contact@eurinhash.com
+- **WhatsApp** : +229 01 62 26 52 46
+- **LinkedIn** : [eurinalmeida](https://linkedin.com/in/eurinalmeida)
+- **GitHub** : [digitaleflex](https://github.com/digitaleflex)
 
 ---
 
-© 2024 EurinHash. Tous droits réservés.
+Développé avec ❤️ par Eurin Hash

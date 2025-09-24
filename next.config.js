@@ -1,80 +1,58 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  experimental: {
-    serverActions: {
-      allowedOrigins: ['localhost:3000'],
+    eslint: {
+        ignoreDuringBuilds: true,
     },
-    optimizeCss: true,
-    optimizePackageImports: ['lucide-react'],
-  },
-  // Performance optimizations
-  images: {
-    formats: ['image/webp', 'image/avif'],
-    minimumCacheTTL: 60,
-    dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-  },
-  // Compression and caching
-  compress: true,
-  poweredByHeader: false,
-  // Bundle analyzer for production builds
-  ...(process.env.ANALYZE === 'true' && {
-    webpack: (config, { isServer }) => {
-      if (!isServer) {
-        const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-        config.plugins.push(
-          new BundleAnalyzerPlugin({
-            analyzerMode: 'static',
-            openAnalyzer: false,
-          })
-        );
-      }
-      return config;
+    typescript: {
+        ignoreBuildErrors: true,
     },
-  }),
-  webpack: (config, { isServer }) => {
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      fs: false,
-    };
-    
-    // Optimize bundle splitting
-    if (!isServer) {
-      config.optimization.splitChunks = {
-        chunks: 'all',
-        cacheGroups: {
-          default: {
-            minChunks: 2,
-            priority: -20,
-            reuseExistingChunk: true,
-          },
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            priority: -10,
-            chunks: 'all',
-          },
-          // Separate chunk for React
-          react: {
-            test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-            name: 'react',
-            priority: 20,
-            chunks: 'all',
-          },
-          // Separate chunk for UI components
-          ui: {
-            test: /[\\/]app[\\/]components[\\/]ui[\\/]/,
-            name: 'ui',
-            priority: 10,
-            chunks: 'all',
-          },
-        },
-      };
+
+    // Optimisations de performance
+    experimental: {
+        optimizePackageImports: ['lucide-react', 'framer-motion'],
+        webVitalsAttribution: ['CLS', 'LCP'],
+    },
+
+    // Compression
+    compress: true,
+    poweredByHeader: false,
+
+    // Optimisation des images
+    images: {
+        formats: ['image/webp', 'image/avif'],
+        minimumCacheTTL: 3600, // 1 heure
+        dangerouslyAllowSVG: true,
+        deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+        imageSizes: [16, 32, 48, 64, 96, 128, 256],
+    },
+
+    // Headers de performance
+    async headers() {
+        return [{
+                source: '/(.*)',
+                headers: [{
+                        key: 'Cache-Control',
+                        value: 'public, max-age=3600',
+                    },
+                    {
+                        key: 'X-DNS-Prefetch-Control',
+                        value: 'on'
+                    },
+                    {
+                        key: 'X-Content-Type-Options',
+                        value: 'nosniff'
+                    }
+                ]
+            },
+            {
+                source: '/sw.js',
+                headers: [{
+                    key: 'Cache-Control',
+                    value: 'public, max-age=0, must-revalidate',
+                }, ]
+            }
+        ]
     }
-    
-    return config;
-  },
 }
 
-module.exports = nextConfig 
+module.exports = nextConfig

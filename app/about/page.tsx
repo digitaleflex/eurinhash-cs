@@ -1,0 +1,141 @@
+import { Target, Shield, Leaf } from "lucide-react";
+import Image from "next/image";
+
+export default function AboutPage() {
+  return (
+    <main className="relative isolate">
+      {/* Hero Section */}
+      <section className="mx-auto max-w-4xl px-6 md:px-8 py-16 sm:py-20 md:py-28">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+            Eurin Hash
+          </h1>
+          <p className="text-xl text-muted-foreground mb-8">
+            Consultant IT & Entrepreneur Numérique
+          </p>
+          <div className="flex items-center justify-center mb-8">
+            <div className="relative h-32 w-32 rounded-full overflow-hidden border-2 border-accent/20 shadow-lg">
+              <Image
+                src="/eurin-photo.webp"
+                alt="Eurin Hash - Portrait professionnel"
+                fill
+                className="object-cover object-center"
+                sizes="128px"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Bio */}
+        <div className="prose prose-lg mx-auto text-center max-w-3xl">
+          <p className="text-lg leading-relaxed mb-6">
+            Passionné par l’innovation technologique et l’entrepreneuriat, je conçois des solutions 
+            cloud et web au croisement de performance et simplicité. Mon approche privilégie 
+            la clarté, la sécurité et la durabilité des systèmes.
+          </p>
+          <p className="text-lg leading-relaxed mb-8">
+            Fondateur d’E-FLEX, j’accompagne les entreprises dans leur transformation numérique 
+            tout en formant la prochaine génération de talents IT. Ma vision : une technologie 
+            accessible, souveraine et conçue pour durer.
+          </p>
+        </div>
+      </section>
+
+      {/* Parcours */}
+      <section className="py-16 sm:py-20 bg-muted">
+        <div className="mx-auto max-w-4xl px-6 md:px-8">
+          <h2 className="text-3xl font-bold tracking-tight mb-12 text-center">Mon parcours</h2>
+          <div className="space-y-8">
+            <div className="border-l-2 border-accent pl-6">
+              <h3 className="text-xl font-semibold mb-2">2024 - Présent</h3>
+              <h4 className="text-lg font-medium text-accent mb-2">Fondateur & CEO - E-FLEX</h4>
+              <p className="text-muted-foreground">
+                Création et développement d’une société de conseil IT spécialisée dans les solutions cloud, 
+                le développement web et la formation technologique.
+              </p>
+            </div>
+            
+            <div className="border-l-2 border-accent pl-6">
+              <h3 className="text-xl font-semibold mb-2">2023 - 2024</h3>
+              <h4 className="text-lg font-medium text-accent mb-2">Consultant IT Indépendant</h4>
+              <p className="text-muted-foreground">
+                Développement de solutions web innovantes pour des clients variés, 
+                de la spiritualité numérique aux plateformes agro-industrielles.
+              </p>
+            </div>
+            
+            <div className="border-l-2 border-accent pl-6">
+              <h3 className="text-xl font-semibold mb-2">Formation Continue</h3>
+              <h4 className="text-lg font-medium text-accent mb-2">Autodidacte Technologique</h4>
+              <p className="text-muted-foreground">
+                Veille technologique constante, spécialisation en cloud computing, 
+                DevOps, et technologies web modernes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Valeurs */}
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-6 md:px-8">
+          <h2 className="text-3xl font-bold tracking-tight mb-12 text-center">Mes valeurs</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center p-6">
+              <div className="h-16 w-16 mx-auto mb-4 rounded-full bg-accent/10 flex items-center justify-center">
+                <Target className="h-8 w-8 text-accent" />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Clarté</h3>
+              <p className="text-muted-foreground">
+                Des solutions simples, compréhensibles et efficaces. 
+                La complexité technique ne doit jamais nuire à l’expérience utilisateur.
+              </p>
+            </div>
+            
+            <div className="text-center p-6">
+              <div className="h-16 w-16 mx-auto mb-4 rounded-full bg-accent/10 flex items-center justify-center">
+                <Shield className="h-8 w-8 text-accent" />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Sécurité</h3>
+              <p className="text-muted-foreground">
+                La sécurité by design dans chaque projet. 
+                Protection des données et respect de la vie privée sont prioritaires.
+              </p>
+            </div>
+            
+            <div className="text-center p-6">
+              <div className="h-16 w-16 mx-auto mb-4 rounded-full bg-accent/10 flex items-center justify-center">
+                <Leaf className="h-8 w-8 text-accent" />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Durabilité</h3>
+              <p className="text-muted-foreground">
+                Concevoir pour durer. Technologies pérennes, 
+                code maintenable et impact environnemental maîtrisé.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact CTA */}
+      <section className="py-16 sm:py-20 bg-muted">
+        <div className="mx-auto max-w-3xl px-6 md:px-8 text-center">
+          <h2 className="text-3xl font-bold tracking-tight mb-6">
+            Travaillons ensemble
+          </h2>
+          <p className="text-lg text-muted-foreground mb-8">
+            Vous avez un projet, une idée ou simplement envie d’échanger ? 
+            Je serais ravi de discuter avec vous.
+          </p>
+          <a
+            href="/contact"
+            className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium transition hover:shadow-[0_10px_40px_-10px] hover:shadow-foreground/30"
+          >
+            Me contacter
+          </a>
+        </div>
+      </section>
+    </main>
+  );
+}
