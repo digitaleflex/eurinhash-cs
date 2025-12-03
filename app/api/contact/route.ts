@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { prismaApi as prisma } from '@/lib/prisma-api';
+import { apiCache } from '@/lib/cache';
 
 // Cache simple pour éviter les requêtes répétées
 const rateLimitCache = new Map<string, { count: number; lastReset: number }>();
@@ -40,40 +41,47 @@ export async function POST(request: Request) {
 
     const { name, email, subject, message } = await request.json();
 
-    // Validation rapide
-    if (!name?.trim() || !email?.trim() || !message?.trim()) {
+    // Validation rapide optimisée
+    const trimmedName = name?.trim();
+    const trimmedEmail = email?.trim();
+    const trimmedMessage = message?.trim();
+    
+    if (!trimmedName || !trimmedEmail || !trimmedMessage) {
       return NextResponse.json({ 
         error: 'Tous les champs obligatoires doivent être remplis' 
       }, { status: 400 });
     }
 
-    // Validation email basique
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    // Validation email optimisée avec cache
+    const emailCacheKey = `email_valid_${trimmedEmail}`;
+    let isEmailValid = apiCache.get(emailCacheKey);
+    
+    if (isEmailValid === undefined) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      isEmailValid = emailRegex.test(trimmedEmail);
+      apiCache.set(emailCacheKey, isEmailValid, 5 * 60 * 1000); // 5 minutes
+    }
+    
+    if (!isEmailValid) {
       return NextResponse.json({ 
         error: 'Format d\'email invalide' 
       }, { status: 400 });
     }
 
     // Sauvegarde optimisée avec timeout
-    const contactMessage = await Promise.race([
-      prisma.contactMessage.create({
-        data: {
-          name: name.trim(),
-          email: email.trim().toLowerCase(),
-          subject: subject?.trim() || null,
-          message: message.trim(),
-          status: 'new',
-        },
-        select: {
-          id: true,
-          createdAt: true,
-        },
-      }),
-      new Promise((_, reject) => 
-        setTimeout(() => reject(new Error('Timeout')), 10000)
-      )
-    ]) as { id: string; createdAt: Date };
+    const contactMessage = await prisma.contactMessage.create({
+      data: {
+        name: name.trim(),
+        email: email.trim().toLowerCase(),
+        subject: subject?.trim() || null,
+        message: message.trim(),
+        status: 'new',
+      },
+      select: {
+        id: true,
+        createdAt: true,
+      },
+    });
 
     const processingTime = Date.now() - startTime;
 
