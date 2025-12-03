@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("contact_messages")
+}
+
+model ProjectRequest {
+  id          String   @id @default(cuid())
+  
+  // Informations de contact
+  name        String
+  email       String
+  phone       String?
+  country     String   @default("BJ")
+  company     String?
+  position    String?
+  
+  // Détails du projet
+  projectType String   // "web", "cloud", "consulting", "training", "other"
+  projectName String
+  description String
+  objectives  String
+  
+  // Budget et timing
+  budget      String   // "under-100k", "100k-300k", "300k-500k", "500k-1m", "1m-plus", "discuss"
+  timeline    String   // "asap", "1-month", "3-months", "6-months", "flexible"
+  startDate   DateTime?
+  
+  // Spécifications techniques
+  technologies String[] // Array des technologies mentionnées
+  requirements String?
+  constraints  String?
+  
+  // Statut et suivi
+  status      String   @default("new") // "new", "reviewed", "quoted", "accepted", "declined"
+  priority    String   @default("medium") // "low", "medium", "high", "urgent"
+  source      String   @default("website") // "website", "referral", "social", "other"
+  
+  // Métadonnées
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("project_requests")
+}
