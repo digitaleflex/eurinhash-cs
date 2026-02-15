@@ -21,7 +21,7 @@ export function useHoverPrefetch(href: string) {
         prefetchTimeoutRef.current = setTimeout(() => {
             router.prefetch(href);
             isPrefetchedRef.current = true;
-        }, 50);
+        }, 150);
     }, [href, router]);
 
     const onMouseLeave = useCallback(() => {

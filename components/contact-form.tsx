@@ -2,7 +2,11 @@
 
 import { useState, useRef } from 'react';
 import { Send, AlertCircle, Loader2, CheckCircle } from 'lucide-react';
-import { FeedbackPopup } from './feedback-popup';
+import dynamic from 'next/dynamic';
+
+const FeedbackPopup = dynamic(() => import('./feedback-popup').then(mod => mod.FeedbackPopup), {
+  ssr: false,
+});
 
 import { SITE_CONFIG } from '@/lib/config';
 
