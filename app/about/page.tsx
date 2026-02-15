@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import { Target, Shield, Leaf } from 'lucide-react';
 import Image from 'next/image';
 

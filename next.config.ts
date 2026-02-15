@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
   // Optimisations de performance avancées
   experimental: {
     webVitalsAttribution: ['CLS', 'LCP', 'FID', 'FCP', 'TTFB'],
-    optimizeCss: true,
+    optimizeCss: false,
     // Prefetch intelligent
     scrollRestoration: true,
     // Optimisations supplémentaires

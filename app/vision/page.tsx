@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -95,9 +94,8 @@ export default function VisionPage() {
               <button
                 key={index}
                 onClick={() => setCurrentQuote(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentQuote ? 'bg-accent w-8' : 'bg-foreground/30'
-                }`}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentQuote ? 'bg-accent w-8' : 'bg-foreground/30'
+                  }`}
               />
             ))}
           </div>
@@ -590,11 +588,10 @@ export default function VisionPage() {
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
-                      className={`w-4 h-4 ${
-                        i < testimonial.rating
+                      className={`w-4 h-4 ${i < testimonial.rating
                           ? 'fill-yellow-400 text-yellow-400'
                           : 'text-gray-300'
-                      }`}
+                        }`}
                     />
                   ))}
                 </div>

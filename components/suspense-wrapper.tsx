@@ -46,7 +46,6 @@ export function LazyImage({
       <Suspense
         fallback={<LoadingSkeleton variant="card" className={className} />}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <Image
           src={src}
           alt={alt || ''}
@@ -66,7 +65,6 @@ export function LazyImage({
     <Suspense
       fallback={<LoadingSkeleton variant="card" className={className} />}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={src}
         alt={alt}
