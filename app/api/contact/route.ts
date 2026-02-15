@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { prismaApi as prisma } from '@/lib/prisma-api';
 import { apiCache } from '@/lib/cache';
 import { SITE_CONFIG } from '@/lib/config';
+import { sendMail } from '@/lib/mail';
 
 // Cache simple pour éviter les requêtes répétées
 const rateLimitCache = new Map<string, { count: number; lastReset: number }>();
@@ -148,6 +149,8 @@ export async function POST(request: Request) {
       );
     }
 
+
+
     // Sauvegarde optimisée avec timeout
     // Cast pour éviter les problèmes de typage avec Prisma Accelerate
     const prismaClient = prisma as any;
@@ -165,6 +168,25 @@ export async function POST(request: Request) {
       },
     });
 
+    // Envoi de l'email via Resend
+    const emailResult = await sendMail({
+      to: 'contact@eurinhash.com', // Ou l'email configuré dans .env
+      subject: `Nouveau message de ${name}: ${subject || 'Sans objet'}`,
+      html: `
+        <h1>Nouveau message de contact</h1>
+        <p><strong>De:</strong> ${name} (${email})</p>
+        <p><strong>Sujet:</strong> ${subject || 'Non spécifié'}</p>
+        <p><strong>Message:</strong></p>
+        <pre style="font-family: sans-serif; white-space: pre-wrap;">${message}</pre>
+      `,
+      text: `Nouveau message de ${name} (${email})\n\nSujet: ${subject}\n\n${message}`,
+    });
+
+    if (!emailResult.success) {
+      console.error("Erreur lors de l'envoi de l'email:", emailResult.error);
+      // On ne bloque pas la réponse si l'email échoue, mais on pourrait le logger en DB
+    }
+
     const processingTime = Date.now() - startTime;
 
     return NextResponse.json({
@@ -172,6 +194,7 @@ export async function POST(request: Request) {
       id: contactMessage.id,
       message: 'Message envoyé avec succès',
       processingTime: `${processingTime}ms`,
+      emailSent: emailResult.success,
     });
   } catch (err: unknown) {
     const processingTime = Date.now() - startTime;

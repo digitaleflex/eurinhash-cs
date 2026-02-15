@@ -68,9 +68,6 @@ export function createMetadata(override: Partial<Metadata> = {}): Metadata {
         'max-snippet': -1,
       },
     },
-    verification: {
-      google: 'your-google-verification-code',
-    },
     ...override,
   };
 }
