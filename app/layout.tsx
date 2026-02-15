@@ -1,23 +1,23 @@
-import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
-import { createMetadata } from "@/lib/metadata";
-import { Navigation } from "@/components/navigation";
-import { Logo } from "@/components/logo";
-import { Footer } from "@/components/footer";
-import { ThemeProvider } from "@/components/theme-provider";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { MobileMenu } from "@/components/mobile-menu";
-import { ResourcePreloader } from "@/components/resource-preloader";
-import { PerformanceOptimizer } from "@/components/performance-optimizer";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import type { Metadata } from 'next';
+import { Inter, JetBrains_Mono } from 'next/font/google';
+import { createMetadata } from '@/lib/metadata';
+import { Navigation } from '@/components/navigation';
+import { Logo } from '@/components/logo';
+import { Footer } from '@/components/footer';
+import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeToggle } from '@/components/theme-toggle';
+import { MobileMenu } from '@/components/mobile-menu';
+import { ResourcePreloader } from '@/components/resource-preloader';
+import { PerformanceOptimizer } from '@/components/performance-optimizer';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
-import "./globals.css";
+import './globals.css';
 
 const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
+  variable: '--font-inter',
+  subsets: ['latin'],
+  display: 'swap',
   preload: true,
   fallback: ['system-ui', 'arial'],
   weight: ['400', '500', '600', '700'],
@@ -26,9 +26,9 @@ const inter = Inter({
 });
 
 const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  display: "swap",
+  variable: '--font-jetbrains-mono',
+  subsets: ['latin'],
+  display: 'swap',
   preload: true,
   fallback: ['monospace'],
   weight: ['400', '500', '600', '700'],
@@ -68,20 +68,24 @@ export default function RootLayout({
         />
         {/* Preload de l'image LCP */}
         <link rel="preload" as="image" href="/eurin-photo.webp" />
-        
+
         {/* Meta tags de performance */}
         <meta name="theme-color" content="#000000" />
         <meta name="color-scheme" content="light dark" />
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
-        
+
         {/* DNS prefetch pour les domaines externes */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//fonts.gstatic.com" />
         <link rel="dns-prefetch" href="//vercel.com" />
-        
+
         {/* Preconnect pour les ressources critiques */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
       </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground min-h-screen flex flex-col overflow-x-hidden`}
@@ -106,7 +110,7 @@ export default function RootLayout({
                   </div>
                 </div>
               </div>
-              
+
               {/* Mobile: Logo à gauche, Toggle et Menu à droite */}
               <div className="md:hidden flex items-center justify-between w-full">
                 <Logo size="md" variant="default" />
@@ -117,9 +121,7 @@ export default function RootLayout({
               </div>
             </div>
           </header>
-          <main className="flex-1">
-            {children}
-          </main>
+          <main className="flex-1">{children}</main>
           <Footer />
         </ThemeProvider>
         <Analytics />

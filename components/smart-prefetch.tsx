@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
@@ -9,7 +9,11 @@ interface SmartPrefetchProps {
   className?: string;
 }
 
-export function SmartPrefetch({ href, children, className }: SmartPrefetchProps) {
+export function SmartPrefetch({
+  href,
+  children,
+  className,
+}: SmartPrefetchProps) {
   const router = useRouter();
   const linkRef = useRef<HTMLAnchorElement>(null);
   const prefetchedRef = useRef(false);
@@ -19,8 +23,8 @@ export function SmartPrefetch({ href, children, className }: SmartPrefetchProps)
     if (!link || prefetchedRef.current) return;
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      entries => {
+        entries.forEach(entry => {
           if (entry.isIntersecting && !prefetchedRef.current) {
             // Prefetch la page quand elle devient visible
             router.prefetch(href);

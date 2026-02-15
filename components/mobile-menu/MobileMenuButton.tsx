@@ -1,15 +1,15 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
-import { useMobileMenu } from './MobileMenuProvider'
+import { motion } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
+import { useMobileMenu } from './MobileMenuProvider';
 
 interface MobileMenuButtonProps {
-  className?: string
+  className?: string;
 }
 
 export function MobileMenuButton({ className = '' }: MobileMenuButtonProps) {
-  const { isOpen, toggleMenu } = useMobileMenu()
+  const { isOpen, toggleMenu } = useMobileMenu();
 
   return (
     <button
@@ -20,13 +20,17 @@ export function MobileMenuButton({ className = '' }: MobileMenuButtonProps) {
     >
       {/* Indicateur de notification */}
       <div className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-pulse z-10" />
-      
+
       <motion.div
         animate={{ rotate: isOpen ? 180 : 0 }}
         transition={{ duration: 0.2 }}
       >
-        {isOpen ? <X className="h-5 w-5 sm:h-6 sm:w-6" /> : <Menu className="h-5 w-5 sm:h-6 sm:w-6" />}
+        {isOpen ? (
+          <X className="h-5 w-5 sm:h-6 sm:w-6" />
+        ) : (
+          <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
+        )}
       </motion.div>
     </button>
-  )
+  );
 }

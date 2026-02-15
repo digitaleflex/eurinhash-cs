@@ -1,12 +1,15 @@
-'use client'
+'use client';
 
 import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 
-export function useSmartPrefetch(href: string, options?: {
-  threshold?: number;
-  delay?: number;
-}) {
+export function useSmartPrefetch(
+  href: string,
+  options?: {
+    threshold?: number;
+    delay?: number;
+  }
+) {
   const router = useRouter();
   const elementRef = useRef<HTMLElement>(null);
   const prefetchedRef = useRef(false);
@@ -17,8 +20,8 @@ export function useSmartPrefetch(href: string, options?: {
     if (!element || prefetchedRef.current) return;
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      entries => {
+        entries.forEach(entry => {
           if (entry.isIntersecting && !prefetchedRef.current) {
             setTimeout(() => {
               router.prefetch(href);

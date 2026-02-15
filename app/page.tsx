@@ -1,6 +1,18 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Building2, Factory, Cloud, Shield, TrendingUp, Zap, Globe, GraduationCap, CheckCircle, ArrowRight, ExternalLink } from "lucide-react";
-import Image from "next/image";
+import {
+  Building2,
+  Factory,
+  Cloud,
+  Shield,
+  TrendingUp,
+  Zap,
+  Globe,
+  GraduationCap,
+  CheckCircle,
+  ArrowRight,
+  ExternalLink,
+} from 'lucide-react';
+import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -27,7 +39,8 @@ export default function Home() {
               Je résous votre problème.
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl leading-relaxed px-4 sm:px-0">
-              Je crée une solution sur mesure pour vous, quelque chose qui vous ressemble. 
+              Je crée une solution sur mesure pour vous, quelque chose qui vous
+              ressemble.
               <span className="block mt-2 text-foreground/80 font-medium">
                 Simple et efficace.
               </span>
@@ -56,11 +69,15 @@ export default function Home() {
       <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-background">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 md:px-8 grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">Qui suis-je ?</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">
+              Qui suis-je ?
+            </h2>
             <p className="text-sm sm:text-base text-muted-foreground mb-6 leading-relaxed">
-              Je suis <span className="font-semibold text-foreground">Eurin Hash</span>, consultant IT et
-              entrepreneur numérique. Je transforme vos défis techniques en solutions concrètes, 
-              durables et adaptées à votre réalité.
+              Je suis{' '}
+              <span className="font-semibold text-foreground">Eurin Hash</span>,
+              consultant IT et entrepreneur numérique. Je transforme vos défis
+              techniques en solutions concrètes, durables et adaptées à votre
+              réalité.
             </p>
             <a
               href="/about"
@@ -88,28 +105,31 @@ export default function Home() {
       {/* === SERVICES === */}
       <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-muted">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">Mes expertises</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">
+            Mes expertises
+          </h2>
           <p className="text-sm sm:text-base text-muted-foreground mb-8 sm:mb-12 max-w-2xl mx-auto px-4 sm:px-0">
-            Des solutions techniques robustes, conçues pour répondre précisément à vos besoins.
+            Des solutions techniques robustes, conçues pour répondre précisément
+            à vos besoins.
           </p>
           <div className="grid gap-6 sm:gap-8 md:grid-cols-3">
             {[
               {
-                title: "Cloud & Infrastructure",
+                title: 'Cloud & Infrastructure',
                 desc: "Migration sécurisée vers le cloud. Je transforme votre infrastructure pour plus d'agilité et de performance.",
                 icon: Cloud,
               },
               {
-                title: "Développement Web",
-                desc: "Applications web modernes, rapides et parfaitement adaptées à vos usages.",
+                title: 'Développement Web',
+                desc: 'Applications web modernes, rapides et parfaitement adaptées à vos usages.',
                 icon: Globe,
               },
               {
-                title: "Formation & Transmission",
-                desc: "Accompagnement personnalisé pour maîtriser les technologies qui comptent.",
+                title: 'Formation & Transmission',
+                desc: 'Accompagnement personnalisé pour maîtriser les technologies qui comptent.',
                 icon: GraduationCap,
               },
-            ].map((service) => (
+            ].map(service => (
               <div
                 key={service.title}
                 className="p-6 sm:p-8 rounded-xl sm:rounded-2xl border border-foreground/10 bg-background hover:shadow-lg transition hover:scale-105 active:scale-95"
@@ -118,9 +138,13 @@ export default function Home() {
                   <div className="w-12 h-12 sm:w-10 sm:h-10 bg-accent/10 rounded-lg flex items-center justify-center mx-auto sm:mx-0">
                     <service.icon className="w-6 h-6 sm:w-5 sm:h-5 text-accent" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-semibold">{service.title}</h3>
+                  <h3 className="text-lg sm:text-xl font-semibold">
+                    {service.title}
+                  </h3>
                 </div>
-                <p className="text-sm sm:text-base text-muted-foreground text-center sm:text-left">{service.desc}</p>
+                <p className="text-sm sm:text-base text-muted-foreground text-center sm:text-left">
+                  {service.desc}
+                </p>
               </div>
             ))}
           </div>
@@ -135,8 +159,13 @@ export default function Home() {
               Le cloud, c'est l'avenir
             </h2>
             <p className="text-sm sm:text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
-              Je vous accompagne dans votre transformation numérique avec des solutions cloud 
-              <span className="text-foreground font-semibold"> sécurisées, performantes et évolutives</span>.
+              Je vous accompagne dans votre transformation numérique avec des
+              solutions cloud
+              <span className="text-foreground font-semibold">
+                {' '}
+                sécurisées, performantes et évolutives
+              </span>
+              .
             </p>
           </div>
 
@@ -153,8 +182,9 @@ export default function Home() {
                   </h3>
                 </div>
                 <p className="text-sm sm:text-base text-muted-foreground">
-                  Migrez vos infrastructures vers le cloud en toute sécurité. 
-                  Je vous guide pas à pas pour moderniser vos systèmes et gagner en agilité.
+                  Migrez vos infrastructures vers le cloud en toute sécurité. Je
+                  vous guide pas à pas pour moderniser vos systèmes et gagner en
+                  agilité.
                 </p>
               </div>
 
@@ -168,8 +198,9 @@ export default function Home() {
                   </h3>
                 </div>
                 <p className="text-sm sm:text-base text-muted-foreground">
-                  Vos données sont précieuses. Je mets en place des architectures cloud 
-                  robustes avec chiffrement, sauvegardes automatiques et monitoring continu.
+                  Vos données sont précieuses. Je mets en place des
+                  architectures cloud robustes avec chiffrement, sauvegardes
+                  automatiques et monitoring continu.
                 </p>
               </div>
 
@@ -183,8 +214,9 @@ export default function Home() {
                   </h3>
                 </div>
                 <p className="text-sm sm:text-base text-muted-foreground">
-                  Votre infrastructure s'adapte à votre croissance. Plus de surdimensionnement 
-                  ou de limitations techniques qui freinent votre développement.
+                  Votre infrastructure s'adapte à votre croissance. Plus de
+                  surdimensionnement ou de limitations techniques qui freinent
+                  votre développement.
                 </p>
               </div>
             </div>
@@ -196,36 +228,46 @@ export default function Home() {
                   <div className="w-12 h-12 sm:w-16 sm:h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Cloud className="w-6 h-6 sm:w-8 sm:h-8 text-accent" />
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold mb-2">Pourquoi le cloud maintenant ?</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold mb-2">
+                    Pourquoi le cloud maintenant ?
+                  </h3>
                 </div>
-                
+
                 <div className="space-y-3 sm:space-y-4">
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-accent mt-0.5 flex-shrink-0" />
                     <p className="text-xs sm:text-sm text-muted-foreground">
-                      <span className="font-semibold text-foreground">Réduction des coûts</span> - 
-                      Payez seulement ce que vous utilisez
+                      <span className="font-semibold text-foreground">
+                        Réduction des coûts
+                      </span>{' '}
+                      - Payez seulement ce que vous utilisez
                     </p>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-accent mt-0.5 flex-shrink-0" />
                     <p className="text-xs sm:text-sm text-muted-foreground">
-                      <span className="font-semibold text-foreground">Accès global</span> - 
-                      Vos équipes travaillent de partout
+                      <span className="font-semibold text-foreground">
+                        Accès global
+                      </span>{' '}
+                      - Vos équipes travaillent de partout
                     </p>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-accent mt-0.5 flex-shrink-0" />
                     <p className="text-xs sm:text-sm text-muted-foreground">
-                      <span className="font-semibold text-foreground">Innovation continue</span> - 
-                      Accès aux dernières technologies
+                      <span className="font-semibold text-foreground">
+                        Innovation continue
+                      </span>{' '}
+                      - Accès aux dernières technologies
                     </p>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-accent mt-0.5 flex-shrink-0" />
                     <p className="text-xs sm:text-sm text-muted-foreground">
-                      <span className="font-semibold text-foreground">Résilience</span> - 
-                      Vos données sont protégées et disponibles
+                      <span className="font-semibold text-foreground">
+                        Résilience
+                      </span>{' '}
+                      - Vos données sont protégées et disponibles
                     </p>
                   </div>
                 </div>
@@ -251,8 +293,10 @@ export default function Home() {
       {/* === PROJECTS === */}
       <section className="py-12 sm:py-16 md:py-20 lg:py-28 bg-background">
         <div className="mx-auto max-w-6xl px-6 md:px-8">
-          <h2 className="text-3xl font-bold tracking-tight mb-12 text-center">Projets récents</h2>
-          
+          <h2 className="text-3xl font-bold tracking-tight mb-12 text-center">
+            Projets récents
+          </h2>
+
           {/* Projets Clients */}
           <div className="mb-16">
             <h3 className="text-2xl font-semibold mb-8 flex items-center gap-2">
@@ -261,57 +305,78 @@ export default function Home() {
             </h3>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               <div className="p-6 rounded-2xl border border-foreground/10 bg-muted hover:shadow-lg transition hover:scale-105 active:scale-95">
-                <h4 className="text-lg font-semibold mb-2">Calendrier Divin – Sainte Adoration</h4>
-                <p className="text-sm text-muted-foreground mb-3">Application web spirituelle</p>
-                <p className="text-sm mb-4">Développement complet (backend Node.js, frontend React, PWA, IA spirituelle, calendrier liturgique, système de temps divin)</p>
-                        <div className="flex items-center justify-between">
-                          <p className="text-xs text-accent font-medium">2024 – 2025</p>
-                          <a
-                            href="https://sainteadoration.org"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-xs text-accent hover:text-accent/80 transition-colors"
-                          >
-                            Visiter le site
-                            <ExternalLink className="w-3 h-3" />
-                          </a>
-                        </div>
+                <h4 className="text-lg font-semibold mb-2">
+                  Calendrier Divin – Sainte Adoration
+                </h4>
+                <p className="text-sm text-muted-foreground mb-3">
+                  Application web spirituelle
+                </p>
+                <p className="text-sm mb-4">
+                  Développement complet (backend Node.js, frontend React, PWA,
+                  IA spirituelle, calendrier liturgique, système de temps divin)
+                </p>
+                <div className="flex items-center justify-between">
+                  <p className="text-xs text-accent font-medium">2024 – 2025</p>
+                  <a
+                    href="https://sainteadoration.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs text-accent hover:text-accent/80 transition-colors"
+                  >
+                    Visiter le site
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
               </div>
-              
+
               <div className="p-6 rounded-2xl border border-foreground/10 bg-muted hover:shadow-lg transition hover:scale-105 active:scale-95">
-                <h4 className="text-lg font-semibold mb-2">Plateforme d'attestations – Ferme St André</h4>
-                <p className="text-sm text-muted-foreground mb-3">Application Next.js pour gestion documentaire</p>
-                <p className="text-sm mb-4">Conception et déploiement d'une solution sécurisée de gestion des attestations et certificats</p>
-                        <div className="flex items-center justify-between">
-                          <p className="text-xs text-accent font-medium">2024 – 2025</p>
-                          <a
-                            href="https://verifier.fermestandre.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-xs text-accent hover:text-accent/80 transition-colors"
-                          >
-                            Visiter le site
-                            <ExternalLink className="w-3 h-3" />
-                          </a>
-                        </div>
+                <h4 className="text-lg font-semibold mb-2">
+                  Plateforme d'attestations – Ferme St André
+                </h4>
+                <p className="text-sm text-muted-foreground mb-3">
+                  Application Next.js pour gestion documentaire
+                </p>
+                <p className="text-sm mb-4">
+                  Conception et déploiement d'une solution sécurisée de gestion
+                  des attestations et certificats
+                </p>
+                <div className="flex items-center justify-between">
+                  <p className="text-xs text-accent font-medium">2024 – 2025</p>
+                  <a
+                    href="https://verifier.fermestandre.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs text-accent hover:text-accent/80 transition-colors"
+                  >
+                    Visiter le site
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
               </div>
-              
+
               <div className="p-6 rounded-2xl border border-foreground/10 bg-muted hover:shadow-lg transition hover:scale-105 active:scale-95">
-                <h4 className="text-lg font-semibold mb-2">Site web – Ferme agro-piscicole St André</h4>
-                <p className="text-sm text-muted-foreground mb-3">Site vitrine professionnel</p>
-                <p className="text-sm mb-4">Développement et mise en ligne du site institutionnel de la ferme</p>
-                        <div className="flex items-center justify-between">
-                          <p className="text-xs text-accent font-medium">2024 – 2025</p>
-                          <a
-                            href="https://fermestandre.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-xs text-accent hover:text-accent/80 transition-colors"
-                          >
-                            Visiter le site
-                            <ExternalLink className="w-3 h-3" />
-                          </a>
-                        </div>
+                <h4 className="text-lg font-semibold mb-2">
+                  Site web – Ferme agro-piscicole St André
+                </h4>
+                <p className="text-sm text-muted-foreground mb-3">
+                  Site vitrine professionnel
+                </p>
+                <p className="text-sm mb-4">
+                  Développement et mise en ligne du site institutionnel de la
+                  ferme
+                </p>
+                <div className="flex items-center justify-between">
+                  <p className="text-xs text-accent font-medium">2024 – 2025</p>
+                  <a
+                    href="https://fermestandre.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs text-accent hover:text-accent/80 transition-colors"
+                  >
+                    Visiter le site
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -324,22 +389,36 @@ export default function Home() {
             </h3>
             <div className="grid gap-6 md:grid-cols-2">
               <div className="p-6 rounded-2xl border border-foreground/10 bg-muted hover:shadow-lg transition hover:scale-105 active:scale-95">
-                <h4 className="text-lg font-semibold mb-2">Infrastructure VPS interne E-Flex</h4>
-                <p className="text-sm text-muted-foreground mb-3">Infrastructure DevOps interne</p>
-                <p className="text-sm mb-4">Déploiement et gestion de serveurs VPS sécurisés, containerisation Docker, routage Traefik, administration via Portainer, CI/CD GitHub, monitoring via Uptime Kuma + alertes Telegram</p>
-                        <p className="text-xs text-accent font-medium">2024 – 2025</p>
+                <h4 className="text-lg font-semibold mb-2">
+                  Infrastructure VPS interne E-Flex
+                </h4>
+                <p className="text-sm text-muted-foreground mb-3">
+                  Infrastructure DevOps interne
+                </p>
+                <p className="text-sm mb-4">
+                  Déploiement et gestion de serveurs VPS sécurisés,
+                  containerisation Docker, routage Traefik, administration via
+                  Portainer, CI/CD GitHub, monitoring via Uptime Kuma + alertes
+                  Telegram
+                </p>
+                <p className="text-xs text-accent font-medium">2024 – 2025</p>
               </div>
-              
+
               <div className="p-6 rounded-2xl border border-foreground/10 bg-muted hover:shadow-lg transition hover:scale-105 active:scale-95">
                 <h4 className="text-lg font-semibold mb-2">FlexPress Core</h4>
-                <p className="text-sm text-muted-foreground mb-3">Projet open-source, CMS conteneurisé</p>
-                <p className="text-sm mb-4">Développement d'un socle WordPress open-source, optimisé pour la production et modulaire</p>
+                <p className="text-sm text-muted-foreground mb-3">
+                  Projet open-source, CMS conteneurisé
+                </p>
+                <p className="text-sm mb-4">
+                  Développement d'un socle WordPress open-source, optimisé pour
+                  la production et modulaire
+                </p>
                 <div className="flex items-center justify-between">
-                          <p className="text-xs text-accent font-medium">2024 – 2025</p>
-                  <a 
-                    href="https://github.com/eurinhash/flexpress-core" 
+                  <p className="text-xs text-accent font-medium">2024 – 2025</p>
+                  <a
+                    href="https://github.com/eurinhash/flexpress-core"
                     className="inline-flex items-center gap-1 text-xs text-accent hover:text-accent/80 transition-colors"
-                    target="_blank" 
+                    target="_blank"
                     rel="noopener noreferrer"
                   >
                     Voir sur GitHub
@@ -378,24 +457,36 @@ export default function Home() {
           <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-4">
             {/* Stats principales - toujours visibles */}
             <div className="text-center p-4 sm:p-6 rounded-2xl bg-background border border-foreground/10">
-              <div className="text-2xl sm:text-3xl font-bold text-accent mb-2">-60%</div>
-              <p className="text-xs sm:text-sm text-muted-foreground">Réduction des coûts</p>
+              <div className="text-2xl sm:text-3xl font-bold text-accent mb-2">
+                -60%
+              </div>
+              <p className="text-xs sm:text-sm text-muted-foreground">
+                Réduction des coûts
+              </p>
             </div>
-            
+
             <div className="text-center p-4 sm:p-6 rounded-2xl bg-background border border-foreground/10">
-              <div className="text-2xl sm:text-3xl font-bold text-accent mb-2">99.9%</div>
-              <p className="text-xs sm:text-sm text-muted-foreground">Disponibilité</p>
+              <div className="text-2xl sm:text-3xl font-bold text-accent mb-2">
+                99.9%
+              </div>
+              <p className="text-xs sm:text-sm text-muted-foreground">
+                Disponibilité
+              </p>
             </div>
-            
+
             {/* Stats secondaires - masquées sur mobile */}
             <div className="hidden md:block text-center p-6 rounded-2xl bg-background border border-foreground/10">
               <div className="text-3xl font-bold text-accent mb-2">3x</div>
-              <p className="text-sm text-muted-foreground">Plus rapide à déployer</p>
+              <p className="text-sm text-muted-foreground">
+                Plus rapide à déployer
+              </p>
             </div>
-            
+
             <div className="hidden md:block text-center p-6 rounded-2xl bg-background border border-foreground/10">
               <div className="text-3xl font-bold text-accent mb-2">24/7</div>
-              <p className="text-sm text-muted-foreground">Monitoring et sécurité</p>
+              <p className="text-sm text-muted-foreground">
+                Monitoring et sécurité
+              </p>
             </div>
           </div>
 
@@ -417,12 +508,15 @@ export default function Home() {
       <section className="hidden md:block py-16 sm:py-20 md:py-28 bg-muted">
         <div className="mx-auto max-w-4xl px-6 md:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold tracking-tight mb-4">Mon approche</h2>
+            <h2 className="text-3xl font-bold tracking-tight mb-4">
+              Mon approche
+            </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Chaque projet est unique. Voici comment je transforme vos défis en succès.
+              Chaque projet est unique. Voici comment je transforme vos défis en
+              succès.
             </p>
           </div>
-          
+
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             <div className="text-center p-6">
               <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -430,27 +524,30 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-semibold mb-3">Écouter</h3>
               <p className="text-muted-foreground">
-                Je comprends vos besoins, vos contraintes et vos objectifs pour définir la solution parfaite.
+                Je comprends vos besoins, vos contraintes et vos objectifs pour
+                définir la solution parfaite.
               </p>
             </div>
-            
+
             <div className="text-center p-6">
               <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-accent">2</span>
               </div>
               <h3 className="text-xl font-semibold mb-3">Concevoir</h3>
               <p className="text-muted-foreground">
-                Je crée une solution sur mesure, simple et efficace, parfaitement adaptée à votre contexte.
+                Je crée une solution sur mesure, simple et efficace,
+                parfaitement adaptée à votre contexte.
               </p>
             </div>
-            
+
             <div className="text-center p-6 md:col-span-2 lg:col-span-1">
               <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-accent">3</span>
               </div>
               <h3 className="text-xl font-semibold mb-3">Livrer</h3>
               <p className="text-muted-foreground">
-                Je déploie votre solution et vous accompagne pour en tirer le meilleur parti.
+                Je déploie votre solution et vous accompagne pour en tirer le
+                meilleur parti.
               </p>
             </div>
           </div>
@@ -464,7 +561,8 @@ export default function Home() {
             Discutons de votre projet
           </h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-            Vous avez un défi technique, une idée à concrétiser ou un projet à réaliser ? 
+            Vous avez un défi technique, une idée à concrétiser ou un projet à
+            réaliser ?
             <span className="block mt-2 text-foreground/80 font-medium">
               Parlons de votre transformation numérique.
             </span>
@@ -481,4 +579,3 @@ export default function Home() {
     </main>
   );
 }
-

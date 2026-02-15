@@ -1,7 +1,22 @@
-import { Mail, LinkedinIcon, GithubIcon, Zap, Send, MessageCircle, Calendar, Coffee, ArrowRight, CheckCircle, Clock, Users, MapPin, MessageSquare } from "lucide-react";
-import Image from "next/image";
-import { ContactForm } from "@/components/contact-form";
-import { FAQSection, contactFAQData } from "@/components/faq-section";
+import {
+  Mail,
+  LinkedinIcon,
+  GithubIcon,
+  Zap,
+  Send,
+  MessageCircle,
+  Calendar,
+  Coffee,
+  ArrowRight,
+  CheckCircle,
+  Clock,
+  Users,
+  MapPin,
+  MessageSquare,
+} from 'lucide-react';
+import Image from 'next/image';
+import { ContactForm } from '@/components/contact-form';
+import { FAQSection, contactFAQData } from '@/components/faq-section';
 
 export default function ContactPage() {
   return (
@@ -26,8 +41,9 @@ export default function ContactPage() {
             <span className="text-accent">en réalité</span>
           </h1>
           <p className="text-base sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Que vous ayez un projet ambitieux, une question technique ou simplement envie d'échanger,
-            je suis là pour vous accompagner dans votre réussite.
+            Que vous ayez un projet ambitieux, une question technique ou
+            simplement envie d&#39;échanger, je suis là pour vous accompagner dans
+            votre réussite.
           </p>
         </div>
 
@@ -38,7 +54,9 @@ export default function ContactPage() {
               <Zap className="h-6 w-6 text-accent" />
             </div>
             <div className="text-2xl font-bold text-accent mb-1">24h</div>
-            <div className="text-sm text-muted-foreground">Temps de réponse</div>
+            <div className="text-sm text-muted-foreground">
+              Temps de réponse
+            </div>
           </div>
 
           <div className="text-center p-6 rounded-2xl border border-foreground/10 bg-background/50 backdrop-blur-sm hover:shadow-lg hover:shadow-accent/10 transition-all duration-300">
@@ -46,7 +64,9 @@ export default function ContactPage() {
               <Users className="h-6 w-6 text-accent" />
             </div>
             <div className="text-2xl font-bold text-accent mb-1">50+</div>
-            <div className="text-sm text-muted-foreground">Projets réalisés</div>
+            <div className="text-sm text-muted-foreground">
+              Projets réalisés
+            </div>
           </div>
 
           <div className="text-center p-6 rounded-2xl border border-foreground/10 bg-background/50 backdrop-blur-sm hover:shadow-lg hover:shadow-accent/10 transition-all duration-300">
@@ -54,7 +74,9 @@ export default function ContactPage() {
               <Coffee className="h-6 w-6 text-accent" />
             </div>
             <div className="text-2xl font-bold text-accent mb-1">30min</div>
-            <div className="text-sm text-muted-foreground">Consultation gratuite</div>
+            <div className="text-sm text-muted-foreground">
+              Consultation gratuite
+            </div>
           </div>
 
           <div className="text-center p-6 rounded-2xl border border-foreground/10 bg-background/50 backdrop-blur-sm hover:shadow-lg hover:shadow-accent/10 transition-all duration-300">
@@ -62,7 +84,9 @@ export default function ContactPage() {
               <CheckCircle className="h-6 w-6 text-accent" />
             </div>
             <div className="text-2xl font-bold text-accent mb-1">100%</div>
-            <div className="text-sm text-muted-foreground">Satisfaction client</div>
+            <div className="text-sm text-muted-foreground">
+              Satisfaction client
+            </div>
           </div>
 
           <div className="text-center p-6 rounded-2xl border border-foreground/10 bg-background/50 backdrop-blur-sm hover:shadow-lg hover:shadow-accent/10 transition-all duration-300">
@@ -84,7 +108,9 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h2 className="text-2xl font-bold">Envoyez-moi un message</h2>
-                  <p className="text-muted-foreground">Je vous réponds personnellement sous 24h</p>
+                  <p className="text-muted-foreground">
+                    Je vous réponds personnellement sous 24h
+                  </p>
                 </div>
               </div>
 
@@ -121,7 +147,9 @@ export default function ContactPage() {
 
             {/* Moyens de contact */}
             <div className="space-y-4">
-              <h3 className="font-semibold text-lg mb-4">Contactez-moi directement</h3>
+              <h3 className="font-semibold text-lg mb-4">
+                Contactez-moi directement
+              </h3>
 
               <a
                 href="mailto:contact@eurinhash.com"
@@ -131,8 +159,12 @@ export default function ContactPage() {
                   <Mail className="h-6 w-6 text-accent" />
                 </div>
                 <div className="flex-1">
-                  <div className="font-medium group-hover:text-accent transition-colors">Email</div>
-                  <div className="text-sm text-muted-foreground">contact@eurinhash.com</div>
+                  <div className="font-medium group-hover:text-accent transition-colors">
+                    Email
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    contact@eurinhash.com
+                  </div>
                 </div>
                 <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-accent group-hover:translate-x-1 transition-all" />
               </a>
@@ -147,8 +179,12 @@ export default function ContactPage() {
                   <LinkedinIcon className="h-6 w-6 text-accent" />
                 </div>
                 <div className="flex-1">
-                  <div className="font-medium group-hover:text-accent transition-colors">LinkedIn</div>
-                  <div className="text-sm text-muted-foreground">Réseau professionnel</div>
+                  <div className="font-medium group-hover:text-accent transition-colors">
+                    LinkedIn
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    Réseau professionnel
+                  </div>
                 </div>
                 <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-accent group-hover:translate-x-1 transition-all" />
               </a>
@@ -163,8 +199,12 @@ export default function ContactPage() {
                   <MessageSquare className="h-6 w-6 text-green-500" />
                 </div>
                 <div className="flex-1">
-                  <div className="font-medium group-hover:text-green-500 transition-colors">WhatsApp</div>
-                  <div className="text-sm text-muted-foreground">+229 01 62 26 52 46</div>
+                  <div className="font-medium group-hover:text-green-500 transition-colors">
+                    WhatsApp
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    +229 01 62 26 52 46
+                  </div>
                 </div>
                 <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-green-500 group-hover:translate-x-1 transition-all" />
               </a>
@@ -179,8 +219,12 @@ export default function ContactPage() {
                   <GithubIcon className="h-6 w-6 text-accent" />
                 </div>
                 <div className="flex-1">
-                  <div className="font-medium group-hover:text-accent transition-colors">GitHub</div>
-                  <div className="text-sm text-muted-foreground">Code & projets</div>
+                  <div className="font-medium group-hover:text-accent transition-colors">
+                    GitHub
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    Code & projets
+                  </div>
                 </div>
                 <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-accent group-hover:translate-x-1 transition-all" />
               </a>
@@ -191,17 +235,22 @@ export default function ContactPage() {
               <div className="p-4 rounded-2xl bg-gradient-to-r from-accent/10 to-accent/5 border border-accent/20">
                 <div className="flex items-center gap-3 mb-2">
                   <Calendar className="h-5 w-5 text-accent" />
-                  <span className="font-semibold text-accent">Consultation gratuite</span>
+                  <span className="font-semibold text-accent">
+                    Consultation gratuite
+                  </span>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  30 minutes d'échange pour analyser votre projet et vous conseiller.
+                  30 minutes d&#39;échange pour analyser votre projet et vous
+                  conseiller.
                 </p>
               </div>
 
               <div className="p-4 rounded-2xl bg-gradient-to-r from-green-500/10 to-green-500/5 border border-green-500/20">
                 <div className="flex items-center gap-3 mb-2">
                   <Clock className="h-5 w-5 text-green-500" />
-                  <span className="font-semibold text-green-500">Réponse rapide</span>
+                  <span className="font-semibold text-green-500">
+                    Réponse rapide
+                  </span>
                 </div>
                 <p className="text-sm text-muted-foreground">
                   Réponse garantie sous 24h, souvent bien plus rapide !

@@ -1,17 +1,18 @@
-import { Metadata } from 'next'
+import { Metadata } from 'next';
 
 export const siteConfig = {
-  name: "Eurin Hash",
-  title: "Eurin Hash - Développeur Full Stack & Specialiste Cloud",
-  description: "Développeur passionné spécialisé dans les solutions web modernes, l'architecture cloud et l'expérience utilisateur. Création d'applications performantes et sécurisées.",
-  url: "https://eurinhash.com",
-  ogImage: "https://eurinhash.com/og-image.jpg",
+  name: 'Eurin Hash',
+  title: 'Eurin Hash - Développeur Full Stack & Specialiste Cloud',
+  description:
+    "Développeur passionné spécialisé dans les solutions web modernes, l'architecture cloud et l'expérience utilisateur. Création d'applications performantes et sécurisées.",
+  url: 'https://eurinhash.com',
+  ogImage: 'https://eurinhash.com/og-image.jpg',
   links: {
-    email: "contact@eurinhash.com",
-    linkedin: "https://linkedin.com/in/eurinalmeida",
-    github: "https://github.com/digitaleflex",
+    email: 'contact@eurinhash.com',
+    linkedin: 'https://linkedin.com/in/eurinalmeida',
+    github: 'https://github.com/digitaleflex',
   },
-}
+};
 
 export function createMetadata(override: Partial<Metadata> = {}): Metadata {
   return {
@@ -21,22 +22,22 @@ export function createMetadata(override: Partial<Metadata> = {}): Metadata {
     },
     description: siteConfig.description,
     keywords: [
-      "développeur web",
-      "full stack",
-      "cloud computing",
-      "React",
-      "Next.js",
-      "TypeScript",
-      "AWS",
-      "architecture logicielle",
-      "expérience utilisateur",
-      "développement moderne"
+      'développeur web',
+      'full stack',
+      'cloud computing',
+      'React',
+      'Next.js',
+      'TypeScript',
+      'AWS',
+      'architecture logicielle',
+      'expérience utilisateur',
+      'développement moderne',
     ],
     authors: [{ name: siteConfig.name, url: siteConfig.url }],
     creator: siteConfig.name,
     openGraph: {
-      type: "website",
-      locale: "fr_FR",
+      type: 'website',
+      locale: 'fr_FR',
       url: siteConfig.url,
       title: siteConfig.title,
       description: siteConfig.description,
@@ -51,7 +52,7 @@ export function createMetadata(override: Partial<Metadata> = {}): Metadata {
       ],
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title: siteConfig.title,
       description: siteConfig.description,
       images: [siteConfig.ogImage],
@@ -62,14 +63,14 @@ export function createMetadata(override: Partial<Metadata> = {}): Metadata {
       googleBot: {
         index: true,
         follow: true,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
       },
     },
     verification: {
-      google: "your-google-verification-code",
+      google: 'your-google-verification-code',
     },
     ...override,
-  }
+  };
 }

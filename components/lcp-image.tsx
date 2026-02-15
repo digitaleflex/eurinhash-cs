@@ -8,12 +8,12 @@ interface LCPImageProps {
   quality?: number;
 }
 
-export function LCPImage({ 
-  src, 
-  alt, 
-  className = "", 
+export function LCPImage({
+  src,
+  alt,
+  className = '',
   priority = true,
-  quality = 85 
+  quality = 85,
 }: LCPImageProps) {
   return (
     <Image

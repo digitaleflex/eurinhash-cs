@@ -1,33 +1,45 @@
-'use client'
+'use client';
 
 import dynamic from 'next/dynamic';
 import { LoadingSkeleton } from './loading-skeleton';
 
 // Import dynamique pour les composants lourds
 export const DynamicVisionPage = dynamic(() => import('../app/vision/page'), {
-  loading: () => <LoadingSkeleton variant="page" />,
-  ssr: false
+  loading: () => <LoadingSkeleton variant="form" />,
+  ssr: false,
 });
 
-export const DynamicStartProjectPage = dynamic(() => import('../app/start-project/page'), {
-  loading: () => <LoadingSkeleton variant="form" />,
-  ssr: false
-});
+export const DynamicStartProjectPage = dynamic(
+  () => import('../app/start-project/page'),
+  {
+    loading: () => <LoadingSkeleton variant="form" />,
+    ssr: false,
+  }
+);
 
 // Import dynamique pour les composants avec animations
-export const DynamicCommunityProjects = dynamic(() => import('./community-projects'), {
-  loading: () => <LoadingSkeleton variant="card" />,
-  ssr: false
-});
+export const DynamicCommunityProjects = dynamic(
+  () => import('./community-projects'),
+  {
+    loading: () => <LoadingSkeleton variant="card" />,
+    ssr: false,
+  }
+);
 
 // Import dynamique pour les composants de formulaire
-export const DynamicContactForm = dynamic(() => import('./contact-form'), {
-  loading: () => <LoadingSkeleton variant="form" />,
-  ssr: false
-});
+export const DynamicContactForm = dynamic(
+  () => import('./contact-form').then((mod) => mod.ContactForm),
+  {
+    loading: () => <LoadingSkeleton variant="form" />,
+    ssr: false,
+  }
+);
 
 // Import dynamique pour les composants de navigation mobile
-export const DynamicMobileMenu = dynamic(() => import('./mobile-menu'), {
-  loading: () => <LoadingSkeleton variant="button" />,
-  ssr: false
-});
+export const DynamicMobileMenu = dynamic(
+  () => import('./mobile-menu').then((mod) => mod.MobileMenu),
+  {
+    loading: () => <LoadingSkeleton variant="button" />,
+    ssr: false,
+  }
+);

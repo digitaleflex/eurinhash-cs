@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { useEffect } from 'react';
 import Link from 'next/link';
@@ -37,16 +37,18 @@ export default function Error({
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
           Oups ! Une erreur s&apos;est produite
         </h1>
-        
+
         <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-          Quelque chose ne s&apos;est pas passé comme prévu. Ne vous inquiétez pas, 
-          ce n&apos;est probablement qu&apos;un problème temporaire.
+          Quelque chose ne s&apos;est pas passé comme prévu. Ne vous inquiétez
+          pas, ce n&apos;est probablement qu&apos;un problème temporaire.
         </p>
 
         {/* Détails de l'erreur (en mode développement) */}
         {process.env.NODE_ENV === 'development' && (
           <div className="mb-8 p-4 rounded-2xl border border-red-500/20 bg-red-500/5 text-left">
-            <h3 className="font-semibold text-red-500 mb-2">Détails de l&apos;erreur :</h3>
+            <h3 className="font-semibold text-red-500 mb-2">
+              Détails de l&apos;erreur :
+            </h3>
             <code className="text-sm text-muted-foreground break-all">
               {error.message}
             </code>
@@ -62,7 +64,7 @@ export default function Error({
               Le problème peut être temporaire
             </p>
           </div>
-          
+
           <div className="p-4 rounded-2xl border border-foreground/10 bg-background/50 backdrop-blur-sm">
             <Mail className="h-6 w-6 text-accent mx-auto mb-2" />
             <h3 className="font-semibold mb-1">Signalez le problème</h3>
@@ -81,7 +83,7 @@ export default function Error({
             <RefreshCw className="h-4 w-4" />
             Réessayer
           </button>
-          
+
           <Link
             href="/"
             className="inline-flex items-center gap-2 rounded-full border border-foreground/20 px-6 py-3 font-medium text-foreground transition-all duration-300 hover:border-accent hover:text-accent hover:bg-accent/5"

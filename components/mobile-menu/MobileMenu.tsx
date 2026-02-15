@@ -1,12 +1,12 @@
-'use client'
+'use client';
 
-import { MobileMenuProvider } from './MobileMenuProvider'
-import { MobileMenuButton } from './MobileMenuButton'
-import { MobileMenuOverlay } from './MobileMenuOverlay'
-import { MobileMenuContent } from './MobileMenuContent'
+import { MobileMenuProvider } from './MobileMenuProvider';
+import { MobileMenuButton } from './MobileMenuButton';
+import { MobileMenuOverlay } from './MobileMenuOverlay';
+import { MobileMenuContent } from './MobileMenuContent';
 
 interface MobileMenuProps {
-  className?: string
+  className?: string;
 }
 
 export function MobileMenu({ className = '' }: MobileMenuProps) {
@@ -18,5 +18,5 @@ export function MobileMenu({ className = '' }: MobileMenuProps) {
         <MobileMenuContent />
       </div>
     </MobileMenuProvider>
-  )
+  );
 }

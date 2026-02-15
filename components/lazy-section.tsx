@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { Suspense, lazy, ComponentType } from 'react';
 import { LoadingSkeleton } from './loading-skeleton';
@@ -9,16 +9,14 @@ interface LazySectionProps {
   className?: string;
 }
 
-export function LazySection({ 
-  children, 
+export function LazySection({
+  children,
   fallback = <LoadingSkeleton variant="card" />,
-  className = ""
+  className = '',
 }: LazySectionProps) {
   return (
     <Suspense fallback={fallback}>
-      <div className={className}>
-        {children}
-      </div>
+      <div className={className}>{children}</div>
     </Suspense>
   );
 }
@@ -29,7 +27,7 @@ export function withLazyLoading<T extends object>(
   fallback?: React.ReactNode
 ) {
   const LazyComponent = lazy(() => Promise.resolve({ default: Component }));
-  
+
   return function LazyWrapper(props: T) {
     return (
       <Suspense fallback={fallback || <LoadingSkeleton variant="card" />}>

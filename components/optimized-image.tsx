@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import Image from 'next/image';
 import { useState, memo } from 'react';
@@ -32,12 +32,9 @@ const OptimizedImage = memo(function OptimizedImage({
   return (
     <div className={`relative ${className}`}>
       {isLoading && !error && (
-        <LoadingSkeleton 
-          variant="card" 
-          className="absolute inset-0 z-10" 
-        />
+        <LoadingSkeleton variant="card" className="absolute inset-0 z-10" />
       )}
-      
+
       <Image
         src={src}
         alt={alt}
@@ -59,7 +56,7 @@ const OptimizedImage = memo(function OptimizedImage({
         }}
         {...props}
       />
-      
+
       {error && (
         <div className="absolute inset-0 flex items-center justify-center bg-muted text-muted-foreground">
           <span className="text-sm">Image non disponible</span>

@@ -1,10 +1,10 @@
-"use client"
+'use client';
 
 import Link from 'next/link';
 import { RefreshCw, Home, AlertTriangle } from 'lucide-react';
 
 export default function GlobalError({
-  error,
+  error, // eslint-disable-line @typescript-eslint/no-unused-vars
   reset,
 }: {
   error: Error & { digest?: string };
@@ -17,13 +17,12 @@ export default function GlobalError({
           <div className="h-16 w-16 mx-auto mb-6 rounded-full bg-red-500/10 flex items-center justify-center">
             <AlertTriangle className="h-8 w-8 text-red-500" />
           </div>
-          
-          <h1 className="text-2xl font-bold mb-4">
-            Erreur critique
-          </h1>
-          
+
+          <h1 className="text-2xl font-bold mb-4">Erreur critique</h1>
+
           <p className="text-muted-foreground mb-8">
-            Une erreur inattendue s&apos;est produite. Veuillez réessayer ou retourner à l&apos;accueil.
+            Une erreur inattendue s&apos;est produite. Veuillez réessayer ou
+            retourner à l&apos;accueil.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -34,7 +33,7 @@ export default function GlobalError({
               <RefreshCw className="h-4 w-4" />
               Réessayer
             </button>
-            
+
             <Link
               href="/"
               className="inline-flex items-center gap-2 rounded-full border border-foreground/20 px-6 py-3 font-medium hover:bg-foreground/5 transition-colors"

@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
-import { motion, AnimatePresence } from 'framer-motion'
-import { useMobileMenu } from './MobileMenuProvider'
+import { motion, AnimatePresence } from 'framer-motion';
+import { useMobileMenu } from './MobileMenuProvider';
 
 export function MobileMenuOverlay() {
-  const { isOpen, closeMenu } = useMobileMenu()
+  const { isOpen, closeMenu } = useMobileMenu();
 
   return (
     <AnimatePresence>
@@ -19,5 +19,5 @@ export function MobileMenuOverlay() {
         />
       )}
     </AnimatePresence>
-  )
+  );
 }

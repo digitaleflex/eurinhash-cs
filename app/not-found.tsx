@@ -69,18 +69,22 @@ export default function NotFound() {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {[
-              { href: '/start-project', label: 'Démarrer un projet', isPrimary: true },
+              {
+                href: '/start-project',
+                label: 'Démarrer un projet',
+                isPrimary: true,
+              },
               { href: '/about', label: 'À propos' },
               { href: '/projects', label: 'Projets' },
               { href: '/skills', label: 'Compétences' },
               { href: '/contact', label: 'Contact' },
-            ].map((link) => (
+            ].map(link => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={`px-4 py-2 rounded-full text-sm border transition-colors ${
-                  link.isPrimary 
-                    ? 'border-accent bg-accent text-white hover:bg-accent/90' 
+                  link.isPrimary
+                    ? 'border-accent bg-accent text-white hover:bg-accent/90'
                     : 'border-foreground/20 text-muted-foreground hover:border-accent hover:text-accent'
                 }`}
               >

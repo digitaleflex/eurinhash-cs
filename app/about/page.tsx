@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Target, Shield, Leaf } from "lucide-react";
-import Image from "next/image";
+import { Target, Shield, Leaf } from 'lucide-react';
+import Image from 'next/image';
 
 export default function AboutPage() {
   return (
@@ -31,14 +31,16 @@ export default function AboutPage() {
         {/* Bio */}
         <div className="prose prose-lg mx-auto text-center max-w-3xl">
           <p className="text-lg leading-relaxed mb-6">
-            Passionné par l'innovation technologique et l'entrepreneuriat, je conçois des solutions 
-            cloud et web au croisement de performance et simplicité. Mon approche privilégie 
-            la clarté, la sécurité et la durabilité des systèmes.
+            Passionné par l'innovation technologique et l'entrepreneuriat, je
+            conçois des solutions cloud et web au croisement de performance et
+            simplicité. Mon approche privilégie la clarté, la sécurité et la
+            durabilité des systèmes.
           </p>
           <p className="text-lg leading-relaxed mb-8">
-            Fondateur d'E-FLEX, j'accompagne les entreprises dans leur transformation numérique 
-            tout en formant la prochaine génération de talents IT. Ma vision : une technologie 
-            accessible, souveraine et conçue pour durer.
+            Fondateur d'E-FLEX, j'accompagne les entreprises dans leur
+            transformation numérique tout en formant la prochaine génération de
+            talents IT. Ma vision : une technologie accessible, souveraine et
+            conçue pour durer.
           </p>
         </div>
       </section>
@@ -46,32 +48,48 @@ export default function AboutPage() {
       {/* Parcours */}
       <section className="py-16 sm:py-20 bg-muted">
         <div className="mx-auto max-w-4xl px-6 md:px-8">
-          <h2 className="text-3xl font-bold tracking-tight mb-12 text-center">Mon parcours</h2>
+          <h2 className="text-3xl font-bold tracking-tight mb-12 text-center">
+            Mon parcours
+          </h2>
           <div className="space-y-8">
             <div className="border-l-2 border-accent pl-6 group hover:bg-background/50 p-4 rounded-lg transition-all duration-300">
-              <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">2024 - Présent</h3>
-              <h4 className="text-lg font-medium text-accent mb-2">Fondateur & CEO - E-FLEX</h4>
+              <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
+                2024 - Présent
+              </h3>
+              <h4 className="text-lg font-medium text-accent mb-2">
+                Fondateur & CEO - E-FLEX
+              </h4>
               <p className="text-muted-foreground">
-                Création et développement d'une société de conseil IT spécialisée dans les solutions cloud, 
-                le développement web et la formation technologique.
+                Création et développement d'une société de conseil IT
+                spécialisée dans les solutions cloud, le développement web et la
+                formation technologique.
               </p>
             </div>
-            
+
             <div className="border-l-2 border-accent pl-6 group hover:bg-background/50 p-4 rounded-lg transition-all duration-300">
-              <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">2023 - 2024</h3>
-              <h4 className="text-lg font-medium text-accent mb-2">Consultant IT Indépendant</h4>
+              <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
+                2023 - 2024
+              </h3>
+              <h4 className="text-lg font-medium text-accent mb-2">
+                Consultant IT Indépendant
+              </h4>
               <p className="text-muted-foreground">
-                Développement de solutions web innovantes pour des clients variés, 
-                de la spiritualité numérique aux plateformes agro-industrielles.
+                Développement de solutions web innovantes pour des clients
+                variés, de la spiritualité numérique aux plateformes
+                agro-industrielles.
               </p>
             </div>
-            
+
             <div className="border-l-2 border-accent pl-6 group hover:bg-background/50 p-4 rounded-lg transition-all duration-300">
-              <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">Formation Continue</h3>
-              <h4 className="text-lg font-medium text-accent mb-2">Autodidacte Technologique</h4>
+              <h3 className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
+                Formation Continue
+              </h3>
+              <h4 className="text-lg font-medium text-accent mb-2">
+                Autodidacte Technologique
+              </h4>
               <p className="text-muted-foreground">
-                Veille technologique constante, spécialisation en cloud computing, 
-                DevOps, et technologies web modernes.
+                Veille technologique constante, spécialisation en cloud
+                computing, DevOps, et technologies web modernes.
               </p>
             </div>
           </div>
@@ -81,38 +99,47 @@ export default function AboutPage() {
       {/* Valeurs */}
       <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-6 md:px-8">
-          <h2 className="text-3xl font-bold tracking-tight mb-12 text-center">Mes valeurs</h2>
+          <h2 className="text-3xl font-bold tracking-tight mb-12 text-center">
+            Mes valeurs
+          </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center p-6 group hover:bg-muted/50 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
               <div className="h-16 w-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-accent/20 to-accent/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <Target className="h-8 w-8 text-accent" />
               </div>
-              <h3 className="text-xl font-semibold mb-3 group-hover:text-accent transition-colors">Clarté</h3>
+              <h3 className="text-xl font-semibold mb-3 group-hover:text-accent transition-colors">
+                Clarté
+              </h3>
               <p className="text-muted-foreground">
-                Des solutions simples, compréhensibles et efficaces. 
-                La complexité technique ne doit jamais nuire à l'expérience utilisateur.
+                Des solutions simples, compréhensibles et efficaces. La
+                complexité technique ne doit jamais nuire à l'expérience
+                utilisateur.
               </p>
             </div>
-            
+
             <div className="text-center p-6 group hover:bg-muted/50 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
               <div className="h-16 w-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-accent/20 to-accent/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <Shield className="h-8 w-8 text-accent" />
               </div>
-              <h3 className="text-xl font-semibold mb-3 group-hover:text-accent transition-colors">Sécurité</h3>
+              <h3 className="text-xl font-semibold mb-3 group-hover:text-accent transition-colors">
+                Sécurité
+              </h3>
               <p className="text-muted-foreground">
-                La sécurité by design dans chaque projet. 
-                Protection des données et respect de la vie privée sont prioritaires.
+                La sécurité by design dans chaque projet. Protection des données
+                et respect de la vie privée sont prioritaires.
               </p>
             </div>
-            
+
             <div className="text-center p-6 group hover:bg-muted/50 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
               <div className="h-16 w-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-accent/20 to-accent/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <Leaf className="h-8 w-8 text-accent" />
               </div>
-              <h3 className="text-xl font-semibold mb-3 group-hover:text-accent transition-colors">Durabilité</h3>
+              <h3 className="text-xl font-semibold mb-3 group-hover:text-accent transition-colors">
+                Durabilité
+              </h3>
               <p className="text-muted-foreground">
-                Concevoir pour durer. Technologies pérennes, 
-                code maintenable et impact environnemental maîtrisé.
+                Concevoir pour durer. Technologies pérennes, code maintenable et
+                impact environnemental maîtrisé.
               </p>
             </div>
           </div>
@@ -126,8 +153,8 @@ export default function AboutPage() {
             Travaillons ensemble
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Vous avez un projet, une idée ou simplement envie d'échanger ? 
-            Je serais ravi de discuter avec vous.
+            Vous avez un projet, une idée ou simplement envie d'échanger ? Je
+            serais ravi de discuter avec vous.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a

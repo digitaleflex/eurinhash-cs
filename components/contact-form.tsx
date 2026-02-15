@@ -1,8 +1,10 @@
-"use client"
+'use client';
 
-import { useState, useRef } from "react";
-import { Send, AlertCircle, Loader2, CheckCircle } from "lucide-react";
-import { FeedbackPopup } from "./feedback-popup";
+import { useState, useRef } from 'react';
+import { Send, AlertCircle, Loader2, CheckCircle } from 'lucide-react';
+import { FeedbackPopup } from './feedback-popup';
+
+import { SITE_CONFIG } from '@/lib/config';
 
 interface FormDataShape {
   name: string;
@@ -19,88 +21,133 @@ interface FormErrorsShape {
 
 export function ContactForm() {
   const [formData, setFormData] = useState<FormDataShape>({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
   });
   const [errors, setErrors] = useState<FormErrorsShape>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
-  const [feedbackType, setFeedbackType] = useState<'success' | 'error'>('success');
+  const [feedbackType, setFeedbackType] = useState<'success' | 'error'>(
+    'success'
+  );
   const [feedbackMessage, setFeedbackMessage] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
 
   const validateField = (name: string, value: string): string | undefined => {
+    const { validation } = SITE_CONFIG.forms.contact;
+
     switch (name) {
-      case "name":
-        if (!value.trim()) return "Le nom est requis";
-        if (value.trim().length < 2) return "Le nom doit contenir au moins 2 caractères";
+      case 'name':
+        if (!value.trim()) return 'Le nom est requis';
+        if (value.trim().length < validation.name.minLength)
+          return `Le nom doit contenir au moins ${validation.name.minLength} caractères`;
+        if (value.trim().length > validation.name.maxLength)
+          return `Le nom ne doit pas dépasser ${validation.name.maxLength} caractères`;
         break;
-      case "email":
-        if (!value.trim()) return "L'email est requis";
-        // simplified email regex
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "Format d'email invalide";
+      case 'email':
+        const trimmedEmail = value.trim();
+        if (!trimmedEmail) return "L'email est requis";
+        if (/\s/.test(trimmedEmail)) return "Format d'email invalide";
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail))
+          return "Format d'email invalide";
+        if (trimmedEmail.length > validation.email.maxLength)
+          return `L'email ne doit pas dépasser ${validation.email.maxLength} caractères`;
         break;
-      case "message":
-        if (!value.trim()) return "Le message est requis";
-        if (value.trim().length < 10) return "Le message doit contenir au moins 10 caractères";
+      case 'message':
+        if (!value.trim()) return 'Le message est requis';
+        if (value.trim().length < validation.message.minLength)
+          return `Le message doit contenir au moins ${validation.message.minLength} caractères`;
+        if (value.trim().length > validation.message.maxLength)
+          return `Le message ne doit pas dépasser ${validation.message.maxLength} caractères`;
         break;
     }
     return undefined;
   };
 
   const handleInputChange = (name: keyof FormDataShape, value: string) => {
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
     const error = validateField(name, value);
-    setErrors((prev) => ({ ...prev, [name]: error }));
+    setErrors(prev => ({ ...prev, [name]: error }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validation des champs
     const newErrors: FormErrorsShape = {};
-    (Object.keys(formData) as (keyof FormDataShape)[]).forEach((key) => {
-      if (key !== "subject") {
+    (Object.keys(formData) as (keyof FormDataShape)[]).forEach(key => {
+      if (key !== 'subject') {
         const error = validateField(key, formData[key]);
         if (error) newErrors[key] = error;
       }
     });
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
+      // Focaliser sur le premier champ en erreur
+      const firstErrorField = Object.keys(newErrors)[0];
+      const element = document.getElementById(firstErrorField);
+      if (element) {
+        element.focus();
+      }
       return;
     }
+
     setIsSubmitting(true);
+
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+      // Préparer les données avec email nettoyé
+      const preparedData = {
+        ...formData,
+        email: formData.email.trim().replace(/\s+/g, ''), // Supprimer tous les espaces
+      };
+
+      // Utiliser fetch avec les bons paramètres
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(preparedData),
       });
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error((data as any)?.error || "Erreur serveur");
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          result.details
+            ? result.details.join(', ')
+            : result.error || "Erreur lors de l'envoi du message"
+        );
       }
-      
+
       // Succès
       setIsSubmitted(true);
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setErrors({});
       setFeedbackType('success');
-      setFeedbackMessage('');
+      setFeedbackMessage('Message envoyé avec succès !');
       setShowFeedback(true);
-      
+
       if (formRef.current) {
-        formRef.current.classList.add("animate-pulse");
+        formRef.current.classList.add('animate-pulse');
         setTimeout(() => {
-          formRef.current?.classList.remove("animate-pulse");
+          formRef.current?.classList.remove('animate-pulse');
         }, 1000);
       }
     } catch (error) {
       console.error("Erreur lors de l'envoi:", error);
-      
+
       // Erreur
       setFeedbackType('error');
-      setFeedbackMessage(error instanceof Error ? error.message : "Une erreur est survenue");
+      setFeedbackMessage(
+        error instanceof Error
+          ? error.message
+          : "Une erreur est survenue lors de l'envoi du message"
+      );
       setShowFeedback(true);
     } finally {
       setIsSubmitting(false);
@@ -108,7 +155,11 @@ export function ContactForm() {
   };
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+    <form
+      ref={formRef}
+      onSubmit={handleSubmit}
+      className="space-y-4 sm:space-y-6"
+    >
       <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2">
         <div className="relative group">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-muted-foreground/70 group-focus-within:text-accent transition-colors">
@@ -124,9 +175,12 @@ export function ContactForm() {
             aria-invalid={!!errors.name}
             className="peer w-full rounded-lg sm:rounded-xl border border-foreground/20 bg-background/50 pl-12 pr-4 py-3 sm:py-4 text-foreground placeholder-transparent focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 focus:bg-background transition-all duration-300 hover:border-foreground/30 text-sm sm:text-base"
             value={formData.name}
-            onChange={(e) => handleInputChange("name", e.target.value)}
+            onChange={e => handleInputChange('name', e.target.value)}
           />
-          <label htmlFor="name" className="pointer-events-none absolute left-12 top-1/2 -translate-y-1/2 text-foreground/70 transition-all duration-200 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent bg-background px-1 rounded">
+          <label
+            htmlFor="name"
+            className="pointer-events-none absolute left-12 top-1/2 -translate-y-1/2 text-foreground/70 transition-all duration-200 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent bg-background px-1 rounded"
+          >
             Nom *
           </label>
           {errors.name && (
@@ -152,9 +206,12 @@ export function ContactForm() {
             aria-invalid={!!errors.email}
             className="peer w-full rounded-lg sm:rounded-xl border border-foreground/20 bg-background/50 pl-12 pr-4 py-3 sm:py-4 text-foreground placeholder-transparent focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 focus:bg-background transition-all duration-300 hover:border-foreground/30 text-sm sm:text-base"
             value={formData.email}
-            onChange={(e) => handleInputChange("email", e.target.value)}
+            onChange={e => handleInputChange('email', e.target.value)}
           />
-          <label htmlFor="email" className="pointer-events-none absolute left-12 top-1/2 -translate-y-1/2 text-foreground/70 transition-all duration-200 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent bg-background px-1 rounded">
+          <label
+            htmlFor="email"
+            className="pointer-events-none absolute left-12 top-1/2 -translate-y-1/2 text-foreground/70 transition-all duration-200 peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent bg-background px-1 rounded"
+          >
             Email *
           </label>
           {errors.email && (
@@ -173,7 +230,7 @@ export function ContactForm() {
           id="subject"
           name="subject"
           defaultValue={formData.subject}
-          onChange={(e) => handleInputChange("subject", e.target.value)}
+          onChange={e => handleInputChange('subject', e.target.value)}
           aria-label="Sujet"
           className="peer w-full appearance-none rounded-lg sm:rounded-xl border border-foreground/20 bg-background/50 pl-12 pr-10 py-3 sm:py-4 text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 focus:bg-background transition-all duration-300 hover:border-foreground/30 text-sm sm:text-base"
         >
@@ -201,9 +258,12 @@ export function ContactForm() {
           aria-invalid={!!errors.message}
           className="peer w-full rounded-lg sm:rounded-xl border border-foreground/20 bg-background/50 pl-12 pr-4 py-3 sm:py-4 text-foreground placeholder-transparent focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 focus:bg-background transition-all duration-300 hover:border-foreground/30 resize-vertical text-sm sm:text-base"
           value={formData.message}
-          onChange={(e) => handleInputChange("message", e.target.value)}
+          onChange={e => handleInputChange('message', e.target.value)}
         />
-        <label htmlFor="message" className="pointer-events-none absolute left-12 top-4 text-foreground/70 transition-all duration-200 peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent bg-background px-1 rounded">
+        <label
+          htmlFor="message"
+          className="pointer-events-none absolute left-12 top-4 text-foreground/70 transition-all duration-200 peer-focus:top-2 peer-focus:text-xs peer-focus:text-accent bg-background px-1 rounded"
+        >
           Message *
         </label>
         {errors.message && (
@@ -223,7 +283,11 @@ export function ContactForm() {
         ) : (
           <Send className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
         )}
-        {isSubmitting ? "Envoi..." : isSubmitted ? "Envoyé !" : "Envoyer le message"}
+        {isSubmitting
+          ? 'Envoi...'
+          : isSubmitted
+            ? 'Envoyé !'
+            : 'Envoyer le message'}
       </button>
 
       {/* Feedback Popup */}

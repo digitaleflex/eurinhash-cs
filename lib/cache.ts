@@ -1,12 +1,15 @@
+import { SITE_CONFIG } from './config';
+
 // Système de mise en cache simple pour les opérations fréquentes
-class SimpleCache<T = any> {
+class SimpleCache<T> {
   private cache: Map<string, { value: T; expiry: number }> = new Map();
   private defaultTtl: number;
 
-  constructor(defaultTtl: number = 5 * 60 * 1000) { // 5 minutes par défaut
+  constructor(defaultTtl: number = SITE_CONFIG.cache.defaultTtl) {
+    // 5 minutes par défaut
     this.defaultTtl = defaultTtl;
     // Nettoyer le cache périodiquement
-    setInterval(() => this.cleanup(), 60 * 1000); // Nettoyage toutes les minutes
+    setInterval(() => this.cleanup(), SITE_CONFIG.time.oneMinute); // Nettoyage toutes les minutes
   }
 
   set(key: string, value: T, ttl?: number): void {
@@ -49,10 +52,10 @@ class SimpleCache<T = any> {
 }
 
 // Cache pour les statistiques et les données fréquemment consultées
-export const statsCache = new SimpleCache<any>(10 * 60 * 1000); // 10 minutes
-export const dataCache = new SimpleCache<any>(5 * 60 * 1000); // 5 minutes
+export const statsCache = new SimpleCache<unknown>(SITE_CONFIG.cache.statsTtl); // 10 minutes
+export const dataCache = new SimpleCache<unknown>(SITE_CONFIG.cache.defaultTtl); // 5 minutes
 
 // Cache pour les requêtes API fréquentes
-export const apiCache = new SimpleCache<any>(2 * 60 * 1000); // 2 minutes
+export const apiCache = new SimpleCache<unknown>(SITE_CONFIG.cache.apiTtl); // 2 minutes
 
 export default SimpleCache;

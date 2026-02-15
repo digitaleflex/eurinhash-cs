@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
 
 interface PageTransitionProps {
@@ -8,7 +8,10 @@ interface PageTransitionProps {
   className?: string;
 }
 
-export function PageTransition({ children, className = "" }: PageTransitionProps) {
+export function PageTransition({
+  children,
+  className = '',
+}: PageTransitionProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -16,7 +19,7 @@ export function PageTransition({ children, className = "" }: PageTransitionProps
       exit={{ opacity: 0, y: -20 }}
       transition={{
         duration: 0.3,
-        ease: [0.25, 0.25, 0, 1]
+        ease: [0.25, 0.25, 0, 1],
       }}
       className={className}
     >
@@ -25,10 +28,10 @@ export function PageTransition({ children, className = "" }: PageTransitionProps
   );
 }
 
-export function FadeInSection({ 
-  children, 
+export function FadeInSection({
+  children,
   delay = 0,
-  className = ""
+  className = '',
 }: {
   children: ReactNode;
   delay?: number;
@@ -38,11 +41,11 @@ export function FadeInSection({
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: true, margin: '-50px' }}
       transition={{
         duration: 0.6,
         delay,
-        ease: [0.25, 0.25, 0, 1]
+        ease: [0.25, 0.25, 0, 1],
       }}
       className={className}
     >

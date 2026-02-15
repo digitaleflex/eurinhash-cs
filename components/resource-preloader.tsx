@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useEffect } from 'react';
 
@@ -19,7 +19,7 @@ export function ResourcePreloader() {
 
     try {
       // Précharger les ressources critiques
-      CRITICAL_RESOURCES.forEach((resource) => {
+      CRITICAL_RESOURCES.forEach(resource => {
         const link = document.createElement('link');
         link.rel = 'preload';
         link.as = resource.endsWith('.webp') ? 'image' : 'fetch';
@@ -33,16 +33,14 @@ export function ResourcePreloader() {
       fontLink.as = 'font';
       fontLink.type = 'font/woff2';
       fontLink.crossOrigin = 'anonymous';
-      fontLink.href = 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2';
+      fontLink.href =
+        'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2';
       document.head.appendChild(fontLink);
 
       // DNS prefetch pour les domaines externes
-      const dnsPrefetchDomains = [
-        'fonts.googleapis.com',
-        'fonts.gstatic.com',
-      ];
+      const dnsPrefetchDomains = ['fonts.googleapis.com', 'fonts.gstatic.com'];
 
-      dnsPrefetchDomains.forEach((domain) => {
+      dnsPrefetchDomains.forEach(domain => {
         const link = document.createElement('link');
         link.rel = 'dns-prefetch';
         link.href = `//${domain}`;

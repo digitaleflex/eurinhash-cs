@@ -1,45 +1,50 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { CheckCircle, X, Mail, Clock, MessageSquare } from 'lucide-react'
+import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { CheckCircle, X, Mail, Clock, MessageSquare } from 'lucide-react';
 
 interface FeedbackPopupProps {
-  isOpen: boolean
-  onClose: () => void
-  type: 'success' | 'error'
-  message?: string
+  isOpen: boolean;
+  onClose: () => void;
+  type: 'success' | 'error';
+  message?: string;
 }
 
-export function FeedbackPopup({ isOpen, onClose, type, message }: FeedbackPopupProps) {
-  const [progress, setProgress] = useState(0)
+export function FeedbackPopup({
+  isOpen,
+  onClose,
+  type,
+  message,
+}: FeedbackPopupProps) {
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     if (isOpen) {
-      setProgress(0)
+      setProgress(0);
       const timer = setInterval(() => {
-        setProgress((prev) => {
+        setProgress(prev => {
           if (prev >= 100) {
-            clearInterval(timer)
-            return 100
+            clearInterval(timer);
+            return 100;
           }
-          return prev + 2
-        })
-      }, 50)
+          return prev + 2;
+        });
+      }, 50);
 
-      return () => clearInterval(timer)
+      return () => clearInterval(timer);
     }
-  }, [isOpen])
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen) {
       const timer = setTimeout(() => {
-        onClose()
-      }, 5000)
+        onClose();
+      }, 5000);
 
-      return () => clearTimeout(timer)
+      return () => clearTimeout(timer);
     }
-  }, [isOpen, onClose])
+  }, [isOpen, onClose]);
 
   if (type === 'success') {
     return (
@@ -58,11 +63,13 @@ export function FeedbackPopup({ isOpen, onClose, type, message }: FeedbackPopupP
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
               className="relative w-full max-w-sm sm:max-w-md bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden mx-2 sm:mx-0"
-              onClick={(e) => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
             >
               {/* Progress bar */}
-              <div className="absolute top-0 left-0 h-1 bg-gradient-to-r from-green-400 to-emerald-500 transition-all duration-100 ease-out"
-                   style={{ width: `${progress}%` }} />
+              <div
+                className="absolute top-0 left-0 h-1 bg-gradient-to-r from-green-400 to-emerald-500 transition-all duration-100 ease-out"
+                style={{ width: `${progress}%` }}
+              />
 
               {/* Close button */}
               <button
@@ -101,7 +108,8 @@ export function FeedbackPopup({ isOpen, onClose, type, message }: FeedbackPopupP
                   transition={{ delay: 0.4 }}
                   className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4 sm:mb-6 leading-relaxed"
                 >
-                  Votre message a été transmis avec succès. Je vous répondrai dans les plus brefs délais.
+                  Votre message a été transmis avec succès. Je vous répondrai
+                  dans les plus brefs délais.
                 </motion.p>
 
                 {/* Features */}
@@ -140,7 +148,7 @@ export function FeedbackPopup({ isOpen, onClose, type, message }: FeedbackPopupP
           </motion.div>
         )}
       </AnimatePresence>
-    )
+    );
   }
 
   // Error popup
@@ -152,7 +160,7 @@ export function FeedbackPopup({ isOpen, onClose, type, message }: FeedbackPopupP
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 50 }}
           transition={{ type: 'spring', duration: 0.5 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/50 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/50 backdrop-blur-sm"
           onClick={onClose}
         >
           <motion.div
@@ -160,11 +168,13 @@ export function FeedbackPopup({ isOpen, onClose, type, message }: FeedbackPopupP
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             className="relative w-full max-w-sm sm:max-w-md bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden mx-2 sm:mx-0"
-            onClick={(e) => e.stopPropagation()}
+            onClick={e => e.stopPropagation()}
           >
             {/* Progress bar */}
-            <div className="absolute top-0 left-0 h-1 bg-gradient-to-r from-red-400 to-red-500 transition-all duration-100 ease-out"
-                 style={{ width: `${progress}%` }} />
+            <div
+              className="absolute top-0 left-0 h-1 bg-gradient-to-r from-red-400 to-red-500 transition-all duration-100 ease-out"
+              style={{ width: `${progress}%` }}
+            />
 
             {/* Close button */}
             <button
@@ -203,7 +213,8 @@ export function FeedbackPopup({ isOpen, onClose, type, message }: FeedbackPopupP
                 transition={{ delay: 0.4 }}
                 className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4 sm:mb-6 leading-relaxed"
               >
-                {message || 'Une erreur est survenue lors de l\'envoi de votre message. Veuillez réessayer.'}
+                {message ||
+                  "Une erreur est survenue lors de l&#39;envoi de votre message. Veuillez r&#233;essayer."}
               </motion.p>
 
               {/* Action button */}
@@ -221,5 +232,5 @@ export function FeedbackPopup({ isOpen, onClose, type, message }: FeedbackPopupP
         </motion.div>
       )}
     </AnimatePresence>
-  )
+  );
 }

@@ -1,6 +1,7 @@
-'use client'
+'use client';
 
 import { Suspense, ReactNode } from 'react';
+import Image from 'next/image';
 import { LoadingSkeleton } from './loading-skeleton';
 
 interface SuspenseWrapperProps {
@@ -9,10 +10,10 @@ interface SuspenseWrapperProps {
   className?: string;
 }
 
-export function SuspenseWrapper({ 
-  children, 
+export function SuspenseWrapper({
+  children,
   fallback,
-  className = ""
+  className = '',
 }: SuspenseWrapperProps) {
   const defaultFallback = (
     <div className={`animate-pulse ${className}`}>
@@ -24,25 +25,51 @@ export function SuspenseWrapper({
     </div>
   );
 
-  return (
-    <Suspense fallback={fallback || defaultFallback}>
-      {children}
-    </Suspense>
-  );
+  return <Suspense fallback={fallback || defaultFallback}>{children}</Suspense>;
 }
 
 // Composant pour les images avec lazy loading
-export function LazyImage({ 
-  src, 
-  alt, 
-  className = "",
-  ...props 
-}: React.ImgHTMLAttributes<HTMLImageElement>) {
+export function LazyImage({
+  src,
+  alt,
+  className = '',
+  width,
+  height,
+  ...props
+}: React.ImgHTMLAttributes<HTMLImageElement> & {
+  width?: number;
+  height?: number;
+}) {
+  // Utiliser le composant Image de Next.js pour optimiser les images
+  if (width && height && src && typeof src === 'string') {
+    return (
+      <Suspense
+        fallback={<LoadingSkeleton variant="card" className={className} />}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <Image
+          src={src}
+          alt={alt || ''}
+          className={className}
+          width={width}
+          height={height}
+          loading="lazy"
+          decoding="async"
+          {...props}
+        />
+      </Suspense>
+    );
+  }
+
+  // Sinon, utiliser une image standard
   return (
-    <Suspense fallback={<LoadingSkeleton variant="card" className={className} />}>
-      <img 
-        src={src} 
-        alt={alt} 
+    <Suspense
+      fallback={<LoadingSkeleton variant="card" className={className} />}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt={alt}
         className={className}
         loading="lazy"
         decoding="async"
