@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://eurinhash.dev/sitemap.xml
+Sitemap: https://eurinhash.com/sitemap.xml

@@ -23,6 +23,7 @@ const nextConfig: NextConfig = {
     // Optimisations supplémentaires
     optimizeServerReact: true,
     serverMinification: true,
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons', 'framer-motion'],
   },
 
   // Packages externes pour les composants serveur

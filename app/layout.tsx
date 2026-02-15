@@ -9,6 +9,7 @@ import { ThemeToggle } from '@/components/theme-toggle';
 import { MobileMenu } from '@/components/mobile-menu';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { JsonLd } from '@/components/json-ld';
 
 import './globals.css';
 
@@ -50,20 +51,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.webmanifest" />
         {/* Preload des polices critiques */}
-        <link
-          rel="preload"
-          href="/_next/static/media/inter-latin.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/_next/static/media/jetbrains-mono-latin.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
+        {/* Preload des polices critiques géré par next/font */}
         {/* Preload de l'image LCP */}
         <link rel="preload" as="image" href="/eurin-photo.webp" />
 
@@ -122,6 +110,7 @@ export default function RootLayout({
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />
+        <JsonLd />
       </body>
     </html>
   );
