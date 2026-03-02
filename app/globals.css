@@ -100,17 +100,7 @@
   }
 }
 
-/* Amélioration de la lisibilité */
-body {
-  font-feature-settings:
-    'rlig' 1,
-    'calt' 1;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
-/* Animations de chargement */
 @keyframes shimmer {
   0% {
     background-position: -200px 0;

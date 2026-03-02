@@ -155,14 +155,17 @@ export default function VisionPage() {
           <span className="font-mono text-[10px] opacity-40 uppercase tracking-[0.4em] block mb-12">Axiomes de la vision</span>
           <div className="grid md:grid-cols-3 gap-16">
             {[
-              { id: 'I', t: 'Une structure se conçoit avant de se développer', d: 'L’architecture précède le produit.' },
-              { id: 'II', t: 'La maîtrise précède la performance', d: 'Un système sans maîtrise n’est jamais durable.' },
-              { id: 'III', t: 'La transparence garantit la pérennité', d: 'La documentation est un contrat avec le futur.' }
+              { id: 'I', t: 'Une structure se conçoit avant de se développer', d: 'L’architecture précède le produit.', href: '/vision/ehaf', label: 'Voir EHAF' },
+              { id: 'II', t: 'La maîtrise précède la performance', d: 'Un système sans maîtrise n’est jamais durable.', href: '/vision/doctrine', label: 'Lire la Doctrine' },
+              { id: 'III', t: 'Les standards garantissent la stabilité', d: 'Le respect des protocoles est la clé de la pérennité.', href: '/vision/standards', label: 'Voir les Standards' }
             ].map(ax => (
               <div key={ax.id} className="space-y-6">
                 <span className="text-6xl font-black text-accent/30 font-mono">{ax.id}</span>
                 <h3 className="text-xl font-bold uppercase tracking-tight">{ax.t}</h3>
-                <p className="text-background/60 leading-relaxed italic">"{ax.d}"</p>
+                <p className="text-background/60 leading-relaxed italic mb-8">"{ax.d}"</p>
+                <Link href={ax.href} className="inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.3em] text-accent hover:text-white transition-colors">
+                  {ax.label} <ArrowRight className="w-3 h-3" />
+                </Link>
               </div>
             ))}
           </div>

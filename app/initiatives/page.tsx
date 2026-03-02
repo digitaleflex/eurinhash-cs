@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { ArrowRight, Info, ShieldCheck, Cpu, Users } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -151,6 +152,29 @@ export default function InitiativesPage() {
                                                 </div>
                                             </div>
                                         </div>
+                                        {/* Lien vers la spécification si disponible */}
+                                        {initiative.ref === 'EHAF-INFRA-01' && (
+                                            <div className="mt-16 pt-8 border-t border-foreground/5">
+                                                <Link
+                                                    href="/initiatives/flexhost"
+                                                    className="inline-flex items-center gap-4 font-mono text-[10px] text-accent uppercase tracking-[0.4em] font-black hover:text-foreground transition-colors group/link"
+                                                >
+                                                    Voir les spécifications techniques FlexHOST
+                                                    <ArrowRight className="w-4 h-4 group-hover/link:translate-x-2 transition-transform duration-500" />
+                                                </Link>
+                                            </div>
+                                        )}
+                                        {initiative.ref === 'EHAF-ARCH-01' && (
+                                            <div className="mt-16 pt-8 border-t border-foreground/5">
+                                                <Link
+                                                    href="/vision/ehaf"
+                                                    className="inline-flex items-center gap-4 font-mono text-[10px] text-accent uppercase tracking-[0.4em] font-black hover:text-foreground transition-colors group/link"
+                                                >
+                                                    Lire la spécification complète v1.0
+                                                    <ArrowRight className="w-4 h-4 group-hover/link:translate-x-2 transition-transform duration-500" />
+                                                </Link>
+                                            </div>
+                                        )}
 
                                     </div>
                                 ))}
