@@ -1,68 +1,60 @@
 'use client';
 
 import { useState } from 'react';
-import {
-    ChevronDown,
-    ChevronUp,
-    Check,
-} from 'lucide-react';
+import { ChevronDown, ChevronUp, Check } from 'lucide-react';
 
 const phases = [
     {
         id: 'phase-0',
-        year: '2024-2026',
-        title: 'Fondation Invisible',
-        subtitle: 'PHASE-0 — INCUBATION',
+        year: '2024–2026',
+        title: 'Fondation invisible',
+        subtitle: 'Phase 0 · Incubation',
         status: 'current',
-        description: "Période de structuration interne. Développement des socles méthodologiques et des frameworks d'architecture EH-CS.",
+        description: "Structuration interne. Développement des socles méthodologiques et des frameworks d'architecture EH-CS.",
         objectives: [
             'Exploration technique de haut niveau',
             'Standardisation de la stack EHAF',
             'Consolidation des protocoles système',
         ],
-        color: 'bg-accent/40',
     },
     {
         id: 'phase-1',
-        year: '2026-2027',
-        title: 'Structuration Publique',
-        subtitle: 'PHASE-1 — DÉPLOIEMENT',
+        year: '2026–2027',
+        title: 'Structuration publique',
+        subtitle: 'Phase 1 · Déploiement',
         status: 'upcoming',
         description: 'Lancement de la plateforme institutionnelle et déploiement des premiers standards de souveraineté numérique.',
         objectives: [
-            'Publication de la Doctrine EHAF',
+            'Publication de la doctrine EHAF',
             'Déploiement MVP FlexHOST',
             'Initialisation de Hashcode 2.0',
         ],
-        color: 'bg-foreground/20',
     },
     {
         id: 'phase-2',
-        year: '2027-2028',
+        year: '2027–2028',
         title: 'Industrialisation',
-        subtitle: 'PHASE-2 — CONSOLIDATION',
+        subtitle: 'Phase 2 · Consolidation',
         status: 'upcoming',
         description: 'Intégration chez des partenaires stratégiques et stabilisation des infrastructures cloud hybrides.',
         objectives: [
-            'Déploiement Clients Pilotes',
-            'Gouvernance Technique EHAF',
+            'Déploiement chez les clients pilotes',
+            'Gouvernance technique EHAF',
             'Standardisation de l\'interconnectivité',
         ],
-        color: 'bg-foreground/15',
     },
     {
         id: 'phase-3',
-        year: '2028-2030',
-        title: 'Maturité Systémique',
-        subtitle: 'PHASE-3 — ÉTENDUE',
+        year: '2028–2030',
+        title: 'Maturité systémique',
+        subtitle: 'Phase 3 · Étendue',
         status: 'upcoming',
-        description: 'Mise en place d\'un écosystème interconnecté, réduire durablement la dépendance technologique externe.',
+        description: 'Mise en place d\'un écosystème interconnecté réduisant durablement la dépendance technologique externe.',
         objectives: [
-            'Infrastructure Multi-Région EHAF',
-            'Adoption Massive de Standards',
-            'Souveraineté Systémique Totale',
+            'Infrastructure multi-région EHAF',
+            'Adoption large des standards',
+            'Souveraineté systémique totale',
         ],
-        color: 'bg-foreground/10',
     },
 ];
 
@@ -76,52 +68,55 @@ export default function InteractiveTimeline() {
     return (
         <div className="w-full">
             <div className="relative">
-                {/* Ligne technique latérale */}
-                <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-foreground/5" />
+                {/* Ligne latérale */}
+                <div className="absolute left-0 top-0 bottom-0 w-px bg-foreground/8" />
 
-                <div className="space-y-4">
+                <div className="space-y-2">
                     {phases.map((phase) => {
                         const isExpanded = expandedPhase === phase.id;
 
                         return (
-                            <div key={phase.id} className="relative pl-12 sm:pl-16">
-                                {/* Marqueur technique (Carré) */}
+                            <div key={phase.id} className="relative pl-10 sm:pl-14">
+                                {/* Marqueur */}
                                 <div
-                                    className={`absolute left-[-5px] top-8 w-[12px] h-[12px] border-2 border-background transition-all duration-700 ${phase.status === 'current' ? 'bg-accent scale-125' : 'bg-foreground/20'}`}
+                                    className={`absolute left-[-5px] top-7 w-2.5 h-2.5 border-2 border-background transition-all duration-500 ${phase.status === 'current' ? 'bg-accent scale-110' : 'bg-foreground/20'}`}
                                 />
 
                                 <div
                                     onClick={() => togglePhase(phase.id)}
-                                    className={`group cursor-pointer p-8 sm:p-12 transition-all duration-700 border-l-[3px] ${isExpanded ? 'bg-foreground/[0.03] border-accent' : 'bg-transparent border-transparent hover:bg-foreground/[0.01] hover:border-foreground/10'}`}
+                                    className={`group cursor-pointer px-6 sm:px-10 py-7 transition-all duration-500 border-l-2 ${isExpanded ? 'bg-foreground/[0.025] border-accent' : 'border-transparent hover:bg-foreground/[0.01] hover:border-foreground/10'}`}
                                 >
-                                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8">
-                                        <div className="space-y-2">
-                                            <div className="flex items-center gap-4">
-                                                <span className="font-mono text-[10px] text-accent font-black tracking-[0.4em]">
+                                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-0">
+                                        <div className="space-y-1">
+                                            <div className="flex items-center gap-3">
+                                                <span className="font-mono text-xs text-accent font-medium tracking-tight">
                                                     {phase.year}
                                                 </span>
                                                 {phase.status === 'current' && (
-                                                    <span className="animate-pulse flex h-1.5 w-1.5 bg-accent" />
+                                                    <span className="animate-pulse flex h-1.5 w-1.5 bg-accent rounded-full" />
                                                 )}
                                             </div>
-                                            <h3 className="text-2xl font-black uppercase tracking-tighter">{phase.title}</h3>
-                                            <p className="font-mono text-[9px] text-foreground/30 uppercase tracking-[0.5em]">{phase.subtitle}</p>
+                                            <h3 className="text-lg font-bold tracking-tight">{phase.title}</h3>
+                                            <p className="font-mono text-[10px] text-foreground/30 tracking-tight">{phase.subtitle}</p>
                                         </div>
-                                        <div className="flex-shrink-0">
-                                            {isExpanded ? <ChevronUp className="w-5 h-5 opacity-20" /> : <ChevronDown className="w-5 h-5 opacity-20" />}
+                                        <div className="shrink-0">
+                                            {isExpanded
+                                                ? <ChevronUp className="w-4 h-4 text-foreground/30" />
+                                                : <ChevronDown className="w-4 h-4 text-foreground/20" />
+                                            }
                                         </div>
                                     </div>
 
                                     {isExpanded && (
-                                        <div className="grid md:grid-cols-2 gap-12 items-start animate-in fade-in slide-in-from-left-4 duration-1000">
-                                            <p className="text-sm font-medium text-muted-foreground uppercase tracking-widest leading-loose opacity-80">
+                                        <div className="mt-6 grid md:grid-cols-2 gap-8 items-start animate-in fade-in slide-in-from-left-4 duration-500">
+                                            <p className="text-sm text-muted-foreground leading-relaxed">
                                                 {phase.description}
                                             </p>
-                                            <ul className="space-y-4 pt-1">
+                                            <ul className="space-y-3">
                                                 {phase.objectives.map((objective, i) => (
-                                                    <li key={i} className="flex items-center gap-4 group/item">
-                                                        <Check className="w-3 h-3 text-accent/40 group-hover/item:text-accent transition-colors" />
-                                                        <span className="text-[10px] font-black uppercase tracking-widest text-foreground/60">{objective}</span>
+                                                    <li key={i} className="flex items-center gap-3 group/item">
+                                                        <Check className="w-3 h-3 text-accent/40 group-hover/item:text-accent transition-colors shrink-0" />
+                                                        <span className="text-sm text-foreground/65">{objective}</span>
                                                     </li>
                                                 ))}
                                             </ul>
@@ -134,15 +129,15 @@ export default function InteractiveTimeline() {
                 </div>
             </div>
 
-            {/* Légende Technique */}
-            <div className="mt-20 pt-12 border-t border-foreground/5 flex items-center gap-12 font-mono text-[9px] uppercase tracking-[0.4em] opacity-30">
+            {/* Légende */}
+            <div className="mt-12 pt-8 border-t border-foreground/5 flex items-center gap-8 font-mono text-[10px] text-foreground/25 tracking-tight">
                 <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-accent" />
-                    <span>Statut : Opérationnel</span>
+                    <span>En cours</span>
                 </div>
                 <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-foreground/20" />
-                    <span>Statut : Planifié</span>
+                    <span>Planifié</span>
                 </div>
             </div>
         </div>

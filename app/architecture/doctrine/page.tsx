@@ -60,17 +60,17 @@ export default function DoctrinePage() {
                     </div>
 
                     <div className="flex items-center gap-6 mb-12">
-                        <Link href="/vision" className="font-mono text-[9px] text-foreground/30 uppercase tracking-[0.4em] hover:text-accent transition-colors">
+                        <Link href="/vision" className="font-mono text-[9px] text-foreground/30 uppercase tracking-tight hover:text-accent transition-colors">
                             ← Retour Vision
                         </Link>
                         <div className="h-px flex-1 bg-foreground/5" />
-                        <span className="font-mono text-[9px] text-accent font-black uppercase tracking-[0.4em]">
+                        <span className="font-mono text-[9px] text-accent font-black uppercase tracking-tight">
                             VERS-1.0-DOC
                         </span>
                     </div>
 
                     <div className="space-y-8 relative z-10">
-                        <span className="font-mono text-[10px] text-accent font-black uppercase tracking-[1.2em] block">
+                        <span className="font-mono text-[10px] text-accent font-black uppercase tracking-tight block">
                             Cœur Idéologique
                         </span>
                         <h1 className="text-6xl sm:text-7xl md:text-9xl font-black tracking-tighter uppercase leading-[0.8]">
@@ -91,7 +91,7 @@ export default function DoctrinePage() {
                                 <CheckCircle2 className="w-6 h-6" />
                                 <h2 className="text-2xl font-black uppercase tracking-tighter">Approches Privilégiées</h2>
                             </div>
-                            <p className="font-mono text-[10px] text-foreground/30 uppercase tracking-[0.2em]">
+                            <p className="font-mono text-[10px] text-foreground/30 uppercase tracking-tight">
                                 Pour la pérennité structurelle
                             </p>
                         </div>
@@ -114,7 +114,7 @@ export default function DoctrinePage() {
                                 <XCircle className="w-6 h-6" />
                                 <h2 className="text-2xl font-black uppercase tracking-tighter">Pratiques Refusées</h2>
                             </div>
-                            <p className="font-mono text-[10px] text-background/30 uppercase tracking-[0.2em]">
+                            <p className="font-mono text-[10px] text-background/30 uppercase tracking-tight">
                                 Pour éviter l&apos;effondrement
                             </p>
                         </div>
@@ -141,7 +141,7 @@ export default function DoctrinePage() {
                                         <div className="w-12 h-12 flex items-center justify-center bg-foreground text-background">
                                             <section.icon className="w-6 h-6" />
                                         </div>
-                                        <span className="font-mono text-[11px] text-accent font-black tracking-[0.5em]">{section.id}</span>
+                                        <span className="font-mono text-[11px] text-accent font-black tracking-tight">{section.id}</span>
                                     </div>
                                     <h2 className="text-4xl font-black uppercase tracking-tighter leading-none">
                                         {section.title}
@@ -152,8 +152,8 @@ export default function DoctrinePage() {
                                         &quot;{section.content}&quot;
                                     </p>
                                     <div className="p-8 border-l-2 border-accent bg-foreground/[0.02]">
-                                        <span className="font-mono text-[9px] text-foreground/30 uppercase tracking-[0.4em] block mb-4">Principe Actif</span>
-                                        <p className="text-sm font-black uppercase tracking-widest leading-loose">
+                                        <span className="font-mono text-[9px] text-foreground/30 uppercase tracking-tight block mb-4">Principe Actif</span>
+                                        <p className="text-sm font-black uppercase tracking-tight leading-loose">
                                             {section.model}
                                         </p>
                                     </div>
@@ -173,12 +173,12 @@ export default function DoctrinePage() {
                     </div>
 
                     <div className="relative z-10 space-y-12 max-w-3xl">
-                        <span className="font-mono text-[10px] text-accent font-black uppercase tracking-[0.8em]">Axiome Central</span>
+                        <span className="font-mono text-[10px] text-accent font-black uppercase tracking-tight">Axiome Central</span>
                         <h2 className="text-4xl sm:text-6xl font-black uppercase tracking-tighter leading-tight">
                             La durabilité est une conséquence de la structure.
                         </h2>
                         <div className="h-px w-24 bg-accent" />
-                        <p className="text-xl text-background/50 uppercase tracking-widest font-mono">
+                        <p className="text-xl text-background/50 uppercase tracking-tight font-mono">
                             Pas de la technologie utilisée.
                         </p>
                     </div>
@@ -187,7 +187,7 @@ export default function DoctrinePage() {
                 {/* ── VERSION CONDENSÉE (GRID) ── */}
                 <section className="mb-48" aria-labelledby="condensed">
                     <div className="flex items-center gap-6 mb-16">
-                        <span className="font-mono text-[10px] text-foreground/30 uppercase tracking-[0.5em]">Manifeste</span>
+                        <span className="font-mono text-[10px] text-foreground/30 uppercase tracking-tight">Manifeste</span>
                         <div className="h-px flex-1 bg-foreground/5" />
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-foreground/5 border border-foreground/5">
@@ -199,7 +199,7 @@ export default function DoctrinePage() {
                         ].map((item, i) => (
                             <div key={i} className="bg-background p-8 text-center space-y-4">
                                 <span className="text-xl font-black uppercase tracking-tighter block">{item.t}</span>
-                                <span className="font-mono text-[8px] text-accent uppercase tracking-[0.2em] font-black">{item.sub}</span>
+                                <span className="font-mono text-[8px] text-accent uppercase tracking-tight font-black">{item.sub}</span>
                             </div>
                         ))}
                     </div>
@@ -212,13 +212,13 @@ export default function DoctrinePage() {
                             <p className="text-sm font-black uppercase tracking-tight">
                                 Doctrine Architecturale v1.0
                             </p>
-                            <p className="text-[10px] font-mono text-foreground/20 uppercase tracking-[0.4em]">
+                            <p className="text-[10px] font-mono text-foreground/20 uppercase tracking-tight">
                                 Document non négociable · EurinHash Foundation
                             </p>
                         </div>
                         <Link
                             href="/initiatives"
-                            className="group flex items-center gap-6 bg-foreground text-background px-8 py-4 text-[10px] font-mono uppercase tracking-[0.4em] hover:bg-accent transition-colors"
+                            className="group flex items-center gap-6 bg-foreground text-background px-8 py-4 text-[10px] font-mono uppercase tracking-tight hover:bg-accent transition-colors"
                         >
                             Appliquer la doctrine
                             <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />

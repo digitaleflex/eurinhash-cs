@@ -10,12 +10,13 @@ declare global {
 }
 
 const createPrismaApiClient = () => {
-  const databaseUrl = process.env.MONGODB_URI || process.env.DATABASE_URL;
+  const databaseUrl = process.env.DATABASE_URL;
 
   if (!databaseUrl) {
-    throw new Error('MONGODB_URI is not set. Please check your .env file.');
+    throw new Error('DATABASE_URL is not set. Please check your .env file.');
   }
 
+  // Configuration du client Prisma avec Accelerate
   return new PrismaClient({
     log: process.env.NODE_ENV === 'development' ? ['error'] : ['error'],
     datasources: {

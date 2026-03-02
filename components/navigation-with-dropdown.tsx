@@ -18,24 +18,34 @@ interface NavItem {
 
 const navigationItems: NavItem[] = [
     {
-        label: 'Doctrine',
+        label: 'Vision',
         href: '/vision',
-        description: 'Manifeste & Stratégie',
+        description: 'Déclaration stratégique',
+    },
+    {
+        label: 'Architecture',
+        href: '/architecture',
+        description: 'Cœur méthodologique',
     },
     {
         label: 'Initiatives',
         href: '/initiatives',
-        description: 'Piliers & Déploiements',
+        description: 'Exécution concrète',
     },
     {
-        label: 'Expertise',
-        href: '/skills',
-        description: 'Capacités techniques',
+        label: 'Communauté',
+        href: '/communaute',
+        description: 'Espace humain',
     },
     {
-        label: 'Auteur',
-        href: '/about',
-        description: 'Parcours structurel',
+        label: 'Contact',
+        href: '/contact',
+        description: 'Interaction directe',
+    },
+    {
+        label: 'Collaboration',
+        href: '/collaboration',
+        isCTA: true,
     },
 ];
 
@@ -70,11 +80,11 @@ export function NavigationWithDropdown() {
                         <Link
                             key={item.href}
                             href={item.href}
-                            className="flex items-center gap-2 px-4 py-2.5 bg-accent text-white rounded-none font-medium transition-all duration-200 hover:bg-accent/90 ml-2 shadow-none"
-                            aria-label={item.label}
+                            className="flex items-center gap-2 px-4 py-2.5 bg-accent text-white font-medium text-sm tracking-tight transition-all duration-200 hover:bg-accent/90 ml-2"
+                            aria-label="Parlons de votre projet"
                         >
-                            <span>{item.label}</span>
-                            <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                            <span>Votre projet</span>
+                            <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                         </Link>
                     );
                 }
@@ -104,7 +114,7 @@ export function NavigationWithDropdown() {
                                     )}
                                     <span className="text-sm font-medium">{item.label}</span>
                                     {item.placeholder && (
-                                        <span className="text-[10px] text-amber-500 font-mono tracking-widest uppercase ml-1">(Bientôt)</span>
+                                        <span className="text-[10px] text-amber-500 font-mono tracking-tight uppercase ml-1">(Bientôt)</span>
                                     )}
                                     <ChevronDown
                                         className={cn(
@@ -127,7 +137,7 @@ export function NavigationWithDropdown() {
                                                 href={child.href}
                                                 onClick={() => setOpenDropdown(null)}
                                                 className={cn(
-                                                    'flex items-center gap-3 px-4 py-3 text-xs uppercase tracking-widest transition-colors border-b border-foreground/5 last:border-0',
+                                                    'flex items-center gap-3 px-4 py-3 text-xs uppercase tracking-tight transition-colors border-b border-foreground/5 last:border-0',
                                                     child.placeholder
                                                         ? 'text-muted-foreground/60 cursor-not-allowed'
                                                         : pathname === child.href

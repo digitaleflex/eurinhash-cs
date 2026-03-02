@@ -96,18 +96,18 @@ export default function EHAFPage() {
                 ═══════════════════════════════════════════════════════ */}
                 <header className="mb-48">
                     <div className="flex items-center gap-6 mb-12">
-                        <Link href="/vision" className="font-mono text-[9px] text-foreground/30 uppercase tracking-[0.4em] hover:text-accent transition-colors">
-                            ← Doctrine
+                        <Link href="/vision" className="font-mono text-[9px] text-foreground/30 uppercase tracking-tight hover:text-accent transition-colors">
+                            ← Retour Vision
                         </Link>
                         <div className="h-px flex-1 bg-foreground/5" />
-                        <span className="font-mono text-[9px] text-accent font-black uppercase tracking-[0.4em]">
+                        <span className="font-mono text-[9px] text-accent font-black uppercase tracking-tight">
                             EHAF-ARCH-01
                         </span>
                     </div>
 
                     <div className="space-y-8">
-                        <span className="font-mono text-[10px] text-accent uppercase tracking-[1em] font-black block">
-                            Framework & Standards
+                        <span className="font-mono text-[10px] text-accent font-black uppercase tracking-tight block">
+                            EHAF Framework
                         </span>
                         <h1 className="text-6xl sm:text-7xl md:text-8xl font-black tracking-tighter uppercase leading-[0.85]">
                             EHAF
@@ -115,7 +115,7 @@ export default function EHAFPage() {
                         <p className="text-lg sm:text-xl font-bold uppercase tracking-tight text-foreground/60">
                             EurinHash Architectural Framework
                         </p>
-                        <div className="flex items-center gap-8 font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/30 border-t border-foreground/5 pt-8">
+                        <div className="flex items-center gap-8 font-mono text-[9px] uppercase tracking-tight text-foreground/30 border-t border-foreground/5 pt-8">
                             <span>Version 1.0</span>
                             <span className="text-foreground/10">—</span>
                             <span>Core Specification</span>
@@ -130,7 +130,7 @@ export default function EHAFPage() {
                 ═══════════════════════════════════════════════════════ */}
                 <section className="mb-48" aria-labelledby="objectif">
                     <div className="flex items-center gap-6 mb-16">
-                        <span className="font-mono text-[10px] text-accent font-black uppercase tracking-[0.5em]">01</span>
+                        <span className="font-mono text-[10px] text-accent font-black uppercase tracking-tight">01</span>
                         <div className="h-px flex-1 bg-foreground/5" />
                     </div>
                     <h2 id="objectif" className="text-4xl sm:text-5xl font-black uppercase tracking-tighter mb-12">
@@ -142,7 +142,7 @@ export default function EHAFPage() {
                     </p>
 
                     <blockquote className="border-l-2 border-accent pl-8 py-4 mb-16">
-                        <p className="text-sm font-black uppercase tracking-widest text-foreground/60 leading-loose">
+                        <p className="text-sm font-black uppercase tracking-tight text-foreground/60 leading-loose">
                             Standardiser la conception des architectures logicielles afin de garantir cohérence, scalabilité, sécurité et durabilité.
                         </p>
                     </blockquote>
@@ -150,7 +150,7 @@ export default function EHAFPage() {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-foreground/5 border border-foreground/5">
                         {['Pas une stack', 'Pas un template', 'Pas une boilerplate', 'Un cadre systémique'].map((item, i) => (
                             <div key={i} className={`bg-background p-6 sm:p-8 text-center ${i === 3 ? 'bg-foreground text-background' : ''}`}>
-                                <span className={`font-mono text-[9px] uppercase tracking-[0.3em] font-bold ${i === 3 ? 'text-accent' : 'text-foreground/40'}`}>
+                                <span className={`font-mono text-[9px] uppercase tracking-tight font-bold ${i === 3 ? 'text-accent' : 'text-foreground/40'}`}>
                                     {item}
                                 </span>
                             </div>
@@ -166,7 +166,7 @@ export default function EHAFPage() {
                         ].map((rule, i) => (
                             <div key={i} className="bg-background p-6 flex items-center gap-4">
                                 <div className="w-1.5 h-1.5 bg-accent flex-shrink-0" />
-                                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/60 font-bold">{rule}</span>
+                                <span className="font-mono text-[10px] uppercase tracking-tight text-foreground/60 font-bold">{rule}</span>
                             </div>
                         ))}
                     </div>
@@ -177,7 +177,7 @@ export default function EHAFPage() {
                 ═══════════════════════════════════════════════════════ */}
                 <section className="mb-48" aria-labelledby="probleme">
                     <div className="flex items-center gap-6 mb-16">
-                        <span className="font-mono text-[10px] text-accent font-black uppercase tracking-[0.5em]">02</span>
+                        <span className="font-mono text-[10px] text-accent font-black uppercase tracking-tight">02</span>
                         <div className="h-px flex-1 bg-foreground/5" />
                     </div>
                     <h2 id="probleme" className="text-4xl sm:text-5xl font-black uppercase tracking-tighter mb-12">
@@ -187,15 +187,15 @@ export default function EHAFPage() {
                     <div className="divide-y divide-foreground/5 border-y border-foreground/5 mb-16">
                         {problems.map((p) => (
                             <div key={p.id} className="grid grid-cols-[60px_1fr] gap-8 py-6 group hover:bg-foreground/[0.015] transition-colors">
-                                <span className="font-mono text-[11px] text-accent font-black tracking-widest">{p.id}</span>
-                                <span className="text-sm font-bold uppercase tracking-wider text-foreground/70 group-hover:text-foreground transition-colors">{p.text}</span>
+                                <span className="font-mono text-[11px] text-accent font-black tracking-tight">{p.id}</span>
+                                <span className="text-sm font-bold uppercase tracking-tight text-foreground/70 group-hover:text-foreground transition-colors">{p.text}</span>
                             </div>
                         ))}
                     </div>
 
                     <div className="bg-foreground/[0.02] border border-foreground/5 p-8 sm:p-12 space-y-6">
-                        <span className="font-mono text-[9px] text-foreground/30 uppercase tracking-[0.4em] font-bold">Résultat sans EHAF</span>
-                        <div className="flex flex-wrap gap-8 font-mono text-[10px] uppercase tracking-[0.2em]">
+                        <span className="font-mono text-[9px] text-foreground/30 uppercase tracking-tight font-bold">Résultat sans EHAF</span>
+                        <div className="flex flex-wrap gap-8 font-mono text-[10px] uppercase tracking-tight">
                             <span className="text-red-400/80 font-black">Systèmes fragiles</span>
                             <span className="text-foreground/10">·</span>
                             <span className="text-red-400/80 font-black">Croissance instable</span>
@@ -210,7 +210,7 @@ export default function EHAFPage() {
                 ═══════════════════════════════════════════════════════ */}
                 <section className="mb-48" aria-labelledby="architecture">
                     <div className="flex items-center gap-6 mb-16">
-                        <span className="font-mono text-[10px] text-accent font-black uppercase tracking-[0.5em]">03</span>
+                        <span className="font-mono text-[10px] text-accent font-black uppercase tracking-tight">03</span>
                         <div className="h-px flex-1 bg-foreground/5" />
                     </div>
                     <h2 id="architecture" className="text-4xl sm:text-5xl font-black uppercase tracking-tighter mb-12">
@@ -237,7 +237,7 @@ export default function EHAFPage() {
                                     {/* Annotation technique */}
                                     <div className="absolute -left-12 sm:-left-32 top-1/2 -translate-y-1/2 h-px w-8 sm:w-24 bg-foreground/10 flex items-center">
                                         <span className="absolute -left-2 w-1 h-1 bg-accent rotate-45" />
-                                        <span className="ml-4 font-mono text-[8px] text-foreground/30 uppercase tracking-[0.2em] whitespace-nowrap hidden sm:block">
+                                        <span className="ml-4 font-mono text-[8px] text-foreground/30 uppercase tracking-tight whitespace-nowrap hidden sm:block">
                                             L0{layers.length - i} · {layer.name.toLowerCase()}
                                         </span>
                                     </div>
@@ -254,11 +254,11 @@ export default function EHAFPage() {
                                                 <h3 className={`text-2xl sm:text-3xl font-black uppercase tracking-tighter ${layer.accent ? 'text-white' : ''}`}>
                                                     {layer.name}
                                                 </h3>
-                                                <p className={`font-mono text-[9px] uppercase tracking-[0.1em] ${layer.accent ? 'text-accent' : 'text-foreground/40'}`}>
+                                                <p className={`font-mono text-[9px] uppercase tracking-tight ${layer.accent ? 'text-accent' : 'text-foreground/40'}`}>
                                                     System Layer Specification
                                                 </p>
                                             </div>
-                                            <span className={`font-mono text-[10px] uppercase tracking-[0.3em] font-bold ${layer.accent ? 'text-accent' : 'text-foreground/60'}`}>
+                                            <span className={`font-mono text-[10px] uppercase tracking-tight font-bold ${layer.accent ? 'text-accent' : 'text-foreground/60'}`}>
                                                 {layer.detail}
                                             </span>
                                         </div>
@@ -280,7 +280,7 @@ export default function EHAFPage() {
 
                     {/* Flux d'information - Schema simplifié */}
                     <div className="mb-20 flex flex-col items-center">
-                        <div className="font-mono text-[9px] text-accent uppercase tracking-[0.5em] mb-8 font-black">Architecture Logic Flow</div>
+                        <div className="font-mono text-[9px] text-accent uppercase tracking-tight mb-8 font-black">Architecture Logic Flow</div>
                         <div className="w-full max-w-4xl p-8 border border-foreground/5 bg-foreground/[0.01] flex flex-wrap justify-center items-center gap-8 sm:gap-16">
                             <div className="flex flex-col items-center gap-2">
                                 <div className="p-3 border border-foreground/10 bg-background font-mono text-[9px] uppercase">User Interaction</div>
@@ -306,7 +306,7 @@ export default function EHAFPage() {
                         ].map((rule, i) => (
                             <div key={i} className="bg-background p-8 flex items-start gap-4">
                                 <span className="font-mono text-[9px] text-accent font-black mt-0.5">{String(i + 1).padStart(2, '0')}</span>
-                                <span className="text-xs font-bold uppercase tracking-widest text-foreground/60 leading-relaxed">{rule}</span>
+                                <span className="text-xs font-bold uppercase tracking-tight text-foreground/60 leading-relaxed">{rule}</span>
                             </div>
                         ))}
                     </div>
@@ -317,7 +317,7 @@ export default function EHAFPage() {
                 ═══════════════════════════════════════════════════════ */}
                 <section className="mb-48" aria-labelledby="principes">
                     <div className="flex items-center gap-6 mb-16">
-                        <span className="font-mono text-[10px] text-accent font-black uppercase tracking-[0.5em]">04</span>
+                        <span className="font-mono text-[10px] text-accent font-black uppercase tracking-tight">04</span>
                         <div className="h-px flex-1 bg-foreground/5" />
                     </div>
                     <h2 id="principes" className="text-4xl sm:text-5xl font-black uppercase tracking-tighter mb-12">
@@ -346,7 +346,7 @@ export default function EHAFPage() {
                 ═══════════════════════════════════════════════════════ */}
                 <section className="mb-48" aria-labelledby="stack">
                     <div className="flex items-center gap-6 mb-16">
-                        <span className="font-mono text-[10px] text-accent font-black uppercase tracking-[0.5em]">05</span>
+                        <span className="font-mono text-[10px] text-accent font-black uppercase tracking-tight">05</span>
                         <div className="h-px flex-1 bg-foreground/5" />
                     </div>
                     <h2 id="stack" className="text-4xl sm:text-5xl font-black uppercase tracking-tighter mb-12">
@@ -356,14 +356,14 @@ export default function EHAFPage() {
                     <div className="divide-y divide-foreground/5 border-y border-foreground/5 mb-16">
                         {stack.map((s, i) => (
                             <div key={i} className="grid grid-cols-[1fr_2fr] gap-8 py-5 group hover:bg-foreground/[0.015] transition-colors">
-                                <span className="font-mono text-[10px] text-foreground/30 uppercase tracking-[0.3em] font-bold">{s.label}</span>
+                                <span className="font-mono text-[10px] text-foreground/30 uppercase tracking-tight font-bold">{s.label}</span>
                                 <span className="font-mono text-[11px] text-foreground/80 font-bold">{s.value}</span>
                             </div>
                         ))}
                     </div>
 
                     <div className="bg-foreground/[0.02] border-l-2 border-accent p-8">
-                        <p className="font-mono text-[10px] text-foreground/50 uppercase tracking-[0.3em] leading-loose">
+                        <p className="font-mono text-[10px] text-foreground/50 uppercase tracking-tight leading-loose">
                             La stack peut évoluer. <br />
                             <span className="text-accent font-black">Les principes ne changent pas.</span>
                         </p>
@@ -374,7 +374,7 @@ export default function EHAFPage() {
                 ═══════════════════════════════════════════════════════ */}
                 <section className="mb-48" aria-labelledby="convention">
                     <div className="flex items-center gap-6 mb-16">
-                        <span className="font-mono text-[10px] text-accent font-black uppercase tracking-[0.5em]">06</span>
+                        <span className="font-mono text-[10px] text-accent font-black uppercase tracking-tight">06</span>
                         <div className="h-px flex-1 bg-foreground/5" />
                     </div>
                     <h2 id="convention" className="text-4xl sm:text-5xl font-black uppercase tracking-tighter mb-12">
@@ -383,7 +383,7 @@ export default function EHAFPage() {
 
                     {/* Blueprint de dossiers */}
                     <div className="relative p-8 sm:p-16 border border-foreground/5 bg-foreground/[0.01] mb-16 overflow-hidden">
-                        <div className="absolute top-0 right-0 p-4 font-mono text-[8px] text-foreground/10 uppercase tracking-[0.2em] border-l border-b border-foreground/5">
+                        <div className="absolute top-0 right-0 p-4 font-mono text-[8px] text-foreground/10 uppercase tracking-tight border-l border-b border-foreground/5">
                             Project Blueprint v1.0
                         </div>
 
@@ -415,7 +415,7 @@ export default function EHAFPage() {
                                             {dir.name}
                                         </span>
                                     </div>
-                                    <span className="font-mono text-[9px] text-foreground/20 uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <span className="font-mono text-[9px] text-foreground/20 uppercase tracking-tight opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                         {dir.desc}
                                     </span>
                                 </motion.div>
@@ -433,7 +433,7 @@ export default function EHAFPage() {
                         ].map((rule, i) => (
                             <div key={i} className="bg-background p-6 flex items-center gap-4">
                                 <div className="w-1.5 h-1.5 bg-accent flex-shrink-0" />
-                                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/60 font-bold">{rule}</span>
+                                <span className="font-mono text-[9px] uppercase tracking-tight text-foreground/60 font-bold">{rule}</span>
                             </div>
                         ))}
                     </div>
@@ -444,7 +444,7 @@ export default function EHAFPage() {
                 ═══════════════════════════════════════════════════════ */}
                 <section className="mb-48" aria-labelledby="roadmap">
                     <div className="flex items-center gap-6 mb-16">
-                        <span className="font-mono text-[10px] text-accent font-black uppercase tracking-[0.5em]">07</span>
+                        <span className="font-mono text-[10px] text-accent font-black uppercase tracking-tight">07</span>
                         <div className="h-px flex-1 bg-foreground/5" />
                     </div>
                     <h2 id="roadmap" className="text-4xl sm:text-5xl font-black uppercase tracking-tighter mb-12">
@@ -454,10 +454,10 @@ export default function EHAFPage() {
                     <div className="divide-y divide-foreground/5 border-y border-foreground/5 mb-20">
                         {roadmap.map((r) => (
                             <div key={r.ref} className="grid md:grid-cols-[120px_1.5fr_2fr_100px] gap-8 py-8 group hover:bg-foreground/[0.015] transition-colors items-center">
-                                <span className="font-mono text-[9px] text-foreground/30 uppercase tracking-[0.3em] font-bold">{r.ref}</span>
+                                <span className="font-mono text-[9px] text-foreground/30 uppercase tracking-tight font-bold">{r.ref}</span>
                                 <span className="text-lg font-black uppercase tracking-tighter group-hover:text-accent transition-colors">{r.name}</span>
-                                <span className="text-xs text-muted-foreground font-medium uppercase tracking-wider">{r.description}</span>
-                                <span className={`font-mono text-[8px] font-black uppercase tracking-[0.3em] px-3 py-1 text-center ${r.status === 'ACTIF'
+                                <span className="text-xs text-muted-foreground font-medium uppercase tracking-tight">{r.description}</span>
+                                <span className={`font-mono text-[8px] font-black uppercase tracking-tight px-3 py-1 text-center ${r.status === 'ACTIF'
                                     ? 'bg-accent/10 text-accent'
                                     : r.status === 'CONCEPTION'
                                         ? 'bg-foreground/5 text-foreground/40'
@@ -470,7 +470,7 @@ export default function EHAFPage() {
                     </div>
 
                     <div className="bg-foreground/[0.02] border-l-2 border-accent p-8">
-                        <span className="font-mono text-[9px] text-foreground/30 uppercase tracking-[0.4em] block mb-4">Objectif Long Terme</span>
+                        <span className="font-mono text-[9px] text-foreground/30 uppercase tracking-tight block mb-4">Objectif Long Terme</span>
                         <p className="text-lg font-black uppercase tracking-tight">
                             Transformer EHAF en framework propriétaire complet.
                         </p>
@@ -493,7 +493,7 @@ export default function EHAFPage() {
                         </div>
                     </div>
 
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-8 py-12 border-t border-foreground/5 font-mono text-[9px] text-foreground/20 uppercase tracking-[0.4em]">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-8 py-12 border-t border-foreground/5 font-mono text-[9px] text-foreground/20 uppercase tracking-tight">
                         <span>EHAF-ARCH-01 · Core Specification v1.0</span>
                         <span>Mars 2026 · EurinHash Foundation</span>
                     </div>

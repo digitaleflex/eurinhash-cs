@@ -31,12 +31,12 @@ export function MobileMenuContent() {
           aria-modal="true"
           aria-label="Menu de navigation"
         >
-          <div className="flex flex-col h-full uppercase">
+          <div className="flex flex-col h-full">
             {/* Header du menu */}
             <div className="flex items-center justify-between p-8 border-b border-foreground/5 bg-foreground/[0.02]">
               <div className="flex flex-col">
-                <h2 className="text-xl font-black tracking-tighter text-foreground">Système</h2>
-                <span className="font-mono text-[9px] text-accent tracking-[.3em] font-black uppercase">Navigation Menu</span>
+                <h2 className="text-lg font-bold tracking-tight text-foreground">Navigation</h2>
+                <span className="font-mono text-[10px] text-muted-foreground tracking-tight">Eurin Hash CS</span>
               </div>
               <button
                 onClick={closeMenu}
@@ -85,15 +85,15 @@ export function MobileMenuContent() {
             </nav>
 
             {/* CTA en bas du menu */}
-            <div className="p-8 border-t border-foreground/5 bg-foreground/[0.01]">
+            <div className="p-8 border-t border-foreground/5">
               <Link
-                href="/start-project"
+                href="/collaboration"
                 onClick={closeMenu}
-                className="flex items-center justify-center gap-4 w-full bg-foreground text-background px-8 py-8 text-xs font-black uppercase tracking-[.4em] transition-all duration-500 hover:bg-accent hover:text-white"
-                aria-label="Démarrer un projet"
+                className="flex items-center justify-center gap-3 w-full bg-foreground text-background px-6 py-4 text-sm font-semibold tracking-tight transition-all duration-300 hover:bg-accent hover:text-white"
+                aria-label="Parlons de votre projet"
               >
-                <span>Initialiser Collaboration</span>
-                <ArrowRight className="w-5 h-5" aria-hidden="true" />
+                <span>Votre projet</span>
+                <ArrowRight className="w-4 h-4" aria-hidden="true" />
               </Link>
             </div>
           </div>

@@ -95,7 +95,7 @@ export default function StandardsPage() {
 
                 {/* ── HEADER OPÉRATIONNEL ── */}
                 <header className="mb-48">
-                    <div className="flex items-center gap-6 mb-12 font-mono text-[9px] uppercase tracking-[0.4em]">
+                    <div className="flex items-center gap-6 mb-12 font-mono text-[9px] uppercase tracking-tight">
                         <Link href="/vision" className="text-foreground/30 hover:text-accent transition-colors">← Vision</Link>
                         <div className="h-px flex-1 bg-foreground/5" />
                         <span className="text-accent font-black">Core Operational Standards</span>
@@ -110,7 +110,7 @@ export default function StandardsPage() {
                         </p>
                     </div>
 
-                    <div className="mt-20 flex flex-wrap gap-12 font-mono text-[9px] text-foreground/20 uppercase tracking-[0.3em]">
+                    <div className="mt-20 flex flex-wrap gap-12 font-mono text-[9px] text-foreground/20 uppercase tracking-tight">
                         <div className="flex flex-col gap-2">
                             <span className="text-foreground/40 font-black">Diffusion</span>
                             <span>Partiellement Publique</span>
@@ -137,14 +137,14 @@ export default function StandardsPage() {
                                         <div className="w-12 h-12 bg-foreground text-background flex items-center justify-center">
                                             <section.icon className="w-6 h-6" />
                                         </div>
-                                        <span className="font-mono text-[10px] text-accent font-black tracking-[0.5em]">{section.id}</span>
+                                        <span className="font-mono text-[10px] text-accent font-black tracking-tight">{section.id}</span>
                                     </div>
                                     <h2 className="text-3xl font-black uppercase tracking-tighter leading-tight">{section.title}</h2>
-                                    <p className="text-sm text-foreground/50 font-medium uppercase tracking-widest leading-relaxed italic">
+                                    <p className="text-sm text-foreground/50 font-medium uppercase tracking-tight leading-relaxed italic">
                                         &quot;{section.objective}&quot;
                                     </p>
                                     <div className="p-6 border border-foreground/5 bg-foreground/[0.02]">
-                                        <p className="font-mono text-[9px] text-foreground/40 uppercase tracking-[0.2em] leading-loose">
+                                        <p className="font-mono text-[9px] text-foreground/40 uppercase tracking-tight leading-loose">
                                             {section.model}
                                         </p>
                                     </div>
@@ -157,14 +157,14 @@ export default function StandardsPage() {
                                             <div className="w-6 h-6 border border-foreground/10 flex items-center justify-center shrink-0 group-hover:border-accent group-hover:bg-accent/5 transition-all">
                                                 <Check className="w-3 h-3 text-accent opacity-0 group-hover:opacity-100 transition-opacity" />
                                             </div>
-                                            <span className="text-[13px] font-bold uppercase tracking-wider text-foreground/70 leading-snug group-hover:text-foreground">
+                                            <span className="text-[13px] font-bold uppercase tracking-tight text-foreground/70 leading-snug group-hover:text-foreground">
                                                 {rule}
                                             </span>
                                         </div>
                                     ))}
                                     {section.rules.length % 2 !== 0 && (
                                         <div className="bg-foreground/[0.02] p-8 flex items-center justify-center border-t border-foreground/5">
-                                            <span className="font-mono text-[9px] text-foreground/10 uppercase tracking-[0.5em]">End of section</span>
+                                            <span className="font-mono text-[9px] text-foreground/10 uppercase tracking-tight">End of section</span>
                                         </div>
                                     )}
                                 </div>
@@ -184,7 +184,7 @@ export default function StandardsPage() {
                             { l: 'Documentation', v: 'Transparence' },
                         ].map((item, i) => (
                             <div key={i} className="bg-background p-8 text-center space-y-2">
-                                <span className="font-mono text-[8px] text-foreground/30 uppercase tracking-[0.3em] font-black">{item.l}</span>
+                                <span className="font-mono text-[8px] text-foreground/30 uppercase tracking-tight font-black">{item.l}</span>
                                 <span className="text-[11px] font-black uppercase tracking-tighter block text-accent">{item.v}</span>
                             </div>
                         ))}
@@ -197,13 +197,13 @@ export default function StandardsPage() {
                         <p className="text-xl font-black uppercase tracking-tighter">
                             Ces standards sont la loi du système.
                         </p>
-                        <p className="text-[10px] font-mono text-foreground/20 uppercase tracking-[0.4em]">
+                        <p className="text-[10px] font-mono text-foreground/20 uppercase tracking-tight">
                             Aucune exception ne sera accordée sans validation architecturale.
                         </p>
                     </div>
                     <Link
                         href="/start-project"
-                        className="flex items-center gap-6 bg-foreground text-background px-10 py-5 text-[10px] font-mono font-black uppercase tracking-[0.4em] hover:bg-accent transition-colors"
+                        className="flex items-center gap-6 bg-foreground text-background px-10 py-5 text-[10px] font-mono font-black uppercase tracking-tight hover:bg-accent transition-colors"
                     >
                         Appliquer maintenant
                         <ArrowRight className="w-4 h-4" />

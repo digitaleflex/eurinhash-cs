@@ -10,7 +10,7 @@ export function JsonLd() {
         url: 'https://eurinhash.com',
         image: 'https://eurinhash.com/eurin-photo.webp',
         sameAs: [
-            'https://linkedin.com/in/eurinalmeida',
+            'https://www.linkedin.com/in/eurindalemeida/',
             'https://github.com/digitaleflex',
             'https://eurinhash.com'
         ],

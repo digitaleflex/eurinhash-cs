@@ -1,235 +1,74 @@
 import { NextResponse } from 'next/server';
 import { prismaApi as prisma } from '@/lib/prisma-api';
-import { apiCache } from '@/lib/cache';
-import { SITE_CONFIG } from '@/lib/config';
 import { sendMail } from '@/lib/mail';
 
-// Cache simple pour éviter les requêtes répétées
-const rateLimitCache = new Map<string, { count: number; lastReset: number }>();
-const RATE_LIMIT_WINDOW = SITE_CONFIG.rateLimit.window; // 1 minute
-const RATE_LIMIT_MAX_REQUESTS = SITE_CONFIG.rateLimit.maxRequests; // 5 requêtes par minute par IP
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const userLimit = rateLimitCache.get(ip);
-
-  if (!userLimit || now - userLimit.lastReset > RATE_LIMIT_WINDOW) {
-    rateLimitCache.set(ip, { count: 1, lastReset: now });
-    return true;
-  }
-
-  if (userLimit.count >= RATE_LIMIT_MAX_REQUESTS) {
-    return false;
-  }
-
-  userLimit.count++;
-  return true;
-}
-
-// Fonction de validation des données
-function validateContactData(data: any): {
-  isValid: boolean;
-  errors: string[];
-} {
-  const errors: string[] = [];
-  const { name, email, message } = data;
-
-  // Validation du nom
-  if (!name || typeof name !== 'string') {
-    errors.push('Le nom est requis');
-  } else if (
-    name.trim().length < SITE_CONFIG.forms.contact.validation.name.minLength
-  ) {
-    errors.push(
-      `Le nom doit contenir au moins ${SITE_CONFIG.forms.contact.validation.name.minLength} caractères`
-    );
-  } else if (
-    name.trim().length > SITE_CONFIG.forms.contact.validation.name.maxLength
-  ) {
-    errors.push(
-      `Le nom ne doit pas dépasser ${SITE_CONFIG.forms.contact.validation.name.maxLength} caractères`
-    );
-  }
-
-  // Validation de l'email
-  if (!email || typeof email !== 'string') {
-    errors.push("L'email est requis");
-  } else {
-    const trimmedEmail = email.trim();
-    if (
-      trimmedEmail.length > SITE_CONFIG.forms.contact.validation.email.maxLength
-    ) {
-      errors.push(
-        `L'email ne doit pas dépasser ${SITE_CONFIG.forms.contact.validation.email.maxLength} caractères`
-      );
-    } else {
-      // Validation email optimisée avec cache
-      const emailCacheKey = `email_valid_${trimmedEmail}`;
-      let isEmailValid = apiCache.get(emailCacheKey);
-
-      if (isEmailValid === undefined) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        isEmailValid = emailRegex.test(trimmedEmail);
-        apiCache.set(emailCacheKey, isEmailValid, 5 * 60 * 1000); // 5 minutes
-      }
-
-      if (!isEmailValid) {
-        errors.push("Format d'email invalide");
-      }
-    }
-  }
-
-  // Validation du message
-  if (!message || typeof message !== 'string') {
-    errors.push('Le message est requis');
-  } else if (
-    message.trim().length <
-    SITE_CONFIG.forms.contact.validation.message.minLength
-  ) {
-    errors.push(
-      `Le message doit contenir au moins ${SITE_CONFIG.forms.contact.validation.message.minLength} caractères`
-    );
-  } else if (
-    message.trim().length >
-    SITE_CONFIG.forms.contact.validation.message.maxLength
-  ) {
-    errors.push(
-      `Le message ne doit pas dépasser ${SITE_CONFIG.forms.contact.validation.message.maxLength} caractères`
-    );
-  }
-
-  return {
-    isValid: errors.length === 0,
-    errors,
-  };
-}
+// Rate limit simple (1 contact par minute par IP)
+const rateLimit = new Map<string, number>();
 
 export async function POST(request: Request) {
-  const startTime = Date.now();
-
   try {
-    // Rate limiting basique
-    const ip =
-      request.headers.get('x-forwarded-for') ||
-      request.headers.get('x-real-ip') ||
-      'unknown';
+    const ip = request.headers.get('x-forwarded-for') || 'unknown';
+    const now = Date.now();
+    const lastRequest = rateLimit.get(ip);
 
-    if (!checkRateLimit(ip)) {
-      return NextResponse.json(
-        {
-          error: 'Trop de requêtes. Veuillez patienter.',
-        },
-        { status: 429 }
-      );
+    if (lastRequest && now - lastRequest < 60000) {
+      return NextResponse.json({ error: 'Veuillez patienter entre deux messages.' }, { status: 429 });
     }
-
-    // Vérifier que la requête est bien du JSON
-    const contentType = request.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
-      return NextResponse.json(
-        {
-          error: 'Content-Type doit être application/json',
-        },
-        { status: 400 }
-      );
-    }
+    rateLimit.set(ip, now);
 
     const body = await request.json();
     const { name, email, subject, message } = body;
 
-    // Validation des données
-    const validation = validateContactData({ name, email, message });
-    if (!validation.isValid) {
-      return NextResponse.json(
-        {
-          error: 'Données invalides',
-          details: validation.errors,
-        },
-        { status: 400 }
-      );
+    if (!name || !email || !message) {
+      return NextResponse.json({ error: 'Champs requis manquants.' }, { status: 400 });
     }
 
-
-
-    // Sauvegarde optimisée avec timeout
-    // Cast pour éviter les problèmes de typage avec Prisma Accelerate
     const prismaClient = prisma as any;
     const contactMessage = await prismaClient.contactMessage.create({
       data: {
         name: name.trim(),
         email: email.trim().toLowerCase(),
-        subject: subject?.trim() || null,
+        subject: subject?.trim() || 'Sans objet',
         message: message.trim(),
-        status: 'new',
-      },
-      select: {
-        id: true,
-        createdAt: true,
       },
     });
 
-    // Envoi de l'email via Resend
-    const emailResult = await sendMail({
-      to: 'contact@eurinhash.com', // Ou l'email configuré dans .env
-      subject: `Nouveau message de ${name}: ${subject || 'Sans objet'}`,
+    // ── EMAIL ADMIN ──
+    await sendMail({
+      to: process.env.RESEND_FROM_EMAIL || 'contact@eurinhash.com',
+      subject: `[CONTACT] ${name} : ${subject || 'Nouveau Message'}`,
       html: `
-        <h1>Nouveau message de contact</h1>
-        <p><strong>De:</strong> ${name} (${email})</p>
-        <p><strong>Sujet:</strong> ${subject || 'Non spécifié'}</p>
-        <p><strong>Message:</strong></p>
-        <pre style="font-family: sans-serif; white-space: pre-wrap;">${message}</pre>
+        <div style="font-family: monospace; border: 1px solid #eee; padding: 20px;">
+          <h2 style="text-transform: uppercase;">Nouveau Contact Entrant</h2>
+          <p><strong>De:</strong> ${name} (${email})</p>
+          <p><strong>Sujet:</strong> ${subject || 'Nouveau Message'}</p>
+          <hr/>
+          <p style="white-space: pre-wrap;">${message}</p>
+        </div>
       `,
-      text: `Nouveau message de ${name} (${email})\n\nSujet: ${subject}\n\n${message}`,
     });
 
-    if (!emailResult.success) {
-      console.error("Erreur lors de l'envoi de l'email:", emailResult.error);
-      // On ne bloque pas la réponse si l'email échoue, mais on pourrait le logger en DB
-    }
-
-    const processingTime = Date.now() - startTime;
-
-    return NextResponse.json({
-      ok: true,
-      id: contactMessage.id,
-      message: 'Message envoyé avec succès',
-      processingTime: `${processingTime}ms`,
-      emailSent: emailResult.success,
+    // ── EMAIL UTILISATEUR (ACCUSÉ PROTOCOLAIRE) ──
+    await sendMail({
+      to: email,
+      subject: `[EHAF] Votre message a été reçu`,
+      html: `
+        <div style="max-width: 600px; font-family: sans-serif; line-height: 1.6;">
+          <h3 style="text-transform: uppercase;">Transmission Reçue.</h3>
+          <p>Bonjour ${name},</p>
+          <p>Votre message a été transmis à notre service d&apos;architecture. Une réponse vous sera adressée sous un délai de 24 heures ouvrées.</p>
+          
+          <div style="margin-top: 40px; border-top: 1px solid #eee; pt-10px; font-size: 11px; color: #999;">
+            EHAF — Architecture & Souveraineté
+          </div>
+        </div>
+      `,
     });
-  } catch (err: unknown) {
-    const processingTime = Date.now() - startTime;
-    console.error(`Erreur API contact (${processingTime}ms):`, err);
 
-    // Gestion spécifique des erreurs de parsing JSON
-    if (err instanceof SyntaxError) {
-      return NextResponse.json(
-        {
-          error: 'JSON invalide dans la requête',
-        },
-        { status: 400 }
-      );
-    }
+    return NextResponse.json({ ok: true, message: 'Message transmis.' });
 
-    const errorMessage = err instanceof Error ? err.message : 'Erreur serveur';
-    return NextResponse.json(
-      {
-        error: errorMessage,
-        processingTime: `${processingTime}ms`,
-      },
-      { status: 500 }
-    );
+  } catch (error) {
+    console.error('Erreur Contact:', error);
+    return NextResponse.json({ error: 'Échec de la transmission.' }, { status: 500 });
   }
-}
-
-// Gérer les méthodes non autorisées
-export function GET() {
-  return NextResponse.json({ error: 'Méthode non autorisée' }, { status: 405 });
-}
-
-export function PUT() {
-  return NextResponse.json({ error: 'Méthode non autorisée' }, { status: 405 });
-}
-
-export function DELETE() {
-  return NextResponse.json({ error: 'Méthode non autorisée' }, { status: 405 });
 }

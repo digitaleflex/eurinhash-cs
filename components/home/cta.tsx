@@ -3,56 +3,48 @@ import { ArrowRight } from 'lucide-react';
 
 export default function CTASection() {
     return (
-        <section className="py-24 sm:py-56 bg-background border-t border-foreground/5 text-center relative overflow-hidden">
+        <section className="py-32 sm:py-48 bg-background border-t border-foreground/5 text-center relative overflow-hidden">
 
-            {/* Grille architecturale massive */}
+            {/* Grille architecturale discrète */}
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 -z-10"
                 style={{
                     backgroundImage: `
-                        linear-gradient(to right, hsl(var(--foreground)/0.03) 1px, transparent 1px),
-                        linear-gradient(to bottom, hsl(var(--foreground)/0.03) 1px, transparent 1px)
+                        linear-gradient(to right, hsl(var(--foreground)/0.02) 1px, transparent 1px),
+                        linear-gradient(to bottom, hsl(var(--foreground)/0.02) 1px, transparent 1px)
                     `,
-                    backgroundSize: '120px 120px',
+                    backgroundSize: '100px 100px',
                 }}
             />
 
-            <div className="mx-auto max-w-5xl px-4 sm:px-8">
+            <div className="mx-auto max-w-3xl px-4 sm:px-8">
 
-                <span className="font-mono text-[10px] text-accent uppercase tracking-[1em] font-black block mb-20 animate-pulse duration-[3000ms]">
-                    Collaboration · EHAF
+                <span className="font-mono text-xs text-accent tracking-tight font-medium block mb-8">
+                    Travaillons ensemble
                 </span>
 
-                <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.8] mb-16 uppercase">
-                    Bâtissons une <br />
-                    <span className="text-foreground/20 italic">infrastructure</span> <br />
-                    pérenne.
+                <h2 className="font-black tracking-tight mb-8 text-foreground">
+                    Un projet en tête ?
                 </h2>
 
-                <p className="text-sm font-medium text-muted-foreground uppercase tracking-[0.3em] leading-loose max-w-3xl mx-auto mb-24 opacity-60">
-                    Si vous souhaitez structurer une plateforme d'envergure, <br className="hidden sm:block" />
-                    maîtriser votre cloud, ou contribuer à un écosystème <br className="hidden sm:block" />
-                    numérique souverain.
+                <p className="text-lg text-muted-foreground leading-relaxed mb-12 font-normal max-w-xl mx-auto" style={{ letterSpacing: '-0.01em' }}>
+                    Que ce soit une infrastructure à structurer, un cloud à maîtriser
+                    ou une base technique à poser — on en parle simplement.
                 </p>
 
                 <Link
-                    href="/start-project"
-                    className="inline-flex items-center justify-center gap-8 bg-foreground text-background px-20 py-10 text-xs font-black uppercase tracking-[0.5em] transition-all duration-700 hover:bg-accent hover:text-white group relative shadow-2xl"
+                    href="/collaboration"
+                    className="inline-flex items-center justify-center gap-3 bg-foreground text-background px-10 py-5 text-sm font-semibold tracking-tight transition-all duration-300 hover:bg-accent hover:text-white group"
                 >
-                    <div className="absolute top-0 left-0 w-full h-1 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-700" />
-                    Engager la transformation
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-3 transition-transform duration-700" />
+                    Démarrer une discussion
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </Link>
 
-                {/* Signature finale - Brutal Footer */}
-                <div className="mt-40 pt-16 border-t border-foreground/5 flex flex-col items-center gap-6">
-                    <span className="font-mono text-[9px] text-foreground/20 uppercase tracking-[0.6em]">
-                        Eurinhash CS · Architecture Foundation
-                    </span>
-                    <div className="w-px h-24 bg-foreground/10" />
-                    <span className="font-mono text-[11px] text-foreground/40 uppercase tracking-[0.3em]">
-                        Document EHAF-2025-SYSTEM · VERSION 1.0.0
+                {/* Signature finale sobre */}
+                <div className="mt-24 pt-12 border-t border-foreground/5 flex flex-col items-center gap-3">
+                    <span className="font-mono text-[10px] text-foreground/20 tracking-tight">
+                        Eurin Hash CS · EHAF Foundation · 2026
                     </span>
                 </div>
 
