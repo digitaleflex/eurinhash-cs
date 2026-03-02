@@ -18,47 +18,33 @@ interface NavItem {
 
 const navigationItems: NavItem[] = [
     {
-        label: 'Vision',
+        label: 'Doctrine',
         href: '/vision',
-        icon: Eye,
-        description: 'Manifeste & Timeline',
+        description: 'Manifeste & Stratégie',
     },
     {
-        label: 'Projets',
+        label: 'Initiatives',
         href: '/projects',
-        icon: Globe,
-        description: 'Réalisations',
+        description: 'Déploiements & Architectures',
     },
     {
-        label: 'Compétences',
+        label: 'Expertise',
         href: '/skills',
-        icon: BookOpen,
-        description: 'Expertise',
+        description: 'Capacités techniques',
     },
     {
-        label: 'À propos',
+        label: 'Auteur',
         href: '/about',
-        icon: Layout,
-        description: 'Mon parcours',
+        description: 'Parcours structurel',
     },
-    {
-        label: 'Contact',
-        href: '/contact',
-        icon: Globe,
-        description: 'Parlons-en',
-    },
-    // Pages à venir - Ecosystem placeholder
     {
         label: 'Écosystème',
         href: '/ecosystem',
-        icon: Globe,
         description: 'Projets & Services',
         children: [
-            { label: 'Vue globale', href: '/ecosystem', placeholder: true },
-            { label: 'FlexHOST', href: '/ecosystem/flexhost', placeholder: true },
-            { label: 'Hashcode', href: '/ecosystem/hashcode', placeholder: true },
-            { label: 'Formation', href: '/ecosystem/formation', placeholder: true },
-            { label: 'Roadmap', href: '/ecosystem/roadmap', placeholder: true },
+            { label: 'Vue globale', href: '/ecosystem' },
+            { label: 'FlexHOST', href: '/ecosystem/flexhost' },
+            { label: 'Framework EHAF', href: '/ecosystem/ehaf' },
         ],
     },
 ];
@@ -111,33 +97,25 @@ export function NavigationWithDropdown() {
                                 <button
                                     onClick={() => handleDropdownToggle(item.href)}
                                     className={cn(
-                                        'group relative flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-200',
+                                        'group relative flex items-center gap-1.5 px-3 py-2 rounded-md transition-all duration-200',
                                         isActive
-                                            ? 'bg-accent/10 text-accent font-medium shadow-sm'
+                                            ? 'text-foreground font-semibold bg-foreground/5'
                                             : item.placeholder
                                                 ? 'text-amber-500/70 hover:text-amber-500 hover:bg-amber-500/10'
-                                                : 'text-foreground/70 hover:text-foreground hover:bg-foreground/5'
+                                                : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5'
                                     )}
                                     aria-expanded={isOpen}
                                     aria-haspopup="true"
                                 >
-                                    {item.placeholder ? (
+                                    {item.placeholder && (
                                         <Construction
-                                            className="w-4 h-4 text-amber-500"
-                                            aria-hidden="true"
-                                        />
-                                    ) : Icon && (
-                                        <Icon
-                                            className={cn(
-                                                'w-4 h-4 transition-all duration-200',
-                                                isActive ? 'text-accent' : 'text-foreground/60 group-hover:text-foreground'
-                                            )}
+                                            className="w-3.5 h-3.5 text-amber-500"
                                             aria-hidden="true"
                                         />
                                     )}
-                                    <span className="font-medium">{item.label}</span>
+                                    <span className="text-sm font-medium">{item.label}</span>
                                     {item.placeholder && (
-                                        <span className="text-xs text-amber-500">(Bientôt)</span>
+                                        <span className="text-[10px] text-amber-500 font-mono tracking-widest uppercase ml-1">(Bientôt)</span>
                                     )}
                                     <ChevronDown
                                         className={cn(
@@ -164,8 +142,8 @@ export function NavigationWithDropdown() {
                                                     child.placeholder
                                                         ? 'text-muted-foreground/60 cursor-not-allowed'
                                                         : pathname === child.href
-                                                            ? 'bg-accent/10 text-accent font-medium'
-                                                            : 'text-foreground/70 hover:text-foreground hover:bg-foreground/5'
+                                                            ? 'text-foreground font-semibold bg-foreground/5'
+                                                            : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5'
                                                 )}
                                             >
                                                 {child.placeholder && (
@@ -184,23 +162,14 @@ export function NavigationWithDropdown() {
                             <Link
                                 href={item.href}
                                 className={cn(
-                                    'group relative flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-200',
+                                    'group relative flex items-center gap-1.5 px-3 py-2 rounded-md transition-all duration-200',
                                     isActive
-                                        ? 'bg-accent/10 text-accent font-medium shadow-sm'
-                                        : 'text-foreground/70 hover:text-foreground hover:bg-foreground/5'
+                                        ? 'text-foreground font-semibold bg-foreground/5'
+                                        : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5'
                                 )}
                                 aria-current={isActive ? 'page' : undefined}
                             >
-                                {Icon && (
-                                    <Icon
-                                        className={cn(
-                                            'w-4 h-4 transition-all duration-200',
-                                            isActive ? 'text-accent' : 'text-foreground/60 group-hover:text-foreground'
-                                        )}
-                                        aria-hidden="true"
-                                    />
-                                )}
-                                <span className="font-medium">{item.label}</span>
+                                <span className="text-sm font-medium">{item.label}</span>
                                 {isActive && (
                                     <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-accent rounded-full" />
                                 )}
