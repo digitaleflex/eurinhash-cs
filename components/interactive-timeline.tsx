@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import {
     Globe,
     Shield,
@@ -100,119 +99,97 @@ const phases = [
 ];
 
 export default function InteractiveTimeline() {
-    const [expandedPhase, setExpandedPhase] = useState<string | null>('phase-0');
+    const [expandedPhase, setExpandedPhase] = useState<string | null>('phase-1');
 
     const togglePhase = (phaseId: string) => {
         setExpandedPhase(expandedPhase === phaseId ? null : phaseId);
     };
 
     return (
-        <div className="w-full">
-            {/* Timeline verticale interactive */}
+        <div className="w-full py-12">
             <div className="relative">
                 {/* Ligne centrale */}
-                <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-accent via-accent/50 to-transparent transform sm:-translate-x-1/2" />
+                <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-px bg-foreground/10 transform sm:-translate-x-1/2" />
 
-                {/* Phases */}
-                <div className="space-y-4 sm:space-y-8">
+                <div className="space-y-12">
                     {phases.map((phase, index) => {
                         const isExpanded = expandedPhase === phase.id;
                         const Icon = phase.icon;
                         const isEven = index % 2 === 0;
 
                         return (
-                            <motion.div
+                            <div
                                 key={phase.id}
-                                className={`relative flex items-center ${isEven ? 'sm:flex-row' : 'sm:flex-row-reverse'
-                                    }`}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
+                                className={`relative flex items-center ${isEven ? 'sm:flex-row' : 'sm:flex-row-reverse'}`}
                             >
                                 {/* Point sur la timeline */}
-                                <button
-                                    onClick={() => togglePhase(phase.id)}
-                                    className="absolute left-4 sm:left-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full border-4 border-background flex items-center justify-center transform -translate-x-1/2 z-10 transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-accent"
+                                <div
+                                    className="absolute left-4 sm:left-1/2 w-10 h-10 rounded-full border-4 border-background flex items-center justify-center transform -translate-x-1/2 z-10 shadow-sm"
                                     style={{
-                                        backgroundColor: phase.status === 'current' ? '#22c55e' : '#6b7280',
+                                        backgroundColor: phase.status === 'current' ? '#3b82f6' : '#94a3b8',
                                     }}
-                                    aria-label={`Voir ${phase.title}`}
                                 >
-                                    <Icon className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
-                                </button>
+                                    <Icon className="w-5 h-5 text-white" />
+                                </div>
 
                                 {/* Contenu */}
-                                <div className={`ml-12 sm:ml-0 sm:w-1/2 ${isEven ? 'sm:pr-8 sm:text-right' : 'sm:pl-8'}`}>
-                                    <button
+                                <div className={`ml-12 sm:ml-0 sm:w-1/2 ${isEven ? 'sm:pr-12' : 'sm:pl-12'}`}>
+                                    <div
                                         onClick={() => togglePhase(phase.id)}
-                                        className={`w-full text-left p-4 sm:p-6 rounded-xl border transition-all ${isExpanded
-                                                ? 'bg-accent/10 border-accent shadow-lg'
-                                                : 'bg-background border-foreground/10 hover:border-accent/30'
-                                            }`}
+                                        className={`cursor-pointer p-6 rounded-2xl border transition-all duration-300 ${isExpanded ? 'bg-accent/5 border-accent shadow-sm' : 'bg-background border-foreground/10 hover:border-accent/30 hover:shadow-md'}`}
                                     >
-                                        <div className="flex items-center gap-3 mb-2 flex-wrap">
-                                            <span className={`text-xs font-medium px-2 py-1 rounded-full ${phase.color} text-white`}>
+                                        <div className="flex items-center gap-3 mb-3">
+                                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider ${phase.color} text-white`}>
                                                 {phase.year}
                                             </span>
                                             {phase.status === 'current' && (
-                                                <span className="flex items-center gap-1 text-xs text-green-500 font-medium">
-                                                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                                                    En cours
+                                                <span className="flex items-center gap-1.5 text-[10px] text-accent font-bold uppercase tracking-wider">
+                                                    Actuel
                                                 </span>
                                             )}
                                         </div>
-                                        <h3 className="font-semibold text-lg mb-1">{phase.title}</h3>
-                                        <p className="text-sm text-muted-foreground">{phase.subtitle}</p>
 
-                                        <div className="mt-2 flex items-center justify-end gap-1 text-accent">
-                                            {isExpanded ? (
-                                                <ChevronUp className="w-4 h-4" />
-                                            ) : (
-                                                <ChevronDown className="w-4 h-4" />
-                                            )}
+                                        <div className="flex items-center justify-between gap-4 text-left">
+                                            <div>
+                                                <h3 className="font-bold text-xl mb-1">{phase.title}</h3>
+                                                <p className="text-sm text-muted-foreground">{phase.subtitle}</p>
+                                            </div>
+                                            <div className="flex-shrink-0">
+                                                {isExpanded ? <ChevronUp className="w-5 h-5 opacity-40" /> : <ChevronDown className="w-5 h-5 opacity-40" />}
+                                            </div>
                                         </div>
-                                    </button>
 
-                                    {/* Détails expansibles */}
-                                    <AnimatePresence>
                                         {isExpanded && (
-                                            <motion.div
-                                                initial={{ opacity: 0, height: 0 }}
-                                                animate={{ opacity: 1, height: 'auto' }}
-                                                exit={{ opacity: 0, height: 0 }}
-                                                transition={{ duration: 0.3 }}
-                                                className="mt-4"
-                                            >
-                                                <p className="text-sm text-muted-foreground mb-4 italic">
+                                            <div className="mt-6 pt-6 border-t border-foreground/5">
+                                                <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
                                                     {phase.description}
                                                 </p>
-                                                <ul className="space-y-2">
+                                                <ul className="grid gap-3">
                                                     {phase.objectives.map((objective, i) => (
-                                                        <li key={i} className="flex items-start gap-2">
+                                                        <li key={i} className="flex items-start gap-3 text-left">
                                                             <CheckCircle className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
-                                                            <span className="text-sm">{objective}</span>
+                                                            <span className="text-sm font-medium">{objective}</span>
                                                         </li>
                                                     ))}
                                                 </ul>
-                                            </motion.div>
+                                            </div>
                                         )}
-                                    </AnimatePresence>
+                                    </div>
                                 </div>
-                            </motion.div>
+                            </div>
                         );
                     })}
                 </div>
             </div>
 
-            {/* Légende */}
-            <div className="mt-8 pt-6 border-t border-foreground/10 flex flex-wrap gap-4 justify-center text-xs text-muted-foreground">
+            <div className="mt-12 pt-8 border-t border-foreground/5 flex flex-wrap gap-6 justify-center text-[10px] uppercase tracking-widest font-bold text-muted-foreground">
                 <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-green-500 rounded-full" />
-                    <span>Phase en cours</span>
+                    <div className="w-2 h-2 bg-blue-500 rounded-full" />
+                    <span>Phase Actuelle</span>
                 </div>
                 <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-gray-500 rounded-full" />
-                    <span>Phase à venir</span>
+                    <div className="w-2 h-2 bg-slate-400 rounded-full" />
+                    <span>Prochaines étapes</span>
                 </div>
             </div>
         </div>
