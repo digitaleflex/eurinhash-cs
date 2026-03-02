@@ -8,18 +8,18 @@ import { useHoverPrefetch } from '@/hooks/use-smart-prefetch';
 import { ArrowRight, User, Briefcase, Code, Eye, Mail } from 'lucide-react';
 
 const navigationItems = [
-  { href: '/about', label: 'À propos', icon: User },
-  { href: '/projects', label: 'Projets', icon: Briefcase },
-  { href: '/skills', label: 'Compétences', icon: Code },
-  { href: '/vision', label: 'Vision', icon: Eye },
-  { href: '/contact', label: 'Contact', icon: Mail },
+  { href: '/about', label: 'À propos', icon: User, description: 'Mon parcours' },
+  { href: '/projects', label: 'Laboratoire', icon: Briefcase, description: 'Réalisations' },
+  { href: '/skills', label: 'Expertise', icon: Code, description: 'Compétences' },
+  { href: '/vision', label: 'Vision', icon: Eye, description: 'Ma mission' },
+  { href: '/contact', label: 'Contact', icon: Mail, description: 'Parlons-en' },
 ];
 
 export function Navigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="hidden md:flex items-center gap-1 text-sm">
+    <nav className="hidden lg:flex items-center gap-1 text-sm" role="navigation" aria-label="Navigation principale">
       {navigationItems.map(item => {
         const hoverProps = useHoverPrefetch(item.href);
         const isActive = pathname === item.href;
@@ -36,6 +36,7 @@ export function Navigation() {
                 ? 'bg-accent/10 text-accent font-medium shadow-sm'
                 : 'text-foreground/70 hover:text-foreground hover:bg-foreground/5'
             )}
+            aria-current={isActive ? 'page' : undefined}
           >
             <item.icon
               className={cn(
@@ -44,16 +45,17 @@ export function Navigation() {
                   ? 'text-accent'
                   : 'text-foreground/60 group-hover:text-foreground'
               )}
+              aria-hidden="true"
             />
             <span className="font-medium">{item.label}</span>
 
             {/* Indicateur actif */}
             {isActive && (
-              <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-accent rounded-full" />
+              <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-accent rounded-full" aria-hidden="true" />
             )}
 
             {/* Effet hover */}
-            <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+            <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200" aria-hidden="true" />
           </Link>
         );
       })}
@@ -63,9 +65,10 @@ export function Navigation() {
         <Link
           href="/start-project"
           className="group flex items-center gap-2 px-4 py-2.5 bg-accent text-white rounded-lg font-medium transition-all duration-200 hover:bg-accent/90 hover:scale-105 active:scale-95 shadow-sm hover:shadow-md"
+          aria-label="Démarrer un projet"
         >
           <span>Démarrer un projet</span>
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" aria-hidden="true" />
         </Link>
       </div>
     </nav>

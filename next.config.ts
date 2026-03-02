@@ -23,8 +23,17 @@ const nextConfig: NextConfig = {
     // Optimisations supplémentaires
     optimizeServerReact: true,
     serverMinification: true,
-    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons', 'framer-motion'],
+    // Optimisation des imports de bibliothèques lourdes
+    optimizePackageImports: [
+      'lucide-react',
+      '@radix-ui/react-icons',
+      'framer-motion',
+      'react',
+      'react-dom',
+    ],
   },
+
+  // Optimisation du compilation
 
   // Packages externes pour les composants serveur
   serverExternalPackages: ['@prisma/client'],

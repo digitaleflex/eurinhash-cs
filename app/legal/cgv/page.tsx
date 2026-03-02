@@ -1,4 +1,16 @@
 import { LegalPage } from '../../../components/legal-page';
+import { Metadata } from 'next';
+
+export const revalidate = 86400; // Revalider toutes les 24 heures (ISR)
+
+export const metadata: Metadata = {
+  title: 'CGV - Eurin Hash | Conditions Générales de Vente',
+  description: 'Conditions Générales de Vente des prestations de E-FLEX - Devis, délais, paiement et propriété intellectuelle.',
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default function CGVPage() {
   return (

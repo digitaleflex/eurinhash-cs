@@ -6,8 +6,23 @@ import {
   Globe,
   Rocket,
   Package,
+  Cloud,
+  Code2,
+  Users,
 } from 'lucide-react';
+import { Metadata } from 'next';
 import CommunityProjects from '@/components/community-projects';
+
+export const metadata: Metadata = {
+  title: 'Projets - Eurin Hash | Portfolio de réalisations',
+  description: 'Découvrez mes projets de développement web, cloud et infrastructure. Applications mobiles, plateformes web, solutions DevOps et projets open-source.',
+  openGraph: {
+    title: 'Projets - Eurin Hash | Portfolio de réalisations',
+    description: 'Découvrez mes projets de développement web, cloud et infrastructure.',
+    url: 'https://eurinhash.com/projects',
+    type: 'website',
+  },
+};
 
 export default function ProjectsPage() {
   return (
@@ -15,7 +30,7 @@ export default function ProjectsPage() {
       <section className="mx-auto max-w-6xl px-6 md:px-8 py-16 sm:py-20 md:py-28">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
-            Mes Projets
+            Laboratoire
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Découvrez une sélection de projets qui illustrent mon approche :
@@ -23,11 +38,11 @@ export default function ProjectsPage() {
           </p>
         </div>
 
-        {/* Projets Clients */}
+        {/* Applications & Plateformes */}
         <div className="mb-20">
           <h2 className="text-3xl font-bold tracking-tight mb-12 flex items-center gap-3">
-            <Building2 className="h-8 w-8 text-accent" />
-            Projets Clients
+            <Globe className="h-8 w-8 text-accent" />
+            Applications & Plateformes
           </h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             <div className="group rounded-2xl border border-foreground/10 bg-background p-6 transition hover:shadow-xl hover:shadow-accent/20 hover:-translate-y-2">
@@ -120,14 +135,14 @@ export default function ProjectsPage() {
           </div>
         </div>
 
-        {/* Projets Communautaires */}
+        {/* Communauté & Formation */}
         <CommunityProjects />
 
-        {/* Projets Internes */}
+        {/* Infrastructure & Cloud */}
         <div className="mb-20">
           <h2 className="text-3xl font-bold tracking-tight mb-12 flex items-center gap-3">
-            <Factory className="h-8 w-8 text-accent" />
-            Projets Internes E-FLEX
+            <Cloud className="h-8 w-8 text-accent" />
+            Infrastructure & Cloud
           </h2>
           <div className="grid gap-8 md:grid-cols-2">
             <div className="group rounded-2xl border border-foreground/10 bg-background p-6 transition hover:shadow-xl hover:shadow-accent/20 hover:-translate-y-2">

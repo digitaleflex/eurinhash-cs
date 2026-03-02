@@ -15,8 +15,20 @@ import {
   MessageSquare,
 } from 'lucide-react';
 import Image from 'next/image';
+import { Metadata } from 'next';
 import { ContactForm } from '@/components/contact-form';
 import { FAQSection, contactFAQData } from '@/components/faq-section';
+
+export const metadata: Metadata = {
+  title: 'Contact - Eurin Hash | Parlons de votre projet',
+  description: 'Contactez-moi pour votre projet web ou cloud. Réponse garantie sous 24h. Démarrons votre transformation numérique ensemble.',
+  openGraph: {
+    title: 'Contact - Eurin Hash | Parlons de votre projet',
+    description: 'Contactez-moi pour votre projet web ou cloud.',
+    url: 'https://eurinhash.com/contact',
+    type: 'website',
+  },
+};
 
 export default function ContactPage() {
   return (

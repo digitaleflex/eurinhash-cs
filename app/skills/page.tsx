@@ -10,6 +10,18 @@ import {
   Search,
   Award,
 } from 'lucide-react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Compétences - Eurin Hash | Expert Cloud & Développement Web',
+  description: 'Découvrez mes compétences techniques : développement web (Next.js, React, TypeScript), cloud & DevOps (Docker, AWS, CI/CD), et transmission de savoir.',
+  openGraph: {
+    title: 'Compétences - Eurin Hash | Expert Cloud & Développement Web',
+    description: 'Découvrez mes compétences techniques en développement web et cloud.',
+    url: 'https://eurinhash.com/skills',
+    type: 'website',
+  },
+};
 
 export default function SkillsPage() {
   const technicalSkills = [

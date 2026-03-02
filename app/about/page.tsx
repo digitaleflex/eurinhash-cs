@@ -1,5 +1,17 @@
 import { Target, Shield, Leaf } from 'lucide-react';
 import Image from 'next/image';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'À propos - Eurin Hash | Consultant IT & Entrepreneur Numérique',
+  description: 'Découvrez le parcours d\'Eurin Hash, consultant IT et entrepreneur numérique. Passionné par l\'innovation technologique et la transformation numérique.',
+  openGraph: {
+    title: 'À propos - Eurin Hash | Consultant IT & Entrepreneur Numérique',
+    description: 'Découvrez le parcours d\'Eurin Hash, consultant IT et entrepreneur numérique. Passionné par l\'innovation technologique et la transformation numérique.',
+    url: 'https://eurinhash.com/about',
+    type: 'website',
+  },
+};
 
 export default function AboutPage() {
   return (

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import { createMetadata } from '@/lib/metadata';
-import { Navigation } from '@/components/navigation';
+import { NavigationWithDropdown } from '@/components/navigation-with-dropdown';
 import { Logo } from '@/components/logo';
 import { Footer } from '@/components/footer';
 import { ThemeProvider } from '@/components/theme-provider';
@@ -83,10 +83,10 @@ export default function RootLayout({
           <header className="border-b border-border sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
             <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
               {/* Desktop: Logo à gauche, Navigation à droite */}
-              <div className="hidden md:flex items-center justify-between w-full">
+              <div className="hidden lg:flex items-center justify-between w-full">
                 <Logo size="md" variant="default" />
                 <div className="flex items-center gap-2 sm:gap-4">
-                  <Navigation />
+                  <NavigationWithDropdown />
                   <div className="flex items-center gap-2 sm:gap-3">
                     <ThemeToggle />
                   </div>
@@ -94,7 +94,7 @@ export default function RootLayout({
               </div>
 
               {/* Mobile: Logo à gauche, Toggle et Menu à droite */}
-              <div className="md:hidden flex items-center justify-between w-full">
+              <div className="lg:hidden flex items-center justify-between w-full">
                 <Logo size="md" variant="default" />
                 <div className="flex items-center gap-2">
                   <ThemeToggle />

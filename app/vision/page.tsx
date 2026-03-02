@@ -589,8 +589,8 @@ export default function VisionPage() {
                     <Star
                       key={i}
                       className={`w-4 h-4 ${i < testimonial.rating
-                          ? 'fill-yellow-400 text-yellow-400'
-                          : 'text-gray-300'
+                        ? 'fill-yellow-400 text-yellow-400'
+                        : 'text-gray-300'
                         }`}
                     />
                   ))}
