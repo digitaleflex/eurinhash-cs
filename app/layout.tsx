@@ -52,6 +52,19 @@ export default function RootLayout({
         {SITE_CONFIG.seo.verification.bing && <meta name="msvalidate.01" content={SITE_CONFIG.seo.verification.bing} />}
         {SITE_CONFIG.seo.verification.baidu && <meta name="baidu-site-verification" content={SITE_CONFIG.seo.verification.baidu} />}
         {SITE_CONFIG.seo.verification.norton && <meta name="norton-safeweb-site-verification" content={SITE_CONFIG.seo.verification.norton} />}
+
+        {/* Clarity tracking code for https://eurinhash.com/ */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "vpjywbgzu9");
+            `,
+          }}
+        />
       </head>
       <body
         className="antialiased bg-background text-foreground min-h-screen flex flex-col overflow-x-hidden font-sans"

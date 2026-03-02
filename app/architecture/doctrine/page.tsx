@@ -1,12 +1,8 @@
-import { Metadata } from 'next';
+'use client';
+
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ShieldAlert, Cloud, Zap, ArrowRight, XCircle, CheckCircle2 } from 'lucide-react';
-
-export const metadata: Metadata = {
-    title: 'Doctrine Architecturale — EurinHash v1.0',
-    description: 'Les principes idéologiques et techniques qui dirigent la conception des systèmes EurinHash.',
-};
 
 const favors = [
     'La séparation stricte des responsabilités',

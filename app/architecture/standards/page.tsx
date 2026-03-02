@@ -1,12 +1,8 @@
-import { Metadata } from 'next';
+'use client';
+
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Cloud, ShieldCheck, Terminal, Code2, FileText, ArrowRight, Check } from 'lucide-react';
-
-export const metadata: Metadata = {
-    title: 'Standards Techniques — EurinHash v1.0',
-    description: 'Règles opérationnelles et standards techniques pour le déploiement de systèmes numériques.',
-};
 
 const standardSections = [
     {

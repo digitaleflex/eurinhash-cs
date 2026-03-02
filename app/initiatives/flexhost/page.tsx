@@ -1,12 +1,8 @@
-import { Metadata } from 'next';
+'use client';
+
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Cpu, Server, Network, Shield, ArrowRight, Zap, Database, Terminal } from 'lucide-react';
-
-export const metadata: Metadata = {
-    title: 'Initiative — FlexHOST v1.0',
-    description: 'Spécification technique de l\'infrastructure cloud hybride et souveraine FlexHOST.',
-};
 
 const techPoints = [
     { icon: Cpu, label: 'Frontend', value: 'Next.js (Server-First)' },

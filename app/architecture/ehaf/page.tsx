@@ -1,17 +1,7 @@
-import { Metadata } from 'next';
+'use client';
+
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-
-export const metadata: Metadata = {
-    title: 'EHAF — EurinHash Architectural Framework v1.0',
-    description: 'Spécification fondatrice du cadre architectural EHAF. Standardisation, structuration et déploiement de systèmes numériques maîtrisés.',
-    openGraph: {
-        title: 'EHAF v1.0 — Core Specification',
-        description: 'Cadre architectural reproductible pour systèmes numériques souverains.',
-        url: 'https://eurinhash.com/vision/ehaf',
-        type: 'article',
-    },
-};
 
 const problems = [
     { id: '01', text: 'Absence de structure initiale' },
