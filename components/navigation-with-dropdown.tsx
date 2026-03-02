@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { ArrowRight, ChevronDown, Eye, Layout, BookOpen, Globe, Lightbulb, GraduationCap, Handshake, Construction } from 'lucide-react';
+import { ArrowRight, ChevronDown, Construction } from 'lucide-react';
 
 interface NavItem {
     label: string;
@@ -13,7 +13,7 @@ interface NavItem {
     description?: string;
     children?: NavItem[];
     isCTA?: boolean;
-    placeholder?: boolean; // Pages à venir (à implémenter)
+    placeholder?: boolean;
 }
 
 const navigationItems: NavItem[] = [
@@ -24,8 +24,8 @@ const navigationItems: NavItem[] = [
     },
     {
         label: 'Initiatives',
-        href: '/projects',
-        description: 'Déploiements & Architectures',
+        href: '/initiatives',
+        description: 'Piliers & Déploiements',
     },
     {
         label: 'Expertise',
@@ -36,16 +36,6 @@ const navigationItems: NavItem[] = [
         label: 'Auteur',
         href: '/about',
         description: 'Parcours structurel',
-    },
-    {
-        label: 'Écosystème',
-        href: '/ecosystem',
-        description: 'Projets & Services',
-        children: [
-            { label: 'Vue globale', href: '/ecosystem' },
-            { label: 'FlexHOST', href: '/ecosystem/flexhost' },
-            { label: 'Framework EHAF', href: '/ecosystem/ehaf' },
-        ],
     },
 ];
 
@@ -74,14 +64,13 @@ export function NavigationWithDropdown() {
                 const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
                 const hasChildren = item.children && item.children.length > 0;
                 const isOpen = openDropdown === item.href;
-                const Icon = item.icon;
 
                 if (item.isCTA) {
                     return (
                         <Link
                             key={item.href}
                             href={item.href}
-                            className="flex items-center gap-2 px-4 py-2.5 bg-accent text-white rounded-lg font-medium transition-all duration-200 hover:bg-accent/90 hover:scale-105 active:scale-95 shadow-sm hover:shadow-md ml-2"
+                            className="flex items-center gap-2 px-4 py-2.5 bg-accent text-white rounded-none font-medium transition-all duration-200 hover:bg-accent/90 ml-2 shadow-none"
                             aria-label={item.label}
                         >
                             <span>{item.label}</span>
@@ -97,7 +86,7 @@ export function NavigationWithDropdown() {
                                 <button
                                     onClick={() => handleDropdownToggle(item.href)}
                                     className={cn(
-                                        'group relative flex items-center gap-1.5 px-3 py-2 rounded-md transition-all duration-200',
+                                        'group relative flex items-center gap-1.5 px-3 py-2 rounded-none transition-all duration-200',
                                         isActive
                                             ? 'text-foreground font-semibold bg-foreground/5'
                                             : item.placeholder
@@ -125,20 +114,20 @@ export function NavigationWithDropdown() {
                                         aria-hidden="true"
                                     />
                                     {isActive && (
-                                        <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-accent rounded-full" />
+                                        <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-accent" />
                                     )}
                                 </button>
 
                                 {/* Dropdown Menu */}
                                 {isOpen && (
-                                    <div className="absolute top-full left-0 mt-1 w-56 py-2 bg-background border border-foreground/10 rounded-xl shadow-lg z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                                    <div className="absolute top-full left-0 mt-0 w-56 py-0 bg-background border border-foreground/10 rounded-none shadow-none z-50 animate-in fade-in slide-in-from-top-2 duration-300">
                                         {item.children?.map((child, index) => (
                                             <Link
                                                 key={child.href}
                                                 href={child.href}
                                                 onClick={() => setOpenDropdown(null)}
                                                 className={cn(
-                                                    'flex items-center gap-3 px-4 py-2.5 text-sm transition-colors',
+                                                    'flex items-center gap-3 px-4 py-3 text-xs uppercase tracking-widest transition-colors border-b border-foreground/5 last:border-0',
                                                     child.placeholder
                                                         ? 'text-muted-foreground/60 cursor-not-allowed'
                                                         : pathname === child.href
@@ -162,7 +151,7 @@ export function NavigationWithDropdown() {
                             <Link
                                 href={item.href}
                                 className={cn(
-                                    'group relative flex items-center gap-1.5 px-3 py-2 rounded-md transition-all duration-200',
+                                    'group relative flex items-center gap-1.5 px-3 py-2 rounded-none transition-all duration-200',
                                     isActive
                                         ? 'text-foreground font-semibold bg-foreground/5'
                                         : 'text-muted-foreground hover:text-foreground hover:bg-foreground/5'
@@ -171,7 +160,7 @@ export function NavigationWithDropdown() {
                             >
                                 <span className="text-sm font-medium">{item.label}</span>
                                 {isActive && (
-                                    <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-accent rounded-full" />
+                                    <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-accent" />
                                 )}
                             </Link>
                         )}

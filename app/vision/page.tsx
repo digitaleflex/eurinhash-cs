@@ -1,668 +1,224 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import {
-  Target,
-  Shield,
-  Leaf,
-  Zap,
-  ShieldCheck,
-  Smartphone,
-  Users,
-  RotateCcw,
-  Handshake,
-  ArrowRight,
-  Globe,
-  Code,
-  Quote,
-  Star,
-  Rocket,
-  Heart,
-  Brain,
-  Eye,
-} from 'lucide-react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+
+const fadeIn = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }
+};
+
+const itemsAmbition = [
+  {
+    id: 'CORE-01',
+    title: 'Concevoir des architectures numériques maîtrisées',
+    desc: 'Des systèmes clairs, documentés, scalables, observables et résilients.'
+  },
+  {
+    id: 'CORE-02',
+    title: 'Formaliser des standards reproductibles',
+    desc: 'Un ensemble de bonnes pratiques applicables à tous types d’organisations — startups, entreprises et institutions.'
+  },
+  {
+    id: 'CORE-03',
+    title: 'Construire des cadres d’intégration systémique',
+    desc: 'Capables de connecter les architectures entre elles, sans duplication de dépendances, avec une maîtrise intégrale.'
+  },
+  {
+    id: 'CORE-04',
+    title: 'Réduire la dépendance technologique non maîtrisée',
+    desc: 'Pour que chaque organisation reste autonome dans ses choix, sans dépendance opaque à des fournisseurs externes.'
+  }
+];
+
+const principes = [
+  { label: 'Clarté conceptuelle', desc: 'Toute architecture doit être compréhensible et documentée.' },
+  { label: 'Séparation des responsabilités', desc: 'Chaque composant est conçu avec un objectif précis.' },
+  { label: 'Scalabilité vérifiable', desc: 'Chaque architecture doit être pensée pour croître sans perdre en cohérence.' },
+  { label: 'Résilience intégrée', desc: 'La capacité de tolérer les défaillances est un critère premier.' },
+  { label: 'Neutralité technologique', desc: 'Les choix techniques sont guidés par la structure, pas par la mode.' }
+];
 
 export default function VisionPage() {
-  const [currentQuote, setCurrentQuote] = useState(0);
-  const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
-
-  const quotes = [
-    {
-      text: 'La technologie doit se faire oublier : puissante, rapide, fluide.',
-      author: 'Ma philosophie du développement',
-    },
-    {
-      text: "L'innovation naît de la simplicité, pas de la complexité.",
-      author: 'Mon approche technique',
-    },
-    {
-      text: 'Chaque ligne de code est un pas vers un monde meilleur.',
-      author: 'Ma vision du développement',
-    },
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentQuote(prev => (prev + 1) % quotes.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [quotes.length]);
-
   return (
-    <main className="relative isolate overflow-hidden">
-      {/* Hero animé avec citations rotatives */}
-      <section className="relative mx-auto max-w-6xl px-6 md:px-8 py-20 sm:py-28 md:py-36 text-center">
-        {/* Background animé */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-accent/10" />
-          <motion.div
-            style={{ y }}
-            className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_50%)]"
-          />
-        </div>
+    <main className="bg-background text-foreground min-h-screen pb-32">
+      {/* ── BACKGROUND ARCHITECTURAL ── */}
+      <div className="fixed inset-0 -z-10 pointer-events-none">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 opacity-[0.02] dark:opacity-[0.03]"
+          style={{
+            backgroundImage: `
+                            linear-gradient(to right, currentColor 1px, transparent 1px),
+                            linear-gradient(to bottom, currentColor 1px, transparent 1px)
+                        `,
+            backgroundSize: '100px 100px',
+          }}
+        />
+      </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative z-10"
-        >
-          <div className="mb-8">
-            <motion.div
-              key={currentQuote}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.6 }}
-              className="relative"
-            >
-              <Quote className="w-8 h-8 text-accent mx-auto mb-6" />
-              <blockquote className="text-3xl md:text-4xl lg:text-6xl font-bold leading-tight mb-6">
-                « {quotes[currentQuote].text} »
-              </blockquote>
-              <p className="text-xl text-muted-foreground">
-                {quotes[currentQuote].author}
+      {/* ── SECTION 1: HERO & INTRO ── */}
+      <section className="pt-32 pb-24 md:pt-48 md:pb-40 border-b border-foreground/5">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
+          <motion.div {...fadeIn}>
+            <div className="flex items-center gap-4 mb-10">
+              <span className="font-mono text-[10px] text-accent uppercase tracking-[0.4em]">Vision · Doctrine</span>
+              <div className="h-px w-24 bg-accent/20" />
+            </div>
+            <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight leading-[0.9] mb-12">
+              Structurer un nouveau <br />
+              <span className="text-foreground/40">paradigme numérique.</span>
+            </h1>
+            <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed max-w-3xl mb-16">
+              Une approche déterminée, cohérente et durable pour concevoir des systèmes numériques maîtrisés.
+            </p>
+          </motion.div>
+
+          <motion.div {...fadeIn} transition={{ delay: 0.2 }} className="pt-20 border-t border-foreground/5">
+            <div className="grid md:grid-cols-[1fr_2fr] gap-12">
+              <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.3em]">Positionnement</span>
+              <div className="space-y-8">
+                <p className="text-2xl sm:text-3xl font-bold leading-snug">
+                  Les transformations numériques ne sont plus des réponses individuelles à des problèmes isolés.
+                  Elles deviennent des <span className="text-accent">structures</span> — complexes, interdépendantes et critiques.
+                </p>
+                <p className="text-lg text-muted-foreground max-w-2xl">
+                  Ce n’est pas une question de technologie. C’est une question d’organisation des systèmes.
+                  La vision d’EurinHash est de faire émerger une discipline d’architecture numérique capable de penser,
+                  concevoir, formaliser et structurer les systèmes de demain.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── SECTION 2: LE DÉFI COLLECTIF ── */}
+      <section className="py-24 sm:py-40 bg-foreground/[0.015] border-b border-foreground/5">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
+          <div className="grid md:grid-cols-[1fr_2fr] gap-12 sm:gap-24">
+            <div>
+              <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.3em] block mb-6 px-3 py-1 border border-foreground/10 w-fit">Diagnostic</span>
+              <h2 className="text-4xl font-black tracking-tight mb-8">Le défi collectif.</h2>
+              <p className="text-muted-foreground leading-relaxed">
+                Aujourd’hui, l’essentiel des organisations se contentent de consommer sans structurer.
               </p>
-            </motion.div>
-          </div>
-
-          {/* Indicateurs de citation */}
-          <div className="flex justify-center gap-2 mb-12">
-            {quotes.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentQuote(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentQuote ? 'bg-accent w-8' : 'bg-foreground/30'
-                  }`}
-              />
-            ))}
-          </div>
-
-          {/* CTA principal */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            <a
-              href="/start-project"
-              className="group inline-flex items-center gap-3 rounded-full bg-accent text-white px-8 py-4 text-lg font-semibold transition-all duration-300 hover:bg-accent/90 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
-            >
-              <Rocket className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-              Démarrer votre transformation
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </a>
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* Statistiques impactantes */}
-      <section className="py-16 sm:py-20 bg-gradient-to-br from-accent/5 to-accent/10">
-        <div className="mx-auto max-w-6xl px-6 md:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-              L&apos;impact de la technologie bien conçue
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Des chiffres qui témoignent de l&apos;importance d&apos;une
-              approche technique réfléchie
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
-            {[
-              {
-                number: '3x',
-                label: 'Plus rapide',
-                icon: Zap,
-                color: 'text-yellow-500',
-              },
-              {
-                number: '60%',
-                label: 'Moins de bugs',
-                icon: ShieldCheck,
-                color: 'text-green-500',
-              },
-              {
-                number: '90%',
-                label: 'Satisfaction client',
-                icon: Heart,
-                color: 'text-red-500',
-              },
-              {
-                number: '24/7',
-                label: 'Disponibilité',
-                icon: Globe,
-                color: 'text-blue-500',
-              },
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center p-4 md:p-6 rounded-2xl bg-background/50 backdrop-blur-sm border border-foreground/10 hover:border-accent/30 transition-all duration-300 hover:scale-105"
-              >
-                <stat.icon className={`w-8 h-8 mx-auto mb-4 ${stat.color}`} />
-                <div className="text-3xl font-bold mb-2">{stat.number}</div>
-                <div className="text-sm text-muted-foreground">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Vision détaillée avec animations */}
-      <section className="py-16 sm:py-20 bg-muted">
-        <div className="mx-auto max-w-6xl px-6 md:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-              Ma Vision
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Trois piliers fondamentaux qui guident chaque décision technique
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-            {[
-              {
-                icon: Target,
-                title: 'Simplicité & Efficacité',
-                description:
-                  "La meilleure technologie est celle qu'on ne remarque pas. Elle doit être intuitive, performante et résoudre des problèmes réels sans créer de complexité inutile.",
-                color: 'from-blue-500/10 to-blue-600/10',
-                iconColor: 'text-blue-500',
-              },
-              {
-                icon: Shield,
-                title: 'Souveraineté Numérique',
-                description:
-                  'Dans un monde hyperconnecté, il est crucial de maîtriser ses outils et ses données. Je privilégie les solutions qui offrent autonomie et contrôle.',
-                color: 'from-green-500/10 to-green-600/10',
-                iconColor: 'text-green-500',
-              },
-              {
-                icon: Leaf,
-                title: 'Durabilité & Pérennité',
-                description:
-                  "Concevoir pour durer, c'est penser à long terme. Technologies éprouvées, code maintenable, architecture évolutive pour minimiser l'impact environnemental.",
-                color: 'from-emerald-500/10 to-emerald-600/10',
-                iconColor: 'text-emerald-500',
-              },
-            ].map((vision, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                viewport={{ once: true }}
-                className={`relative p-6 md:p-8 rounded-2xl bg-gradient-to-br ${vision.color} border border-foreground/10 hover:border-accent/30 transition-all duration-300 hover:scale-105 group`}
-              >
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative z-10">
-                  <div
-                    className={`h-16 w-16 mx-auto mb-6 rounded-full bg-background/50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
-                  >
-                    <vision.icon className={`h-8 w-8 ${vision.iconColor}`} />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-4 text-center text-foreground">
-                    {vision.title}
-                  </h3>
-                  <p className="text-foreground/70 leading-relaxed text-center">
-                    {vision.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Timeline de l'évolution technologique */}
-      <section className="py-16 sm:py-20 bg-gradient-to-br from-muted to-background">
-        <div className="mx-auto max-w-6xl px-6 md:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-              L&apos;évolution de la technologie
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Comment nous sommes passés de la complexité à la simplicité
-            </p>
-          </motion.div>
-
-          {/* Version Desktop */}
-          <div className="hidden md:block relative">
-            {/* Ligne de temps */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-accent to-accent/50 rounded-full" />
-
-            <div className="space-y-12">
+            </div>
+            <div className="divide-y divide-foreground/5 bg-background border border-foreground/5">
               {[
-                {
-                  year: '2000-2010',
-                  title: "L'ère de la complexité",
-                  description:
-                    'Technologies lourdes, interfaces compliquées, apprentissage difficile',
-                  icon: Code,
-                  side: 'left',
-                  color: 'text-red-500',
-                },
-                {
-                  year: '2010-2020',
-                  title: 'La révolution mobile',
-                  description:
-                    'Naissance du mobile-first, interfaces simplifiées, accessibilité améliorée',
-                  icon: Smartphone,
-                  side: 'right',
-                  color: 'text-yellow-500',
-                },
-                {
-                  year: '2020-2025',
-                  title: "L'ère de la simplicité",
-                  description:
-                    'IA intégrée, interfaces invisibles, expérience utilisateur optimale',
-                  icon: Brain,
-                  side: 'left',
-                  color: 'text-green-500',
-                },
-                {
-                  year: '2025+',
-                  title: "L'avenir invisible",
-                  description:
-                    'Technologie transparente, intelligence contextuelle, expérience naturelle',
-                  icon: Eye,
-                  side: 'right',
-                  color: 'text-blue-500',
-                },
-              ].map((era, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: era.side === 'left' ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
-                  viewport={{ once: true }}
-                  className={`flex items-center ${era.side === 'left' ? 'flex-row' : 'flex-row-reverse'}`}
-                >
-                  <div
-                    className={`w-1/2 ${era.side === 'left' ? 'pr-8 text-right' : 'pl-8 text-left'}`}
-                  >
-                    <div className="bg-background p-6 rounded-2xl border border-foreground/10 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                      <div
-                        className={`inline-flex items-center gap-2 mb-3 ${era.side === 'left' ? 'flex-row-reverse' : 'flex-row'}`}
-                      >
-                        <era.icon className={`w-5 h-5 ${era.color}`} />
-                        <span className="text-sm font-semibold text-accent">
-                          {era.year}
-                        </span>
-                      </div>
-                      <h3 className="text-xl font-semibold mb-3">
-                        {era.title}
-                      </h3>
-                      <p className="text-muted-foreground">{era.description}</p>
-                    </div>
-                  </div>
-
-                  {/* Point sur la timeline */}
-                  <div className="relative z-10 w-4 h-4 bg-accent rounded-full border-4 border-background shadow-lg" />
-
-                  <div className="w-1/2" />
-                </motion.div>
+                { id: '01', t: 'Développement sans structure', d: 'Produire des applications sans penser à l\'intégrité systémique.' },
+                { id: '02', t: 'Consommation cloud opaque', d: 'Utiliser des services sans en maîtriser les implications réelles.' },
+                { id: '03', t: 'Multiplication des silos', d: 'Lancer des projets sans aucune cohérence stratégique globale.' }
+              ].map(item => (
+                <div key={item.id} className="p-8 group hover:bg-foreground/[0.01] transition-colors">
+                  <span className="font-mono text-xs text-accent mb-2 block">{item.id} —</span>
+                  <h3 className="text-xl font-bold mb-2">{item.t}</h3>
+                  <p className="text-muted-foreground text-sm">{item.d}</p>
+                </div>
               ))}
+              <div className="p-10 bg-accent text-white">
+                <p className="text-xl font-bold leading-tight uppercase tracking-tight">
+                  → Des dépendances invisibles, des systèmes fragiles, une dette technique massive.
+                </p>
+                <p className="mt-4 text-white/60 font-mono text-[10px] uppercase tracking-widest">Ce n’est pas une erreur individuelle. C’est une erreur structurelle.</p>
+              </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Version Mobile */}
-          <div className="md:hidden space-y-8">
-            {[
-              {
-                year: '2000-2010',
-                title: "L'ère de la complexité",
-                description:
-                  'Technologies lourdes, interfaces compliquées, apprentissage difficile',
-                icon: Code,
-                color: 'text-red-500',
-                bgColor: 'from-red-500/10 to-red-600/10',
-              },
-              {
-                year: '2010-2020',
-                title: 'La révolution mobile',
-                description:
-                  'Naissance du mobile-first, interfaces simplifiées, accessibilité améliorée',
-                icon: Smartphone,
-                color: 'text-yellow-500',
-                bgColor: 'from-yellow-500/10 to-yellow-600/10',
-              },
-              {
-                year: '2020-2025',
-                title: "L'ère de la simplicité",
-                description:
-                  'IA intégrée, interfaces invisibles, expérience utilisateur optimale',
-                icon: Brain,
-                color: 'text-green-500',
-                bgColor: 'from-green-500/10 to-green-600/10',
-              },
-              {
-                year: '2025+',
-                title: "L'avenir invisible",
-                description:
-                  'Technologie transparente, intelligence contextuelle, expérience naturelle',
-                icon: Eye,
-                color: 'text-blue-500',
-                bgColor: 'from-blue-500/10 to-blue-600/10',
-              },
-            ].map((era, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className={`relative bg-gradient-to-br ${era.bgColor} p-6 rounded-2xl border border-foreground/10 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105`}
-              >
-                {/* Ligne de connexion mobile */}
-                {index < 3 && (
-                  <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-0.5 h-8 bg-gradient-to-b from-accent to-accent/50" />
-                )}
+      {/* ── SECTION 3: HYPOTHÈSE & AMBITION ── */}
+      <section className="py-24 sm:py-40 border-b border-foreground/5">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
+          <blockquote className="text-3xl sm:text-5xl font-black tracking-tight mb-32 leading-[1.1] max-w-4xl">
+            "La transformation numérique ne se décrète pas. <br />
+            <span className="text-accent underline decoration-4 underline-offset-8">Elle se conçoit.</span>"
+          </blockquote>
 
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 rounded-xl bg-background/50 flex items-center justify-center">
-                      <era.icon className={`w-6 h-6 ${era.color}`} />
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-sm font-semibold text-accent bg-accent/10 px-2 py-1 rounded-full">
-                        {era.year}
-                      </span>
-                    </div>
-                    <h3 className="text-lg font-semibold mb-2 text-foreground">
-                      {era.title}
-                    </h3>
-                    <p className="text-foreground/70 text-sm leading-relaxed">
-                      {era.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
+          <div className="grid md:grid-cols-2 gap-px bg-foreground/5 border border-foreground/5">
+            {itemsAmbition.map(item => (
+              <div key={item.id} className="bg-background p-10 sm:p-16 hover:bg-foreground/[0.01] transition-colors">
+                <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.2em] mb-6 block">{item.id}</span>
+                <h3 className="text-2xl font-bold mb-4 tracking-tight">{item.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Principes améliorés */}
-      <section className="py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-6 md:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-              Mes Principes
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Six piliers qui guident chaque décision technique et créative
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* ── SECTION 4: LES TROIS AXIOMES ── */}
+      <section className="py-24 sm:py-40 bg-foreground text-background">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 text-center sm:text-left">
+          <span className="font-mono text-[10px] opacity-40 uppercase tracking-[0.4em] block mb-12">Axiomes de la vision</span>
+          <div className="grid md:grid-cols-3 gap-16">
             {[
-              {
-                icon: Zap,
-                title: 'Performance First',
-                description:
-                  'Chaque milliseconde compte. Optimisation continue pour des expériences fluides et rapides.',
-                color: 'from-yellow-500/10 to-orange-500/10',
-                iconColor: 'text-yellow-500',
-              },
-              {
-                icon: ShieldCheck,
-                title: 'Sécurité by Design',
-                description:
-                  "La sécurité n'est pas une option, c'est un prérequis intégré dès la conception.",
-                color: 'from-green-500/10 to-emerald-500/10',
-                iconColor: 'text-green-500',
-              },
-              {
-                icon: Smartphone,
-                title: 'Mobile First',
-                description:
-                  "Concevoir d'abord pour mobile garantit une expérience optimale sur tous les appareils.",
-                color: 'from-blue-500/10 to-cyan-500/10',
-                iconColor: 'text-blue-500',
-              },
-              {
-                icon: Users,
-                title: 'Accessibilité',
-                description:
-                  'La technologie doit être accessible à tous, sans exception ni discrimination.',
-                color: 'from-purple-500/10 to-pink-500/10',
-                iconColor: 'text-purple-500',
-              },
-              {
-                icon: RotateCcw,
-                title: 'Amélioration Continue',
-                description:
-                  'Itération constante, feedback utilisateur et optimisation permanente des solutions.',
-                color: 'from-indigo-500/10 to-blue-500/10',
-                iconColor: 'text-indigo-500',
-              },
-              {
-                icon: Handshake,
-                title: 'Collaboration',
-                description:
-                  'Les meilleures solutions naissent de la collaboration et du partage de connaissances.',
-                color: 'from-teal-500/10 to-green-500/10',
-                iconColor: 'text-teal-500',
-              },
-            ].map((principle, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className={`group p-6 rounded-2xl bg-gradient-to-br ${principle.color} border border-foreground/10 hover:border-accent/30 transition-all duration-300 hover:scale-105`}
-              >
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 rounded-xl bg-background/50 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <principle.icon
-                        className={`w-6 h-6 ${principle.iconColor}`}
-                      />
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold mb-2 text-foreground">
-                      {principle.title}
-                    </h3>
-                    <p className="text-foreground/70 text-sm leading-relaxed">
-                      {principle.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
+              { id: 'I', t: 'Une structure se conçoit avant de se développer', d: 'L’architecture précède le produit.' },
+              { id: 'II', t: 'La maîtrise précède la performance', d: 'Un système sans maîtrise n’est jamais durable.' },
+              { id: 'III', t: 'La transparence garantit la pérennité', d: 'La documentation est un contrat avec le futur.' }
+            ].map(ax => (
+              <div key={ax.id} className="space-y-6">
+                <span className="text-6xl font-black text-accent/30 font-mono">{ax.id}</span>
+                <h3 className="text-xl font-bold uppercase tracking-tight">{ax.t}</h3>
+                <p className="text-background/60 leading-relaxed italic">"{ax.d}"</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Témoignages clients */}
-      <section className="py-16 sm:py-20 bg-gradient-to-br from-accent/5 to-accent/10">
-        <div className="mx-auto max-w-6xl px-6 md:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-              Ce que disent mes clients
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Des témoignages qui reflètent l&apos;impact de mon approche
-              technique
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-            {[
-              {
-                quote:
-                  'Eurin a transformé notre vision du développement. Des solutions simples mais puissantes qui ont révolutionné notre productivité.',
-                author: 'Marie K.',
-                role: 'Directrice IT, Entreprise locale',
-                rating: 5,
-              },
-              {
-                quote:
-                  "Une approche technique solide avec quelques points d'amélioration. Le projet a été livré dans les temps avec une qualité correcte.",
-                author: 'Jean-Baptiste M.',
-                role: 'CEO, Startup tech',
-                rating: 4,
-              },
-              {
-                quote:
-                  'La formation dispensée par Eurin a changé la donne pour notre équipe. Des connaissances pratiques et applicables immédiatement.',
-                author: 'Fatou S.',
-                role: 'Responsable formation',
-                rating: 5,
-              },
-            ].map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-background p-4 md:p-6 rounded-2xl border border-foreground/10 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-              >
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-4 h-4 ${i < testimonial.rating
-                        ? 'fill-yellow-400 text-yellow-400'
-                        : 'text-gray-300'
-                        }`}
-                    />
-                  ))}
-                </div>
-                <blockquote className="text-foreground/80 mb-4 italic text-sm leading-relaxed">
-                  &ldquo;{testimonial.quote}&rdquo;
-                </blockquote>
-                <div className="border-t border-foreground/10 pt-4">
-                  <div className="font-semibold text-sm">
-                    {testimonial.author}
+      {/* ── SECTION 5: MISSION & PRINCIPES ── */}
+      <section className="py-24 sm:py-40">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
+          <div className="grid md:grid-cols-[1fr_2fr] gap-20 sm:gap-32">
+            <div className="space-y-12">
+              <div>
+                <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.3em] block mb-6">Mission</span>
+                <h2 className="text-3xl font-black tracking-tight mb-6">Action concrète.</h2>
+                <p className="text-muted-foreground text-lg italic">"Nous ne faisons pas simplement du développement. Nous faisons de l’architecture systémique maîtrisée."</p>
+              </div>
+              <ul className="space-y-4 text-sm font-bold uppercase tracking-widest text-foreground/40 divide-y divide-foreground/5">
+                <li className="py-4">Cadres d'architecture adaptés</li>
+                <li className="py-4">Méthodologies professionnelles</li>
+                <li className="py-4">Frameworks & Standards</li>
+                <li className="py-4">Accompagnement rigoureux</li>
+              </ul>
+            </div>
+            <div>
+              <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.3em] block mb-12 leading-[1.0]">Principes directeurs</span>
+              <div className="divide-y divide-foreground/5">
+                {principes.map(p => (
+                  <div key={p.label} className="py-10 grid sm:grid-cols-[200px_1fr] gap-4">
+                    <h4 className="font-black text-sm uppercase tracking-tighter">{p.label}</h4>
+                    <p className="text-muted-foreground">{p.desc}</p>
                   </div>
-                  <div className="text-xs text-muted-foreground">
-                    {testimonial.role}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Impact et CTA final */}
-      <section className="py-16 sm:py-20 bg-muted">
-        <div className="mx-auto max-w-4xl px-6 md:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
+      {/* ── SECTION 6: IMPACT & CONCLUSION ── */}
+      <section className="py-24 sm:py-48 bg-background border-t border-foreground/5 text-center">
+        <div className="mx-auto max-w-4xl px-4 sm:px-8">
+          <span className="font-mono text-[10px] text-accent uppercase tracking-[0.3em] block mb-12">Épilogue · Transformation</span>
+          <h2 className="text-4xl sm:text-6xl font-black tracking-tight leading-tight mb-12">
+            Faire de l’architecture un <br className="hidden sm:block" />
+            <span className="text-foreground/30 italic">actif stratégique.</span>
+          </h2>
+          <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-20">
+            La transformation numérique n’est pas une course à la vitesse. C’est une démarche architecturale qui exige pensée systémique, discernement et discipline.
+          </p>
+          <Link
+            href="/start-project"
+            className="inline-flex items-center justify-center gap-4 bg-foreground text-background px-12 py-6 text-sm font-bold uppercase tracking-[0.3em] transition hover:bg-accent hover:text-white"
           >
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-8">
-              L&apos;Impact que je veux créer
-            </h2>
-
-            <div className="space-y-8 mb-12">
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Mon ambition va au-delà du simple développement technique. Je
-                veux contribuer à
-                <strong className="text-foreground">
-                  {' '}
-                  former la prochaine génération de talents IT
-                </strong>
-                , partager les connaissances et démocratiser l'accès aux
-                technologies modernes.
-              </p>
-
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Chaque projet est une opportunité de créer de la valeur durable,
-                d&apos;innover de manière responsable et de construire un
-                écosystème technologique plus humain et plus accessible.
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a
-                href="/start-project"
-                className="group inline-flex items-center gap-3 rounded-full bg-accent text-white px-8 py-4 text-lg font-semibold transition-all duration-300 hover:bg-accent/90 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
-              >
-                <Rocket className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                Démarrer votre projet
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </a>
-
-              <a
-                href="/contact"
-                className="group inline-flex items-center gap-2 rounded-full border-2 border-foreground/20 px-6 py-3 text-foreground font-medium transition-all duration-300 hover:border-accent hover:text-accent hover:scale-105 active:scale-95"
-              >
-                <Handshake className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                Discutons de votre vision
-              </a>
-            </div>
-          </motion.div>
+            Bâtir vos fondations
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
     </main>

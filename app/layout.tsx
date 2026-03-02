@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import { createMetadata } from '@/lib/metadata';
+import { SITE_CONFIG } from '@/lib/config';
 import { NavigationWithDropdown } from '@/components/navigation-with-dropdown';
 import { Logo } from '@/components/logo';
 import { Footer } from '@/components/footer';
@@ -70,6 +71,16 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
+
+        {/* Meta tags pour indexation générale - Centralisés dans SITE_CONFIG */}
+        <meta name="author" content={SITE_CONFIG.seo.author} />
+        <meta name="robots" content={SITE_CONFIG.seo.robots} />
+        <meta name="revisit-after" content={SITE_CONFIG.seo.revisitAfter} />
+
+        {/* Meta tags de vérification des moteurs de recherche - Centralisés dans SITE_CONFIG */}
+        {SITE_CONFIG.seo.verification.bing && <meta name="msvalidate.01" content={SITE_CONFIG.seo.verification.bing} />}
+        {SITE_CONFIG.seo.verification.baidu && <meta name="baidu-site-verification" content={SITE_CONFIG.seo.verification.baidu} />}
+        {SITE_CONFIG.seo.verification.norton && <meta name="norton-safeweb-site-verification" content={SITE_CONFIG.seo.verification.norton} />}
       </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground min-h-screen flex flex-col overflow-x-hidden`}

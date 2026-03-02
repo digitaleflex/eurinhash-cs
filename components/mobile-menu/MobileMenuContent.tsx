@@ -3,16 +3,15 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { User, Briefcase, Code, Eye, Mail, X } from 'lucide-react';
+import { X, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useMobileMenu } from './MobileMenuProvider';
 
 const navigationItems = [
-  { href: '/about', label: 'À propos', icon: User },
-  { href: '/projects', label: 'Projets', icon: Briefcase },
-  { href: '/skills', label: 'Compétences', icon: Code },
-  { href: '/vision', label: 'Vision', icon: Eye },
-  { href: '/contact', label: 'Contact', icon: Mail },
+  { href: '/vision', label: 'Doctrine', description: 'Manifeste & Stratégie' },
+  { href: '/initiatives', label: 'Initiatives', description: 'Piliers & Déploiements' },
+  { href: '/skills', label: 'Expertise', description: 'Capacités techniques' },
+  { href: '/about', label: 'Auteur', description: 'Parcours structurel' },
 ];
 
 export function MobileMenuContent() {
@@ -26,60 +25,77 @@ export function MobileMenuContent() {
           initial={{ x: '100%' }}
           animate={{ x: 0 }}
           exit={{ x: '100%' }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
-          className="fixed right-0 top-0 h-full w-80 max-w-[85vw] z-50 bg-background border-l border-border shadow-2xl"
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed right-0 top-0 h-full w-full sm:w-96 z-50 bg-background border-l border-foreground/10 shadow-none"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu de navigation"
         >
-          <div className="flex flex-col h-full">
+          <div className="flex flex-col h-full uppercase">
             {/* Header du menu */}
-            <div className="flex items-center justify-between p-6 border-b border-border bg-foreground/5">
-              <h2 className="text-lg font-semibold text-foreground">Menu</h2>
+            <div className="flex items-center justify-between p-8 border-b border-foreground/5 bg-foreground/[0.02]">
+              <div className="flex flex-col">
+                <h2 className="text-xl font-black tracking-tighter text-foreground">Système</h2>
+                <span className="font-mono text-[9px] text-accent tracking-[.3em] font-black uppercase">Navigation Menu</span>
+              </div>
               <button
                 onClick={closeMenu}
-                className="p-2 rounded-lg hover:bg-foreground/10 transition-colors"
+                className="p-4 bg-foreground text-background transition-colors hover:bg-accent hover:text-white"
                 aria-label="Fermer le menu"
               >
-                <X className="h-5 w-5" />
+                <X className="h-6 w-6" />
               </button>
             </div>
 
             {/* Navigation */}
-            <nav className="flex-1 p-6 space-y-2 bg-background">
+            <nav className="flex-1 p-8 space-y-4 bg-background" role="navigation" aria-label="Navigation mobile">
               {navigationItems.map((item, index) => {
-                const isActive = pathname === item.href;
+                const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
                 return (
                   <motion.div
                     key={item.href}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.2, delay: index * 0.05 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
                   >
                     <Link
                       href={item.href}
                       onClick={closeMenu}
                       className={cn(
-                        'group flex items-center gap-4 px-4 py-3 rounded-xl text-base font-medium transition-all duration-200',
+                        'group flex flex-col gap-1 p-6 transition-all duration-300 border border-transparent',
                         isActive
-                          ? 'bg-accent/15 text-accent border border-accent/30 shadow-sm'
-                          : 'text-foreground hover:bg-foreground/10 hover:text-foreground border border-transparent'
+                          ? 'bg-foreground/5 border-l-4 border-accent pl-10'
+                          : 'hover:bg-foreground/[0.03] hover:border-foreground/5'
                       )}
+                      aria-current={isActive ? 'page' : undefined}
                     >
-                      <item.icon
-                        className={cn(
-                          'w-6 h-6 transition-colors duration-200',
-                          isActive
-                            ? 'text-accent'
-                            : 'text-foreground/70 group-hover:text-foreground'
-                        )}
-                      />
-                      <span>{item.label}</span>
-                      {isActive && (
-                        <div className="ml-auto w-2 h-2 bg-accent rounded-full" />
-                      )}
+                      <span className={cn(
+                        "text-2xl font-black tracking-tighter transition-colors",
+                        isActive ? "text-accent" : "text-foreground group-hover:text-foreground"
+                      )}>
+                        {item.label}
+                      </span>
+                      <span className="font-mono text-[9px] text-muted-foreground tracking-[.2em] font-bold">
+                        {item.description}
+                      </span>
                     </Link>
                   </motion.div>
                 );
               })}
             </nav>
+
+            {/* CTA en bas du menu */}
+            <div className="p-8 border-t border-foreground/5 bg-foreground/[0.01]">
+              <Link
+                href="/start-project"
+                onClick={closeMenu}
+                className="flex items-center justify-center gap-4 w-full bg-foreground text-background px-8 py-8 text-xs font-black uppercase tracking-[.4em] transition-all duration-500 hover:bg-accent hover:text-white"
+                aria-label="Démarrer un projet"
+              >
+                <span>Initialiser Collaboration</span>
+                <ArrowRight className="w-5 h-5" aria-hidden="true" />
+              </Link>
+            </div>
           </div>
         </motion.div>
       )}

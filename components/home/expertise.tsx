@@ -1,141 +1,102 @@
 import Link from 'next/link';
 
+const items = [
+    {
+        id: '01',
+        title: 'Architecture Cloud Hybride',
+        description: 'Coexistence du cloud public et des infrastructures locales. Conception de systèmes résilients garantissant la maîtrise totale des données critiques.',
+        details: ['Souveraineté des données', 'Continuité d\'activité', 'Isolation réseaux']
+    },
+    {
+        id: '02',
+        title: 'Ingénierie SaaS Multi-tenant',
+        description: 'Industrialisation de plateformes logicielles massives. Isolation totale des données et gestion unifiée pour des structures s\'adressant au marché global.',
+        details: ['Isolation par client', 'Passage à l\'échelle', 'Gouvernance IAM']
+    },
+    {
+        id: '03',
+        title: 'Standardisation & Blueprints',
+        description: 'Création de frameworks internes et de socles techniques reproductibles. Passer de l\'artisanat de code à l\'ingénierie systémique.',
+        details: ['Conventions techniques', 'CI/CD Immuable', 'Observabilité']
+    }
+];
+
 export default function Expertise() {
     return (
-        <section className="py-24 sm:py-40 bg-background border-b border-foreground/5 relative overflow-hidden">
-            {/* Motif Blueprint discret pour la section */}
-            <div className="absolute inset-0 bg-blueprint-pattern opacity-[0.2] pointer-events-none" />
+        <section className="py-24 sm:py-40 bg-background border-t border-foreground/5 relative overflow-hidden">
+            <div className="mx-auto max-w-6xl px-4 sm:px-8 relative z-10">
 
-            <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 relative z-10">
-                <div className="mb-20 sm:mb-32">
-                    <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.3em] block mb-6">
-                        Domaines d'intervention · Expertise
-                    </span>
-                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mb-8 max-w-4xl">
-                        Ingénierie & Transformation.
-                    </h2>
-                    <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl">
-                        Solutions techniques de haut niveau pour répondre aux enjeux de souveraineté et de croissance. Plus qu'une prestation : une transformation durable de vos architectures.
-                    </p>
+                {/* Header de section technique */}
+                <div className="flex items-center gap-6 mb-24">
+                    <span className="font-mono text-[10px] text-accent font-black uppercase tracking-[0.5em]">Expertise</span>
+                    <div className="h-px flex-1 bg-foreground/5" />
+                    <span className="font-mono text-[10px] text-foreground/20 uppercase tracking-[0.3em]">[ 03 FIELDS · EHAF ]</span>
                 </div>
 
-                <div className="divide-y divide-foreground/5 mb-16 border-t border-foreground/5">
-                    {/* Bloc Large 1 */}
-                    <div className="group py-16 flex flex-col md:flex-row gap-8 items-start md:items-center -mx-4 px-4 hover:bg-foreground/[0.015] transition-colors">
-                        <div className="w-48 flex-shrink-0">
-                            <span className="font-mono text-[11px] font-bold text-foreground/40 uppercase tracking-[0.2em]">
-                                [ ARCH-01 ]
-                            </span>
-                        </div>
-                        <div className="flex-1">
-                            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4 group-hover:text-accent transition-colors">
-                                Architecture Cloud Hybride
-                            </h3>
-                            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mb-6">
-                                Coexistence élégante du cloud public et des infrastructures locales. Conception de systèmes résilients qui garantissent la maîtrise totale des données critiques.
-                            </p>
-                            <div className="flex flex-wrap gap-4 text-[10px] font-mono uppercase tracking-widest text-muted-foreground/60">
-                                <span className="flex items-center gap-2">
-                                    <span className="w-1 h-1 rounded-full bg-accent/50" />
-                                    Souveraineté des données
-                                </span>
-                                <span className="flex items-center gap-2">
-                                    <span className="w-1 h-1 rounded-full bg-accent/50" />
-                                    Continuité d'activité
-                                </span>
+                {/* Liste façon nomenclature technique - Brutal */}
+                <div className="divide-y divide-foreground/5 border-y border-foreground/5 mb-32">
+                    {items.map((item, idx) => (
+                        <div key={idx} className="group py-16 grid md:grid-cols-[1fr_2.5fr_1.5fr] gap-12 items-start hover:bg-foreground/[0.015] transition-all duration-700">
+                            {/* Identifiant Monochrome */}
+                            <div className="font-mono text-[11px] text-foreground/30 tracking-widest pt-1 font-bold">
+                                [ ARCH-{item.id} ]
                             </div>
-                        </div>
-                        <div className="hidden lg:block text-right">
-                            <Link href="/start-project" className="text-[10px] font-mono font-bold uppercase tracking-widest hover:text-accent transition-colors">
-                                Planifier un audit →
-                            </Link>
-                        </div>
-                    </div>
 
-                    {/* Bloc Large 2 */}
-                    <div className="group py-16 flex flex-col md:flex-row gap-8 items-start md:items-center -mx-4 px-4 hover:bg-foreground/[0.015] transition-colors">
-                        <div className="w-48 flex-shrink-0">
-                            <span className="font-mono text-[11px] font-bold text-foreground/40 uppercase tracking-[0.2em]">
-                                [ ARCH-02 ]
-                            </span>
-                        </div>
-                        <div className="flex-1">
-                            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4 group-hover:text-accent transition-colors">
-                                Ingénierie SaaS Multi-tenant
-                            </h3>
-                            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mb-6">
-                                Industrialisation de plateformes logicielles massives. Isolation totale des données et gestion unifiée pour des structures s'adressant au marché global.
-                            </p>
-                            <div className="flex flex-wrap gap-4 text-[10px] font-mono uppercase tracking-widest text-muted-foreground/60">
-                                <span className="flex items-center gap-2">
-                                    <span className="w-1 h-1 rounded-full bg-accent/50" />
-                                    Isolation par client
-                                </span>
-                                <span className="flex items-center gap-2">
-                                    <span className="w-1 h-1 rounded-full bg-accent/50" />
-                                    Passage à l'échelle (Scale)
-                                </span>
+                            {/* Contenu - Brutal Typography */}
+                            <div>
+                                <h3 className="text-3xl font-black uppercase tracking-tighter mb-6 group-hover:text-accent transition-colors duration-700">
+                                    {item.title}
+                                </h3>
+                                <p className="text-muted-foreground leading-relaxed max-w-lg text-sm sm:text-base">
+                                    {item.description}
+                                </p>
                             </div>
-                        </div>
-                        <div className="hidden lg:block text-right">
-                            <Link href="/projects" className="text-[10px] font-mono font-bold uppercase tracking-widest hover:text-accent transition-colors">
-                                Voir les initiatives →
-                            </Link>
-                        </div>
-                    </div>
 
-                    {/* Bloc Large 3 */}
-                    <div className="group py-16 flex flex-col md:flex-row gap-8 items-start md:items-center -mx-4 px-4 hover:bg-foreground/[0.015] transition-colors">
-                        <div className="w-48 flex-shrink-0">
-                            <span className="font-mono text-[11px] font-bold text-foreground/40 uppercase tracking-[0.2em]">
-                                [ ARCH-03 ]
-                            </span>
-                        </div>
-                        <div className="flex-1">
-                            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4 group-hover:text-accent transition-colors">
-                                Standardisation & Blueprints
-                            </h3>
-                            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mb-6">
-                                Création de frameworks internes et de socles techniques reproductibles. Passer de l'artisanat de code à l'ingénierie systémique.
-                            </p>
-                            <div className="flex flex-wrap gap-4 text-[10px] font-mono uppercase tracking-widest text-muted-foreground/60">
-                                <span className="flex items-center gap-2">
-                                    <span className="w-1 h-1 rounded-full bg-accent/50" />
-                                    Conventions techniques
-                                </span>
-                                <span className="flex items-center gap-2">
-                                    <span className="w-1 h-1 rounded-full bg-accent/50" />
-                                    Gouvernance du code
-                                </span>
+                            {/* Tags Techniques - Surgical Blue */}
+                            <div className="flex flex-wrap gap-x-8 gap-y-4 pt-1">
+                                {item.details.map((detail, dIdx) => (
+                                    <div key={dIdx} className="flex items-center gap-2 group/tag">
+                                        <div className="w-1.5 h-1.5 bg-accent/20 group-hover/tag:bg-accent transition-all duration-500" />
+                                        <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-foreground/40 group-hover/tag:text-foreground/80 transition-colors">
+                                            {detail}
+                                        </span>
+                                    </div>
+                                ))}
                             </div>
                         </div>
-                        <div className="hidden lg:block text-right">
-                            <Link href="/contact" className="text-[10px] font-mono font-bold uppercase tracking-widest hover:text-accent transition-colors">
-                                Demander un blueprint →
-                            </Link>
+                    ))}
+                </div>
+
+                {/* Socle transversal - Brutal Bar Block */}
+                <div className="bg-foreground text-background p-10 sm:p-16 flex flex-col md:flex-row items-center justify-between gap-16 group transition-all duration-1000 relative">
+                    <div className="absolute top-0 left-0 w-1 h-full bg-accent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="space-y-4 text-center md:text-left">
+                        <span className="font-mono text-[10px] text-accent uppercase tracking-[0.5em] font-black">Capacités Transverses</span>
+                        <h4 className="text-3xl font-black uppercase tracking-tighter leading-none">
+                            Sécurité & <br /> Interconnectivité
+                        </h4>
+                    </div>
+                    <div className="flex items-center gap-12 font-mono text-[10px] uppercase tracking-[0.3em] opacity-30 group-hover:opacity-100 transition-all duration-1000">
+                        <div className="flex flex-col gap-2">
+                            <span className="text-background/50">SEC-OPS</span>
+                            <span className="text-white font-black">ZERO-TRUST</span>
+                        </div>
+                        <div className="w-px h-12 bg-background/10" />
+                        <div className="flex flex-col gap-2">
+                            <span className="text-background/50">DATA-INT</span>
+                            <span className="text-white font-black">API-FIRST</span>
                         </div>
                     </div>
                 </div>
 
-                {/* Résumé des capacités critiques remplaçant les 2 petits blocs */}
-                <div className="bg-foreground flex flex-col sm:flex-row items-center justify-between gap-6 p-8 sm:p-12 text-background mt-20">
-                    <div className="flex-1">
-                        <h4 className="text-xl font-bold tracking-tight mb-2">Capacités transverses critiques</h4>
-                        <p className="text-background/60 font-medium">Sécurité systémique organisationnelle et interconnectivité multi-régions des systèmes d'informations.</p>
-                    </div>
-                    <div className="flex items-center gap-8 font-mono text-[10px] uppercase tracking-widest opacity-60">
-                        <span className="flex flex-col gap-1 items-start">
-                            <span className="font-bold text-white text-base">TLS / IAM</span>
-                            Protocoles Isolation
-                        </span>
-                        <div className="w-px h-8 bg-background/20" />
-                        <span className="flex flex-col gap-1 items-start">
-                            <span className="font-bold text-white text-base">API / VPN</span>
-                            Passerelles Sync
-                        </span>
-                    </div>
+                <div className="mt-20 flex justify-center">
+                    <Link
+                        href="/initiatives"
+                        className="font-mono text-[10px] text-foreground/30 uppercase tracking-[0.4em] hover:text-accent transition-colors py-4 border-b border-transparent hover:border-accent"
+                    >
+                        Explorer les initiatives techniques →
+                    </Link>
                 </div>
-
             </div>
         </section>
     );

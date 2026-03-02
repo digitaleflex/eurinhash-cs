@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 export default function Hero() {
     return (
@@ -19,87 +20,80 @@ export default function Hero() {
                 }}
             />
 
-            {/* ── Cercles concentriques architecturaux ── */}
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center">
-                <div className="w-[1000px] h-[1000px] border border-foreground/[0.02] rounded-full" />
-                <div className="absolute w-[700px]  h-[700px]  border border-foreground/[0.02] rounded-full" />
-                <div className="absolute w-[420px]  h-[420px]  border border-foreground/5  rounded-full" />
-                <div className="absolute w-[180px]  h-[180px]  border border-accent/10  rounded-full" />
+            {/* ── Cercles concentriques architecturaux (Brutalisés: Sharp) ── */}
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center opacity-20">
+                <div className="w-[1000px] h-[1000px] border border-foreground/[0.05]" />
+                <div className="absolute w-[700px]  h-[700px]  border border-foreground/[0.05]" />
+                <div className="absolute w-[420px]  h-[420px]  border border-foreground/10" />
             </div>
 
-            {/* ── Halo central très atténué ── */}
-            <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -z-10 inset-0"
-                style={{
-                    background: 'radial-gradient(ellipse 50% 35% at 50% 50%, hsl(var(--accent)/0.05), transparent)',
-                }}
-            />
-
             {/* ── Contenu ── */}
-            <div className="mx-auto max-w-5xl px-4 sm:px-8 flex flex-col items-center gap-10">
+            <div className="mx-auto max-w-5xl px-4 sm:px-8 flex flex-col items-center gap-14">
 
-                {/* Micro-label honnête */}
-                <div className="flex items-center gap-3">
-                    <div className="w-8 h-px bg-foreground/15" />
-                    <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-[0.3em]">
-                        Initiative architecturale indépendante
+                {/* Micro-résumé Vision */}
+                <div className="flex flex-col items-center gap-6 max-w-2xl border-l-2 border-accent pl-10 py-2 transition-all duration-1000">
+                    <span className="text-[10px] font-mono text-accent uppercase tracking-[0.5em] font-black">
+                        Vision & Stratégie
                     </span>
-                    <div className="w-8 h-px bg-foreground/15" />
+                    <p className="text-sm font-medium text-muted-foreground uppercase tracking-[0.2em] leading-relaxed text-left">
+                        Vers une architecture numérique maîtrisée et durable. <br />
+                        <span className="text-foreground/40 italic">L’organisation des systèmes est un choix stratégique, pas un hasard.</span>
+                    </p>
                 </div>
 
-                {/* H1 massif */}
-                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black tracking-tight leading-[1.05]">
-                    Architectures numériques
+                {/* H1 massif - Brutal */}
+                <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-black tracking-tighter leading-[0.85] uppercase">
+                    Architectures
                     <br />
-                    <span className="text-accent">souveraines</span>.
+                    <span className="text-foreground/10">Systémiques</span>
                 </h1>
 
-                {/* Sous-texte ancrage */}
-                <p className="text-lg sm:text-xl text-muted-foreground font-light leading-relaxed max-w-xl">
-                    Pensées pour la résilience, la scalabilité
-                    <br className="hidden sm:block" /> et la maîtrise structurelle.
-                </p>
-
-                {/* Bloc signature — 3 piliers */}
-                <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/30">
-                    <span>Maîtrise des dépendances</span>
-                    <span className="w-1 h-1 rounded-full bg-foreground/10" />
-                    <span>Standards reproductibles</span>
-                    <span className="w-1 h-1 rounded-full bg-foreground/10" />
-                    <span>Autonomie stratégique</span>
+                {/* Bloc signature — Brutal Table */}
+                <div className="flex bg-foreground/5 p-4 border border-foreground/5 gap-12 font-mono text-[9px] uppercase tracking-[0.4em] text-foreground/40">
+                    <div className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 bg-accent" />
+                        <span>Souveraineté</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 bg-accent" />
+                        <span>Maîtrise</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 bg-accent" />
+                        <span>Pérennité</span>
+                    </div>
                 </div>
 
-                {/* CTAs sobres — dynamiques */}
-                <div className="flex flex-col sm:flex-row gap-4 items-center pt-4">
+                {/* CTAs - Sharper */}
+                <div className="flex flex-col sm:flex-row gap-0 items-center pt-8 border-t border-foreground/5 w-full justify-center">
                     <Link
                         href="/start-project"
-                        className="inline-flex items-center justify-center bg-foreground text-background px-10 py-4 text-[13px] font-bold uppercase tracking-[0.2em] transition hover:bg-foreground/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-foreground"
+                        className="inline-flex items-center justify-center gap-6 bg-foreground text-background px-16 py-8 text-xs font-black uppercase tracking-[0.4em] transition-all duration-700 hover:bg-accent hover:text-white group relative"
                     >
-                        Initier une collaboration
+                        <div className="absolute top-0 left-0 w-full h-0.5 bg-accent scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-700" />
+                        Initialiser la structure
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-700" />
                     </Link>
                     <Link
                         href="/vision"
-                        className="inline-flex items-center justify-center border border-foreground/10 text-muted-foreground px-10 py-4 text-[13px] font-bold uppercase tracking-[0.2em] transition hover:border-foreground/25 hover:text-foreground"
+                        className="w-full sm:w-auto inline-flex items-center justify-center border border-foreground/5 text-muted-foreground px-16 py-8 text-xs font-black uppercase tracking-[0.4em] transition-all duration-700 hover:border-foreground/30 hover:text-foreground"
                     >
                         Lire la doctrine
                     </Link>
                 </div>
 
                 {/* Mention fondatrice discrète */}
-                <p className="text-[10px] font-mono text-muted-foreground/40 uppercase tracking-[0.2em] mt-4">
-                    Initiée par Eurin Hash · Architecte cloud indépendant
+                <p className="text-[10px] font-mono text-muted-foreground/20 uppercase tracking-[0.4em] mt-8">
+                    Fragment EHAF-01 · Initié par Eurin Hash · Architecte
                 </p>
 
             </div>
 
             {/* ── Signature architecturale pied de hero ── */}
-            <div className="absolute bottom-8 left-0 right-0 flex items-center justify-center gap-4">
-                <div className="w-12 h-px bg-foreground/10" />
-                <span className="text-[9px] font-mono text-muted-foreground/30 uppercase tracking-[0.4em]">
-                    Core Architecture · EHAF · Version 1.0
+            <div className="absolute bottom-8 left-8 flex items-center gap-4">
+                <span className="text-[9px] font-mono text-muted-foreground/10 uppercase tracking-[0.6em] [writing-mode:vertical-rl] transform -rotate-180">
+                    EHAF-2025-SYSTEM
                 </span>
-                <div className="w-12 h-px bg-foreground/10" />
             </div>
         </section>
     );

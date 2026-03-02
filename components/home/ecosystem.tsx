@@ -13,9 +13,9 @@ const projects = [
     },
     {
         ref: 'EHAF-ARCH-01',
-        name: 'EHAF',
+        name: 'EHAF Framework',
         status: 'BETA',
-        statusColor: 'text-blue-400',
+        statusColor: 'text-accent/60',
         description:
             'Eurinhash Architectural Framework. Socle reproductible pour structurer tout projet d\'infrastructure d\'envergure.',
     },
@@ -31,67 +31,64 @@ const projects = [
 
 export default function Ecosystem() {
     return (
-        <section className="py-24 sm:py-40 bg-background border-b border-foreground/5">
-            <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
+        <section className="py-24 sm:py-48 bg-background border-b border-foreground/5 relative overflow-hidden">
+            <div className="mx-auto max-w-6xl px-4 sm:px-8 relative z-10">
 
-                {/* En-tête */}
-                <div className="mb-20 sm:mb-32 flex flex-col md:flex-row md:items-end justify-between gap-8">
-                    <div>
-                        <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.3em] block mb-6">
-                            Initiatives · Écosystème
-                        </span>
-                        <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight">
-                            Un écosystème en structuration.
+                {/* En-tête Brutal */}
+                <div className="mb-32 flex flex-col md:flex-row md:items-end justify-between gap-12">
+                    <div className="space-y-6">
+                        <span className="font-mono text-[10px] text-accent uppercase tracking-[0.5em] font-black">Architecture Écosystème</span>
+                        <h2 className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tighter uppercase leading-none">
+                            Systèmes en <br />
+                            <span className="text-foreground/20 italic">Déploiement</span>.
                         </h2>
                     </div>
                     <Link
-                        href="/projects"
-                        className="inline-flex items-center gap-2 text-accent font-bold uppercase tracking-widest text-sm group"
+                        href="/initiatives"
+                        className="inline-flex items-center gap-4 text-foreground/40 font-mono text-[10px] uppercase tracking-[0.4em] group hover:text-accent transition-colors py-4 border-b border-foreground/10 hover:border-accent"
                     >
                         Voir toutes les initiatives
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-500" />
                     </Link>
                 </div>
 
-                {/* Fiches techniques */}
-                <div className="divide-y divide-foreground/5 mb-24">
+                {/* Fiches techniques Brutales */}
+                <div className="grid md:grid-cols-3 gap-px bg-foreground/5 border border-foreground/5 mb-32">
                     {projects.map((project) => (
                         <div
                             key={project.ref}
-                            className="grid md:grid-cols-[1fr_auto] gap-8 items-start py-12 group hover:bg-foreground/[0.015] transition-colors -mx-4 px-4"
+                            className="bg-background p-10 sm:p-12 group hover:bg-foreground/[0.015] transition-all duration-700 relative"
                         >
-                            <div>
-                                <div className="flex items-center gap-4 mb-4">
-                                    <span className="font-mono text-[10px] text-muted-foreground/50 uppercase tracking-[0.3em]">
-                                        {project.ref}
-                                    </span>
-                                    <span className={`font-mono text-[10px] font-bold uppercase tracking-[0.3em] ${project.statusColor}`}>
-                                        {project.status}
-                                    </span>
+                            <div className="flex items-center justify-between mb-12">
+                                <span className="font-mono text-[9px] text-foreground/30 uppercase tracking-[0.4em] font-black">
+                                    {project.ref}
+                                </span>
+                                <div className={`px-3 py-1 bg-foreground/5 font-mono text-[8px] font-black uppercase tracking-[0.4em] ${project.statusColor}`}>
+                                    {project.status}
                                 </div>
-                                <h3 className="text-2xl sm:text-3xl font-black tracking-tight mb-4">
-                                    {project.name}
-                                </h3>
-                                <p className="text-muted-foreground leading-relaxed max-w-2xl">
-                                    {project.description}
-                                </p>
                             </div>
-                            <div className="hidden md:flex items-end justify-end pb-2">
-                                <span className="font-mono text-[10px] text-foreground/20 group-hover:text-accent/40 transition-colors uppercase tracking-widest">
-                                    {project.status} →
+                            <h3 className="text-2xl font-black uppercase tracking-tighter mb-6 group-hover:text-accent transition-colors duration-700">
+                                {project.name}
+                            </h3>
+                            <p className="text-muted-foreground text-[13px] leading-relaxed uppercase tracking-widest opacity-60">
+                                {project.description}
+                            </p>
+                            <div className="mt-12 pt-8 border-t border-foreground/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                                <span className="font-mono text-[9px] text-accent uppercase tracking-widest font-black">
+                                    Détails techniques →
                                 </span>
                             </div>
                         </div>
                     ))}
                 </div>
 
-                {/* Timeline */}
-                <div className="border-t border-foreground/5 pt-20">
-                    <div className="mb-12">
-                        <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.3em] block mb-4">
-                            Feuille de route · 2024–2030+
+                {/* Timeline - Intégrée Architecturalement */}
+                <div className="mt-48 pt-32 border-t border-foreground/10">
+                    <div className="mb-20 text-center md:text-left">
+                        <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.6em] block mb-6 px-4 py-1 border border-foreground/5 w-fit mx-auto md:mx-0">
+                            Roadmap · Systémique
                         </span>
-                        <h3 className="text-2xl font-bold">Phases de déploiement.</h3>
+                        <h3 className="text-4xl font-black uppercase tracking-tighter">Évolution & Maturité.</h3>
                     </div>
                     <InteractiveTimeline />
                 </div>

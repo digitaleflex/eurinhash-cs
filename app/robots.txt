@@ -1,4 +1,73 @@
+# robots.txt pour eurinhash.com
+# Optimisé pour tous les moteurs de recherche
+
 User-agent: *
 Allow: /
 
+# Moteurs de recherche principaux
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
+User-agent: Googlebot-Video
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Moteurs régionaux
+User-agent: YandexBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: NaverBot
+Allow: /
+
+User-agent: exabot
+Allow: /
+
+# Moteurs privacy/alternatifs
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: privacybot
+Allow: /
+
+# Réseaux sociaux (pour preview)
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+# Outils SEO (pour analyse, pas d'indexation)
+User-agent: AhrefsBot
+Allow: /
+
+User-agent: SemrushBot
+Allow: /
+
+User-agent: MJ12bot
+Allow: /
+
+User-agent:rogerbot
+Allow: /
+
+# Sitemap
 Sitemap: https://eurinhash.com/sitemap.xml
