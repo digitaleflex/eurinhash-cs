@@ -133,15 +133,15 @@ export default function Hero() {
             <div className="mx-auto max-w-4xl px-4 sm:px-8 flex flex-col items-center gap-12 relative z-10">
 
                 {/* Label discret */}
-                <div className="flex items-center gap-3">
-                    <div className="w-1.5 h-1.5 bg-accent rounded-full" />
-                    <span className="text-xs font-mono text-muted-foreground tracking-widest uppercase opacity-70">
-                        Eurin Hash · Architecture de Systèmes
+                <div className="flex items-center gap-2 sm:gap-3">
+                    <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-accent rounded-full" />
+                    <span className="text-[10px] sm:text-xs font-mono text-muted-foreground tracking-widest uppercase opacity-70">
+                        Eurin Hash · Architecture
                     </span>
                 </div>
 
                 {/* H1 */}
-                <h1 className="font-black tracking-tight leading-none text-foreground">
+                <h1 className="text-[2.2rem] xs:text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter leading-[1.1] sm:leading-none text-foreground px-2">
                     On construit des systèmes<br />
                     <span className="text-foreground/25 font-light">qui durent.</span>
                 </h1>
@@ -153,11 +153,11 @@ export default function Hero() {
                 </p>
 
                 {/* Piliers */}
-                <div className="flex items-center gap-8 text-[10px] text-muted-foreground/40 font-mono tracking-widest uppercase">
+                <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 sm:gap-8 text-[8px] xs:text-[9px] sm:text-[10px] text-muted-foreground/30 font-mono tracking-[0.15em] uppercase">
                     <span>Souveraineté</span>
-                    <span className="w-1 h-1 bg-foreground/10 rounded-full" />
+                    <span className="w-0.5 h-0.5 bg-foreground/10 rounded-full" />
                     <span>Clarté</span>
-                    <span className="w-1 h-1 bg-foreground/10 rounded-full" />
+                    <span className="w-0.5 h-0.5 bg-foreground/10 rounded-full" />
                     <span>Pérennité</span>
                 </div>
 
