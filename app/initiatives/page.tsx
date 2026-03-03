@@ -17,7 +17,7 @@ const pillars = [
             {
                 name: 'FlexHOST',
                 ref: 'EHAF-INFRA-01',
-                status: 'ALPHA',
+                status: 'Alpha',
                 phase: 'Tests de résilience multi-régions',
                 updated: 'Mars 2026',
                 objectif: 'Concevoir une infrastructure cloud modulaire garantissant la souveraineté totale des données critiques.',
@@ -38,7 +38,7 @@ const pillars = [
             {
                 name: 'EHAF Framework',
                 ref: 'EHAF-ARCH-01',
-                status: 'BETA',
+                status: 'Beta',
                 phase: 'Standardisation des interfaces API',
                 updated: 'Mars 2026',
                 objectif: 'Établir un socle de développement unifié pour accélérer le déploiement de systèmes complexes sans sacrifier la rigueur.',
@@ -59,7 +59,7 @@ const pillars = [
             {
                 name: 'Hashcode',
                 ref: 'EHAF-EDU-01',
-                status: 'STRUCTURATION',
+                status: 'Structuration',
                 phase: 'Définition du curriculum systémique',
                 updated: 'Mars 2026',
                 objectif: 'Former des praticiens capables de penser en architectures, pas seulement en code.',
@@ -74,9 +74,9 @@ const pillars = [
 ];
 
 const statusColors: Record<string, string> = {
-    ALPHA: 'text-yellow-500',
-    BETA: 'text-blue-500',
-    STRUCTURATION: 'text-accent',
+    Alpha: 'text-yellow-500',
+    Beta: 'text-blue-500',
+    Structuration: 'text-accent',
 };
 
 export default function InitiativesPage() {

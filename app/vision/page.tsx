@@ -77,7 +77,7 @@ export default function VisionPage() {
                     <div className="grid md:grid-cols-2 gap-px bg-foreground/5 border border-foreground/5">
                         {axioms.map((a) => (
                             <div key={a.id} className="bg-background p-8 sm:p-10 space-y-3 group hover:bg-foreground/[0.02] transition-colors">
-                                <span className="font-mono text-xs text-accent tracking-tight font-medium">AXIOME {a.id}</span>
+                                <span className="font-mono text-xs text-accent tracking-tight font-medium">Axiome {a.id}</span>
                                 <h3 className="text-lg font-bold tracking-tight group-hover:text-accent transition-colors">
                                     {a.title}
                                 </h3>

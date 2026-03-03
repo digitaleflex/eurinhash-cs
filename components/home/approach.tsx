@@ -49,12 +49,12 @@ export default function Approach() {
                 {/* Header */}
                 <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-10">
                     <div className="space-y-5">
-                        <span className="font-mono text-xs text-accent tracking-tight font-medium block">
+                        <span className="font-mono text-[10px] text-accent tracking-widest font-medium block uppercase opacity-80">
                             Méthodologie
                         </span>
-                        <h2 className="font-black tracking-tight text-foreground">
+                        <h2 className="font-bold tracking-tight text-foreground">
                             Notre approche,<br />
-                            <span className="text-foreground/25">étape par étape.</span>
+                            <span className="text-foreground/25 font-light">étape par étape.</span>
                         </h2>
                     </div>
                     <Link
@@ -79,44 +79,45 @@ export default function Approach() {
                             {/* Numéro premium */}
                             <div className="flex items-center justify-between">
                                 <span
-                                    className="font-mono text-4xl font-black leading-none select-none"
+                                    className="font-mono text-3xl font-bold leading-none select-none"
                                     style={{
                                         color: `hsl(var(--foreground) / ${0.04 + index * 0.015})`,
                                     }}
                                 >
                                     {step.id}
                                 </span>
-                                <div className="w-1.5 h-1.5 bg-accent/30 group-hover:bg-accent rounded-full transition-colors duration-500" />
+                                <div className="w-1 h-1 bg-accent/20 group-hover:bg-accent rounded-full transition-colors duration-500" />
                             </div>
 
                             {/* Titre */}
-                            <h3 className="text-sm font-bold tracking-tight text-foreground leading-snug group-hover:text-accent transition-colors duration-300">
+                            <h3 className="text-xs font-bold tracking-tight text-foreground leading-snug group-hover:text-accent transition-colors duration-300 uppercase">
                                 {step.title}
                             </h3>
 
                             {/* Description */}
-                            <p className="text-xs text-muted-foreground leading-relaxed flex-1">
+                            <p className="text-[11px] text-muted-foreground leading-relaxed flex-1 font-normal opacity-80">
                                 {step.description}
                             </p>
 
                             {/* Indicateur bas discret */}
-                            <div className="w-4 h-px bg-foreground/10 group-hover:bg-accent group-hover:w-8 transition-all duration-500" />
+                            <div className="w-4 h-px bg-foreground/5 group-hover:bg-accent group-hover:w-8 transition-all duration-500" />
                         </div>
                     ))}
                 </div>
 
                 {/* Citation finale — raffinée */}
-                <div className="mt-16 grid md:grid-cols-[1fr_auto] gap-8 items-center bg-foreground text-background p-10 sm:p-14">
+                <div className="mt-16 grid md:grid-cols-[1fr_auto] gap-8 items-center bg-foreground text-background p-10 sm:p-14 overflow-hidden relative group">
+                    <div className="absolute top-0 left-0 w-full h-0.5 bg-accent/20" />
                     <blockquote>
                         <p className="text-xl sm:text-2xl font-bold tracking-tight leading-snug text-background">
                             "Un système{' '}
-                            <span className="text-accent">se construit</span>.<br />
+                            <span className="text-accent italic font-light">se construit</span>.<br />
                             Il ne se corrige pas."
                         </p>
                     </blockquote>
                     <div className="text-right">
-                        <p className="font-mono text-[10px] text-background/30 tracking-tight">
-                            EHAF · Règle fondatrice 001
+                        <p className="font-mono text-[9px] text-background/30 tracking-[0.2em] uppercase">
+                            ehaf · Règle fondatrice 001
                         </p>
                     </div>
                 </div>

@@ -34,7 +34,7 @@ export default function NotFound() {
         <div className="grid gap-4 md:grid-cols-2 mb-8">
           <div className="p-4 rounded-2xl border border-foreground/10 bg-background/50 backdrop-blur-sm">
             <Search className="h-6 w-6 text-accent mx-auto mb-2" />
-            <h3 className="font-semibold mb-1">Vérifiez l&apos;URL</h3>
+            <h3 className="font-semibold mb-1">Vérifiez l&apos;url</h3>
             <p className="text-sm text-muted-foreground">
               Assurez-vous que l&apos;adresse est correcte
             </p>
@@ -82,11 +82,10 @@ export default function NotFound() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-4 py-2 rounded-full text-sm border transition-colors ${
-                  link.isPrimary
+                className={`px-4 py-2 rounded-full text-sm border transition-colors ${link.isPrimary
                     ? 'border-accent bg-accent text-white hover:bg-accent/90'
                     : 'border-foreground/20 text-muted-foreground hover:border-accent hover:text-accent'
-                }`}
+                  }`}
               >
                 {link.label}
               </Link>

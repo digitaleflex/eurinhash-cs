@@ -10,7 +10,7 @@ export default function Hero() {
             className="relative isolate overflow-hidden flex flex-col items-center justify-start text-center min-h-screen pt-24 pb-32 bg-background text-foreground"
             aria-label="Section principale"
         >
-            {/* ═══ FOND GÉOMÉTRIQUE ═══ */}
+            {/* Background Animations */}
 
             {/* Grille architecturale subtile */}
             <div
@@ -129,13 +129,13 @@ export default function Hero() {
                 ))}
             </div>
 
-            {/* ═══ CONTENU ═══ */}
+            {/* Page Content */}
             <div className="mx-auto max-w-4xl px-4 sm:px-8 flex flex-col items-center gap-12 relative z-10">
 
                 {/* Label discret */}
                 <div className="flex items-center gap-3">
                     <div className="w-1.5 h-1.5 bg-accent rounded-full" />
-                    <span className="text-xs font-mono text-muted-foreground tracking-tight">
+                    <span className="text-xs font-mono text-muted-foreground tracking-widest uppercase opacity-70">
                         Eurin Hash · Architecture de Systèmes
                     </span>
                 </div>
@@ -143,7 +143,7 @@ export default function Hero() {
                 {/* H1 */}
                 <h1 className="font-black tracking-tight leading-none text-foreground">
                     On construit des systèmes<br />
-                    <span className="text-foreground/25">qui durent.</span>
+                    <span className="text-foreground/25 font-light">qui durent.</span>
                 </h1>
 
                 {/* Sous-titre */}
@@ -153,26 +153,26 @@ export default function Hero() {
                 </p>
 
                 {/* Piliers */}
-                <div className="flex items-center gap-8 text-xs text-muted-foreground/60 font-mono tracking-tight">
+                <div className="flex items-center gap-8 text-[10px] text-muted-foreground/40 font-mono tracking-widest uppercase">
                     <span>Souveraineté</span>
-                    <span className="w-1 h-1 bg-foreground/20 rounded-full" />
+                    <span className="w-1 h-1 bg-foreground/10 rounded-full" />
                     <span>Clarté</span>
-                    <span className="w-1 h-1 bg-foreground/20 rounded-full" />
+                    <span className="w-1 h-1 bg-foreground/10 rounded-full" />
                     <span>Pérennité</span>
                 </div>
 
                 {/* CTAs */}
-                <div className="flex flex-col sm:flex-row gap-3 items-center pt-6 border-t border-foreground/8 w-full justify-center">
+                <div className="flex flex-col sm:flex-row gap-6 items-center pt-10 border-t border-foreground/5 w-full justify-center">
                     <Link
                         href="/collaboration"
-                        className="inline-flex items-center justify-center gap-3 bg-foreground text-background px-8 py-4 text-sm font-semibold tracking-tight transition-all duration-300 hover:bg-accent hover:text-white group"
+                        className="inline-flex items-center justify-center gap-3 bg-foreground text-background px-8 py-4 text-sm font-medium tracking-tight transition-all duration-300 hover:bg-accent hover:text-white group"
                     >
                         Parlons de votre projet
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                     </Link>
                     <Link
                         href="/vision"
-                        className="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold text-muted-foreground tracking-tight transition-all duration-300 hover:text-foreground border border-transparent hover:border-foreground/10"
+                        className="inline-flex items-center justify-center px-8 py-4 text-sm font-medium text-muted-foreground tracking-tight transition-all duration-300 hover:text-foreground border border-transparent hover:border-foreground/5"
                     >
                         Notre vision
                     </Link>
