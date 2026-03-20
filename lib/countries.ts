@@ -3,6 +3,8 @@ export interface Country {
   name: string;
   phoneCode: string;
   continent: string;
+  flag?: string;
+  exampleNumber?: string;
 }
 
 export const countries: Country[] = [
@@ -480,3 +482,42 @@ export function validatePhoneNumber(
 
   return { isValid: true };
 }
+
+// Fonction utilitaire pour rechercher un pays
+export function searchCountry(query: string): Country[] {
+  const normalizedQuery = query.toLowerCase().trim();
+  
+  if (!normalizedQuery) return countries;
+  
+  return countries.filter(country => 
+    country.name.toLowerCase().includes(normalizedQuery) ||
+    country.phoneCode.includes(normalizedQuery) ||
+    country.continent.toLowerCase().includes(normalizedQuery) ||
+    country.code.toLowerCase().includes(normalizedQuery)
+  );
+}
+
+// Fonction pour obtenir le pays par code
+export function getCountryByCode(code: string): Country | undefined {
+  return countries.find(c => c.code === code);
+}
+
+// Fonction pour obtenir les pays par continent
+export function getCountriesByContinent(continent: string): Country[] {
+  return countries.filter(c => c.continent === continent);
+}
+
+// Liste des continents
+export const continents = [
+  "Afrique de l'Ouest",
+  'Afrique du Nord',
+  'Afrique Centrale',
+  "Afrique de l'Est",
+  'Afrique Australe',
+  'Europe',
+  'Europe/Asie',
+  'Amérique du Nord',
+  'Amérique du Sud',
+  'Asie',
+  'Océanie',
+];

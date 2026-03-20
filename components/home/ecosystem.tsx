@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import InteractiveTimeline from '@/components/interactive-timeline';
+import { InteractiveTimeline } from '@/components/interactive-timeline';
 
 const projects = [
     {

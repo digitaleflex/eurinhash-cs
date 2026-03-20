@@ -2,13 +2,14 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle, ArrowRight, ArrowLeft, Building2, Home } from 'lucide-react';
+import { CheckCircle, ArrowRight, ArrowLeft, Home } from 'lucide-react';
 import Link from 'next/link';
 import { FeedbackPopup } from '@/components/feedback-popup';
 import { defaultCountry } from '@/lib/countries';
 import { WizardData, steps } from '@/lib/collaboration-data';
 import { Loader2, Send } from '@/components/collaboration/icons';
 import { Step1, Step2, Step3, Step4, Step5 } from '@/components/collaboration/steps';
+import { usePhoneInput } from '@/components/collaboration/_hooks/usePhoneInput';
 
 export default function CollaborationPage() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -17,6 +18,7 @@ export default function CollaborationPage() {
   const [feedbackType, setFeedbackType] = useState<'success' | 'error'>('success');
   const [feedbackMessage, setFeedbackMessage] = useState('');
   const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
+  const [phoneError, setPhoneError] = useState('');
 
   const [data, setData] = useState<WizardData>({
     organization: '', role: '', location: '', email: '', phone: '', country: defaultCountry.code,
@@ -25,7 +27,13 @@ export default function CollaborationPage() {
     regulatoryRequirements: '', technologies: [],
   });
 
-  const updateData = (field: keyof WizardData, value: string | string[]) => setData(prev => ({ ...prev, [field]: value }));
+  const updateData = (field: keyof WizardData, value: string | string[]) => {
+    setData(prev => ({ ...prev, [field]: value }));
+    // Clear phone error when phone changes
+    if (field === 'phone') {
+      setPhoneError('');
+    }
+  };
 
   const toggleTechnology = (tech: string) => {
     setData(prev => ({
@@ -91,7 +99,15 @@ export default function CollaborationPage() {
       <ProgressBar />
       <main className="mx-auto max-w-4xl px-4 sm:px-8 py-16">
         <AnimatePresence mode="wait">
-          {currentStep === 1 && <Step1 data={data} updateData={updateData} phoneError="" isCountryDropdownOpen={isCountryDropdownOpen} setIsCountryDropdownOpen={setIsCountryDropdownOpen} />}
+          {currentStep === 1 && (
+            <Step1 
+              data={data} 
+              updateData={updateData} 
+              phoneError={phoneError} 
+              isCountryDropdownOpen={isCountryDropdownOpen} 
+              setIsCountryDropdownOpen={setIsCountryDropdownOpen} 
+            />
+          )}
           {currentStep === 2 && <Step2 data={data} updateData={updateData} />}
           {currentStep === 3 && <Step3 data={data} updateData={updateData} />}
           {currentStep === 4 && <Step4 data={data} updateData={updateData} toggleTechnology={toggleTechnology} />}

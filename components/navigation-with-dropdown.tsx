@@ -71,7 +71,7 @@ export function NavigationWithDropdown() {
     return (
         <nav className="hidden lg:flex items-center gap-1" role="navigation" aria-label="Navigation principale" ref={dropdownRef}>
             {navigationItems.map((item) => {
-                const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
+                const isActive = pathname && (pathname === item.href || pathname.startsWith(item.href + '/'));
                 const hasChildren = item.children && item.children.length > 0;
                 const isOpen = openDropdown === item.href;
 

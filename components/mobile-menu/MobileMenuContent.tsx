@@ -50,7 +50,7 @@ export function MobileMenuContent() {
             {/* Navigation */}
             <nav className="flex-1 p-8 space-y-4 bg-background" role="navigation" aria-label="Navigation mobile">
               {navigationItems.map((item, index) => {
-                const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
+                const isActive = pathname && (pathname === item.href || pathname.startsWith(item.href + '/'));
                 return (
                   <motion.div
                     key={item.href}

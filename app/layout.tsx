@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-import { GeistSans } from 'geist/font/sans';
-import { GeistMono } from 'geist/font/mono';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 import { createMetadata } from '@/lib/metadata';
 import { SITE_CONFIG } from '@/lib/config';
 import { NavigationWithDropdown } from '@/components/navigation-with-dropdown';
@@ -15,7 +14,36 @@ import { JsonLd } from '@/components/json-ld';
 
 import './globals.css';
 
-export const metadata: Metadata = createMetadata();
+const inter = Inter({
+  variable: '--font-inter',
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+  fallback: ['system-ui', 'arial'],
+  weight: ['400', '500', '600', '700'],
+  style: ['normal'],
+  adjustFontFallback: true,
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: '--font-jetbrains-mono',
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+  fallback: ['monospace'],
+  weight: ['400', '500', '600', '700'],
+  style: ['normal'],
+  adjustFontFallback: true,
+});
+
+export const metadata: Metadata = {
+  title: {
+    default: 'Eurin Hash CS',
+    template: '%s | Eurin Hash CS',
+  },
+  description: 'Portfolio professionnel d\'Eurin Hash - Développeur Full Stack & Expert Cloud',
+  // ... autres métadonnées
+};
 
 export default function RootLayout({
   children,
@@ -23,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" suppressHydrationWarning className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang="fr" suppressHydrationWarning className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/Icon_Logo_claire.svg" type="image/svg+xml" />
@@ -49,26 +77,17 @@ export default function RootLayout({
         <meta name="robots" content={SITE_CONFIG.seo.robots} />
         <meta name="revisit-after" content={SITE_CONFIG.seo.revisitAfter} />
 
-        {SITE_CONFIG.seo.verification.bing && <meta name="msvalidate.01" content={SITE_CONFIG.seo.verification.bing} />}
-        {SITE_CONFIG.seo.verification.baidu && <meta name="baidu-site-verification" content={SITE_CONFIG.seo.verification.baidu} />}
-        {SITE_CONFIG.seo.verification.norton && <meta name="norton-safeweb-site-verification" content={SITE_CONFIG.seo.verification.norton} />}
-
-        {/* Clarity tracking code for https://eurinhash.com/ */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(c,l,a,r,i,t,y){
-                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
-                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-              })(window, document, "clarity", "script", "vpjywbgzu9");
-            `,
-          }}
-        />
+        {SITE_CONFIG.seo.verification.bing && (
+          <meta name="msvalidate.01" content={SITE_CONFIG.seo.verification.bing} />
+        )}
+        {SITE_CONFIG.seo.verification.baidu && (
+          <meta name="baidu-site-verification" content={SITE_CONFIG.seo.verification.baidu} />
+        )}
+        {SITE_CONFIG.seo.verification.norton && (
+          <meta name="norton-safeweb-site-verification" content={SITE_CONFIG.seo.verification.norton} />
+        )}
       </head>
-      <body
-        className="antialiased bg-background text-foreground min-h-screen flex flex-col overflow-x-hidden font-sans"
-      >
+      <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground min-h-screen flex flex-col overflow-x-hidden font-sans`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

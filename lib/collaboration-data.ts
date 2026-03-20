@@ -1,4 +1,5 @@
 import { Building2, Layers, Target, Shield, CheckCircle, RefreshCwIcon } from 'lucide-react';
+import { Country } from '@/lib/countries';
 
 export interface WizardData {
     organization: string;
@@ -18,6 +19,11 @@ export interface WizardData {
     existingInfrastructure: string;
     regulatoryRequirements: string;
     technologies: string[];
+}
+
+export interface CountryWithDetails extends Country {
+    exampleNumber?: string;
+    flag: string;
 }
 
 export const initiativeTypes = [

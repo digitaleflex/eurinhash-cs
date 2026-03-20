@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { FAQSection, contactFAQData } from '@/components/faq-section';
 
 describe('FAQSection', () => {

@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import { withAccelerate } from '@prisma/extension-accelerate';
 
 // Type pour gérer à la fois le client Prisma standard et le client étendu avec Accelerate
-type ExtendedPrismaClient = PrismaClient | ReturnType<PrismaClient['$extends']>;
+export type ExtendedPrismaClient = PrismaClient | ReturnType<PrismaClient['$extends']>;
 
 declare global {
   var prismaApi: ExtendedPrismaClient | undefined;
