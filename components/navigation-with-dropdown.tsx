@@ -18,33 +18,39 @@ interface NavItem {
 
 const navigationItems: NavItem[] = [
     {
-        label: 'Vision',
-        href: '/vision',
-        description: 'Déclaration stratégique',
+        label: 'Accueil',
+        href: '/',
     },
     {
-        label: 'Architecture',
-        href: '/architecture',
-        description: 'Cœur méthodologique',
+        label: 'Réalisations',
+        href: '/realisations',
+        description: 'Études de cas et impact',
     },
     {
-        label: 'Initiatives',
-        href: '/initiatives',
-        description: 'Exécution concrète',
-    },
-    {
-        label: 'Communauté',
-        href: '/communaute',
-        description: 'Espace humain',
+        label: 'Services',
+        href: '/services',
+        description: 'Expertise & Accompagnement',
+        children: [
+            {
+                label: 'Audit de Résilience',
+                href: '/services/audit',
+                description: 'Analyse 360° en 5 jours',
+            },
+            {
+                label: 'Architecture de Système',
+                href: '/services/architecture',
+                description: 'Conception haute performance',
+            },
+            {
+                label: 'Accompagnement CTO',
+                href: '/services/cto',
+                description: 'Suivi stratégique long terme',
+            },
+        ],
     },
     {
         label: 'Contact',
         href: '/contact',
-        description: 'Interaction directe',
-    },
-    {
-        label: 'Collaboration',
-        href: '/collaboration',
         isCTA: true,
     },
 ];
@@ -81,9 +87,9 @@ export function NavigationWithDropdown() {
                             key={item.href}
                             href={item.href}
                             className="flex items-center gap-2 px-4 py-2.5 bg-accent text-white font-medium text-sm tracking-tight transition-all duration-200 hover:bg-accent/90 ml-2"
-                            aria-label="Parlons de votre projet"
+                            aria-label="Réserver un audit de votre infrastructure"
                         >
-                            <span>Votre projet</span>
+                            <span>Réserver un audit</span>
                             <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                         </Link>
                     );

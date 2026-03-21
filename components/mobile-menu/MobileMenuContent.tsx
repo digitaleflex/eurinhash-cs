@@ -8,10 +8,19 @@ import { cn } from '@/lib/utils';
 import { useMobileMenu } from './MobileMenuProvider';
 
 const navigationItems = [
-  { href: '/vision', label: 'Doctrine', description: 'Manifeste & Stratégie' },
-  { href: '/initiatives', label: 'Initiatives', description: 'Piliers & Déploiements' },
-  { href: '/skills', label: 'Expertise', description: 'Capacités techniques' },
-  { href: '/about', label: 'Auteur', description: 'Parcours structurel' },
+  { href: '/', label: 'Accueil', description: 'Valeur & Introduction' },
+  { href: '/realisations', label: 'Réalisations', description: 'Études de cas & Impact' },
+  { 
+    href: '/services', 
+    label: 'Services', 
+    description: 'Expertise & Accompagnement',
+    children: [
+      { href: '/services/audit', label: 'Audit de Résilience' },
+      { href: '/services/architecture', label: 'Architecture de Système' },
+      { href: '/services/cto', label: 'Accompagnement CTO' },
+    ]
+  },
+  { href: '/contact', label: 'Contact', description: 'Interaction directe' },
 ];
 
 export function MobileMenuContent() {
@@ -48,15 +57,18 @@ export function MobileMenuContent() {
             </div>
 
             {/* Navigation */}
-            <nav className="flex-1 p-8 space-y-4 bg-background" role="navigation" aria-label="Navigation mobile">
+            <nav className="flex-1 p-8 space-y-4 bg-background overflow-y-auto" role="navigation" aria-label="Navigation mobile">
               {navigationItems.map((item, index) => {
                 const isActive = pathname && (pathname === item.href || pathname.startsWith(item.href + '/'));
+                const hasChildren = 'children' in item && item.children;
+
                 return (
                   <motion.div
                     key={item.href}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.05 }}
+                    className="space-y-2"
                   >
                     <Link
                       href={item.href}
@@ -79,6 +91,23 @@ export function MobileMenuContent() {
                         {item.description}
                       </span>
                     </Link>
+
+                    {/* Sub-links (Simple list for now, as requested "accordéon simple" - can be styled as sub-items) */}
+                    {hasChildren && (
+                      <div className="pl-10 space-y-2 pb-4">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            onClick={closeMenu}
+                            className="flex items-center gap-2 py-2 text-sm text-muted-foreground hover:text-accent transition-colors"
+                          >
+                            <span className="w-1.5 h-1.5 bg-accent/20 rounded-full" />
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </motion.div>
                 );
               })}
@@ -87,12 +116,12 @@ export function MobileMenuContent() {
             {/* CTA en bas du menu */}
             <div className="p-8 border-t border-foreground/5">
               <Link
-                href="/collaboration"
+                href="/contact"
                 onClick={closeMenu}
-                className="flex items-center justify-center gap-3 w-full bg-foreground text-background px-6 py-4 text-sm font-semibold tracking-tight transition-all duration-300 hover:bg-accent hover:text-white"
-                aria-label="Parlons de votre projet"
+                className="flex items-center justify-center gap-3 w-full bg-accent text-white px-6 py-4 text-sm font-semibold tracking-tight transition-all duration-300 hover:bg-foreground"
+                aria-label="Réserver un audit"
               >
-                <span>Votre projet</span>
+                <span>Réserver un audit</span>
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
               </Link>
             </div>
