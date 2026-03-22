@@ -20,17 +20,6 @@ const nextConfig: NextConfig = {
     optimizeCss: false,
     // Prefetch intelligent
     scrollRestoration: true,
-    // Optimisations supplémentaires
-    optimizeServerReact: true,
-    serverMinification: true,
-    // Optimisation des imports de bibliothèques lourdes
-    optimizePackageImports: [
-      'lucide-react',
-      '@radix-ui/react-icons',
-      'framer-motion',
-      'react',
-      'react-dom',
-    ],
   },
 
   // Optimisation du compilation

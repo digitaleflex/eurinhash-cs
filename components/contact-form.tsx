@@ -104,12 +104,12 @@ export function ContactForm() {
           className="peer w-full appearance-none rounded-lg sm:rounded-xl border border-foreground/20 bg-background/50 pl-12 pr-10 py-3 sm:py-4 text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 focus:bg-background transition-all duration-300 hover:border-foreground/30 text-sm sm:text-base"
         >
           <option value="">Sélectionnez un sujet</option>
-          <option value="nouveau-projet">Nouveau projet web</option>
-          <option value="infrastructure">Infrastructure cloud</option>
-          <option value="consultation">Consultation technique</option>
-          <option value="formation">Formation équipe</option>
-          <option value="maintenance">Maintenance/Support</option>
-          <option value="autre">Autre</option>
+          <option value="Audit de Résilience">Audit de Résilience</option>
+          <option value="Architecture de Système">Architecture de Système</option>
+          <option value="Accompagnement CTO">Accompagnement CTO</option>
+          <option value="Formation & Communauté">Formation & Communauté</option>
+          <option value="Support Technique">Support Technique</option>
+          <option value="Autre demande">Autre demande</option>
         </select>
       </div>
 

@@ -58,10 +58,10 @@ export default function Approach() {
                         </h2>
                     </div>
                     <Link
-                        href="/vision"
+                        href="/services"
                         className="inline-flex items-center gap-3 text-sm font-medium text-muted-foreground hover:text-accent transition-colors group shrink-0"
                     >
-                        Lire la doctrine complète
+                        Découvrir nos services
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>

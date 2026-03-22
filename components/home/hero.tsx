@@ -142,39 +142,46 @@ export default function Hero() {
 
                 {/* H1 */}
                 <h1 className="text-[2.2rem] xs:text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter leading-[1.1] sm:leading-none text-foreground px-2">
-                    On construit des systèmes<br />
-                    <span className="text-foreground/25 font-light">qui durent.</span>
+                    Je conçois des architectures<br />
+                    <span className="text-foreground/20 font-light italic">digitales robustes et sécurisées pour votre entreprise.</span>
                 </h1>
 
                 {/* Sous-titre */}
                 <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl leading-relaxed font-normal" style={{ letterSpacing: '-0.01em' }}>
-                    Pas de complexité inutile. Pas de dette technique cachée.<br />
-                    Une architecture claire, maîtrisée, pensée pour tenir dans le temps.
+                    Spécialiste Cloud, Infrastructure & Cybersécurité pour les entreprises en croissance.<br />
+                    Disponibilité, scalabilité et sécurité. Pas des promesses, des systèmes réels.
                 </p>
 
-                {/* Piliers */}
-                <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 sm:gap-8 text-[8px] xs:text-[9px] sm:text-[10px] text-muted-foreground/30 font-mono tracking-[0.15em] uppercase">
-                    <span>Souveraineté</span>
-                    <span className="w-0.5 h-0.5 bg-foreground/10 rounded-full" />
-                    <span>Clarté</span>
-                    <span className="w-0.5 h-0.5 bg-foreground/10 rounded-full" />
-                    <span>Pérennité</span>
+                {/* Data Points / Proof */}
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-8 sm:gap-16 pt-8 border-t border-foreground/5 w-full max-w-2xl">
+                    <div className="flex flex-col items-center gap-1">
+                        <span className="text-2xl sm:text-3xl font-black tracking-tighter">+15</span>
+                        <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">Systèmes conçus</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-1">
+                        <span className="text-2xl sm:text-3xl font-black tracking-tighter">-40%</span>
+                        <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">Coûts Cloud</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-1 col-span-2 md:col-span-1 border-t md:border-t-0 border-foreground/5 pt-6 md:pt-0">
+                        <span className="text-2xl sm:text-3xl font-black tracking-tighter">+200</span>
+                        <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">Membres Formés</span>
+                    </div>
                 </div>
 
                 {/* CTAs */}
-                <div className="flex flex-col sm:flex-row gap-6 items-center pt-10 border-t border-foreground/5 w-full justify-center">
+                <div className="flex flex-col sm:flex-row gap-6 items-center pt-8 w-full justify-center">
                     <Link
-                        href="/collaboration"
-                        className="inline-flex items-center justify-center gap-3 bg-foreground text-background px-8 py-4 text-sm font-medium tracking-tight transition-all duration-300 hover:bg-accent hover:text-white group"
+                        href="/contact"
+                        className="inline-flex items-center justify-center gap-3 bg-accent text-white px-10 py-5 text-sm font-bold tracking-tight transition-all duration-300 hover:bg-foreground group"
                     >
-                        Parlons de votre projet
+                        Réserver un audit
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                     </Link>
                     <Link
-                        href="/vision"
-                        className="inline-flex items-center justify-center px-8 py-4 text-sm font-medium text-muted-foreground tracking-tight transition-all duration-300 hover:text-foreground border border-transparent hover:border-foreground/5"
+                        href="/realisations"
+                        className="inline-flex items-center justify-center px-8 py-4 text-sm font-medium text-muted-foreground tracking-tight transition-all duration-300 hover:text-foreground"
                     >
-                        Notre vision
+                        Voir les projets
                     </Link>
                 </div>
 

@@ -9,7 +9,7 @@ const projects = [
         status: 'Alpha',
         statusColor: 'text-yellow-500',
         description: 'Infrastructure cloud modulaire pour l\'hébergement local et la résilience des données souveraines.',
-        href: '/initiatives/flexhost',
+        href: '/realisations',
     },
     {
         ref: 'EHAF-ARCH-01',
@@ -17,7 +17,7 @@ const projects = [
         status: 'Beta',
         statusColor: 'text-blue-400',
         description: 'Socle reproductible pour structurer tout projet d\'infrastructure d\'envergure.',
-        href: '/architecture/ehaf',
+        href: '/services/architecture',
     },
     {
         ref: 'EHAF-EDU-01',
@@ -25,7 +25,7 @@ const projects = [
         status: 'En structuration',
         statusColor: 'text-muted-foreground',
         description: 'Formation systémique pour transformer les développeurs en architectes de systèmes.',
-        href: '/initiatives/hashcode',
+        href: '/services/mentorat',
     },
 ];
 
@@ -45,10 +45,10 @@ export default function Ecosystem() {
                         </h2>
                     </div>
                     <Link
-                        href="/initiatives"
+                        href="/realisations"
                         className="inline-flex items-center gap-3 text-sm font-medium text-muted-foreground hover:text-accent transition-colors group shrink-0"
                     >
-                        Toutes les initiatives
+                        Toutes les réalisations
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>

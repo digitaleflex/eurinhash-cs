@@ -58,9 +58,17 @@ Copier le fichier `.env.example` (ou créer un `.env`) et remplir les variables 
 # Base de données (PostgreSQL/Neon)
 DATABASE_URL="postgresql://user:password@host:port/dbname?sslmode=require"
 
-# Configuration du site
-NEXT_PUBLIC_SITE_URL="http://localhost:3001"
+# Configuration du site (même URL côté client et serveur en prod)
+NEXT_PUBLIC_SITE_URL="http://localhost:3000"
+# Better Auth (sessions, OAuth) — aligner sur NEXT_PUBLIC_SITE_URL
+BETTER_AUTH_URL="http://localhost:3000"
+BETTER_AUTH_SECRET="$(openssl rand -base64 32)"
+
 NEXT_PUBLIC_APP_NAME="EurinHash Portfolio"
+
+# Google OAuth — redirect URI: {BETTER_AUTH_URL}/api/auth/callback/google
+GOOGLE_CLIENT_ID=""
+GOOGLE_CLIENT_SECRET=""
 
 # Email (Resend)
 RESEND_API_KEY="re_123456789"
@@ -82,17 +90,19 @@ npm run db:generate
 npm run db:push
 ```
 
+Si la base contenait déjà l’ancien schéma NextAuth-style (colonnes `provider`, `sessionToken`, etc.), il faut soit une migration SQL manuelle, soit repartir sur une base vide en dev (`db push` après sauvegarde).
+
 5. **Démarrer le serveur**
 
 ```bash
 npm run dev
 ```
 
-Le site sera accessible sur [http://localhost:3001](http://localhost:3001).
+Le site sera accessible sur [http://localhost:3000](http://localhost:3000) (voir `package.json` pour le port).
 
 ## 📜 Scripts disponibles
 
-- `npm run dev` : Démarre le serveur de développement (port 3001).
+- `npm run dev` : Démarre le serveur de développement (port 3000).
 - `npm run build` : Compile l'application pour la production.
 - `npm run start` : Démarre le serveur de production.
 - `npm run lint` : Vérifie le code avec ESLint.

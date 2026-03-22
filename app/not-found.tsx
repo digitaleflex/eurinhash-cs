@@ -4,7 +4,7 @@ import { BackButton } from '@/components/back-button';
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden">
       {/* Background Effects */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px]" />
@@ -70,14 +70,13 @@ export default function NotFound() {
           <div className="flex flex-wrap justify-center gap-3">
             {[
               {
-                href: '/start-project',
-                label: 'Démarrer un projet',
+                href: '/contact',
+                label: 'Contact',
                 isPrimary: true,
               },
-              { href: '/about', label: 'À propos' },
-              { href: '/projects', label: 'Projets' },
-              { href: '/skills', label: 'Compétences' },
-              { href: '/contact', label: 'Contact' },
+              { href: '/services', label: 'Services' },
+              { href: '/realisations', label: 'Réalisations' },
+              { href: '/blog', label: 'Blog' },
             ].map(link => (
               <Link
                 key={link.href}
@@ -93,6 +92,6 @@ export default function NotFound() {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

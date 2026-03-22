@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, Search, Layers, Users } from 'lucide-react';
+import { ArrowRight, Search, Layers, Users, GraduationCap } from 'lucide-react';
 import Link from 'next/link';
 
 const services = [
@@ -21,6 +21,12 @@ const services = [
     href: '/services/cto',
     icon: Users,
     description: 'Un partenaire stratégique pour diriger votre vision technique, recruter vos talents et instaurer une culture d\'excellence.',
+  },
+  {
+    title: 'Programme de Mentorat',
+    href: '/services/mentorat',
+    icon: GraduationCap,
+    description: 'Formation d\'élite et mentorat pratique en programmation, cybersécurité et cloud computing pour les talents émergents.',
   },
 ];
 

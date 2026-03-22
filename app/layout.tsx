@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
 import { createMetadata } from '@/lib/metadata';
 import { SITE_CONFIG } from '@/lib/config';
 import { NavigationWithDropdown } from '@/components/navigation-with-dropdown';
@@ -14,35 +15,13 @@ import { JsonLd } from '@/components/json-ld';
 
 import './globals.css';
 
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin'],
-  display: 'swap',
-  preload: true,
-  fallback: ['system-ui', 'arial'],
-  weight: ['400', '500', '600', '700'],
-  style: ['normal'],
-  adjustFontFallback: true,
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: '--font-jetbrains-mono',
-  subsets: ['latin'],
-  display: 'swap',
-  preload: true,
-  fallback: ['monospace'],
-  weight: ['400', '500', '600', '700'],
-  style: ['normal'],
-  adjustFontFallback: true,
-});
-
 export const metadata: Metadata = {
   title: {
-    default: 'Eurin Hash CS',
-    template: '%s | Eurin Hash CS',
+    default: 'Eurin Hash',
+    template: '%s | Eurin Hash',
   },
-  description: 'Portfolio professionnel d\'Eurin Hash - Développeur Full Stack & Expert Cloud',
-  // ... autres métadonnées
+  description:
+    "Portfolio professionnel d'Eurin Hash - Développeur Full Stack & Expert Cloud",
 };
 
 export default function RootLayout({
@@ -51,7 +30,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" suppressHydrationWarning className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html
+      lang="fr"
+      suppressHydrationWarning
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+    >
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/Icon_Logo_claire.svg" type="image/svg+xml" />
@@ -78,16 +61,28 @@ export default function RootLayout({
         <meta name="revisit-after" content={SITE_CONFIG.seo.revisitAfter} />
 
         {SITE_CONFIG.seo.verification.bing && (
-          <meta name="msvalidate.01" content={SITE_CONFIG.seo.verification.bing} />
+          <meta
+            name="msvalidate.01"
+            content={SITE_CONFIG.seo.verification.bing}
+          />
         )}
         {SITE_CONFIG.seo.verification.baidu && (
-          <meta name="baidu-site-verification" content={SITE_CONFIG.seo.verification.baidu} />
+          <meta
+            name="baidu-site-verification"
+            content={SITE_CONFIG.seo.verification.baidu}
+          />
         )}
         {SITE_CONFIG.seo.verification.norton && (
-          <meta name="norton-safeweb-site-verification" content={SITE_CONFIG.seo.verification.norton} />
+          <meta
+            name="norton-safeweb-site-verification"
+            content={SITE_CONFIG.seo.verification.norton}
+          />
         )}
       </head>
-      <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground min-h-screen flex flex-col overflow-x-hidden font-sans`}>
+      <body
+        className={`${GeistSans.variable} ${GeistMono.variable} antialiased bg-background text-foreground min-h-screen flex flex-col overflow-x-hidden font-sans`}
+        suppressHydrationWarning
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -95,7 +90,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <header className="border-b border-border sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-            <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+            <div className="mx-auto w-full max-w-[1400px] px-6 lg:px-12 py-3 sm:py-4 flex items-center justify-between">
               <div className="hidden lg:flex items-center justify-between w-full">
                 <Logo size="md" variant="default" />
                 <div className="flex items-center gap-2 sm:gap-4">
