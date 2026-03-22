@@ -2,13 +2,6 @@
 import { PrismaClient } from '@prisma/client';
 import { withAccelerate } from '@prisma/extension-accelerate';
 
-// Type pour gérer à la fois le client Prisma standard et le client étendu avec Accelerate
-export type ExtendedPrismaClient = PrismaClient | ReturnType<PrismaClient['$extends']>;
-
-declare global {
-  var prismaApi: ExtendedPrismaClient | undefined;
-}
-
 const createPrismaApiClient = () => {
   const databaseUrl = process.env.DATABASE_URL;
 
@@ -27,7 +20,16 @@ const createPrismaApiClient = () => {
   }).$extends(withAccelerate());
 };
 
-export const prismaApi = globalThis.prismaApi ?? createPrismaApiClient();
+// Infer the full extended type so model accessors (event, contactMessage, etc.) are typed
+export type ExtendedPrismaClient = ReturnType<typeof createPrismaApiClient>;
+
+declare global {
+  // eslint-disable-next-line no-var
+  var prismaApi: ExtendedPrismaClient | undefined;
+}
+
+export const prismaApi: ExtendedPrismaClient =
+  globalThis.prismaApi ?? createPrismaApiClient();
 
 if (process.env.NODE_ENV !== 'production') globalThis.prismaApi = prismaApi;
 

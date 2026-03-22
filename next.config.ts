@@ -4,7 +4,7 @@ import { SITE_CONFIG } from './lib/config';
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    formats: SITE_CONFIG.images.formats as any,
+    formats: (SITE_CONFIG.images.formats || ['image/webp']) as any,
     minimumCacheTTL: SITE_CONFIG.images.minimumCacheTTL,
     dangerouslyAllowSVG: true,
     deviceSizes: SITE_CONFIG.images.deviceSizes,
@@ -14,15 +14,10 @@ const nextConfig: NextConfig = {
     unoptimized: false,
   },
 
-  // Optimisations de performance avancées
+  // Simplification pour éviter les erreurs de worker sur Windows
   experimental: {
-    webVitalsAttribution: ['CLS', 'LCP', 'FID', 'FCP', 'TTFB'],
-    optimizeCss: false,
-    // Prefetch intelligent
     scrollRestoration: true,
   },
-
-  // Optimisation du compilation
 
   // Packages externes pour les composants serveur
   serverExternalPackages: ['@prisma/client'],

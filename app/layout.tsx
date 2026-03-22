@@ -12,6 +12,7 @@ import { MobileMenu } from '@/components/mobile-menu';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { JsonLd } from '@/components/json-ld';
+import { ConditionalWrapper } from '@/components/layout-wrapper';
 
 import './globals.css';
 
@@ -89,29 +90,33 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <header className="border-b border-border sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-            <div className="mx-auto w-full max-w-[1400px] px-6 lg:px-12 py-3 sm:py-4 flex items-center justify-between">
-              <div className="hidden lg:flex items-center justify-between w-full">
-                <Logo size="md" variant="default" />
-                <div className="flex items-center gap-2 sm:gap-4">
-                  <NavigationWithDropdown />
-                  <div className="flex items-center gap-2 sm:gap-3">
+          <ConditionalWrapper excludePaths={['/admin', '/dashboard']}>
+            <header className="border-b border-border sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+              <div className="mx-auto w-full max-w-[1400px] px-6 lg:px-12 py-3 sm:py-4 flex items-center justify-between">
+                <div className="hidden lg:flex items-center justify-between w-full">
+                  <Logo size="md" variant="default" />
+                  <div className="flex items-center gap-2 sm:gap-4">
+                    <NavigationWithDropdown />
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <ThemeToggle />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="lg:hidden flex items-center justify-between w-full">
+                  <Logo size="md" variant="default" />
+                  <div className="flex items-center gap-2">
                     <ThemeToggle />
+                    <MobileMenu />
                   </div>
                 </div>
               </div>
-
-              <div className="lg:hidden flex items-center justify-between w-full">
-                <Logo size="md" variant="default" />
-                <div className="flex items-center gap-2">
-                  <ThemeToggle />
-                  <MobileMenu />
-                </div>
-              </div>
-            </div>
-          </header>
+            </header>
+          </ConditionalWrapper>
           <main className="flex-1">{children}</main>
-          <Footer />
+          <ConditionalWrapper excludePaths={['/admin', '/dashboard']}>
+            <Footer />
+          </ConditionalWrapper>
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />

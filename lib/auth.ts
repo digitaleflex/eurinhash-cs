@@ -1,7 +1,7 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { PrismaClient } from "@prisma/client";
-import { emailOTP } from "better-auth/plugins";
+import { emailOTP, admin } from "better-auth/plugins";
 import { sendMail } from "./mail";
 
 // Better Auth requires a PLAIN PrismaClient — not extended with $extends(withAccelerate())
@@ -53,6 +53,7 @@ export const auth = betterAuth({
         } : {}),
     },
     plugins: [
+        admin(),
         emailOTP({
             async sendVerificationOTP({ email, otp, type }) {
                 const subject = type === "sign-in" ? "Votre code de connexion" : "Vérifiez votre email";

@@ -20,10 +20,12 @@ model User {
   email         String    @unique
   emailVerified Boolean   @default(false)
   image         String?
+  role          String?   @default("user")
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
   sessions      Session[]
+  registrations EventRegistration[]
 
   @@map("users")
 }
@@ -129,4 +131,37 @@ model ProjectRequest {
   updatedAt DateTime @updatedAt
 
   @@map("project_requests")
+}
+
+model Event {
+  id               String   @id @default(cuid())
+  title            String
+  slug             String   @unique
+  description      String   @db.Text
+  date             DateTime
+  type             String   // "Webinar", "Live", "Conférence"
+  platform         String   // "TikTok", "YouTube", "Substack", "Google Meet", "Meetup", "Other"
+  eventUrl         String
+  registrationLink String?
+  thumbnail        String?
+  isFeatured       Boolean  @default(false)
+  status           String   @default("upcoming") // "upcoming", "past", "canceled"
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  registrations    EventRegistration[]
+
+  @@map("events")
+}
+
+model EventRegistration {
+  id        String   @id @default(cuid())
+  userId    String
+  eventId   String
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId])
+  @@map("event_registrations")
 }

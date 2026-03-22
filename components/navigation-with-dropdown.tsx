@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { ArrowRight, ChevronDown, Construction, User } from 'lucide-react';
+import { ArrowRight, ChevronDown, Construction, User, ShieldCheck } from 'lucide-react';
 import { useSession } from '@/lib/auth-clients';
 
 interface NavItem {
@@ -192,23 +192,34 @@ export function NavigationWithDropdown() {
             {/* Auth Buttons */}
             <div className="hidden lg:flex items-center gap-4">
                 {!isPending && session ? (
-                    <Link
-                        href="/dashboard/profil"
-                        className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-200 group"
-                    >
-                        <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center overflow-hidden ring-1 ring-border group-hover:ring-accent/50 transition-all">
-                            {session.user?.image ? (
-                                <img
-                                    src={session.user.image}
-                                    alt={session.user.name || 'User'}
-                                    className="w-full h-full object-cover"
-                                />
-                            ) : (
-                                <User className="w-3.5 h-3.5" />
-                            )}
-                        </div>
-                        <span className="tracking-tight">{session.user?.name || 'Mon Compte'}</span>
-                    </Link>
+                    <div className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-200 group">
+                        {/* Admin Link for admins */}
+                        {(session.user as { role?: string }).role === 'admin' && (
+                            <Link
+                                href="/admin"
+                                className="mr-4 text-[10px] font-bold uppercase tracking-widest text-accent hover:text-accent/80 flex items-center gap-1 border border-accent/20 px-2 py-1 bg-accent/5"
+                            >
+                                <ShieldCheck className="w-3 h-3" /> Admin
+                            </Link>
+                        )}
+                        <Link
+                            href="/dashboard/profil"
+                            className="flex items-center gap-3 min-w-max"
+                        >
+                            <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center overflow-hidden ring-1 ring-border group-hover:ring-accent/50 transition-all">
+                                {session.user?.image ? (
+                                    <img
+                                        src={session.user.image}
+                                        alt={session.user.name || 'User'}
+                                        className="w-full h-full object-cover"
+                                    />
+                                ) : (
+                                    <User className="w-3.5 h-3.5" />
+                                )}
+                            </div>
+                            <span className="tracking-tight">{session.user?.name || 'Mon Compte'}</span>
+                        </Link>
+                    </div>
                 ) : (
                     <Link
                         href="/sign-in"

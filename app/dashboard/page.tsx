@@ -6,9 +6,8 @@ import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import prismaApi from '@/lib/prisma-api';
-import type { PrismaClient } from '@prisma/client';
 
-const prisma = prismaApi as PrismaClient;
+const prisma = prismaApi;
 
 export default async function DashboardPage() {
   const session = await auth.api.getSession({

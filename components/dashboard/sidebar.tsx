@@ -16,6 +16,7 @@ import {
   LayoutDashboard,
   ChevronRight,
   Loader2,
+  ShieldCheck,
 } from 'lucide-react';
 
 const navItems = [
@@ -114,6 +115,27 @@ export function DashboardSidebar() {
                 </Link>
               );
             })}
+
+            {/* Admin Section */}
+            {(session?.user as any)?.role === 'admin' && (
+              <div className="pt-8">
+                <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-[0.2em] mb-4 px-3"> 
+                   Administration 
+                </p>
+                <Link
+                  href="/admin"
+                  className={cn(
+                    'flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200',
+                    pathname?.startsWith('/admin')
+                      ? 'bg-accent/10 text-accent border border-accent/20'
+                      : 'text-muted-foreground hover:bg-accent/5 hover:text-accent'
+                  )}
+                >
+                  <ShieldCheck className="w-4.5 h-4.5" />
+                  <span>Portail Admin</span>
+                </Link>
+              </div>
+            )}
           </nav>
 
           {/* Footer */}
