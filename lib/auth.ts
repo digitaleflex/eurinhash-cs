@@ -8,10 +8,15 @@ import { sendMail } from "./mail";
 const prismaForAuth = prisma;
 
 
-const AUTH_BASE_URL =
+let AUTH_BASE_URL =
     process.env.BETTER_AUTH_URL ||
     process.env.NEXT_PUBLIC_SITE_URL ||
     "http://localhost:3000";
+
+// Ensure the URL starts with a protocol (http/https)
+if (AUTH_BASE_URL && !AUTH_BASE_URL.startsWith("http")) {
+    AUTH_BASE_URL = `https://${AUTH_BASE_URL}`;
+}
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
