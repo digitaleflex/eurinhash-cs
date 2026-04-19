@@ -6,11 +6,10 @@ import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import prismaApi from '@/lib/prisma-api';
-import type { PrismaClient } from '@prisma/client';
 import { DashboardSearch } from '@/components/dashboard/search';
 import { MessageItem } from './message-item';
 
-const prisma = prismaApi as PrismaClient;
+const prisma = prismaApi;
 
 interface MessagesPageProps {
   searchParams: Promise<{ q?: string }>;

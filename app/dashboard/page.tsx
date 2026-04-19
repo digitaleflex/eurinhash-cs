@@ -21,9 +21,8 @@ export default async function DashboardPage() {
   const user = session.user;
 
   // Fetch real stats directly on server
-  const [messagesCount, requestsCount] = await Promise.all([
+  const [messagesCount] = await Promise.all([
     prisma.contactMessage.count({ where: { email: user.email } }),
-    prisma.projectRequest.count({ where: { email: user.email } }),
   ]);
 
   return (
@@ -46,18 +45,6 @@ export default async function DashboardPage() {
             <div>
               <p className="text-2xl font-bold">{messagesCount}</p>
               <p className="text-sm text-muted-foreground">Messages</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="p-6 bg-card border border-border rounded-xl">
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-accent/10 rounded-lg">
-              <Key className="w-6 h-6 text-accent" />
-            </div>
-            <div>
-              <p className="text-2xl font-bold">{requestsCount}</p>
-              <p className="text-sm text-muted-foreground">Demandes</p>
             </div>
           </div>
         </div>

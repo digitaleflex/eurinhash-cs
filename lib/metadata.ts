@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { SITE_CONFIG } from './config';
 
 export const siteConfig = {
@@ -75,9 +75,9 @@ export function createMetadata(override: Partial<Metadata> = {}): Metadata {
       google: SITE_CONFIG.seo.verification.google || undefined,
       yandex: SITE_CONFIG.seo.verification.yandex || undefined,
       other: {
-        'msvalidate.01': [SITE_CONFIG.seo.verification.bing].filter(Boolean) as string[],
-        'baidu-site-verification': [SITE_CONFIG.seo.verification.baidu].filter(Boolean) as string[],
-        'norton-safeweb-site-verification': [SITE_CONFIG.seo.verification.norton].filter(Boolean) as string[],
+        'msvalidate.01': [SITE_CONFIG.seo.verification.bing].filter((v): v is string => typeof v === 'string' && v.length > 0),
+        'baidu-site-verification': [SITE_CONFIG.seo.verification.baidu].filter((v): v is string => typeof v === 'string' && v.length > 0),
+        'norton-safeweb-site-verification': [SITE_CONFIG.seo.verification.norton].filter((v): v is string => typeof v === 'string' && v.length > 0),
       },
     },
     // Canonical URL pour éviter le duplicate content

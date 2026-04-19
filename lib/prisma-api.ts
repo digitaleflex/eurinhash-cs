@@ -21,14 +21,14 @@ const createPrismaApiClient = () => {
 };
 
 // Infer the full extended type so model accessors (event, contactMessage, etc.) are typed
-export type ExtendedPrismaClient = ReturnType<typeof createPrismaApiClient>;
+type ExtendedPrismaClient = ReturnType<typeof createPrismaApiClient>;
 
 declare global {
   // eslint-disable-next-line no-var
   var prismaApi: ExtendedPrismaClient | undefined;
 }
 
-export const prismaApi: ExtendedPrismaClient =
+const prismaApi: ExtendedPrismaClient =
   globalThis.prismaApi ?? createPrismaApiClient();
 
 if (process.env.NODE_ENV !== 'production') globalThis.prismaApi = prismaApi;

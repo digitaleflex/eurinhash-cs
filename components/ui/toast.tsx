@@ -10,6 +10,8 @@ type ToasterToast = {
   title: React.ReactNode;
   description?: React.ReactNode;
   action?: React.ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 };
 
 const actionTypes = {
@@ -67,7 +69,7 @@ const addToRemoveQueue = (toastId: string) => {
   toastTimeouts.set(toastId, timeout);
 };
 
-export const reducer = (state: State, action: Action): State => {
+const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'ADD_TOAST':
       return {
@@ -230,7 +232,11 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
-const ToastProviderContext = React.createContext({
+const ToastProviderContext = React.createContext<{
+  toasts: ToasterToast[];
+  toast: (props: ToastProps) => { id: string; dismiss: () => void; update: (props: ToastProps) => void };
+  dismiss: (toastId?: string) => void;
+}>({
   toasts: [] as ToasterToast[],
   toast: () => ({ id: '', dismiss: () => {}, update: () => {} }),
   dismiss: () => {},

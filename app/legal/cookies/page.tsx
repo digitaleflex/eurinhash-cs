@@ -1,5 +1,5 @@
 import { LegalPage } from '@/components/legal-page';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 
 export const revalidate = 86400; // Revalider toutes les 24 heures (ISR)
 

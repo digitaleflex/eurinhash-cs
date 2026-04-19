@@ -93,41 +93,6 @@ export async function deleteMessage(messageId: string) {
   }
 }
 
-export async function updateProjectRequestStatus(
-  requestId: string,
-  status: 'new' | 'analyzing' | 'qualified' | 'rejected' | 'archived'
-) {
-  try {
-    await checkAdmin();
-
-    const request = await prisma.projectRequest.update({
-      where: { id: requestId },
-      data: { status },
-    });
-
-    revalidatePath('/admin/demandes');
-    revalidatePath(`/admin/demandes/${requestId}`);
-    return { success: true, request };
-  } catch (error: any) {
-    return { success: false, error: error.message };
-  }
-}
-
-export async function deleteProjectRequest(requestId: string) {
-  try {
-    await checkAdmin();
-
-    await prisma.projectRequest.delete({
-      where: { id: requestId },
-    });
-
-    revalidatePath('/admin/demandes');
-    return { success: true };
-  } catch (error: any) {
-    return { success: false, error: error.message };
-  }
-}
-
 export async function deleteEventAdmin(eventId: string) {
   try {
     await checkAdmin();

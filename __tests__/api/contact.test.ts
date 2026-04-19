@@ -1,5 +1,5 @@
 import { POST } from '@/app/api/contact/route';
-import { prismaApi } from '@/lib/prisma-api';
+import prismaApi from '@/lib/prisma-api';
 import { NextRequest } from 'next/server';
 
 // Mock Prisma

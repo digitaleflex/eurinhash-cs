@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import {
   Calendar,
@@ -20,14 +20,14 @@ import { RegisterButton } from '@/components/events/RegisterButton';
 import { Countdown } from '@/components/events/Countdown';
 import type { PrismaClient } from '@prisma/client';
 
-const prisma = prismaApi as unknown as PrismaClient;
+const prisma = prismaApi;
 
 export const metadata: Metadata = {
   title: 'Événements & Webinaires - Eurin Hash',
   description: 'Participez en direct à nos sessions techniques et découvrez les coulisses de l\'architecture moderne.',
 };
 
-const platformIcons: Record<string, any> = {
+const platformIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   YouTube: Youtube,
   TikTok: Youtube, // Temporary fallback
   'Google Meet': Video,
@@ -49,8 +49,8 @@ export default async function EvenementsPage() {
     orderBy: { date: 'desc' },
   });
 
-  const featuredEvent = events.find((e: any) => e.isFeatured && e.status === 'upcoming') || events.find((e: any) => e.status === 'upcoming');
-  const otherEvents = events.filter((e: any) => e.id !== featuredEvent?.id);
+  const featuredEvent = events.find(e => e.isFeatured && e.status === 'upcoming') || events.find(e => e.status === 'upcoming');
+  const otherEvents = events.filter(e => e.id !== featuredEvent?.id);
 
   return (
     <main className="min-h-screen bg-background pt-32 pb-40">
@@ -140,7 +140,7 @@ export default async function EvenementsPage() {
 
         {/* Gallery */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {otherEvents.map((event: any) => {
+          {otherEvents.map((event) => {
             const Icon = platformIcons[event.platform] || Globe;
             const isPast = new Date(event.date) < new Date();
 

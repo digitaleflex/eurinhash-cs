@@ -70,7 +70,6 @@ function DesktopSidebar() {
         />
         <AdminNavItem href="/admin/users" icon={Users} label="Utilisateurs" />
         <AdminNavItem href="/admin/messages" icon={Mail} label="Messages" />
-        <AdminNavItem href="/admin/demandes" icon={FileText} label="Demandes" />
         <AdminNavItem
           href="/admin/evenements"
           icon={Calendar}

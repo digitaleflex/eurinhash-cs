@@ -35,11 +35,6 @@ const navItems = [
     href: '/dashboard/messages',
     icon: Mail,
   },
-  {
-    title: 'Mes Demandes',
-    href: '/dashboard/demandes',
-    icon: FileText,
-  },
 ];
 
 export function DashboardSidebar() {

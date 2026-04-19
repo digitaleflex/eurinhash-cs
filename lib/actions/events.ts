@@ -47,26 +47,6 @@ export async function updateEvent(id: string, data: any) {
   return event;
 }
 
-export async function deleteEvent(id: string) {
-  await prisma.event.delete({
-    where: { id },
-  });
-
-  revalidatePath('/evenements');
-  revalidatePath('/admin/evenements');
-}
-
-export async function getEvents() {
-  return await prisma.event.findMany({
-    include: {
-      _count: {
-        select: { registrations: true }
-      }
-    },
-    orderBy: { date: 'desc' },
-  });
-}
-
 export async function registerForEvent(eventId: string) {
   const session = await auth.api.getSession({
     headers: await headers(),
@@ -123,15 +103,7 @@ export async function registerForEvent(eventId: string) {
   return { success: true, registration };
 }
 
-export async function getRegistrationsByEvent(eventId: string) {
-  return await prisma.eventRegistration.findMany({
-    where: { eventId },
-    include: {
-      user: true,
-    },
-    orderBy: { createdAt: 'desc' },
-  });
-}
+
 
 export async function sendEventReminders(eventId: string) {
   const event = await prisma.event.findUnique({
