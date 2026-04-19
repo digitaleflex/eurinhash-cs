@@ -1,6 +1,6 @@
 'use client';
 
-import { Newspaper, ArrowRight, Tag } from 'lucide-react';
+import { Newspaper, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 const posts = [

@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { ArrowRight, ChevronDown, Construction, User, ShieldCheck } from 'lucide-react';
+import { ArrowRight, ChevronDown, User, ShieldCheck } from 'lucide-react';
 import { useSession } from '@/lib/auth-clients';
 
 interface NavItem {

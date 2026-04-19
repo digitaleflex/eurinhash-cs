@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { User, Mail, Shield, Key } from 'lucide-react';
+import { User, Mail, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { auth } from '@/lib/auth';
@@ -21,9 +20,9 @@ export default async function DashboardPage() {
   const user = session.user;
 
   // Fetch real stats directly on server
-  const [messagesCount] = await Promise.all([
-    prisma.contactMessage.count({ where: { email: user.email } }),
-  ]);
+  const messagesCount = await prisma.contactMessage.count({
+    where: { email: user.email },
+  });
 
   return (
     <div className="space-y-8">
@@ -96,11 +95,15 @@ export default async function DashboardPage() {
             <div className="flex-1 space-y-4">
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <label className="text-sm text-muted-foreground">Nom</label>
+                  <span className="text-sm text-muted-foreground block mb-1">
+                    Nom
+                  </span>
                   <p className="font-medium">{user.name || 'Non renseigné'}</p>
                 </div>
                 <div>
-                  <label className="text-sm text-muted-foreground">Email</label>
+                  <span className="text-sm text-muted-foreground block mb-1">
+                    Email
+                  </span>
                   <p className="font-medium">{user.email}</p>
                 </div>
               </div>
@@ -130,26 +133,6 @@ export default async function DashboardPage() {
                 <h3 className="font-semibold">Mes Messages</h3>
                 <p className="text-sm text-muted-foreground">
                   Voir l'historique de mes messages
-                </p>
-              </div>
-            </div>
-            <span className="text-accent">→</span>
-          </div>
-        </a>
-
-        <a
-          href="/dashboard/demandes"
-          className="p-6 bg-card border border-border rounded-xl hover:border-accent/50 transition-colors group"
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-accent/10 rounded-lg group-hover:bg-accent/20 transition-colors">
-                <Key className="w-6 h-6 text-accent" />
-              </div>
-              <div>
-                <h3 className="font-semibold">Mes Demandes</h3>
-                <p className="text-sm text-muted-foreground">
-                  Voir mes demandes de projet
                 </p>
               </div>
             </div>

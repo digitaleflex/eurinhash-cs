@@ -9,7 +9,6 @@ import {
   Calendar,
   Loader2,
   Check,
-  X,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -57,7 +56,8 @@ export function ProfileForm({ user, sessionCreatedAt }: { user: UserData, sessio
       }
 
       setIsEditing(false);
-      window.location.reload();
+      globalThis.location.reload();
+
     } catch (error) {
       console.error('Save error:', error);
       setSaveError('Une erreur est survenue lors de la sauvegarde.');

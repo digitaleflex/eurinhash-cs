@@ -52,11 +52,12 @@ export default function CookiesPage() {
       </ul>
       <p>
         Le site est hébergé et diffusé via l’infrastructure de{' '}
-        <strong>Vercel Inc.</strong>
+        <strong>Vercel Inc.</strong>{' '}
         (CDN et Edge Network). Si des cookies techniques ou de performance
         propres à Vercel sont requis, ils seront listés ici avec leurs
         finalités.
       </p>
+
 
       <h2 id="controle">Contrôle par l’utilisateur</h2>
       <p>
@@ -70,9 +71,10 @@ export default function CookiesPage() {
       <h2 id="contact">Contact</h2>
       <p>
         Pour toute question relative à l’utilisation future des cookies, vous
-        pouvez nous écrire à :
-        <a href="mailto:contact@eurinhash.com"> contact@eurinhash.com</a>.
+        pouvez nous écrire à :{' '}
+        <a href="mailto:contact@eurinhash.com">contact@eurinhash.com</a>.
       </p>
+
     </LegalPage>
   );
 }

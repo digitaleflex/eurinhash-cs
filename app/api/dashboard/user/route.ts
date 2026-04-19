@@ -16,18 +16,19 @@ export async function GET(request: Request) {
 
     const user = session.user;
 
-    const accounts = await prisma.account.findMany({
-      where: { userId: user.id },
-    });
+    // Fetch all counts and accounts in parallel to optimize request time
+    const [accounts, sessionsCount, messagesCount] = await Promise.all([
+      prisma.account.findMany({
+        where: { userId: user.id },
+      }),
+      prisma.session.count({
+        where: { userId: user.id },
+      }),
+      prisma.contactMessage.count({
+        where: { email: user.email },
+      }),
+    ]);
 
-    const sessionsCount = await prisma.session.count({
-      where: { userId: user.id },
-    });
-
-    // Real data counts
-    const messagesCount = await prisma.contactMessage.count({
-      where: { email: user.email },
-    });
 
     return NextResponse.json({
       id: user.id,

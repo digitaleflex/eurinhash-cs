@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Download, FileText, ArrowRight } from 'lucide-react';
+import { Download, ArrowRight } from 'lucide-react';
+
 
 export const metadata: Metadata = {
   title: 'Ressources Gratuites - Eurin Hash',

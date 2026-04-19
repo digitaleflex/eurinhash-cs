@@ -6,11 +6,11 @@ import { usePathname } from 'next/navigation';
 
 interface AdminNavItemProps {
   href: string;
-  icon: React.ElementType;
+  icon: React.ReactNode;
   label: string;
 }
 
-export function AdminNavItem({ href, icon: Icon, label }: AdminNavItemProps) {
+export function AdminNavItem({ href, icon, label }: AdminNavItemProps) {
   const pathname = usePathname();
 
   const isActive = React.useMemo(() => {
@@ -30,7 +30,9 @@ export function AdminNavItem({ href, icon: Icon, label }: AdminNavItemProps) {
           : 'text-muted-foreground hover:bg-accent/10 hover:text-accent'
       }`}
     >
-      <Icon className="w-4 h-4" />
+      <div className="flex items-center justify-center w-4 h-4 shrink-0 [&>svg]:w-4 [&>svg]:h-4">
+        {icon}
+      </div>
       <span>{label}</span>
     </Link>
   );

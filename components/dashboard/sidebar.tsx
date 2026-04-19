@@ -2,14 +2,12 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { signOut, useSession } from '@/lib/auth-clients';
-import { useRouter } from 'next/navigation';
 import {
   User,
   Mail,
-  FileText,
   LogOut,
   Menu,
   X,
@@ -18,6 +16,7 @@ import {
   Loader2,
   ShieldCheck,
 } from 'lucide-react';
+
 
 const navItems = [
   {

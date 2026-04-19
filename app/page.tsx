@@ -1,5 +1,5 @@
-import dynamic from 'next/dynamic';
 import Hero from "@/components/home/hero";
+
 import ResultsSection from "@/components/home/results";
 import ExpertiseSection from "@/components/home/expertise";
 import BioSection from "@/components/home/bio";

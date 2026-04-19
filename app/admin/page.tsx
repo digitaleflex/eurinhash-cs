@@ -1,14 +1,4 @@
-import * as React from 'react';
-import {
-  Users,
-  Mail,
-  FileText,
-  TrendingUp,
-  ArrowUpRight,
-  ShieldAlert,
-  Clock,
-  ExternalLink,
-} from 'lucide-react';
+import { Users, Mail, ArrowUpRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import prismaApi from '@/lib/prisma-api';
@@ -18,11 +8,7 @@ const prisma = prismaApi;
 
 export default async function AdminPage() {
   // Fetch global stats
-  const [
-    totalUsers,
-    totalMessages,
-    recentMessages,
-  ] = await Promise.all([
+  const [totalUsers, totalMessages, recentMessages] = await Promise.all([
     prisma.user.count(),
     prisma.contactMessage.count(),
     prisma.contactMessage.findMany({

@@ -24,6 +24,8 @@ export const sendMail = async ({ to, subject, html, text }: SendMailOptions) => 
             html,
             text,
         });
+        
+        logger.info({ data, to, subject }, 'Email sent successfully');
 
         return { success: true, data };
     } catch (error) {

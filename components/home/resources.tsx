@@ -1,6 +1,6 @@
 'use client';
 
-import { Download, FileText, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Download, FileText, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 const resources = [
