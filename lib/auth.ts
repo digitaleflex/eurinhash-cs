@@ -1,12 +1,12 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { PrismaClient } from "@prisma/client";
+import prisma from "./prisma";
 import { emailOTP, admin } from "better-auth/plugins";
 import { sendMail } from "./mail";
 
-// Better Auth requires a PLAIN PrismaClient — not extended with $extends(withAccelerate())
-// Using the extended client from prisma-api.ts causes silent auth failures
-const prismaForAuth = new PrismaClient();
+// Better Auth uses the shared singleton PrismaClient
+const prismaForAuth = prisma;
+
 
 const AUTH_BASE_URL =
     process.env.BETTER_AUTH_URL ||
@@ -53,7 +53,7 @@ export const auth = betterAuth({
         } : {}),
     },
     plugins: [
-        admin(),
+        admin() as any,
         emailOTP({
             async sendVerificationOTP({ email, otp, type }) {
                 const subject = type === "sign-in" ? "Votre code de connexion" : "Vérifiez votre email";
@@ -72,7 +72,7 @@ export const auth = betterAuth({
                     `,
                 });
             },
-        }),
+        }) as any,
     ],
     trustedOrigins: uniqueTrustedOrigins,
     // Session configuration
