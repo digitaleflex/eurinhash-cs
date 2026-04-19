@@ -11,7 +11,7 @@ async function checkAdmin() {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  if (!session || session.user.role !== 'admin') {
+  if (!session || (session.user as any).role !== 'admin') {
     throw new Error('Accès refusé - Administrateur requis');
   }
   return session;
