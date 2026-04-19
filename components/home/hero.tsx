@@ -1,12 +1,18 @@
+'use client';
+
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Hero() {
     return (
         <section
-            className="relative isolate overflow-hidden flex flex-col items-center justify-start text-center min-h-screen pt-20 pb-32 bg-background text-foreground"
+            className="relative isolate overflow-hidden flex flex-col items-center justify-start text-center min-h-screen pt-24 pb-32 bg-background text-foreground"
             aria-label="Section principale"
         >
-            {/* ── Fond architectural : grille blueprint (dynamique) ── */}
+            {/* Background Animations */}
+
+            {/* Grille architecturale subtile */}
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 -z-10"
@@ -19,87 +25,166 @@ export default function Hero() {
                 }}
             />
 
-            {/* ── Cercles concentriques architecturaux ── */}
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center">
-                <div className="w-[1000px] h-[1000px] border border-foreground/[0.02] rounded-full" />
-                <div className="absolute w-[700px]  h-[700px]  border border-foreground/[0.02] rounded-full" />
-                <div className="absolute w-[420px]  h-[420px]  border border-foreground/5  rounded-full" />
-                <div className="absolute w-[180px]  h-[180px]  border border-accent/10  rounded-full" />
+            {/* Grand cercle — centre droit, respire lentement */}
+            <motion.div
+                aria-hidden="true"
+                className="pointer-events-none absolute -z-10"
+                style={{ top: '10%', right: '-15%', width: 600, height: 600 }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 120, repeat: Infinity, ease: 'linear' }}
+            >
+                <svg viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                    <circle cx="300" cy="300" r="280" stroke="hsl(var(--foreground))" strokeWidth="0.5" opacity="0.04" />
+                    <circle cx="300" cy="300" r="200" stroke="hsl(var(--foreground))" strokeWidth="0.5" opacity="0.03" strokeDasharray="4 8" />
+                    <circle cx="300" cy="300" r="120" stroke="hsl(var(--accent))" strokeWidth="0.5" opacity="0.06" />
+                </svg>
+            </motion.div>
+
+            {/* Petit carré technique — coin supérieur gauche */}
+            <motion.div
+                aria-hidden="true"
+                className="pointer-events-none absolute -z-10"
+                style={{ top: '15%', left: '8%', width: 120, height: 120 }}
+                animate={{ rotate: -45, scale: [1, 1.05, 1] }}
+                transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+            >
+                <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                    <rect x="10" y="10" width="100" height="100" stroke="hsl(var(--foreground))" strokeWidth="0.5" opacity="0.05" />
+                    <rect x="25" y="25" width="70" height="70" stroke="hsl(var(--accent))" strokeWidth="0.5" opacity="0.08" />
+                </svg>
+            </motion.div>
+
+            {/* Losange — milieu gauche */}
+            <motion.div
+                aria-hidden="true"
+                className="pointer-events-none absolute -z-10"
+                style={{ top: '55%', left: '5%', width: 80, height: 80 }}
+                animate={{ y: [0, -15, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+            >
+                <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                    <rect x="20" y="20" width="40" height="40" stroke="hsl(var(--accent))" strokeWidth="0.8" opacity="0.1" transform="rotate(45 40 40)" />
+                </svg>
+            </motion.div>
+
+            {/* Lignes croisées — milieu droit */}
+            <motion.div
+                aria-hidden="true"
+                className="pointer-events-none absolute -z-10"
+                style={{ top: '60%', right: '10%', width: 160, height: 160 }}
+                animate={{ rotate: [0, 90] }}
+                transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
+            >
+                <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                    <line x1="0" y1="80" x2="160" y2="80" stroke="hsl(var(--foreground))" strokeWidth="0.5" opacity="0.04" />
+                    <line x1="80" y1="0" x2="80" y2="160" stroke="hsl(var(--foreground))" strokeWidth="0.5" opacity="0.04" />
+                    <circle cx="80" cy="80" r="3" fill="hsl(var(--accent))" opacity="0.12" />
+                </svg>
+            </motion.div>
+
+            {/* Petit triangle — bas centre-gauche */}
+            <motion.div
+                aria-hidden="true"
+                className="pointer-events-none absolute -z-10"
+                style={{ bottom: '18%', left: '20%', width: 60, height: 60 }}
+                animate={{ y: [0, 10, 0], rotate: [0, 5, 0] }}
+                transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+            >
+                <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                    <polygon points="30,5 55,55 5,55" stroke="hsl(var(--foreground))" strokeWidth="0.5" opacity="0.05" fill="none" />
+                </svg>
+            </motion.div>
+
+            {/* Arc de cercle — haut centre */}
+            <motion.div
+                aria-hidden="true"
+                className="pointer-events-none absolute -z-10"
+                style={{ top: '-5%', left: '30%', width: 400, height: 400 }}
+                animate={{ rotate: -360 }}
+                transition={{ duration: 200, repeat: Infinity, ease: 'linear' }}
+            >
+                <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                    <path d="M 200 20 A 180 180 0 0 1 380 200" stroke="hsl(var(--accent))" strokeWidth="0.6" opacity="0.06" strokeLinecap="round" />
+                </svg>
+            </motion.div>
+
+            {/* Points de connexion dispersés */}
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+                {[
+                    { x: '12%', y: '25%', s: 3, o: 0.08 },
+                    { x: '85%', y: '35%', s: 2, o: 0.06 },
+                    { x: '75%', y: '75%', s: 4, o: 0.05 },
+                    { x: '25%', y: '80%', s: 2, o: 0.07 },
+                    { x: '50%', y: '15%', s: 3, o: 0.04 },
+                    { x: '90%', y: '20%', s: 2, o: 0.06 },
+                    { x: '8%', y: '70%', s: 3, o: 0.05 },
+                ].map((dot, i) => (
+                    <motion.div
+                        key={i}
+                        className="absolute rounded-full bg-accent"
+                        style={{ left: dot.x, top: dot.y, width: dot.s, height: dot.s, opacity: dot.o }}
+                        animate={{ opacity: [dot.o, dot.o * 2.5, dot.o] }}
+                        transition={{ duration: 3 + i, repeat: Infinity, ease: 'easeInOut', delay: i * 0.3 }}
+                    />
+                ))}
             </div>
 
-            {/* ── Halo central très atténué ── */}
-            <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -z-10 inset-0"
-                style={{
-                    background: 'radial-gradient(ellipse 50% 35% at 50% 50%, hsl(var(--accent)/0.05), transparent)',
-                }}
-            />
+            {/* Page Content */}
+            <div className="mx-auto max-w-4xl px-4 sm:px-8 flex flex-col items-center gap-12 relative z-10">
 
-            {/* ── Contenu ── */}
-            <div className="mx-auto max-w-5xl px-4 sm:px-8 flex flex-col items-center gap-10">
-
-                {/* Micro-label honnête */}
-                <div className="flex items-center gap-3">
-                    <div className="w-8 h-px bg-foreground/15" />
-                    <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-[0.3em]">
-                        Initiative architecturale indépendante
+                {/* Label discret */}
+                <div className="flex items-center gap-2 sm:gap-3">
+                    <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-accent rounded-full" />
+                    <span className="text-[10px] sm:text-xs font-mono text-muted-foreground tracking-widest uppercase opacity-70">
+                        Eurin Hash · Architecture
                     </span>
-                    <div className="w-8 h-px bg-foreground/15" />
                 </div>
 
-                {/* H1 massif */}
-                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black tracking-tight leading-[1.05]">
-                    Architectures numériques
-                    <br />
-                    <span className="text-accent">souveraines</span>.
+                {/* H1 */}
+                <h1 className="text-[2.2rem] xs:text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter leading-[1.1] sm:leading-none text-foreground px-2">
+                    Je conçois des architectures<br />
+                    <span className="text-foreground/20 font-light italic">digitales robustes et sécurisées pour votre entreprise.</span>
                 </h1>
 
-                {/* Sous-texte ancrage */}
-                <p className="text-lg sm:text-xl text-muted-foreground font-light leading-relaxed max-w-xl">
-                    Pensées pour la résilience, la scalabilité
-                    <br className="hidden sm:block" /> et la maîtrise structurelle.
+                {/* Sous-titre */}
+                <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl leading-relaxed font-normal" style={{ letterSpacing: '-0.01em' }}>
+                    Spécialiste Cloud, Infrastructure & Cybersécurité pour les entreprises en croissance.<br />
+                    Disponibilité, scalabilité et sécurité. Pas des promesses, des systèmes réels.
                 </p>
 
-                {/* Bloc signature — 3 piliers */}
-                <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/30">
-                    <span>Maîtrise des dépendances</span>
-                    <span className="w-1 h-1 rounded-full bg-foreground/10" />
-                    <span>Standards reproductibles</span>
-                    <span className="w-1 h-1 rounded-full bg-foreground/10" />
-                    <span>Autonomie stratégique</span>
+                {/* Data Points / Proof */}
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-8 sm:gap-16 pt-8 border-t border-foreground/5 w-full max-w-2xl">
+                    <div className="flex flex-col items-center gap-1">
+                        <span className="text-2xl sm:text-3xl font-black tracking-tighter">+15</span>
+                        <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">Systèmes conçus</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-1">
+                        <span className="text-2xl sm:text-3xl font-black tracking-tighter">-40%</span>
+                        <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">Coûts Cloud</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-1 col-span-2 md:col-span-1 border-t md:border-t-0 border-foreground/5 pt-6 md:pt-0">
+                        <span className="text-2xl sm:text-3xl font-black tracking-tighter">+200</span>
+                        <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">Membres Formés</span>
+                    </div>
                 </div>
 
-                {/* CTAs sobres — dynamiques */}
-                <div className="flex flex-col sm:flex-row gap-4 items-center pt-4">
+                {/* CTAs */}
+                <div className="flex flex-col sm:flex-row gap-6 items-center pt-8 w-full justify-center">
                     <Link
-                        href="/start-project"
-                        className="inline-flex items-center justify-center bg-foreground text-background px-10 py-4 text-[13px] font-bold uppercase tracking-[0.2em] transition hover:bg-foreground/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-foreground"
+                        href="/contact"
+                        className="inline-flex items-center justify-center gap-3 bg-accent text-white px-10 py-5 text-sm font-bold tracking-tight transition-all duration-300 hover:bg-foreground group"
                     >
-                        Initier une collaboration
+                        Réserver un audit
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                     </Link>
                     <Link
-                        href="/vision"
-                        className="inline-flex items-center justify-center border border-foreground/10 text-muted-foreground px-10 py-4 text-[13px] font-bold uppercase tracking-[0.2em] transition hover:border-foreground/25 hover:text-foreground"
+                        href="/realisations"
+                        className="inline-flex items-center justify-center px-8 py-4 text-sm font-medium text-muted-foreground tracking-tight transition-all duration-300 hover:text-foreground"
                     >
-                        Lire la doctrine
+                        Voir les projets
                     </Link>
                 </div>
 
-                {/* Mention fondatrice discrète */}
-                <p className="text-[10px] font-mono text-muted-foreground/40 uppercase tracking-[0.2em] mt-4">
-                    Initiée par Eurin Hash · Architecte cloud indépendant
-                </p>
-
-            </div>
-
-            {/* ── Signature architecturale pied de hero ── */}
-            <div className="absolute bottom-8 left-0 right-0 flex items-center justify-center gap-4">
-                <div className="w-12 h-px bg-foreground/10" />
-                <span className="text-[9px] font-mono text-muted-foreground/30 uppercase tracking-[0.4em]">
-                    Core Architecture · EHAF · Version 1.0
-                </span>
-                <div className="w-12 h-px bg-foreground/10" />
             </div>
         </section>
     );

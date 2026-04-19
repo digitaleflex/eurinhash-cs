@@ -1,0 +1,55 @@
+{
+    "version": 1.1,
+    "atDirectives": [
+        {
+            "name": "@tailwind",
+            "description": "Use the @tailwind directive to insert Tailwind's base, components, and utilities styles.",
+            "references": [
+                {
+                    "name": "Tailwind CSS Documentation",
+                    "url": "https://tailwindcss.com/docs"
+                }
+            ]
+        },
+        {
+            "name": "@layer",
+            "description": "Use the @layer directive to group styles within a specific layer.",
+            "references": [
+                {
+                    "name": "Tailwind CSS Layer Documentation",
+                    "url": "https://tailwindcss.com/docs/functions-and-directives#layer"
+                }
+            ]
+        },
+        {
+            "name": "@apply",
+            "description": "Use the @apply directive to inline existing utility classes into custom CSS.",
+            "references": [
+                {
+                    "name": "Tailwind CSS @apply Documentation",
+                    "url": "https://tailwindcss.com/docs/functions-and-directives#apply"
+                }
+            ]
+        },
+        {
+            "name": "@responsive",
+            "description": "Use the @responsive directive to generate responsive variants of your custom styles.",
+            "references": [
+                {
+                    "name": "Tailwind CSS @responsive Documentation",
+                    "url": "https://tailwindcss.com/docs/functions-and-directives#responsive"
+                }
+            ]
+        },
+        {
+            "name": "@variants",
+            "description": "Use the @variants directive to generate state variants of your custom styles.",
+            "references": [
+                {
+                    "name": "Tailwind CSS @variants Documentation",
+                    "url": "https://tailwindcss.com/docs/functions-and-directives#variants"
+                }
+            ]
+        }
+    ]
+}

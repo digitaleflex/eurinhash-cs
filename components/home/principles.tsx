@@ -5,10 +5,10 @@ export default function Principles() {
 
                 {/* En-tête */}
                 <div className="mb-20 sm:mb-32">
-                    <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.3em] block mb-6">
+                    <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-tighter block mb-6">
                         Doctrine · Fondation
                     </span>
-                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight">
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter">
                         Trois axiomes.
                     </h2>
                 </div>
@@ -21,7 +21,7 @@ export default function Principles() {
                             <span className="font-mono text-5xl font-bold text-foreground/10 leading-none">I</span>
                         </div>
                         <div className="max-w-2xl">
-                            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight mb-6">
+                            <h3 className="text-2xl sm:text-3xl font-bold tracking-tighter mb-6">
                                 Clarté architecturale
                             </h3>
                             <p className="text-lg text-muted-foreground leading-relaxed">
@@ -37,7 +37,7 @@ export default function Principles() {
                             <span className="font-mono text-5xl font-bold text-foreground/10 leading-none">II</span>
                         </div>
                         <div className="max-w-2xl">
-                            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight mb-6">
+                            <h3 className="text-2xl sm:text-3xl font-bold tracking-tighter mb-6">
                                 Maîtrise des dépendances
                             </h3>
                             <p className="text-lg text-muted-foreground leading-relaxed">
@@ -54,7 +54,7 @@ export default function Principles() {
                             <span className="font-mono text-5xl font-bold text-foreground/10 leading-none">III</span>
                         </div>
                         <div className="max-w-2xl">
-                            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight mb-6">
+                            <h3 className="text-2xl sm:text-3xl font-bold tracking-tighter mb-6">
                                 Évolutivité progressive
                             </h3>
                             <p className="text-lg text-muted-foreground leading-relaxed">

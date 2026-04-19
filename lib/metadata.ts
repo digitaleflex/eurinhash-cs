@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { SITE_CONFIG } from './config';
 
 export const siteConfig = {
   name: 'Eurin Hash',
@@ -9,7 +10,7 @@ export const siteConfig = {
   ogImage: 'https://eurinhash.com/og-image.jpg',
   links: {
     email: 'contact@eurinhash.com',
-    linkedin: 'https://linkedin.com/in/eurinalmeida',
+    linkedin: 'https://www.linkedin.com/in/eurindalemeida/',
     github: 'https://github.com/digitaleflex',
   },
 };
@@ -66,6 +67,25 @@ export function createMetadata(override: Partial<Metadata> = {}): Metadata {
         'max-video-preview': -1,
         'max-image-preview': 'large',
         'max-snippet': -1,
+      },
+    },
+    // Balises de vérification pour les moteurs de recherche
+    // Configuration centralisée dans SITE_CONFIG.seo.verification
+    verification: {
+      google: SITE_CONFIG.seo.verification.google || undefined,
+      yandex: SITE_CONFIG.seo.verification.yandex || undefined,
+      other: {
+        'msvalidate.01': [SITE_CONFIG.seo.verification.bing].filter(Boolean) as string[],
+        'baidu-site-verification': [SITE_CONFIG.seo.verification.baidu].filter(Boolean) as string[],
+        'norton-safeweb-site-verification': [SITE_CONFIG.seo.verification.norton].filter(Boolean) as string[],
+      },
+    },
+    // Canonical URL pour éviter le duplicate content
+    alternates: {
+      canonical: siteConfig.url,
+      languages: {
+        'fr': siteConfig.url,
+        'en': `${siteConfig.url}/en`,
       },
     },
     ...override,

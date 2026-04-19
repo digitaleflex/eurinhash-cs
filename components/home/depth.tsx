@@ -1,10 +1,10 @@
 import Link from 'next/link';
 
 const links = [
-    { href: '/vision#doctrine', label: 'Doctrine architecturale' },
-    { href: '/vision#vision', label: 'Vision long terme' },
-    { href: '/skills', label: 'Principes techniques' },
-    { href: '/projects#roadmap', label: 'Feuille de route' },
+    { href: '/services', label: 'Nos services' },
+    { href: '/realisations', label: 'Réalisations' },
+    { href: '/blog', label: 'Ressources' },
+    { href: '/contact', label: 'Contact' },
 ];
 
 export default function Depth() {

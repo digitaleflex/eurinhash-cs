@@ -1,0 +1,13 @@
+declare namespace NodeJS {
+  interface ProcessEnv {
+    DATABASE_URL: string;
+    BETTER_AUTH_SECRET: string;
+    BETTER_AUTH_URL: string;
+    NEXT_PUBLIC_SITE_URL: string;
+    GOOGLE_CLIENT_ID: string;
+    GOOGLE_CLIENT_SECRET: string;
+    RESEND_API_KEY: string;
+    RESEND_FROM_EMAIL: string;
+    [key: string]: string | undefined;
+  }
+}

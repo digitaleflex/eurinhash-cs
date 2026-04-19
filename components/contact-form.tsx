@@ -1,162 +1,27 @@
 'use client';
 
-import { useState, useRef } from 'react';
 import { Send, AlertCircle, Loader2, CheckCircle } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import { useContactForm } from './_hooks/useContactForm';
 
 const FeedbackPopup = dynamic(() => import('./feedback-popup').then(mod => mod.FeedbackPopup), {
   ssr: false,
 });
 
-import { SITE_CONFIG } from '@/lib/config';
-
-interface FormDataShape {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-}
-
-interface FormErrorsShape {
-  name?: string;
-  email?: string;
-  message?: string;
-}
-
 export function ContactForm() {
-  const [formData, setFormData] = useState<FormDataShape>({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
-  const [errors, setErrors] = useState<FormErrorsShape>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [showFeedback, setShowFeedback] = useState(false);
-  const [feedbackType, setFeedbackType] = useState<'success' | 'error'>(
-    'success'
-  );
-  const [feedbackMessage, setFeedbackMessage] = useState('');
-  const formRef = useRef<HTMLFormElement>(null);
-
-  const validateField = (name: string, value: string): string | undefined => {
-    const { validation } = SITE_CONFIG.forms.contact;
-
-    switch (name) {
-      case 'name':
-        if (!value.trim()) return 'Le nom est requis';
-        if (value.trim().length < validation.name.minLength)
-          return `Le nom doit contenir au moins ${validation.name.minLength} caractères`;
-        if (value.trim().length > validation.name.maxLength)
-          return `Le nom ne doit pas dépasser ${validation.name.maxLength} caractères`;
-        break;
-      case 'email':
-        const trimmedEmail = value.trim();
-        if (!trimmedEmail) return "L'email est requis";
-        if (/\s/.test(trimmedEmail)) return "Format d'email invalide";
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail))
-          return "Format d'email invalide";
-        if (trimmedEmail.length > validation.email.maxLength)
-          return `L'email ne doit pas dépasser ${validation.email.maxLength} caractères`;
-        break;
-      case 'message':
-        if (!value.trim()) return 'Le message est requis';
-        if (value.trim().length < validation.message.minLength)
-          return `Le message doit contenir au moins ${validation.message.minLength} caractères`;
-        if (value.trim().length > validation.message.maxLength)
-          return `Le message ne doit pas dépasser ${validation.message.maxLength} caractères`;
-        break;
-    }
-    return undefined;
-  };
-
-  const handleInputChange = (name: keyof FormDataShape, value: string) => {
-    setFormData(prev => ({ ...prev, [name]: value }));
-    const error = validateField(name, value);
-    setErrors(prev => ({ ...prev, [name]: error }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Validation des champs
-    const newErrors: FormErrorsShape = {};
-    (Object.keys(formData) as (keyof FormDataShape)[]).forEach(key => {
-      if (key !== 'subject') {
-        const error = validateField(key, formData[key]);
-        if (error) newErrors[key] = error;
-      }
-    });
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      // Focaliser sur le premier champ en erreur
-      const firstErrorField = Object.keys(newErrors)[0];
-      const element = document.getElementById(firstErrorField);
-      if (element) {
-        element.focus();
-      }
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      // Préparer les données avec email nettoyé
-      const preparedData = {
-        ...formData,
-        email: formData.email.trim().replace(/\s+/g, ''), // Supprimer tous les espaces
-      };
-
-      // Utiliser fetch avec les bons paramètres
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(preparedData),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          result.details
-            ? result.details.join(', ')
-            : result.error || "Erreur lors de l'envoi du message"
-        );
-      }
-
-      // Succès
-      setIsSubmitted(true);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setErrors({});
-      setFeedbackType('success');
-      setFeedbackMessage('Message envoyé avec succès !');
-      setShowFeedback(true);
-
-      if (formRef.current) {
-        formRef.current.classList.add('animate-pulse');
-        setTimeout(() => {
-          formRef.current?.classList.remove('animate-pulse');
-        }, 1000);
-      }
-    } catch (error) {
-      console.error("Erreur lors de l'envoi:", error);
-
-      // Erreur
-      setFeedbackType('error');
-      setFeedbackMessage(
-        error instanceof Error
-          ? error.message
-          : "Une erreur est survenue lors de l'envoi du message"
-      );
-      setShowFeedback(true);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const {
+    formData,
+    errors,
+    isSubmitting,
+    isSubmitted,
+    showFeedback,
+    feedbackType,
+    feedbackMessage,
+    formRef,
+    handleInputChange,
+    handleSubmit,
+    setShowFeedback,
+  } = useContactForm();
 
   return (
     <form
@@ -233,18 +98,18 @@ export function ContactForm() {
         <select
           id="subject"
           name="subject"
-          defaultValue={formData.subject}
+          value={formData.subject}
           onChange={e => handleInputChange('subject', e.target.value)}
           aria-label="Sujet"
           className="peer w-full appearance-none rounded-lg sm:rounded-xl border border-foreground/20 bg-background/50 pl-12 pr-10 py-3 sm:py-4 text-foreground focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 focus:bg-background transition-all duration-300 hover:border-foreground/30 text-sm sm:text-base"
         >
           <option value="">Sélectionnez un sujet</option>
-          <option value="nouveau-projet">Nouveau projet web</option>
-          <option value="infrastructure">Infrastructure cloud</option>
-          <option value="consultation">Consultation technique</option>
-          <option value="formation">Formation équipe</option>
-          <option value="maintenance">Maintenance/Support</option>
-          <option value="autre">Autre</option>
+          <option value="Audit de Résilience">Audit de Résilience</option>
+          <option value="Architecture de Système">Architecture de Système</option>
+          <option value="Accompagnement CTO">Accompagnement CTO</option>
+          <option value="Formation & Communauté">Formation & Communauté</option>
+          <option value="Support Technique">Support Technique</option>
+          <option value="Autre demande">Autre demande</option>
         </select>
       </div>
 

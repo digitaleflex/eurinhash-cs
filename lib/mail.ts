@@ -1,4 +1,5 @@
 import { Resend } from 'resend';
+import { logger } from '@/lib/logger';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -11,7 +12,7 @@ interface SendMailOptions {
 
 export const sendMail = async ({ to, subject, html, text }: SendMailOptions) => {
     if (!process.env.RESEND_API_KEY) {
-        console.warn('RESEND_API_KEY is not set. Email not sent.');
+        logger.warn('RESEND_API_KEY is not set. Email not sent.');
         return { success: false, error: 'Missing API Key' };
     }
 
@@ -26,7 +27,7 @@ export const sendMail = async ({ to, subject, html, text }: SendMailOptions) => 
 
         return { success: true, data };
     } catch (error) {
-        console.error('Error sending email:', error);
+        logger.error({ error, to, subject }, 'Error sending email via Resend');
         return { success: false, error };
     }
 };

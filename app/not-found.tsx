@@ -4,7 +4,7 @@ import { BackButton } from '@/components/back-button';
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden">
       {/* Background Effects */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px]" />
@@ -34,7 +34,7 @@ export default function NotFound() {
         <div className="grid gap-4 md:grid-cols-2 mb-8">
           <div className="p-4 rounded-2xl border border-foreground/10 bg-background/50 backdrop-blur-sm">
             <Search className="h-6 w-6 text-accent mx-auto mb-2" />
-            <h3 className="font-semibold mb-1">Vérifiez l&apos;URL</h3>
+            <h3 className="font-semibold mb-1">Vérifiez l&apos;url</h3>
             <p className="text-sm text-muted-foreground">
               Assurez-vous que l&apos;adresse est correcte
             </p>
@@ -70,23 +70,21 @@ export default function NotFound() {
           <div className="flex flex-wrap justify-center gap-3">
             {[
               {
-                href: '/start-project',
-                label: 'Démarrer un projet',
+                href: '/contact',
+                label: 'Contact',
                 isPrimary: true,
               },
-              { href: '/about', label: 'À propos' },
-              { href: '/projects', label: 'Projets' },
-              { href: '/skills', label: 'Compétences' },
-              { href: '/contact', label: 'Contact' },
+              { href: '/services', label: 'Services' },
+              { href: '/realisations', label: 'Réalisations' },
+              { href: '/blog', label: 'Blog' },
             ].map(link => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-4 py-2 rounded-full text-sm border transition-colors ${
-                  link.isPrimary
+                className={`px-4 py-2 rounded-full text-sm border transition-colors ${link.isPrimary
                     ? 'border-accent bg-accent text-white hover:bg-accent/90'
                     : 'border-foreground/20 text-muted-foreground hover:border-accent hover:text-accent'
-                }`}
+                  }`}
               >
                 {link.label}
               </Link>
@@ -94,6 +92,6 @@ export default function NotFound() {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

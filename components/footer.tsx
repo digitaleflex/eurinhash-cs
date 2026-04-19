@@ -1,53 +1,65 @@
 import Link from 'next/link';
 import { Logo } from '@/components/logo';
+import { ArrowRight } from 'lucide-react';
 
 export function Footer() {
   return (
     <footer className="bg-background border-t border-foreground/5 py-12 lg:py-20">
-      <div className="mx-auto w-full max-w-6xl px-6">
+      <div className="mx-auto w-full max-w-[1400px] px-8 lg:px-12">
         <div className="grid gap-12 md:grid-cols-4 items-start">
           <div className="space-y-6 md:col-span-2">
             <Logo size="md" />
-            <p className="text-base text-muted-foreground max-w-sm leading-relaxed">
+            <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
               Ingénierie systémique et architectures numériques souveraines.
               Une infrastructure pensée pour la résilience et le contrôle.
             </p>
-            <div className="pt-4">
-              <Link
-                href="/start-project"
-                className="inline-flex items-center gap-2 text-sm font-bold text-accent uppercase tracking-widest hover:text-accent/80 transition-colors"
-              >
-                Planifier une collaboration →
-              </Link>
-            </div>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent/80 transition-colors group"
+            >
+              Parlons de votre projet
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
 
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-[0.2em] mb-6 opacity-40">Structure</h4>
+            <h4 className="text-xs font-semibold text-foreground/40 tracking-tight mb-6">Navigation</h4>
             <ul className="space-y-4 text-sm font-medium">
-              <li><Link href="/vision" className="hover:text-accent transition-colors">La Doctrine</Link></li>
-              <li><Link href="/projects" className="hover:text-accent transition-colors">Écosystème</Link></li>
-              <li><Link href="/skills" className="hover:text-accent transition-colors">Principes Techniques</Link></li>
-              <li><Link href="/about" className="hover:text-accent transition-colors">L'Institution</Link></li>
+              <li><Link href="/" className="hover:text-accent transition-colors">Accueil</Link></li>
+              <li><Link href="/services" className="hover:text-accent transition-colors">Services</Link></li>
+              <li><Link href="/realisations" className="hover:text-accent transition-colors">Réalisations</Link></li>
+              <li><Link href="/blog" className="hover:text-accent transition-colors">Blog</Link></li>
+              <li><Link href="/contact" className="hover:text-accent transition-colors">Contact</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-[0.2em] mb-6 opacity-40">Contact</h4>
+            <h4 className="text-xs font-semibold text-foreground/40 tracking-tight mb-6">Contact</h4>
             <ul className="space-y-4 text-sm font-medium">
               <li><a href="mailto:contact@eurinhash.com" className="hover:text-accent transition-colors">contact@eurinhash.com</a></li>
-              <li><a href="https://linkedin.com/in/eurinalmeida" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">LinkedIn</a></li>
+              <li><a href="https://www.linkedin.com/in/eurindalemeida/" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">LinkedIn</a></li>
               <li><a href="https://github.com/digitaleflex" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">GitHub</a></li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-20 pt-10 border-t border-foreground/5 flex flex-col md:flex-row items-center justify-between gap-8 text-[11px] font-mono uppercase tracking-widest opacity-40">
-          <div>© 2024-2026 Eurinhash CS Architecture Foundation.</div>
-          <div className="flex items-center gap-8">
-            <Link href="/legal/mentions-legales" className="hover:text-foreground">Légal</Link>
-            <Link href="/legal/politique-confidentialite" className="hover:text-foreground">Confidentialité</Link>
-            <Link href="/legal/cgv" className="hover:text-foreground">Conditions</Link>
+        <div className="mt-16 pt-8 border-t border-foreground/5 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex flex-col gap-1 items-center md:items-start">
+            <span className="text-[10px] text-foreground/20 tracking-tight italic">
+              Initiative architecturale indépendante
+            </span>
+            <div className="flex flex-wrap justify-center md:justify-start gap-x-5 gap-y-2 font-mono text-[10px] text-foreground/25">
+              <Link href="/services" className="hover:text-foreground/50 transition-colors">Services</Link>
+              <span className="opacity-30">—</span>
+              <Link href="/realisations" className="hover:text-foreground/50 transition-colors">Réalisations</Link>
+              <span className="opacity-30">—</span>
+              <Link href="/blog" className="hover:text-foreground/50 transition-colors">Ressources</Link>
+            </div>
+          </div>
+          <div className="flex items-center gap-6 font-mono text-[10px] text-foreground/25">
+            <Link href="/legal/mentions-legales" className="hover:text-foreground/50 transition-colors">Légal</Link>
+            <Link href="/legal/politique-confidentialite" className="hover:text-foreground/50 transition-colors">Confidentialité</Link>
+            <span>© 2024–2026 Eurin Hash</span>
           </div>
         </div>
       </div>

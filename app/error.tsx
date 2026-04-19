@@ -12,12 +12,11 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Log l'erreur pour le debugging
-    console.error('Erreur de page:', error);
+    console.error(error);
   }, [error]);
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden">
       {/* Background Effects */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px]" />
@@ -107,6 +106,6 @@ export default function Error({
           </Link>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

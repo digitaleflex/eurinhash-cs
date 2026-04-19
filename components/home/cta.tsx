@@ -3,52 +3,58 @@ import { ArrowRight } from 'lucide-react';
 
 export default function CTASection() {
     return (
-        <section className="py-24 sm:py-48 bg-background border-t border-foreground/5 text-center relative overflow-hidden">
+        <section className="py-32 sm:py-48 bg-background border-t border-foreground/5 text-center relative overflow-hidden">
 
-            {/* Grille architecturale très discrète */}
+            {/* Grille architecturale discrète */}
             <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 -z-10"
                 style={{
                     backgroundImage: `
-            linear-gradient(to right, hsl(var(--foreground)/0.03) 1px, transparent 1px),
-            linear-gradient(to bottom, hsl(var(--foreground)/0.03) 1px, transparent 1px)
-          `,
-                    backgroundSize: '80px 80px',
+                        linear-gradient(to right, hsl(var(--foreground)/0.02) 1px, transparent 1px),
+                        linear-gradient(to bottom, hsl(var(--foreground)/0.02) 1px, transparent 1px)
+                    `,
+                    backgroundSize: '100px 100px',
                 }}
             />
 
-            <div className="mx-auto max-w-4xl px-4 sm:px-8">
+            <div className="mx-auto max-w-3xl px-4 sm:px-8">
 
-                <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.3em] block mb-10">
-                    Collaboration · Stratégique
+                <span className="font-mono text-xs text-accent tracking-tight font-medium block mb-8">
+                    Travaillons ensemble
                 </span>
 
-                <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.0] mb-12">
-                    Bâtissons une infrastructure <span className="text-foreground/30">pérenne</span>.
+                <h2 className="text-4xl sm:text-6xl font-black tracking-tighter mb-8 text-foreground leading-[1.1]">
+                    Prêt à sécuriser et faire<br />
+                    <span className="text-foreground/20 font-light italic">évoluer votre infrastructure ?</span>
                 </h2>
 
-                <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-16">
-                    Si vous souhaitez structurer une plateforme d'envergure,
-                    maîtriser votre cloud, ou contribuer à un écosystème
-                    numérique souverain.
+                <p className="text-lg text-muted-foreground leading-relaxed mb-12 font-normal max-w-xl mx-auto" style={{ letterSpacing: '-0.01em' }}>
+                    Ne construisez plus sur des sables mouvants.<br />
+                    On en parle simplement, avec une approche axée sur les résultats.
                 </p>
 
-                <Link
-                    href="/start-project"
-                    className="inline-flex items-center justify-center gap-4 bg-foreground text-background px-12 py-6 text-lg font-bold uppercase tracking-widest transition hover:bg-accent hover:text-white group"
-                >
-                    Planifier une discussion stratégique
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                <div className="flex flex-col sm:flex-row gap-4">
+                    <Link
+                        href="/contact"
+                        className="inline-flex items-center justify-center gap-3 bg-accent text-white px-12 py-6 text-sm font-bold tracking-tight transition-all duration-300 hover:bg-foreground group"
+                    >
+                        Réserver un audit maintenant
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    </Link>
+                    <Link
+                        href="/realisations"
+                        className="inline-flex items-center justify-center gap-3 px-12 py-6 text-sm font-bold tracking-tight text-muted-foreground hover:text-foreground transition-all"
+                    >
+                        Voir les réalisations
+                    </Link>
+                </div>
 
-                {/* Signature finale */}
-                <div className="mt-24 flex items-center justify-center gap-4">
-                    <div className="w-16 h-px bg-foreground/10" />
-                    <span className="font-mono text-[9px] text-foreground/25 uppercase tracking-[0.4em]">
-                        Eurinhash CS · Architecture Foundation
+                {/* Signature finale sobre */}
+                <div className="mt-24 pt-12 border-t border-foreground/5 flex flex-col items-center gap-3">
+                    <span className="font-mono text-[10px] text-foreground/20 tracking-tight">
+                        Eurin Hash CS · EHAF Foundation · 2026
                     </span>
-                    <div className="w-16 h-px bg-foreground/10" />
                 </div>
 
             </div>
