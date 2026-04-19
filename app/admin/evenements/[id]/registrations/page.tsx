@@ -1,26 +1,21 @@
-import * as React from 'react';
 import {
-  Users,
   ArrowLeft,
-  Mail,
   Calendar,
-  Send,
-  Loader2,
-  CheckCircle2,
 } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
 import prismaApi from '@/lib/prisma-api';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { RelaunchButton } from '@/components/events/RelaunchButton';
+import { Badge } from '@/components/ui/badge';
+
 
 const prisma = prismaApi;
 
 interface EventRegistrationsPageProps {
-  params: Promise<{ id: string }>;
+  readonly params: Promise<{ id: string }>;
 }
+
 
 export default async function EventRegistrationsPage({
   params,
@@ -56,8 +51,8 @@ export default async function EventRegistrationsPage({
             <span className="text-accent">{event.title}</span>
             <span className="text-muted-foreground/30">•</span>
             <span>
-              {event.registrations.length} participant
-              {event.registrations.length !== 1 ? 's' : ''}
+              {event.registrations.length} participant{event.registrations.length > 1 ? 's' : ''}
+
             </span>
           </p>
         </div>
@@ -80,7 +75,7 @@ export default async function EventRegistrationsPage({
               </tr>
             </thead>
             <tbody className="divide-y divide-border/20">
-              {event.registrations.map(reg => (
+              {event.registrations.map((reg: any) => (
                 <tr
                   key={reg.id}
                   className="group hover:bg-accent/[0.02] transition-colors duration-200"

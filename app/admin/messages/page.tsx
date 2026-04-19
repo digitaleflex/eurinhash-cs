@@ -68,7 +68,7 @@ export default async function AdminMessagesPage({
               </tr>
             </thead>
             <tbody className="divide-y divide-border/40">
-              {messages.map(msg => (
+              {messages.map((msg: any) => (
                 <tr
                   key={msg.id}
                   className="group hover:bg-accent/[0.02] transition-colors"

@@ -7,18 +7,18 @@ import {
   ArrowRight,
   Youtube,
   Globe,
-  Lock,
   Clock,
   ExternalLink,
   Milestone
 } from 'lucide-react';
+
 import { Badge } from '@/components/ui/badge';
 import prismaApi from '@/lib/prisma-api';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { RegisterButton } from '@/components/events/RegisterButton';
 import { Countdown } from '@/components/events/Countdown';
-import type { PrismaClient } from '@prisma/client';
+// import type { PrismaClient } from '@prisma/client';
 
 const prisma = prismaApi;
 
@@ -49,8 +49,8 @@ export default async function EvenementsPage() {
     orderBy: { date: 'desc' },
   });
 
-  const featuredEvent = events.find(e => e.isFeatured && e.status === 'upcoming') || events.find(e => e.status === 'upcoming');
-  const otherEvents = events.filter(e => e.id !== featuredEvent?.id);
+  const featuredEvent = events.find((e: any) => e.isFeatured && e.status === 'upcoming') || events.find((e: any) => e.status === 'upcoming');
+  const otherEvents = events.filter((e: any) => e.id !== featuredEvent?.id);
 
   return (
     <main className="min-h-screen bg-background pt-32 pb-40">
@@ -140,7 +140,7 @@ export default async function EvenementsPage() {
 
         {/* Gallery */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {otherEvents.map((event) => {
+          {otherEvents.map((event: any) => {
             const Icon = platformIcons[event.platform] || Globe;
             const isPast = new Date(event.date) < new Date();
 
