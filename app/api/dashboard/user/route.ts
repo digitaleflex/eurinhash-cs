@@ -29,10 +29,6 @@ export async function GET(request: Request) {
       where: { email: user.email },
     });
 
-    const requestsCount = await prisma.projectRequest.count({
-      where: { email: user.email },
-    });
-
     return NextResponse.json({
       id: user.id,
       name: user.name,
@@ -45,7 +41,6 @@ export async function GET(request: Request) {
       })),
       sessionsCount,
       messagesCount,
-      requestsCount,
     });
   } catch (error) {
     console.error('Dashboard API Error (GET):', error);
