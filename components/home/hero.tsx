@@ -130,41 +130,52 @@ export default function Hero() {
             </div>
 
             {/* Page Content */}
-            <div className="mx-auto max-w-4xl px-4 sm:px-8 flex flex-col items-center gap-12 relative z-10">
+            <div className="mx-auto max-w-5xl px-4 sm:px-8 flex flex-col items-center gap-12 relative z-10">
+
+
+
+                {/* Vertical Scale Indicator - Asymmetry */}
+                <div className="absolute -left-12 top-1/4 hidden lg:flex flex-col items-center gap-4 opacity-20">
+                    <div className="h-32 w-[1px] bg-gradient-to-b from-transparent via-foreground to-transparent" />
+                    <span className="rotate-90 text-[10px] font-mono tracking-[0.5em] uppercase">Architecture</span>
+                    <div className="h-32 w-[1px] bg-gradient-to-b from-transparent via-foreground to-transparent" />
+                </div>
 
                 {/* Label discret */}
                 <div className="flex items-center gap-2 sm:gap-3">
                     <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-accent rounded-full" />
                     <span className="text-[10px] sm:text-xs font-mono text-muted-foreground tracking-widest uppercase opacity-70">
-                        Eurin Hash · Architecture
+                        Souveraineté Numérique · Systèmes Complexes
                     </span>
                 </div>
 
-                {/* H1 */}
-                <h1 className="text-[2.2rem] xs:text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter leading-[1.1] sm:leading-none text-foreground px-2">
-                    Je conçois des architectures<br />
-                    <span className="text-foreground/20 font-light italic">digitales robustes et sécurisées pour votre entreprise.</span>
+                {/* H1 - Universal Wording */}
+                <h1 className="text-[2.2rem] xs:text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.95] sm:leading-none text-foreground px-2 text-center">
+                    Le monde manque <br />
+                    <span className="text-accent underline decoration-foreground/10 underline-offset-8">d'architectures.</span>
                 </h1>
 
-                {/* Sous-titre */}
-                <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl leading-relaxed font-normal" style={{ letterSpacing: '-0.01em' }}>
-                    Spécialiste Cloud, Infrastructure & Cybersécurité pour les entreprises en croissance.<br />
-                    Disponibilité, scalabilité et sécurité. Pas des promesses, des systèmes réels.
+                {/* Sous-titre - Universal Wording */}
+                <p className="text-lg sm:text-2xl text-muted-foreground max-w-3xl leading-relaxed font-normal text-center" style={{ letterSpacing: '-0.01em' }}>
+                    Je conçois les systèmes qui permettront au numérique moderne 
+                    d'être <span className="text-foreground font-semibold">structuré</span>, 
+                    <span className="text-foreground font-semibold"> scalable</span> et 
+                    <span className="text-foreground font-semibold"> souverain</span>.
                 </p>
 
                 {/* Data Points / Proof */}
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-8 sm:gap-16 pt-8 border-t border-foreground/5 w-full max-w-2xl">
                     <div className="flex flex-col items-center gap-1">
                         <span className="text-2xl sm:text-3xl font-black tracking-tighter">+15</span>
-                        <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">Systèmes conçus</span>
+                        <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest text-center">Infrastructures Déployées</span>
                     </div>
                     <div className="flex flex-col items-center gap-1">
-                        <span className="text-2xl sm:text-3xl font-black tracking-tighter">-40%</span>
-                        <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">Coûts Cloud</span>
+                        <span className="text-2xl sm:text-3xl font-black tracking-tighter">100%</span>
+                        <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest text-center">Souveraineté Cloud</span>
                     </div>
                     <div className="flex flex-col items-center gap-1 col-span-2 md:col-span-1 border-t md:border-t-0 border-foreground/5 pt-6 md:pt-0">
                         <span className="text-2xl sm:text-3xl font-black tracking-tighter">+200</span>
-                        <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">Membres Formés</span>
+                        <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest text-center">Membres Formés</span>
                     </div>
                 </div>
 
@@ -172,16 +183,16 @@ export default function Hero() {
                 <div className="flex flex-col sm:flex-row gap-6 items-center pt-8 w-full justify-center">
                     <Link
                         href="/contact"
-                        className="inline-flex items-center justify-center gap-3 bg-accent text-white px-10 py-5 text-sm font-bold tracking-tight transition-all duration-300 hover:bg-foreground group"
+                        className="inline-flex items-center justify-center gap-3 bg-accent text-white px-10 py-5 text-sm font-bold tracking-tight transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl shadow-accent/20 group"
                     >
-                        Réserver un audit
+                        Bâtir mon infrastructure
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                     </Link>
                     <Link
                         href="/realisations"
-                        className="inline-flex items-center justify-center px-8 py-4 text-sm font-medium text-muted-foreground tracking-tight transition-all duration-300 hover:text-foreground"
+                        className="inline-flex items-center justify-center px-8 py-4 text-sm font-medium text-muted-foreground tracking-tight transition-all duration-300 hover:text-foreground border border-transparent hover:border-foreground/10 hover:bg-foreground/5 rounded-full"
                     >
-                        Voir les projets
+                        Voir les systèmes
                     </Link>
                 </div>
 
