@@ -1,6 +1,7 @@
 'use client';
 
-import { Mail, Linkedin, MessageSquare, ArrowRight, MapPin, Shield, Clock, UserCheck, HelpCircle } from 'lucide-react';
+import React from 'react';
+import { Mail, Linkedin, MessageSquare, ArrowRight, MapPin, Shield, Clock, UserCheck, HelpCircle, Loader2 } from 'lucide-react';
 import { ContactForm } from '@/components/contact-form';
 
 
@@ -66,7 +67,9 @@ export default function ContactPage() {
                 <div className="h-px flex-1 bg-foreground/5" />
               </div>
               <div className="border border-foreground/5 p-8 sm:p-12 bg-foreground/[0.01]">
-                <ContactForm />
+                <React.Suspense fallback={<div className="h-64 flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-accent" /></div>}>
+                  <ContactForm />
+                </React.Suspense>
               </div>
             </section>
 

@@ -61,7 +61,7 @@ export function BlogSection() {
                     {post.desc}
                   </p>
                   <Link 
-                    href="/blog" 
+                    href="/contact?subject=Information Blog" 
                     className="shrink-0 font-mono text-[10px] font-bold uppercase tracking-widest border border-foreground/10 px-4 py-2 hover:bg-accent hover:text-white hover:border-accent transition-all flex items-center gap-2 group/btn"
                   >
                     Ouvrir_Dossier 

@@ -4,24 +4,24 @@ import { ArrowRight } from 'lucide-react';
 const items = [
     {
         id: '01',
-        title: 'Audit de Résilience',
-        description: 'Analyse complète de votre infrastructure en 5 jours. Identification des points de rupture, failles de sécurité et goulots d\'étranglement techniques.',
-        details: ['Diagnostic profond', 'Rapport de risques', 'Plan d\'action immédiat'],
-        href: '/services/audit'
+        title: 'Audit & Sécurité',
+        description: 'Identifier les points de rupture et les failles de sécurité avant qu\'ils ne freinent votre activité. Un diagnostic complet pour protéger vos actifs.',
+        details: ['Sécurisation active', 'Analyse de risques', 'Plan de continuité'],
+        href: '/contact?subject=Audit de Résilience'
     },
     {
         id: '02',
-        title: 'Architecture de Système',
-        description: 'Conception d\'infrastructures cloud et logicielles haute performance. Développement de socles modulaires, scalables et souverains.',
-        details: ['Cloud Hybride', 'Multi-tenant SaaS', 'Souveraineté Data'],
-        href: '/services/architecture'
+        title: 'Architecture & Cloud',
+        description: 'Bâtir des infrastructures capables d\'absorber votre croissance. Nous concevons des systèmes robustes, flexibles et totalement sous votre contrôle.',
+        details: ['Cloud Haute Disponibilité', 'Optimisation SaaS', 'Liberté Technologique'],
+        href: '/contact?subject=Architecture de Système'
     },
     {
         id: '03',
-        title: 'Accompagnement CTO',
-        description: 'Suivi stratégique pour guider votre direction technique. Prise de décision critique, recrutement d\'élite et culture de l\'excellence durable.',
-        details: ['Mentor stratégique', 'Pipeline Talents', 'Leadership Tech'],
-        href: '/services/cto'
+        title: 'Conseil & Stratégie CTO',
+        description: 'Un allié technique pour piloter vos choix critiques. Recrutement d\'élite, choix des outils et culture de l\'excellence pour vos équipes.',
+        details: ['Leadership Technique', 'Audit de Talents', 'Accompagnement Décisionnel'],
+        href: '/contact?subject=Accompagnement CTO'
     }
 ];
 

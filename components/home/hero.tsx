@@ -155,12 +155,12 @@ export default function Hero() {
                     <span className="text-accent underline decoration-foreground/10 underline-offset-8">d'architectures.</span>
                 </h1>
 
-                {/* Sous-titre - Universal Wording */}
+                {/* Sous-titre - Hybrid Wording (Elite but Understandable) */}
                 <p className="text-lg sm:text-2xl text-muted-foreground max-w-3xl leading-relaxed font-normal text-center" style={{ letterSpacing: '-0.01em' }}>
-                    Je conçois les systèmes qui permettront au numérique moderne 
-                    d'être <span className="text-foreground font-semibold">structuré</span>, 
-                    <span className="text-foreground font-semibold"> scalable</span> et 
-                    <span className="text-foreground font-semibold"> souverain</span>.
+                    Je conçois les socles technologiques qui permettent à votre entreprise de 
+                    <span className="text-foreground font-semibold"> croître sans limites</span>, 
+                    en toute <span className="text-foreground font-semibold"> sécurité</span> et avec une 
+                    <span className="text-foreground font-semibold"> fiabilité</span> totale.
                 </p>
 
                 {/* Data Points / Proof */}
@@ -182,7 +182,7 @@ export default function Hero() {
                 {/* CTAs */}
                 <div className="flex flex-col sm:flex-row gap-6 items-center pt-8 w-full justify-center">
                     <Link
-                        href="/contact"
+                        href="/contact?subject=Nouveau Projet"
                         className="inline-flex items-center justify-center gap-3 bg-accent text-white px-10 py-5 text-sm font-bold tracking-tight transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl shadow-accent/20 group"
                     >
                         Bâtir mon infrastructure
