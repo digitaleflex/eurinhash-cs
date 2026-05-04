@@ -29,7 +29,7 @@ export function ResourcesSection() {
     <section className="py-32 bg-foreground/[0.02]">
       <div className="mx-auto max-w-6xl px-4 sm:px-8">
         <header className="mb-20 text-center space-y-6">
-          <span className="font-mono text-xs text-accent tracking-widest font-bold block uppercase italic">Value First</span>
+          <span className="font-mono text-xs text-accent font-bold block uppercase italic">Expertise</span>
           <h2 className="text-4xl sm:text-6xl font-black tracking-tighter text-foreground decoration-accent/10 underline underline-offset-8">
               Ressources Gratuites.
           </h2>
@@ -52,7 +52,7 @@ export function ResourcesSection() {
                          <FileText className="w-5 h-5 text-accent" />
                       </div>
                       <div className="flex flex-col">
-                         <span className="text-[8px] font-mono text-muted-foreground/40 uppercase font-black">Archive_Node</span>
+                         <span className="text-[8px] font-mono text-muted-foreground/40 uppercase font-black">Noeud_Archive</span>
                          <span className="text-[10px] font-mono font-bold text-foreground">v2.0.{i}</span>
                       </div>
                    </div>

@@ -73,7 +73,7 @@ export function ProfileForm({ user, sessionCreatedAt }: { user: UserData, sessio
         <div className="flex items-center justify-between px-1">
           <div className="flex items-center gap-4">
              <div className="w-1 h-6 bg-accent" />
-             <h2 className="text-sm font-black uppercase tracking-[0.3em] text-foreground">User_Identity</h2>
+             <h2 className="text-sm font-black uppercase text-foreground">Profil Utilisateur</h2>
           </div>
           <span className="font-mono text-[10px] text-muted-foreground/40 uppercase">ID :: {user.id.slice(0, 8)}...</span>
         </div>
@@ -108,15 +108,15 @@ export function ProfileForm({ user, sessionCreatedAt }: { user: UserData, sessio
               <div className="flex-1 space-y-6 text-center sm:text-left">
                 <div className="space-y-1">
                   <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 mb-2">
-                     <Badge variant="outline" className="rounded-none border-accent/30 text-accent font-mono text-[9px] uppercase font-black tracking-widest bg-accent/5">
-                        Access_Level :: Authorized
-                     </Badge>
-                     <Badge variant="outline" className="rounded-none border-foreground/10 text-muted-foreground font-mono text-[9px] uppercase font-black tracking-widest">
-                        Node :: EU_WEST_1
-                     </Badge>
+                      <Badge variant="outline" className="rounded-none border-accent/30 text-accent font-mono text-[9px] uppercase font-black bg-accent/5">
+                        Accès Autorisé
+                      </Badge>
+                      <Badge variant="outline" className="rounded-none border-foreground/10 text-muted-foreground font-mono text-[9px] uppercase font-black">
+                        Région : EU West
+                      </Badge>
                   </div>
                   <h3 className="font-black text-3xl sm:text-4xl tracking-tighter text-foreground">
-                    {user.name || 'Anonymous_Agent'}
+                    {user.name || 'Utilisateur'}
                   </h3>
                 </div>
 
@@ -125,8 +125,8 @@ export function ProfileForm({ user, sessionCreatedAt }: { user: UserData, sessio
                     "w-2 h-2 rounded-full",
                     user.emailVerified ? "bg-accent" : "bg-yellow-500"
                   )} />
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground font-bold">
-                    Email_Status :: {user.emailVerified ? 'Verified_Secure' : 'Unverified_Warning'}
+                  <span className="font-mono text-[10px] uppercase text-muted-foreground font-bold">
+                    Statut Email : {user.emailVerified ? 'Vérifié' : 'Non vérifié'}
                   </span>
                 </div>
               </div>
@@ -141,9 +141,9 @@ export function ProfileForm({ user, sessionCreatedAt }: { user: UserData, sessio
               )}
               <div className="grid sm:grid-cols-2 gap-10">
                 <div className="space-y-4">
-                  <Label htmlFor="name" className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60 flex items-center gap-2">
+                  <Label htmlFor="name" className="text-[10px] font-black uppercase text-muted-foreground/60 flex items-center gap-2">
                     <div className="w-1 h-1 bg-accent" />
-                    Agent_Name
+                    Nom Complet
                   </Label>
                   {isEditing ? (
                     <div className="relative group">
@@ -158,21 +158,21 @@ export function ProfileForm({ user, sessionCreatedAt }: { user: UserData, sessio
                     </div>
                   ) : (
                     <div className="px-5 py-4 bg-foreground/5 border border-foreground/5 font-bold text-lg tracking-tight">
-                      {user.name || 'Agent_Not_Defined'}
+                      {user.name || 'Non défini'}
                     </div>
                   )}
                 </div>
 
                 <div className="space-y-4">
-                  <Label className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60 flex items-center gap-2">
+                  <Label className="text-[10px] font-black uppercase text-muted-foreground/60 flex items-center gap-2">
                     <div className="w-1 h-1 bg-accent" />
-                    Secure_Communication
+                    Contact & Communication
                   </Label>
                   <div className="px-5 py-4 bg-foreground/[0.02] border border-foreground/5 font-mono text-sm flex items-center gap-4 text-muted-foreground group">
                     <Mail className="w-4 h-4 text-accent/40 group-hover:text-accent transition-colors" />
                     <span className="truncate">{user.email}</span>
                     {user.emailVerified && (
-                      <Badge className="ml-auto bg-accent/10 text-accent border-none text-[8px] font-black tracking-widest uppercase">SSL_ENCRYPTED</Badge>
+                      <Badge className="ml-auto bg-accent/10 text-accent border-none text-[8px] font-black uppercase">Sécurisé</Badge>
                     )}
                   </div>
                 </div>
@@ -186,24 +186,24 @@ export function ProfileForm({ user, sessionCreatedAt }: { user: UserData, sessio
                   <Button
                     variant="ghost"
                     onClick={() => setIsEditing(false)}
-                    className="text-muted-foreground hover:text-foreground font-mono text-[10px] uppercase font-black tracking-widest"
+                    className="text-muted-foreground hover:text-foreground font-mono text-[10px] uppercase font-black"
                   >
-                    Cancel_Operation
+                    Annuler
                   </Button>
-                  <Button onClick={handleSave} disabled={isSaving} className="bg-accent hover:bg-foreground text-white rounded-none px-8 h-12 font-black text-xs uppercase tracking-widest transition-all hover:translate-x-1">
+                  <Button onClick={handleSave} disabled={isSaving} className="bg-accent hover:bg-foreground text-white rounded-none px-8 h-12 font-black text-xs uppercase transition-all hover:translate-x-1">
                     {isSaving ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin mr-3" />
-                        Synchronizing...
+                        Synchronisation...
                       </>
                     ) : (
-                      'Save_Changes'
+                      'Enregistrer'
                     )}
                   </Button>
                 </div>
               ) : (
-                <Button onClick={() => setIsEditing(true)} variant="outline" className="border-foreground/10 hover:border-accent hover:text-accent rounded-none font-black text-[10px] uppercase tracking-[0.2em] px-8 h-12 transition-all">
-                  Edit_Agent_Data
+                <Button onClick={() => setIsEditing(true)} className="bg-foreground hover:bg-accent text-background rounded-none px-8 h-12 font-black text-xs uppercase transition-all">
+                  Modifier le profil
                 </Button>
               )}
             </div>
@@ -216,7 +216,7 @@ export function ProfileForm({ user, sessionCreatedAt }: { user: UserData, sessio
         <section className="space-y-6">
           <div className="flex items-center gap-4">
              <div className="w-1 h-6 bg-accent/40" />
-             <h2 className="text-sm font-black uppercase tracking-[0.3em] text-foreground/60">Defense_Protocol</h2>
+              <h2 className="text-sm font-black uppercase text-foreground/60">Sécurité</h2>
           </div>
           
           <Card className="border-border/60 shadow-none bg-card/30 backdrop-blur-sm rounded-none border-l-4 border-l-yellow-500/20">
@@ -228,10 +228,10 @@ export function ProfileForm({ user, sessionCreatedAt }: { user: UserData, sessio
                   </div>
                   <div className="flex flex-col">
                      <span className="text-sm font-bold tracking-tight">Multi-Factor Auth (MFA)</span>
-                     <span className="text-[9px] font-mono uppercase tracking-widest">Status :: Standby</span>
+                      <span className="text-[9px] font-mono uppercase">Statut : En attente</span>
                   </div>
                 </div>
-                <Badge variant="secondary" className="text-[8px] font-black uppercase tracking-widest px-2">V2_Coming</Badge>
+                <Badge variant="secondary" className="text-[8px] font-black uppercase px-2">Bientôt</Badge>
               </div>
             </CardContent>
           </Card>
@@ -240,7 +240,7 @@ export function ProfileForm({ user, sessionCreatedAt }: { user: UserData, sessio
         <section className="space-y-6">
           <div className="flex items-center gap-4">
              <div className="w-1 h-6 bg-accent/40" />
-             <h2 className="text-sm font-black uppercase tracking-[0.3em] text-foreground/60">Node_Metadata</h2>
+              <h2 className="text-sm font-black uppercase text-foreground/60">Détails du compte</h2>
           </div>
 
           <Card className="border-border/60 shadow-none bg-card/30 backdrop-blur-sm rounded-none">
@@ -248,24 +248,24 @@ export function ProfileForm({ user, sessionCreatedAt }: { user: UserData, sessio
               <div className="flex items-center justify-between group">
                 <div className="flex items-center gap-4">
                   <Calendar className="w-4 h-4 text-accent" />
-                  <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground/60">Deployment_Date</span>
+                  <span className="text-xs font-bold uppercase text-muted-foreground/60">Date d'inscription</span>
                 </div>
                 <span className="font-mono text-xs font-black text-foreground">
                   {user.createdAt 
                     ? new Intl.DateTimeFormat('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' }).format(new Date(user.createdAt))
-                    : 'NULL'}
+                    : 'Aucune'}
                 </span>
               </div>
               <div className="h-px bg-foreground/5" />
               <div className="flex items-center justify-between group">
                 <div className="flex items-center gap-4">
                   <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                  <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground/60">Current_Session</span>
+                  <span className="text-xs font-bold uppercase text-muted-foreground/60">Session actuelle</span>
                 </div>
                 <span className="font-mono text-xs font-black text-accent">
                   {sessionCreatedAt
                     ? new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(new Date(sessionCreatedAt))
-                    : 'ACTIVE'}
+                    : 'Active'}
                 </span>
               </div>
             </CardContent>

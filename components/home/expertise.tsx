@@ -33,7 +33,7 @@ export default function Expertise() {
                 <div className="flex items-center gap-6 mb-24">
                     <span className="font-mono text-[10px] text-accent/80 tracking-widest uppercase font-bold">Solutions Stratégiques</span>
                     <div className="h-px flex-1 bg-foreground/5" />
-                    <span className="font-mono text-[10px] text-foreground/20 tracking-widest uppercase">03 piliers · systems</span>
+                    <span className="font-mono text-[10px] text-foreground/20 uppercase">03 piliers · systèmes</span>
                 </div>
 
                 <div className="grid md:grid-cols-3 gap-px bg-foreground/5 border border-foreground/5 mb-24 relative overflow-hidden">
@@ -45,7 +45,7 @@ export default function Expertise() {
                              {/* Technical Header */}
                              <div className="flex items-center justify-between">
                                 <div className="font-mono text-[10px] text-foreground/20 tracking-widest uppercase">
-                                    arch_node :: {item.id}
+                                    noeud_arch :: {item.id}
                                 </div>
                                 <div className="w-1.5 h-1.5 bg-foreground/5 group-hover:bg-accent transition-colors rounded-sm" />
                              </div>
@@ -88,7 +88,7 @@ export default function Expertise() {
                     <div className="space-y-4 text-center md:text-left relative z-10">
                         <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
                             <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-                            <span className="font-mono text-[10px] text-accent tracking-widest uppercase font-bold">Protocol Status: Optimal</span>
+                            <span className="font-mono text-[10px] text-accent uppercase font-bold">État du Protocole : Optimal</span>
                         </div>
                         <h4 className="text-2xl sm:text-3xl font-black tracking-tighter text-background leading-none">
                             Disponibilité & Souveraineté <br className="hidden sm:block" /> Digitale Sans Compromis.
@@ -97,12 +97,12 @@ export default function Expertise() {
                     
                     <div className="grid grid-cols-2 gap-8 md:gap-16 font-mono text-xs relative z-10">
                         <div className="flex flex-col gap-2">
-                            <span className="text-background/30 text-[9px] tracking-widest uppercase font-bold">Standard_ISO</span>
-                            <span className="text-background font-black tracking-tighter text-lg underline decoration-accent/30 decoration-2 underline-offset-4">27001_COMPLIANT</span>
+                            <span className="text-background/30 text-[9px] uppercase font-bold">Norme_ISO</span>
+                            <span className="text-background font-black tracking-tighter text-lg underline decoration-accent/30 decoration-2 underline-offset-4">CONFORME_27001</span>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <span className="text-background/30 text-[9px] tracking-widest uppercase font-bold">Architecture</span>
-                            <span className="text-background font-black tracking-tighter text-lg underline decoration-accent/30 decoration-2 underline-offset-4">DECOUPLED_SOV</span>
+                            <span className="text-background/30 text-[9px] uppercase font-bold">Architecture</span>
+                            <span className="text-background font-black tracking-tighter text-lg underline decoration-accent/30 decoration-2 underline-offset-4">SOUVERAINETÉ_DÉCOUPLÉE</span>
                         </div>
                     </div>
 

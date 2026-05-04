@@ -30,7 +30,7 @@ export function BlogSection() {
             </div>
             <h2 className="text-4xl sm:text-5xl font-black tracking-tighter leading-[0.9]">
               Blog &<br />
-              <span className="text-foreground/20 font-light italic">Insights.</span>
+              <span className="text-foreground/20 font-light italic">Analyses.</span>
             </h2>
             <p className="text-muted-foreground leading-relaxed">
               Analyses techniques approfondies et points de veille pour les décideurs et ingénieurs.
@@ -45,7 +45,7 @@ export function BlogSection() {
               <article key={i} className="group border-b border-foreground/5 pb-12 last:border-0 last:pb-0 relative">
                 <div className="flex items-center gap-6 mb-6">
                   <div className="font-mono text-[9px] text-foreground/20 tracking-tighter">
-                    REF_ID :: 00{i+1}
+                    Réf. : 00{i+1}
                   </div>
                   <div className="h-px w-8 bg-foreground/10" />
                   <span className="text-[10px] font-mono font-black text-accent uppercase tracking-[0.2em]">{post.category}</span>
