@@ -1,5 +1,6 @@
-import { LegalPage } from '../../../components/legal-page';
-import { Metadata } from 'next';
+import { LegalPage } from '@/components/legal-page';
+
+import type { Metadata } from 'next';
 
 export const revalidate = 86400; // Revalider toutes les 24 heures (ISR)
 
@@ -31,8 +32,8 @@ export default function PolitiqueConfidentialitePage() {
     >
       <p>
         La présente politique de confidentialité a pour objectif d’informer
-        les utilisateurs du site
-        <strong> eurinhash.com</strong> sur la collecte, l’utilisation et la
+        les utilisateurs du site{' '}
+        <strong>eurinhash.com</strong> sur la collecte, l’utilisation et la
         protection de leurs données personnelles.
       </p>
 
@@ -102,9 +103,10 @@ export default function PolitiqueConfidentialitePage() {
       </ul>
       <p>
         Pour exercer vos droits, vous pouvez adresser une demande à l'adresse
-        suivante :
-        <a href="mailto:contact@eurinhash.com"> contact@eurinhash.com</a>.
+        suivante :{' '}
+        <a href="mailto:contact@eurinhash.com">contact@eurinhash.com</a>.
       </p>
+
 
       <h2 id="cookies">Cookies</h2>
       <p>

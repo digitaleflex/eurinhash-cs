@@ -20,7 +20,6 @@ const navItems = [
   { href: '/admin', icon: LayoutDashboard, label: "Vue d'ensemble" },
   { href: '/admin/users', icon: Users, label: 'Utilisateurs' },
   { href: '/admin/messages', icon: Mail, label: 'Messages' },
-  { href: '/admin/demandes', icon: FileText, label: 'Demandes' },
   { href: '/admin/evenements', icon: Calendar, label: 'Événements' },
 ];
 

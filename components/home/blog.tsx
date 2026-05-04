@@ -1,6 +1,6 @@
 'use client';
 
-import { Newspaper, ArrowRight, Tag } from 'lucide-react';
+import { Newspaper, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 const posts = [
@@ -30,7 +30,7 @@ export function BlogSection() {
             </div>
             <h2 className="text-4xl sm:text-5xl font-black tracking-tighter leading-[0.9]">
               Blog &<br />
-              <span className="text-foreground/20 font-light italic">Insights.</span>
+              <span className="text-foreground/20 font-light italic">Analyses.</span>
             </h2>
             <p className="text-muted-foreground leading-relaxed">
               Analyses techniques approfondies et points de veille pour les décideurs et ingénieurs.
@@ -42,20 +42,35 @@ export function BlogSection() {
 
           <div className="lg:w-2/3 grid gap-12">
             {posts.map((post, i) => (
-              <article key={i} className="group border-b border-foreground/5 pb-12 last:border-0 last:pb-0">
-                <div className="flex items-center gap-4 mb-4">
-                  <span className="text-[10px] font-mono font-bold text-accent uppercase tracking-widest px-2 py-0.5 border border-accent/20">{post.category}</span>
-                  <span className="text-[10px] font-mono text-muted-foreground">{post.date}</span>
+              <article key={i} className="group border-b border-foreground/5 pb-12 last:border-0 last:pb-0 relative">
+                <div className="flex items-center gap-6 mb-6">
+                  <div className="font-mono text-[9px] text-foreground/20 tracking-tighter">
+                    Réf. : 00{i+1}
+                  </div>
+                  <div className="h-px w-8 bg-foreground/10" />
+                  <span className="text-[10px] font-mono font-black text-accent uppercase tracking-[0.2em]">{post.category}</span>
+                  <span className="text-[10px] font-mono text-muted-foreground/40 italic ml-auto">{post.date}</span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-black tracking-tight mb-4 group-hover:text-accent transition-colors">
+                
+                <h3 className="text-2xl sm:text-4xl font-black tracking-tighter mb-4 group-hover:text-accent transition-colors leading-[1.1]">
                   <Link href="/blog">{post.title}</Link>
                 </h3>
-                <p className="text-muted-foreground text-sm max-w-xl mb-6">
-                  {post.desc}
-                </p>
-                <Link href="/blog" className="text-xs font-bold underline underline-offset-4 decoration-accent/30 hover:decoration-accent transition-all">
-                  Lire la suite
-                </Link>
+                
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-8">
+                  <p className="text-muted-foreground text-sm sm:text-base max-w-xl leading-relaxed">
+                    {post.desc}
+                  </p>
+                  <Link 
+                    href="/contact?subject=Information Blog" 
+                    className="shrink-0 font-mono text-[10px] font-bold uppercase tracking-widest border border-foreground/10 px-4 py-2 hover:bg-accent hover:text-white hover:border-accent transition-all flex items-center gap-2 group/btn"
+                  >
+                    Ouvrir_Dossier 
+                    <ArrowRight className="w-3 h-3 group-hover/btn:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+
+                {/* Decorative architectural detail */}
+                <div className="absolute right-0 top-0 w-px h-0 bg-accent group-hover:h-full transition-all duration-700 opacity-20" />
               </article>
             ))}
           </div>

@@ -6,16 +6,17 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
 interface Message {
-  id: string;
-  name: string;
-  email: string;
-  subject: string | null;
-  message: string;
-  status: string;
-  createdAt: string;
+  readonly id: string;
+  readonly name: string;
+  readonly email: string;
+  readonly subject: string | null;
+  readonly message: string;
+  readonly status: string;
+  readonly createdAt: string | Date;
 }
 
-export function MessageItem({ msg }: { msg: Message }) {
+export function MessageItem({ msg }: { readonly msg: Message }) {
+
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   return (

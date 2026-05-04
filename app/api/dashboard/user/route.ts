@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server';
-import type { PrismaClient } from '@prisma/client';
 import prismaApi from '@/lib/prisma-api';
 import { auth } from '@/lib/auth';
 
-const prisma = prismaApi as PrismaClient;
+const prisma = prismaApi;
 
 export async function GET(request: Request) {
   try {
@@ -17,22 +16,19 @@ export async function GET(request: Request) {
 
     const user = session.user;
 
-    const accounts = await prisma.account.findMany({
-      where: { userId: user.id },
-    });
+    // Fetch all counts and accounts in parallel to optimize request time
+    const [accounts, sessionsCount, messagesCount] = await Promise.all([
+      prisma.account.findMany({
+        where: { userId: user.id },
+      }),
+      prisma.session.count({
+        where: { userId: user.id },
+      }),
+      prisma.contactMessage.count({
+        where: { email: user.email },
+      }),
+    ]);
 
-    const sessionsCount = await prisma.session.count({
-      where: { userId: user.id },
-    });
-
-    // Real data counts
-    const messagesCount = await prisma.contactMessage.count({
-      where: { email: user.email },
-    });
-
-    const requestsCount = await prisma.projectRequest.count({
-      where: { email: user.email },
-    });
 
     return NextResponse.json({
       id: user.id,
@@ -46,7 +42,6 @@ export async function GET(request: Request) {
       })),
       sessionsCount,
       messagesCount,
-      requestsCount,
     });
   } catch (error) {
     console.error('Dashboard API Error (GET):', error);

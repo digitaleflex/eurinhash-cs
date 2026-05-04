@@ -67,7 +67,7 @@ export default async function AdminEventsPage({
         </div>
         <Button
           asChild
-          className="bg-accent hover:bg-accent/90 text-white font-bold h-11 px-6 px-4"
+          className="bg-accent hover:bg-accent/90 text-white font-bold h-11 px-6"
         >
           <Link
             href="/admin/evenements/new"
@@ -94,7 +94,7 @@ export default async function AdminEventsPage({
               </tr>
             </thead>
             <tbody className="divide-y divide-border/20">
-              {events.map(event => {
+              {events.map((event: any) => {
                 const Icon = platformIcons[event.platform] || ExternalLink;
                 return (
                   <tr

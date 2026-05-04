@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { GraduationCap, Code2, ShieldAlert, Cloud, ArrowRight, CheckCircle2 } from 'lucide-react';
 

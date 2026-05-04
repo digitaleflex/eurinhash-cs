@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import {
   Calendar,
@@ -7,27 +7,27 @@ import {
   ArrowRight,
   Youtube,
   Globe,
-  Lock,
   Clock,
   ExternalLink,
   Milestone
 } from 'lucide-react';
+
 import { Badge } from '@/components/ui/badge';
 import prismaApi from '@/lib/prisma-api';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { RegisterButton } from '@/components/events/RegisterButton';
 import { Countdown } from '@/components/events/Countdown';
-import type { PrismaClient } from '@prisma/client';
+// import type { PrismaClient } from '@prisma/client';
 
-const prisma = prismaApi as unknown as PrismaClient;
+const prisma = prismaApi;
 
 export const metadata: Metadata = {
   title: 'Événements & Webinaires - Eurin Hash',
   description: 'Participez en direct à nos sessions techniques et découvrez les coulisses de l\'architecture moderne.',
 };
 
-const platformIcons: Record<string, any> = {
+const platformIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   YouTube: Youtube,
   TikTok: Youtube, // Temporary fallback
   'Google Meet': Video,

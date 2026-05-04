@@ -1,5 +1,6 @@
-import { LegalPage } from '../../../components/legal-page';
-import { Metadata } from 'next';
+import { LegalPage } from '@/components/legal-page';
+
+import type { Metadata } from 'next';
 
 export const revalidate = 86400; // Revalider toutes les 24 heures (ISR)
 
@@ -29,8 +30,8 @@ export default function MentionsLegalesPage() {
     >
       <p>
         Le présent site <strong>eurinhash.com</strong> est un site personnel
-        édité par
-        <strong> Eurin Hash (E-FLEX)</strong>.
+        édité par{' '}
+        <strong>Eurin Hash (E-FLEX)</strong>.
       </p>
 
       <h2 id="editeur">Éditeur</h2>
@@ -67,13 +68,14 @@ export default function MentionsLegalesPage() {
       <h2 id="propriete">Propriété intellectuelle</h2>
       <p>
         L’ensemble des contenus présents sur le site{' '}
-        <strong>eurinhash.com</strong>
+        <strong>eurinhash.com</strong>{' '}
         (textes, images, graphismes, logo, vidéos, structure, code, etc.) sont
         protégés par les lois en vigueur relatives à la propriété
         intellectuelle. Toute reproduction, représentation, modification,
         publication, adaptation totale ou partielle est interdite sans
         autorisation écrite préalable de l’éditeur.
       </p>
+
 
       <h2 id="responsabilite">Responsabilité</h2>
       <p>

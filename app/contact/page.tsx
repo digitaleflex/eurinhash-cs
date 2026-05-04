@@ -1,8 +1,9 @@
 'use client';
 
-import { Mail, Linkedin, MessageSquare, ArrowRight, MapPin, Shield, Clock, UserCheck, HelpCircle } from 'lucide-react';
-import Link from 'next/link';
+import React from 'react';
+import { Mail, Linkedin, MessageSquare, ArrowRight, MapPin, Shield, Clock, UserCheck, HelpCircle, Loader2 } from 'lucide-react';
 import { ContactForm } from '@/components/contact-form';
+
 
 const trustSignals = [
   { icon: Clock, title: 'Réponse sous 24h', desc: 'Délai maximum garanti pour toute demande technique.' },
@@ -44,8 +45,8 @@ export default function ContactPage() {
 
         {/* Filtre de Confiance */}
         <div className="grid sm:grid-cols-3 gap-8 mb-24 py-12 border-y border-foreground/5">
-          {trustSignals.map((signal, i) => (
-            <div key={i} className="flex gap-5 items-start">
+          {trustSignals.map((signal) => (
+            <div key={signal.title} className="flex gap-5 items-start">
               <signal.icon className="w-6 h-6 text-accent shrink-0 mt-1" />
               <div>
                 <h3 className="font-bold text-sm mb-1">{signal.title}</h3>
@@ -54,6 +55,7 @@ export default function ContactPage() {
             </div>
           ))}
         </div>
+
 
         <div className="grid lg:grid-cols-[1.6fr_1fr] gap-20 items-start">
 
@@ -65,7 +67,9 @@ export default function ContactPage() {
                 <div className="h-px flex-1 bg-foreground/5" />
               </div>
               <div className="border border-foreground/5 p-8 sm:p-12 bg-foreground/[0.01]">
-                <ContactForm />
+                <React.Suspense fallback={<div className="h-64 flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-accent" /></div>}>
+                  <ContactForm />
+                </React.Suspense>
               </div>
             </section>
 
@@ -75,13 +79,14 @@ export default function ContactPage() {
                 <h2 className="text-xl font-bold tracking-tight">Sujets Fréquents</h2>
               </div>
               <div className="grid gap-6">
-                {faqs.map((faq, i) => (
-                  <div key={i} className="p-6 border border-foreground/5 hover:border-accent/20 transition-colors">
+                {faqs.map((faq) => (
+                  <div key={faq.q} className="p-6 border border-foreground/5 hover:border-accent/20 transition-colors">
                     <h4 className="font-bold text-sm mb-2">{faq.q}</h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">{faq.a}</p>
                   </div>
                 ))}
               </div>
+
             </section>
           </div>
 
@@ -94,15 +99,16 @@ export default function ContactPage() {
                 Connectivité Directe
               </h3>
               <div className="grid gap-3">
-                {channels.map((chan, i) => (
+                {channels.map((chan) => (
                   <a
-                    key={i}
+                    key={chan.label}
                     href={chan.href}
                     target={chan.href.startsWith('http') ? '_blank' : undefined}
                     rel="noopener noreferrer"
                     className="flex items-center justify-between p-5 border border-foreground/5 hover:border-accent/40 hover:bg-foreground/[0.02] transition-all group"
                   >
                     <div className="flex items-center gap-5">
+
                       <chan.icon className="w-5 h-5 text-foreground/20 group-hover:text-accent transition-colors" />
                       <div>
                         <span className="font-mono text-[9px] text-muted-foreground block mb-0.5 uppercase tracking-tighter">{chan.label}</span>
@@ -110,9 +116,11 @@ export default function ContactPage() {
                       </div>
                     </div>
                     <ArrowRight className="w-4 h-4 text-foreground/10 group-hover:text-accent group-hover:translate-x-1 transition-all" />
+
                   </a>
                 ))}
               </div>
+
             </div>
 
             {/* Mentions Légales/Confidentialité Badge */}

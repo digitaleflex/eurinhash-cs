@@ -1,16 +1,15 @@
-import * as React from 'react';
-import { redirect } from 'next/navigation';
-import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
 import {
   LayoutDashboard,
   Users,
   Mail,
-  FileText,
   Settings,
   ShieldCheck,
   Calendar,
 } from 'lucide-react';
+import type { ReactNode } from 'react';
+import { redirect } from 'next/navigation';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import Link from 'next/link';
 import { AdminMobileNav } from '@/components/admin/MobileNav';
 import { AdminNavItem } from '@/components/admin/AdminNavItem';
@@ -19,13 +18,13 @@ import { ToastProvider, ToastViewport } from '@/components/ui/toast';
 export default async function AdminLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
 
-  if (!session || session.user.role !== 'admin') {
+  if (!session || (session.user as any).role !== 'admin') {
     redirect('/dashboard');
   }
 
@@ -65,15 +64,18 @@ function DesktopSidebar() {
 
         <AdminNavItem
           href="/admin"
-          icon={LayoutDashboard}
+          icon={<LayoutDashboard />}
           label="Vue d'ensemble"
         />
-        <AdminNavItem href="/admin/users" icon={Users} label="Utilisateurs" />
-        <AdminNavItem href="/admin/messages" icon={Mail} label="Messages" />
-        <AdminNavItem href="/admin/demandes" icon={FileText} label="Demandes" />
+        <AdminNavItem
+          href="/admin/users"
+          icon={<Users />}
+          label="Utilisateurs"
+        />
+        <AdminNavItem href="/admin/messages" icon={<Mail />} label="Messages" />
         <AdminNavItem
           href="/admin/evenements"
-          icon={Calendar}
+          icon={<Calendar />}
           label="Événements"
         />
 
@@ -83,7 +85,7 @@ function DesktopSidebar() {
           </p>
           <AdminNavItem
             href="/admin/settings"
-            icon={Settings}
+            icon={<Settings />}
             label="Configuration"
           />
         </div>

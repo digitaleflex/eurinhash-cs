@@ -1,17 +1,22 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { PrismaClient } from "@prisma/client";
+import prisma from "./prisma";
 import { emailOTP, admin } from "better-auth/plugins";
 import { sendMail } from "./mail";
 
-// Better Auth requires a PLAIN PrismaClient — not extended with $extends(withAccelerate())
-// Using the extended client from prisma-api.ts causes silent auth failures
-const prismaForAuth = new PrismaClient();
+// Better Auth uses the shared singleton PrismaClient
+const prismaForAuth = prisma;
 
-const AUTH_BASE_URL =
+
+let AUTH_BASE_URL =
     process.env.BETTER_AUTH_URL ||
     process.env.NEXT_PUBLIC_SITE_URL ||
     "http://localhost:3000";
+
+// Ensure the URL starts with a protocol (http/https)
+if (AUTH_BASE_URL && !AUTH_BASE_URL.startsWith("http")) {
+    AUTH_BASE_URL = `https://${AUTH_BASE_URL}`;
+}
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
@@ -53,7 +58,7 @@ export const auth = betterAuth({
         } : {}),
     },
     plugins: [
-        admin(),
+        admin() as any,
         emailOTP({
             async sendVerificationOTP({ email, otp, type }) {
                 const subject = type === "sign-in" ? "Votre code de connexion" : "Vérifiez votre email";
@@ -72,7 +77,7 @@ export const auth = betterAuth({
                     `,
                 });
             },
-        }),
+        }) as any,
     ],
     trustedOrigins: uniqueTrustedOrigins,
     // Session configuration
@@ -83,5 +88,5 @@ export const auth = betterAuth({
 });
 
 // Type exports for use in other parts of the app
-export type Session = typeof auth.$Infer.Session.session;
-export type User = typeof auth.$Infer.Session.user;
+type Session = typeof auth.$Infer.Session.session;
+type User = typeof auth.$Infer.Session.user;

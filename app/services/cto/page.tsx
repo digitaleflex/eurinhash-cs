@@ -1,6 +1,6 @@
 'use client';
 
-import { Users, TrendingUp, Target, ArrowRight } from 'lucide-react';
+import { Users, Target, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 export default function CTOServicePage() {

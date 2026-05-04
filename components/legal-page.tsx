@@ -108,7 +108,7 @@ export function LegalPage({
                         <Link
                             key={item.id}
                             href={`#${item.id}`}
-                            className="block text-sm text-foreground/50 hover:text-accent transition-all duration-300 group/link flex items-center gap-3"
+                            className="text-sm text-foreground/50 hover:text-accent transition-all duration-300 group/link flex items-center gap-3"
                         >
                             <span className="font-mono text-[10px] opacity-20 group-hover/link:opacity-100 transition-opacity">{(idx + 1).toString().padStart(2, '0')}</span>
                             <span className="group-hover/link:translate-x-1 transition-transform">{item.label}</span>

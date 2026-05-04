@@ -25,7 +25,7 @@ export default function Bio() {
             {/* Badge flottant technique */}
             <div className="absolute bottom-8 left-8 bg-foreground text-background p-4 sm:p-6 shadow-2xl flex flex-col gap-1">
                 <span className="text-[9px] font-mono text-background/40 uppercase tracking-widest">Poste</span>
-                <span className="text-sm font-bold tracking-tight">Lead Architect · EHAF</span>
+                <span className="text-sm font-bold tracking-tight">Lead Architect · Eurin Hash</span>
             </div>
           </div>
 
@@ -41,12 +41,12 @@ export default function Bio() {
 
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed font-normal">
                 <p>
-                    Mon parcours est né d’un déclic : le constat que l’Afrique ne manque pas de talents techniques, 
-                    mais de structures pour les porter. Ma vision dépasse le simple code ; je conçois les socles qui 
-                    permettent aux entreprises de croître sans s'effondrer sous leur propre poids.
+                    Mon parcours est né d’un déclic : le constat que beaucoup d’entreprises échouent car leurs fondations 
+                    techniques sont trop fragiles. Ma vision dépasse le simple code ; je bâtis les structures robustes 
+                    qui permettent à vos ambitions de se concrétiser sans limites techniques.
                 </p>
                 <p className="text-foreground font-medium">
-                    Expertise Cloud, Sécurité, Formation et Leadership stratégique.
+                    Fiabilité, Croissance et Sécurité au service de votre vision.
                 </p>
             </div>
 

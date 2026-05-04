@@ -1,16 +1,27 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { z } from 'zod';
 import { ContactSchema, type ContactFormData } from '@/lib/validation';
 
 export function useContactForm() {
+  const searchParams = useSearchParams();
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
     subject: '',
     message: '',
   });
+
+  // Pre-fill subject from URL search params
+  useEffect(() => {
+    if (!searchParams) return;
+    const subjectParam = searchParams.get('subject');
+    if (subjectParam) {
+      setFormData(prev => ({ ...prev, subject: subjectParam }));
+    }
+  }, [searchParams]);
   const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);

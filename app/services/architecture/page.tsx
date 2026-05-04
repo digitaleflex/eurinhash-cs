@@ -1,6 +1,7 @@
 'use client';
 
-import { Layers, Cpu, Server, ArrowRight } from 'lucide-react';
+import { Layers, Server, ArrowRight } from 'lucide-react';
+
 import Link from 'next/link';
 
 export default function ArchitectureServicePage() {

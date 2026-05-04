@@ -6,14 +6,13 @@ import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import prismaApi from '@/lib/prisma-api';
-import type { PrismaClient } from '@prisma/client';
 import { DashboardSearch } from '@/components/dashboard/search';
 import { MessageItem } from './message-item';
 
-const prisma = prismaApi as PrismaClient;
+const prisma = prismaApi;
 
 interface MessagesPageProps {
-  searchParams: Promise<{ q?: string }>;
+  readonly searchParams: Promise<{ q?: string }>;
 }
 
 export default async function MessagesPage({ searchParams }: MessagesPageProps) {
@@ -49,10 +48,11 @@ export default async function MessagesPage({ searchParams }: MessagesPageProps) 
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Mes Messages</h1>
           <p className="text-muted-foreground mt-1">
-            {messages.length} message{messages.length !== 1 ? 's' : ''} envoyé
-            {messages.length !== 1 ? 's' : ''}
+            {messages.length} message{messages.length > 1 ? 's' : ''} envoyé
+            {messages.length > 1 ? 's' : ''}
           </p>
         </div>
+
         <Button asChild>
           <a href="/contact">
             <Mail className="w-4 h-4 mr-2" />
@@ -80,9 +80,10 @@ export default async function MessagesPage({ searchParams }: MessagesPageProps) 
       ) : (
         <div className="space-y-4">
           {messages.map(msg => (
-            <MessageItem key={msg.id} msg={JSON.parse(JSON.stringify(msg))} />
+            <MessageItem key={msg.id} msg={structuredClone(msg)} />
           ))}
         </div>
+
       )}
     </div>
   );
