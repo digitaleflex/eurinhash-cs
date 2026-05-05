@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache';
 import prismaApi from '@/lib/prisma-api';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
-import { sendMail } from '@/lib/mail';
+import { sendMail, sendEventConfirmation } from '@/lib/mail';
 
 import { after } from 'next/server';
 
@@ -88,25 +88,20 @@ export async function registerForEvent(eventId: string) {
   // Background tasks: email and revalidation
   after(async () => {
     try {
-      await sendMail({
+      await sendEventConfirmation({
         to: session.user.email,
-        subject: `Inscription confirmée : ${registration.event.title}`,
-        html: `
-          <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-            <h2 style="color: #000; font-weight: 900; text-transform: uppercase; letter-spacing: -0.05em;">Confirmation d'Inscription</h2>
-            <p>Bonjour ${session.user.name},</p>
-            <p>Votre inscription pour l'événement <strong>${registration.event.title}</strong> a été confirmée !</p>
-            <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin: 20px 0;">
-              <p style="margin: 0; font-size: 14px;">📅 <strong>Date :</strong> ${new Date(registration.event.date).toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' })}</p>
-              <p style="margin: 5px 0 0 0; font-size: 14px;">🔗 <strong>Lien :</strong> <a href="${registration.event.eventUrl}">${registration.event.platform}</a></p>
-            </div>
-            <p>Un rappel vous sera envoyé peu de temps avant le début de la session.</p>
-            <p style="margin-top: 30px; border-top: 1px solid #eee; pt: 20px; font-size: 12px; color: #666;">
-              Eurin Hash - Portfolio & Architecture Moderne
-            </p>
-          </div>
-        `,
+        userName: session.user.name || 'Invité',
+        eventTitle: registration.event.title,
+        eventDate: new Date(registration.event.date).toLocaleDateString('fr-FR', { 
+          day: '2-digit', 
+          month: 'long', 
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        }),
+        eventUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/evenements/${registration.event.slug}`,
       });
+      
       revalidatePath('/evenements');
       revalidatePath('/dashboard');
     } catch (error) {

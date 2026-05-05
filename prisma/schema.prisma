@@ -2,8 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["driverAdapters"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -30,6 +29,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
   registrations EventRegistration[]
+  posts         Post[]
+  comments      Comment[]
 
   @@map("users")
 }
@@ -127,4 +128,79 @@ model EventRegistration {
 
   @@unique([userId, eventId])
   @@map("event_registrations")
+}
+
+// ===========================================
+// BLOG SYSTEM (Phase 3)
+// ===========================================
+
+model Post {
+  id               String    @id @default(cuid())
+  title            String
+  slug             String    @unique
+  excerpt          String    @db.Text
+  content          String    @db.Text
+  published        Boolean   @default(false)
+  featured         Boolean   @default(false)
+  readingTime      Int?      // In minutes
+  thumbnail        String?
+  
+  // SEO Metadata
+  seoTitle         String?
+  seoDescription   String?
+  
+  // Relations
+  authorId         String
+  author           User      @relation(fields: [authorId], references: [id])
+  categoryId       String?
+  category         Category? @relation(fields: [categoryId], references: [id])
+  tags             Tag[]     @relation("PostToTag")
+  comments         Comment[]
+
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  publishedAt      DateTime?
+
+  @@index([authorId])
+  @@index([categoryId])
+  @@map("posts")
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
+  description String?  @db.Text
+  posts       Post[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("categories")
+}
+
+model Tag {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slug      String   @unique
+  posts     Post[]   @relation("PostToTag")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("tags")
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String   @db.Text
+  status    String   @default("pending") // "pending", "approved", "spam"
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([postId])
+  @@index([userId])
+  @@map("comments")
 }

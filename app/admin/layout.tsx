@@ -5,6 +5,7 @@ import {
   Settings,
   ShieldCheck,
   Calendar,
+  FileText,
 } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { redirect } from 'next/navigation';
@@ -77,6 +78,11 @@ function DesktopSidebar() {
           href="/admin/evenements"
           icon={<Calendar />}
           label="Événements"
+        />
+        <AdminNavItem
+          href="/admin/blog"
+          icon={<FileText />}
+          label="Blog"
         />
 
         <div className="pt-8">

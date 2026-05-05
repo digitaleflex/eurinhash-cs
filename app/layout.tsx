@@ -13,6 +13,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { JsonLd } from '@/components/json-ld';
 import { ConditionalWrapper } from '@/components/layout-wrapper';
+import NextTopLoader from 'nextjs-toploader';
 
 import './globals.css';
 
@@ -90,6 +91,17 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <NextTopLoader
+            color="#e11d48"
+            initialPosition={0.08}
+            crawlSpeed={200}
+            height={3}
+            crawl={true}
+            showSpinner={false}
+            easing="ease"
+            speed={200}
+            shadow="0 0 10px #e11d48,0 0 5px #e11d48"
+          />
           <ConditionalWrapper excludePaths={['/admin', '/dashboard']}>
             <header className="border-b border-border sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
               <div className="mx-auto w-full max-w-[1400px] px-6 lg:px-12 py-3 sm:py-4 flex items-center justify-between">
