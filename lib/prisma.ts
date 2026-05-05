@@ -15,10 +15,10 @@ const prismaClientSingleton = () => {
 
   // Utilisation de l'adapter Neon pour des performances optimales en serverless
   const pool = new Pool({ connectionString });
-  const adapter = new PrismaNeon(pool as any);
+  const adapter = new PrismaNeon(pool);
 
   return new PrismaClient({
-    adapter,
+    adapter: adapter as any,
     log: process.env.NODE_ENV === 'development' ? ['error', 'warn'] : ['error'],
   });
 };
