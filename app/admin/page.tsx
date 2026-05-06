@@ -31,7 +31,10 @@ export default async function AdminPage() {
     totalRegistrations,
     totalPosts,
     recentMessages,
-    registrationsLast7Days
+    registrationsLast7Days,
+    unreadMessagesCount,
+    registrationsLast7Days_detailed,
+    recentPosts
   ] = await Promise.all([
     prisma.user.count(),
     prisma.contactMessage.count(),
@@ -47,8 +50,27 @@ export default async function AdminPage() {
         createdAt: { gte: sevenDaysAgo }
       },
       select: { createdAt: true }
+    }),
+    prisma.contactMessage.count({ where: { status: 'new' } }),
+    prisma.eventRegistration.findMany({
+      take: 5,
+      orderBy: { createdAt: 'desc' },
+      include: {
+        user: true,
+        event: true,
+      }
+    }),
+    (prisma as any).post.findMany({
+      take: 5,
+      orderBy: { createdAt: 'desc' },
     })
   ]);
+
+  const recentActivity = [
+    ...recentMessages.map((m: any) => ({ id: m.id, type: 'message', title: `Message: ${m.subject || 'Nouveau contact'}`, user: m.name, date: m.createdAt })),
+    ...registrationsLast7Days_detailed.map((r: any) => ({ id: r.id, type: 'registration', title: `Inscription: ${r.event.title}`, user: r.user.name || r.user.email, date: r.createdAt })),
+    ...recentPosts.map((p: any) => ({ id: p.id, type: 'post', title: `Article: ${p.title}`, user: 'Admin', date: p.createdAt })),
+  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 8);
 
   const chartData = Array.from({ length: 7 }).map((_, i) => {
     const d = new Date();
@@ -89,10 +111,10 @@ export default async function AdminPage() {
 
       {/* --- KPI GRID --- */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard title="Utilisateurs" value={totalUsers} icon={Users} trend="+12%" description="Total inscrits" href="/admin/users" />
-        <StatCard title="Événements" value={totalEvents} icon={Calendar} trend="Actifs" description="Sessions lives" href="/admin/evenements" />
-        <StatCard title="Articles" value={totalPosts} icon={FileText} trend="SEO OK" description="Posts publiés" href="/admin/blog" />
-        <StatCard title="Messages" value={totalMessages} icon={MessageSquare} trend="Nouveaux" description="Emails reçus" href="/admin/messages" />
+        <StatCard title="Communauté" value={totalUsers} icon={Users} trend="+12%" description="Utilisateurs totaux" href="/admin/users" />
+        <StatCard title="Inscriptions" value={totalRegistrations} icon={BookmarkCheck} trend="En hausse" description="Total participations" href="/admin/evenements" />
+        <StatCard title="Contenu" value={totalPosts} icon={FileText} trend="Expertise" description="Articles publiés" href="/admin/blog" />
+        <StatCard title="Messages" value={unreadMessagesCount} icon={MessageSquare} trend={unreadMessagesCount > 0 ? "Action requise" : "À jour"} description="Messages non lus" href="/admin/messages" highlight={unreadMessagesCount > 0} />
       </div>
 
       <div className="grid gap-8 lg:grid-cols-3">
@@ -115,23 +137,38 @@ export default async function AdminPage() {
             </CardContent>
           </Card>
 
-          {/* Quick Stats Grid */}
-          <div className="grid grid-cols-2 gap-4">
-             <Card className="bg-accent text-white p-6 border-none shadow-xl shadow-accent/10">
-                <h3 className="text-sm font-black uppercase tracking-widest mb-1">Missions SEO</h3>
-                <p className="text-xs text-white/80 leading-relaxed mb-4">Optimisez vos articles en attente pour booster le trafic.</p>
-                <Button variant="secondary" size="sm" className="w-full bg-white text-accent hover:bg-white/90 text-[10px] font-bold uppercase tracking-widest">
-                  Gérer les brouillons
-                </Button>
-             </Card>
-             <Card className="bg-slate-900 text-white p-6 border-none shadow-xl">
-                <h3 className="text-sm font-black uppercase tracking-widest mb-1">Maintenance</h3>
-                <p className="text-xs text-white/80 leading-relaxed mb-4">Système stable. Prochaine mise à jour prévue : 48h.</p>
-                <Button variant="outline" size="sm" className="w-full border-white/20 text-white hover:bg-white/10 text-[10px] font-bold uppercase tracking-widest">
-                  Logs Système
-                </Button>
-             </Card>
-          </div>
+          {/* Activity Table */}
+          <Card className="border-border/60 bg-card/50 shadow-sm overflow-hidden">
+            <CardHeader className="border-b border-border/40 py-4">
+              <CardTitle className="text-sm font-bold uppercase tracking-widest flex items-center gap-2">
+                <Activity className="h-4 w-4 text-accent" /> Flux d'activité récent
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-0">
+              <div className="divide-y divide-border/40">
+                {recentActivity.map((activity: any) => (
+                  <div key={activity.id} className="flex items-center justify-between p-4 hover:bg-accent/5 transition-colors">
+                    <div className="flex items-center gap-3">
+                      <div className={`h-2 w-2 rounded-full ${
+                        activity.type === 'message' ? 'bg-blue-500' : 
+                        activity.type === 'registration' ? 'bg-emerald-500' : 'bg-amber-500'
+                      }`} />
+                      <div>
+                        <p className="text-[11px] font-bold">{activity.title}</p>
+                        <p className="text-[10px] text-muted-foreground uppercase font-medium">Par {activity.user}</p>
+                      </div>
+                    </div>
+                    <span className="text-[10px] font-mono text-muted-foreground">
+                      {new Date(activity.date).toLocaleDateString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+                    </span>
+                  </div>
+                ))}
+                {recentActivity.length === 0 && (
+                  <div className="py-10 text-center text-xs text-muted-foreground italic">Aucune activité récente.</div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* --- SIDEBAR NOTIFICATIONS --- */}
@@ -181,7 +218,7 @@ export default async function AdminPage() {
   );
 }
 
-function StatCard({ title, value, icon: Icon, trend, description, href }: any) {
+function StatCard({ title, value, icon: Icon, trend, description, href, highlight }: any) {
   return (
     <Link href={href}>
       <Card className="border-border/50 bg-card transition-all hover:border-accent/40 shadow-sm overflow-hidden relative group h-full">
@@ -193,12 +230,12 @@ function StatCard({ title, value, icon: Icon, trend, description, href }: any) {
           <Icon className="w-4 h-4 text-accent" />
         </CardHeader>
         <CardContent>
-          <div className="text-4xl font-black tracking-tighter mb-1">
+          <div className={`text-4xl font-black tracking-tighter mb-1 ${highlight ? 'text-accent animate-pulse' : ''}`}>
             {value}
           </div>
           <div className="flex items-center justify-between mt-2">
             <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-wider">{description}</span>
-            <Badge variant="outline" className="text-[9px] font-bold border-accent/20 text-accent py-0">{trend}</Badge>
+            <Badge variant="outline" className={`text-[9px] font-bold py-0 ${highlight ? 'border-accent bg-accent/10 text-accent' : 'border-accent/20 text-accent'}`}>{trend}</Badge>
           </div>
         </CardContent>
       </Card>

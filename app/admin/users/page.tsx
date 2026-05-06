@@ -111,6 +111,15 @@ export default async function AdminUsersPage({
                         'User'
                       )}
                     </Badge>
+                    {user.banned && (
+                      <Badge
+                        variant="destructive"
+                        className="text-[9px] font-black uppercase tracking-widest px-2.5 ml-2"
+                        title={user.banReason || 'Aucun motif renseigné'}
+                      >
+                        Banni
+                      </Badge>
+                    )}
                   </td>
                   <td className="px-6 py-6">
                     <div className="flex items-center gap-2">
@@ -143,6 +152,7 @@ export default async function AdminUsersPage({
                       userId={user.id}
                       userName={user.name}
                       currentRole={user.role}
+                      isBanned={!!user.banned}
                     />
                   </td>
                 </tr>

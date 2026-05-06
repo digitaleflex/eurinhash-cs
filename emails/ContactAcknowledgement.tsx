@@ -28,25 +28,29 @@ export const ContactAcknowledgementEmail = ({
     <Body style={main}>
       <Container style={container}>
         <Section style={header}>
-          <Heading style={h1}>Transmission Reçue</Heading>
+          <Heading style={h1}>Eurin Hash <span style={accent}>CS</span></Heading>
+          <Text style={badge}>Transmission Reçue</Text>
         </Section>
         <Section style={content}>
           <Text style={paragraph}>Bonjour <strong>{name}</strong>,</Text>
           <Text style={paragraph}>
-            Nous vous confirmons la bonne réception de votre message concernant : <em>"{subject}"</em>.
+            Ceci est un accusé de réception automatique. Nous vous confirmons la bonne réception de votre message concernant : <span style={highlight}>"{subject}"</span>.
           </Text>
           <Text style={paragraph}>
-            Un expert en architecture logicielle examine actuellement votre demande. Vous recevrez une réponse détaillée sous un délai de **24 heures ouvrées**.
+            Votre demande est en cours d'analyse par notre équipe technique. Nous reviendrons vers vous avec une réponse détaillée sous un délai de **24 heures ouvrées**.
           </Text>
+          
           <Section style={btnContainer}>
             <Button style={button} href="https://eurinhash.com/blog">
-              En attendant, visitez notre Blog Tech
+              Découvrir nos derniers articles tech
             </Button>
           </Section>
+          
           <Hr style={hr} />
+          
           <Text style={footer}>
             <strong>Eurin Hash CS</strong><br />
-            Architecture, Souveraineté & Expertise Cloud
+            Expertise Full Stack & Solutions Cloud Souveraines
           </Text>
         </Section>
       </Container>
@@ -54,10 +58,8 @@ export const ContactAcknowledgementEmail = ({
   </Html>
 );
 
-export default ContactAcknowledgementEmail;
-
 const main = {
-  backgroundColor: '#f6f9fc',
+  backgroundColor: '#0a0a0a',
   fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif',
 };
 
@@ -66,24 +68,37 @@ const container = {
   margin: '0 auto',
   padding: '0 0 48px',
   marginBottom: '64px',
-  borderRadius: '8px',
+  borderRadius: '12px',
   overflow: 'hidden' as const,
-  border: '1px solid #e5e7eb',
+  border: '1px solid #222',
 };
 
 const header = {
-  backgroundColor: '#e11d48',
-  padding: '32px',
+  backgroundColor: '#000000',
+  padding: '40px 32px',
   textAlign: 'center' as const,
 };
 
 const h1 = {
   color: '#ffffff',
-  fontSize: '20px',
-  fontWeight: '800',
+  fontSize: '24px',
+  fontWeight: '900',
   margin: '0',
   textTransform: 'uppercase' as const,
-  letterSpacing: '2px',
+  letterSpacing: '-0.05em',
+};
+
+const accent = {
+  color: '#3b82f6',
+};
+
+const badge = {
+  color: '#9ca3af',
+  fontSize: '10px',
+  fontWeight: '700',
+  textTransform: 'uppercase' as const,
+  letterSpacing: '0.2em',
+  marginTop: '8px',
 };
 
 const content = {
@@ -93,8 +108,13 @@ const content = {
 const paragraph = {
   fontSize: '16px',
   lineHeight: '26px',
-  color: '#484848',
+  color: '#111827',
   margin: '16px 0',
+};
+
+const highlight = {
+  color: '#3b82f6',
+  fontWeight: '700',
 };
 
 const btnContainer = {
@@ -104,18 +124,20 @@ const btnContainer = {
 
 const button = {
   backgroundColor: '#000000',
-  borderRadius: '6px',
+  borderRadius: '8px',
   color: '#fff',
   fontSize: '14px',
-  fontWeight: '600',
+  fontWeight: '900',
   textDecoration: 'none',
   textAlign: 'center' as const,
   display: 'inline-block',
-  padding: '12px 24px',
+  padding: '16px 32px',
+  textTransform: 'uppercase' as const,
+  letterSpacing: '0.1em',
 };
 
 const hr = {
-  borderColor: '#e6ebf1',
+  borderColor: '#e5e7eb',
   margin: '32px 0',
 };
 
@@ -125,3 +147,5 @@ const footer = {
   color: '#9ca3af',
   textAlign: 'center' as const,
 };
+
+export default ContactAcknowledgementEmail;

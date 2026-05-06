@@ -31,6 +31,7 @@ model User {
   registrations EventRegistration[]
   posts         Post[]
   comments      Comment[]
+  auditLogs     AuditLog[]
 
   @@map("users")
 }
@@ -203,4 +204,19 @@ model Comment {
   @@index([postId])
   @@index([userId])
   @@map("comments")
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  level     String   @default("info") // "info", "warn", "error", "critical"
+  action    String
+  message   String   @db.Text
+  metadata  Json?
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@index([level])
+  @@index([userId])
+  @@map("audit_logs")
 }

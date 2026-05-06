@@ -4,6 +4,7 @@ import { render } from '@react-email/render';
 import { EventConfirmationEmail } from '@/emails/EventConfirmation';
 import { ContactNotificationEmail } from '@/emails/ContactNotification';
 import { ContactAcknowledgementEmail } from '@/emails/ContactAcknowledgement';
+import { AdminReplyEmail } from '@/emails/AdminReply';
 import * as React from 'react';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -120,6 +121,36 @@ export const sendContactAcknowledgement = async (data: {
     });
   } catch (error) {
     logger.error({ error, to: data.to }, 'Failed to send contact acknowledgement email');
+    return { success: false, error };
+  }
+};
+
+/**
+ * Envoie une réponse personnalisée de l'administrateur
+ */
+export const sendAdminReply = async (data: {
+  to: string;
+  userName: string;
+  originalMessage: string;
+  replyContent: string;
+  subject: string;
+}) => {
+  try {
+    const html = await render(
+      React.createElement(AdminReplyEmail, {
+        userName: data.userName,
+        originalMessage: data.originalMessage,
+        replyContent: data.replyContent,
+      })
+    );
+
+    return await sendMail({
+      to: data.to,
+      subject: `RE: ${data.subject}`,
+      html,
+    });
+  } catch (error) {
+    logger.error({ error, to: data.to }, 'Failed to send admin reply email');
     return { success: false, error };
   }
 };

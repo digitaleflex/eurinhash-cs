@@ -6,6 +6,7 @@ import {
   ShieldCheck,
   Calendar,
   FileText,
+  Activity,
 } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { redirect } from 'next/navigation';
@@ -93,6 +94,11 @@ function DesktopSidebar() {
             href="/admin/settings"
             icon={<Settings />}
             label="Configuration"
+          />
+          <AdminNavItem
+            href="/admin/logs"
+            icon={<Activity />}
+            label="Logs Système"
           />
         </div>
       </nav>

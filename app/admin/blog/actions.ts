@@ -5,6 +5,7 @@ import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { createAuditLog } from '@/lib/audit';
 
 const prisma = prismaApi;
 
@@ -34,8 +35,15 @@ export async function createPost(formData: FormData) {
       published,
       thumbnail,
       authorId: session.user.id,
-      readingTime: Math.ceil(content.split(' ').length / 200), // Simple reading time calculation
+      readingTime: Math.ceil(content.split(' ').length / 200),
     },
+  });
+
+  await createAuditLog({
+    level: 'info',
+    action: 'BLOG_CREATE',
+    message: `Article créé : ${title}`,
+    userId: session.user.id,
   });
 
   revalidatePath('/admin/blog');
@@ -72,6 +80,13 @@ export async function updatePost(id: string, formData: FormData) {
     },
   });
 
+  await createAuditLog({
+    level: 'info',
+    action: 'BLOG_UPDATE',
+    message: `Article mis à jour : ${title}`,
+    userId: session.user.id,
+  });
+
   revalidatePath('/admin/blog');
   revalidatePath(`/admin/blog/${id}`);
   revalidatePath('/blog');
@@ -90,6 +105,13 @@ export async function deletePost(id: string) {
 
   await (prisma as any).post.delete({
     where: { id },
+  });
+
+  await createAuditLog({
+    level: 'warn',
+    action: 'BLOG_DELETE',
+    message: `Article supprimé (ID: ${id})`,
+    userId: session.user.id,
   });
 
   revalidatePath('/admin/blog');
