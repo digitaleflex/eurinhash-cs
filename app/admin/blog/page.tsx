@@ -12,6 +12,7 @@ import {
   ExternalLink 
 } from 'lucide-react';
 import Link from 'next/link';
+import BlogActions from './BlogActions';
 
 const prisma = prismaApi;
 
@@ -96,19 +97,7 @@ export default async function BlogListPage() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 mt-4 sm:mt-0 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                    <Edit className="h-4 w-4" />
-                  </Button>
-                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0 text-destructive hover:text-destructive hover:bg-destructive/10">
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                  <Link href={`/blog/${post.slug}`} target="_blank">
-                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                      <ExternalLink className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                </div>
+                <BlogActions post={post} />
               </div>
             ))}
 

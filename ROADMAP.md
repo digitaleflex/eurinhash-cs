@@ -15,13 +15,13 @@ Ce document trace la vision du développement futur du portail Eurin Hash. Chaqu
 - [ ] **Graphiques Recharts** : Courbe des inscriptions aux évènements (7 derniers jours).
 - [ ] **Tableau d'activité** : Dernières connexions et actions importantes.
 
-## ✍️ Phase 3 : Blog & CMS (Prochaine étape ⏭️)
+## ✍️ Phase 3 : Blog & CMS (Terminé ✅)
 *Objectif : Partager l'expertise technique.*
-- [ ] **Prisma Schema** : Ajout du modèle `Post`, `Category`, `Tag`.
-- [ ] **Admin Editor** : Interface de rédaction avec éditeur riche (TipTap).
-- [ ] **Upload Images** : Intégration Vercel Blob pour les miniatures d'articles.
+- [x] **Prisma Schema** : Ajout du modèle `Post`, `Category`, `Tag`.
+- [x] **Admin Editor** : Interface de rédaction (TipTap) avec CRUD complet.
+- [x] **Upload Images** : Intégration Vercel Blob pour les miniatures et le contenu.
 
-## 📧 Phase 4 : Communication & Resend
+## 📧 Phase 4 : Communication & Resend (Prochaine étape ⏭️)
 *Objectif : Engager la communauté.*
 - [ ] **Emails Groupés** : Envoyer une notification aux inscrits d'un évènement.
 - [ ] **Système de Ticket** : Répondre aux messages de contact directement depuis l'Admin.
