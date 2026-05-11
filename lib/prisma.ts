@@ -19,6 +19,7 @@ const prismaClientSingleton = () => {
   // En développement local (Node.js), on utilise le pilote natif de Prisma.
   if (isDev) {
     return new PrismaClient({
+      datasourceUrl: connectionString,
       log: ['error', 'warn'],
     });
   }

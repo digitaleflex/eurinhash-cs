@@ -8,7 +8,6 @@ import { Logo } from '@/components/logo';
 import { Footer } from '@/components/footer';
 import { ThemeProvider } from '@/components/theme-provider';
 import { ThemeToggle } from '@/components/theme-toggle';
-import { MobileMenu } from '@/components/mobile-menu';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { JsonLd } from '@/components/json-ld';
@@ -42,22 +41,9 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/Icon_Logo_claire.svg" type="image/svg+xml" />
         <link rel="manifest" href="/manifest.webmanifest" />
-        <link rel="preload" as="image" href="/eurin-photo.webp" />
-
-        <meta name="theme-color" content="#000000" />
-        <meta name="color-scheme" content="light dark" />
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
 
-        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
         <link rel="dns-prefetch" href="//vercel.com" />
-
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
 
         <meta name="author" content={SITE_CONFIG.seo.author} />
         <meta name="robots" content={SITE_CONFIG.seo.robots} />
@@ -120,7 +106,6 @@ export default function RootLayout({
                   <Logo size="md" variant="default" />
                   <div className="flex items-center gap-2">
                     <ThemeToggle />
-                    <MobileMenu />
                   </div>
                 </div>
               </div>
