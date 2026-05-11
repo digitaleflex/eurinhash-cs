@@ -14,24 +14,35 @@ export function MobileMenuButton({ className = '' }: MobileMenuButtonProps) {
   return (
     <button
       onClick={toggleMenu}
-      className={`relative inline-flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl border-2 border-foreground/20 bg-background shadow-xl hover:shadow-2xl text-sm font-medium transition-all duration-300 hover:bg-foreground hover:text-background hover:border-foreground hover:scale-110 active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 ${className}`}
+      className={`relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-foreground/10 bg-background/50 backdrop-blur-lg shadow-lg transition-all duration-500 hover:bg-foreground hover:text-background hover:scale-105 active:scale-95 focus-visible:outline-none z-[80] ${className}`}
       aria-label="Toggle mobile menu"
       aria-expanded={isOpen}
     >
-      {/* Indicateur de notification */}
-      <div className="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-pulse z-10" />
-
-      <motion.div
-        animate={{ rotate: isOpen ? 180 : 0 }}
-        transition={{ duration: 0.2 }}
-        className="flex items-center justify-center"
-      >
-        {isOpen ? (
-          <X className="h-6 w-6 text-foreground" />
-        ) : (
-          <Menu className="h-6 w-6 text-foreground" />
-        )}
-      </motion.div>
+      <div className="flex flex-col gap-1.5 items-center justify-center w-6">
+        <motion.span
+          animate={{ 
+            rotate: isOpen ? 45 : 0,
+            y: isOpen ? 7.5 : 0,
+            width: isOpen ? "100%" : "80%"
+          }}
+          className="h-0.5 bg-current rounded-full transition-all"
+        />
+        <motion.span
+          animate={{ 
+            opacity: isOpen ? 0 : 1,
+            x: isOpen ? -10 : 0
+          }}
+          className="h-0.5 w-full bg-current rounded-full"
+        />
+        <motion.span
+          animate={{ 
+            rotate: isOpen ? -45 : 0,
+            y: isOpen ? -7.5 : 0,
+            width: isOpen ? "100%" : "60%"
+          }}
+          className="h-0.5 bg-current rounded-full transition-all"
+        />
+      </div>
     </button>
   );
 }

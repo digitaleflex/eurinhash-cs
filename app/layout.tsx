@@ -13,6 +13,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { JsonLd } from '@/components/json-ld';
 import { ConditionalWrapper } from '@/components/layout-wrapper';
 import { BottomNav } from '@/components/navigation/bottom-nav';
+import { MobileMenu } from '@/components/mobile-menu/MobileMenu';
 import NextTopLoader from 'nextjs-toploader';
 
 import './globals.css';
@@ -104,8 +105,9 @@ export default function RootLayout({
 
                 <div className="lg:hidden flex items-center justify-between w-full">
                   <Logo size="md" variant="default" />
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-4">
                     <ThemeToggle />
+                    <MobileMenu />
                   </div>
                 </div>
               </div>

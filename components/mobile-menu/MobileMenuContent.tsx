@@ -84,6 +84,26 @@ export function MobileMenuContent() {
 
             {/* Navigation */}
             <nav className="flex-1 p-4 sm:p-6 space-y-3 overflow-y-auto custom-scrollbar" role="navigation" aria-label="Navigation mobile">
+              {!isPending && !session && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-6"
+                >
+                  <Link
+                    href="/sign-in"
+                    onClick={closeMenu}
+                    className="flex items-center justify-between w-full bg-accent text-white p-5 rounded-xl shadow-lg shadow-accent/20 group"
+                  >
+                    <div className="flex flex-col gap-1">
+                      <span className="text-lg font-black tracking-tight">Se connecter</span>
+                      <span className="text-[10px] opacity-80 font-bold uppercase tracking-widest">Accéder à votre espace</span>
+                    </div>
+                    <User className="w-6 h-6 transition-transform group-hover:scale-110" />
+                  </Link>
+                </motion.div>
+              )}
+
               {navigationItems.map((item, index) => {
                 const isActive = pathname && (pathname === item.href || pathname.startsWith(item.href + '/'));
                 const hasChildren = item.children && item.children.length > 0;
@@ -198,7 +218,7 @@ export function MobileMenuContent() {
 
             {/* CTA / Auth en bas du menu */}
             <div className="p-6 border-t border-foreground/5 bg-foreground/[0.01] space-y-3">
-              {!isPending && session ? (
+              {!isPending && session && (
                 <Link
                   href="/dashboard/profil"
                   onClick={closeMenu}
@@ -209,14 +229,6 @@ export function MobileMenuContent() {
                     <span className="text-foreground">{session.user?.name || 'Mon Compte'}</span>
                   </div>
                   <ArrowRight className="w-4 h-4 text-muted-foreground transition-transform group-hover:translate-x-1" />
-                </Link>
-              ) : (
-                <Link
-                  href="/sign-in"
-                  onClick={closeMenu}
-                  className="flex items-center justify-center gap-2 w-full bg-accent text-white px-6 py-5 text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:bg-accent/90 shadow-lg shadow-accent/20"
-                >
-                  Se connecter
                 </Link>
               )}
               <Link
