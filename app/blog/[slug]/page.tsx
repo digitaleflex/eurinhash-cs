@@ -5,9 +5,10 @@ import { notFound } from 'next/navigation';
 const prisma = prismaApi;
 
 // Génération dynamique des métadonnées pour le SEO
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
   const post = await (prisma as any).post.findUnique({
-    where: { slug: params.slug },
+    where: { slug },
   });
 
   if (!post) return { title: 'Article non trouvé' };
@@ -31,9 +32,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const post = await (prisma as any).post.findUnique({
-    where: { slug: params.slug },
+    where: { slug },
     include: {
       author: true,
       category: true,
