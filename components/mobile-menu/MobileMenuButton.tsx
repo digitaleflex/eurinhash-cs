@@ -14,7 +14,7 @@ export function MobileMenuButton({ className = '' }: MobileMenuButtonProps) {
   return (
     <button
       onClick={toggleMenu}
-      className={`relative inline-flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl border border-foreground/50 bg-background/95 backdrop-blur-sm shadow-lg hover:shadow-xl text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-white hover:border-accent hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 ${className}`}
+      className={`relative inline-flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl border-2 border-foreground/20 bg-background shadow-xl hover:shadow-2xl text-sm font-medium transition-all duration-300 hover:bg-foreground hover:text-background hover:border-foreground hover:scale-110 active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 ${className}`}
       aria-label="Toggle mobile menu"
       aria-expanded={isOpen}
     >
@@ -24,11 +24,12 @@ export function MobileMenuButton({ className = '' }: MobileMenuButtonProps) {
       <motion.div
         animate={{ rotate: isOpen ? 180 : 0 }}
         transition={{ duration: 0.2 }}
+        className="flex items-center justify-center"
       >
         {isOpen ? (
-          <X className="h-5 w-5 sm:h-6 sm:w-6" />
+          <X className="h-6 w-6 text-foreground" />
         ) : (
-          <Menu className="h-5 w-5 sm:h-6 sm:w-6" />
+          <Menu className="h-6 w-6 text-foreground" />
         )}
       </motion.div>
     </button>

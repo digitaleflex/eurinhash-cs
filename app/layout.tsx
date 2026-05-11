@@ -13,6 +13,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { JsonLd } from '@/components/json-ld';
 import { ConditionalWrapper } from '@/components/layout-wrapper';
+import { BottomNav } from '@/components/navigation/bottom-nav';
 import NextTopLoader from 'nextjs-toploader';
 
 import './globals.css';
@@ -125,8 +126,9 @@ export default function RootLayout({
               </div>
             </header>
           </ConditionalWrapper>
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 pb-16 lg:pb-0">{children}</main>
           <ConditionalWrapper excludePaths={['/admin', '/dashboard']}>
+            <BottomNav />
             <Footer />
           </ConditionalWrapper>
         </ThemeProvider>

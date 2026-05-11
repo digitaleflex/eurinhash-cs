@@ -61,29 +61,29 @@ export function MobileMenuContent() {
           animate={{ x: 0 }}
           exit={{ x: '100%' }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed right-0 top-0 h-full w-full sm:w-96 z-50 bg-background border-l border-foreground/10 shadow-none"
+          className="fixed right-0 top-0 h-full w-full sm:w-[400px] z-[70] bg-background border-l border-foreground/10 shadow-2xl"
           role="dialog"
           aria-modal="true"
           aria-label="Menu de navigation"
         >
-          <div className="flex flex-col h-full">
+          <div className="flex flex-col h-full bg-background overflow-hidden">
             {/* Header du menu */}
-            <div className="flex items-center justify-between p-8 border-b border-foreground/5 bg-foreground/[0.02]">
+            <div className="flex items-center justify-between p-6 sm:p-8 border-b border-foreground/5 bg-foreground/[0.02]">
               <div className="flex flex-col">
-                <h2 className="text-lg font-bold tracking-tight text-foreground">Navigation</h2>
-                <span className="font-mono text-[10px] text-muted-foreground tracking-tight">Eurin Hash CS</span>
+                <h2 className="text-xl font-bold tracking-tight text-foreground">Navigation</h2>
+                <span className="font-mono text-[10px] text-accent tracking-[.2em] uppercase font-bold">Eurin Hash CS</span>
               </div>
               <button
                 onClick={closeMenu}
-                className="p-4 bg-foreground text-background transition-colors hover:bg-accent hover:text-white"
+                className="group relative p-3 bg-foreground text-background transition-all duration-300 hover:bg-accent hover:text-white rounded-full"
                 aria-label="Fermer le menu"
               >
-                <X className="h-6 w-6" />
+                <X className="h-6 w-6 transition-transform duration-300 group-hover:rotate-90" />
               </button>
             </div>
 
             {/* Navigation */}
-            <nav className="flex-1 p-6 space-y-2 bg-background overflow-y-auto" role="navigation" aria-label="Navigation mobile">
+            <nav className="flex-1 p-4 sm:p-6 space-y-3 overflow-y-auto custom-scrollbar" role="navigation" aria-label="Navigation mobile">
               {navigationItems.map((item, index) => {
                 const isActive = pathname && (pathname === item.href || pathname.startsWith(item.href + '/'));
                 const hasChildren = item.children && item.children.length > 0;
@@ -92,19 +92,19 @@ export function MobileMenuContent() {
                 return (
                   <motion.div
                     key={item.href}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.05 }}
                   >
                     {hasChildren ? (
                       /* Accordion Item */
-                      <div className="border border-foreground/5 overflow-hidden">
+                      <div className="border border-foreground/5 bg-foreground/[0.01] rounded-lg overflow-hidden">
                         <button
                           onClick={() => toggleAccordion(item.href)}
                           className={cn(
                             'group w-full flex flex-col gap-1 p-5 transition-all duration-300',
                             isActive
-                              ? 'bg-foreground/5'
+                              ? 'bg-accent/5'
                               : 'hover:bg-foreground/[0.03]'
                           )}
                           aria-expanded={isAccordionOpen}
@@ -118,8 +118,8 @@ export function MobileMenuContent() {
                             </span>
                             <ChevronDown
                               className={cn(
-                                "w-5 h-5 text-muted-foreground transition-transform duration-300",
-                                isAccordionOpen && "rotate-180"
+                                "w-5 h-5 text-muted-foreground transition-transform duration-500",
+                                isAccordionOpen && "rotate-180 text-accent"
                               )}
                             />
                           </div>
@@ -135,11 +135,11 @@ export function MobileMenuContent() {
                               initial={{ height: 0, opacity: 0 }}
                               animate={{ height: 'auto', opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.3 }}
+                              transition={{ duration: 0.4, ease: "circOut" }}
                               className="overflow-hidden bg-foreground/[0.02]"
                             >
                               <div className="p-3 space-y-1">
-                                {item.children?.map((child, childIndex) => {
+                                {item.children?.map((child) => {
                                   const isChildActive = pathname === child.href;
                                   return (
                                     <Link
@@ -147,9 +147,9 @@ export function MobileMenuContent() {
                                       href={child.href}
                                       onClick={closeMenu}
                                       className={cn(
-                                        "flex flex-col gap-1 p-4 rounded-sm transition-all duration-200",
+                                        "flex flex-col gap-1 p-4 rounded-md transition-all duration-200 border border-transparent",
                                         isChildActive
-                                          ? "bg-accent/10 text-accent"
+                                          ? "bg-accent/10 border-accent/20 text-accent"
                                           : "text-muted-foreground hover:bg-foreground/[0.03] hover:text-foreground"
                                       )}
                                     >
@@ -173,20 +173,20 @@ export function MobileMenuContent() {
                         href={item.href}
                         onClick={closeMenu}
                         className={cn(
-                          'group flex flex-col gap-1 p-5 transition-all duration-300 border border-transparent',
+                          'group flex flex-col gap-1 p-5 transition-all duration-300 border rounded-lg',
                           isActive
-                            ? 'bg-foreground/5 border-l-4 border-accent pl-7'
-                            : 'hover:bg-foreground/[0.03] hover:border-foreground/5'
+                            ? 'bg-accent/5 border-accent/20 border-l-4 border-l-accent pl-7'
+                            : 'bg-foreground/[0.01] border-foreground/5 hover:bg-foreground/[0.03] hover:border-foreground/10'
                         )}
                         aria-current={isActive ? 'page' : undefined}
                       >
                         <span className={cn(
                           "text-xl font-black tracking-tighter transition-colors",
-                          isActive ? "text-accent" : "text-foreground group-hover:text-foreground"
+                          isActive ? "text-accent" : "text-foreground group-hover:text-accent"
                         )}>
                           {item.label}
                         </span>
-                        <span className="font-mono text-[9px] text-muted-foreground tracking-[.2em] font-bold">
+                        <span className="font-mono text-[9px] text-muted-foreground tracking-[.2em] font-bold uppercase">
                           {item.description}
                         </span>
                       </Link>
@@ -197,24 +197,24 @@ export function MobileMenuContent() {
             </nav>
 
             {/* CTA / Auth en bas du menu */}
-            <div className="p-6 border-t border-foreground/5 space-y-4">
+            <div className="p-6 border-t border-foreground/5 bg-foreground/[0.01] space-y-3">
               {!isPending && session ? (
                 <Link
                   href="/dashboard/profil"
                   onClick={closeMenu}
-                  className="flex items-center justify-between w-full border border-foreground/10 px-6 py-5 text-sm font-bold uppercase tracking-widest transition-colors hover:bg-foreground/5"
+                  className="flex items-center justify-between w-full bg-background border border-foreground/10 px-6 py-5 text-sm font-bold uppercase tracking-widest transition-all hover:bg-foreground/5 hover:border-accent group"
                 >
                   <div className="flex items-center gap-3">
-                    <User className="w-4 h-4" />
-                    <span>{session.user?.name || 'Mon Compte'}</span>
+                    <User className="w-5 h-5 text-accent" />
+                    <span className="text-foreground">{session.user?.name || 'Mon Compte'}</span>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-muted-foreground" />
+                  <ArrowRight className="w-4 h-4 text-muted-foreground transition-transform group-hover:translate-x-1" />
                 </Link>
               ) : (
                 <Link
                   href="/sign-in"
                   onClick={closeMenu}
-                  className="flex items-center justify-center gap-2 w-full bg-accent text-white px-6 py-5 text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:bg-accent/90"
+                  className="flex items-center justify-center gap-2 w-full bg-accent text-white px-6 py-5 text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:bg-accent/90 shadow-lg shadow-accent/20"
                 >
                   Se connecter
                 </Link>
@@ -222,7 +222,7 @@ export function MobileMenuContent() {
               <Link
                 href="/contact"
                 onClick={closeMenu}
-                className="flex items-center justify-center gap-3 w-full bg-foreground text-background px-6 py-4 text-sm font-semibold tracking-tight transition-all duration-300 hover:bg-accent hover:text-white"
+                className="flex items-center justify-center gap-3 w-full bg-foreground text-background px-6 py-5 text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:bg-accent hover:text-white"
                 aria-label="Réserver un audit"
               >
                 <span>Réserver un audit</span>
