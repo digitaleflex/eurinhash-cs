@@ -30,14 +30,18 @@ export function middleware(request: NextRequest) {
   }
 
   // Get the origin from the request
-  const origin = request.headers.get('origin') || '';
-  const isTrustedOrigin = TRUSTED_ORIGINS.some((trusted) => {
-    try {
-      return new URL(origin).origin === new URL(trusted).origin;
-    } catch {
-      return false;
-    }
-  });
+  const originHeader = request.headers.get('origin') || '';
+  // On ne compare que l'origine normalisee, et c'est cette valeur normalisee qui
+  // est injectee dans la CSP : interpoler l'en-tete brut permettrait d'injecter une
+  // directive (le ';' termine connect-src).
+  let origin: string | null = null;
+  try {
+    origin = originHeader ? new URL(originHeader).origin : null;
+  } catch {
+    origin = null;
+  }
+  const isTrustedOrigin =
+    origin !== null && TRUSTED_ORIGINS.some((trusted) => new URL(trusted).origin === origin);
 
   // Headers de Sécurité (Standard EHAF) - Updated for OAuth
   const isDev = process.env.NODE_ENV === 'development';
