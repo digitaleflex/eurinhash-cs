@@ -20,12 +20,10 @@ import prisma from '@/lib/prisma';
 import Link from 'next/link';
 // recharts pese environ 99 KB gzip : on ne le charge qu'apres hydratation du
 // dashboard, hors First Load JS.
-const RegistrationsChart = dynamic(
-  () => import('@/components/admin/RegistrationsChart').then((mod) => mod.RegistrationsChart),
-  {
-    ssr: false,
-    loading: () => <div className="h-64 animate-pulse rounded bg-muted/20" aria-hidden />,
-  }
+// Ce fichier est un Server Component : `ssr: false` y est interdit, mais
+// l'import dynamique suffit à sortir recharts du First Load JS.
+const RegistrationsChart = dynamic(() =>
+  import('@/components/admin/RegistrationsChart').then((mod) => mod.RegistrationsChart)
 );
 
 
