@@ -2,62 +2,32 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
 export default function CTASection() {
-    return (
-        <section className="py-32 sm:py-48 bg-background border-t border-foreground/5 text-center relative overflow-hidden">
-
-            {/* Grille architecturale discrète */}
-            <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 -z-10"
-                style={{
-                    backgroundImage: `
-                        linear-gradient(to right, hsl(var(--foreground)/0.02) 1px, transparent 1px),
-                        linear-gradient(to bottom, hsl(var(--foreground)/0.02) 1px, transparent 1px)
-                    `,
-                    backgroundSize: '100px 100px',
-                }}
-            />
-
-            <div className="mx-auto max-w-3xl px-4 sm:px-8">
-
-                <span className="font-mono text-xs text-accent tracking-tight font-medium block mb-8">
-                    Travaillons ensemble
-                </span>
-
-                <h2 className="text-4xl sm:text-6xl font-black tracking-tighter mb-8 text-foreground leading-[1.1]">
-                    Prêt à sécuriser et faire<br />
-                    <span className="text-foreground/20 font-light italic">évoluer votre infrastructure ?</span>
-                </h2>
-
-                <p className="text-lg text-muted-foreground leading-relaxed mb-12 font-normal max-w-xl mx-auto" style={{ letterSpacing: '-0.01em' }}>
-                    Ne construisez plus sur des sables mouvants.<br />
-                    On en parle simplement, avec une approche axée sur les résultats.
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-4">
-                    <Link
-                        href="/contact"
-                        className="inline-flex items-center justify-center gap-3 bg-accent text-white px-12 py-6 text-sm font-bold tracking-tight transition-all duration-300 hover:bg-foreground group"
-                    >
-                        Réserver un audit maintenant
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                    </Link>
-                    <Link
-                        href="/realisations"
-                        className="inline-flex items-center justify-center gap-3 px-12 py-6 text-sm font-bold tracking-tight text-muted-foreground hover:text-foreground transition-all"
-                    >
-                        Voir les réalisations
-                    </Link>
-                </div>
-
-                {/* Signature finale sobre */}
-                <div className="mt-24 pt-12 border-t border-foreground/5 flex flex-col items-center gap-3">
-                    <span className="font-mono text-[10px] text-foreground/20 tracking-tight">
-                        Eurin Hash CS · EHAF Foundation · 2026
-                    </span>
-                </div>
-
-            </div>
-        </section>
-    );
+  return (
+    <section className="relative overflow-hidden border-t border-foreground/5 bg-background py-28 text-center sm:py-40">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,hsl(var(--foreground)/0.02)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--foreground)/0.02)_1px,transparent_1px)] bg-[size:100px_100px]" />
+      <div className="mx-auto max-w-3xl px-4 sm:px-8">
+        <span className="font-mono text-xs tracking-[0.16em] text-accent uppercase">Prochaine étape</span>
+        <h2 className="mt-6 text-4xl font-black leading-tight tracking-tight sm:text-6xl">
+          Parlons du système
+          <br />
+          <span className="text-foreground/25">à construire.</span>
+        </h2>
+        <p className="mx-auto mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground">
+          Décrivez le contexte, le problème et ce que vous cherchez à accomplir. Nous pouvons commencer par clarifier les contraintes avant de parler de solution.
+        </p>
+        <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+          <Link href="/contact" className="inline-flex items-center justify-center gap-3 bg-accent px-8 py-4 text-sm font-bold text-white hover:bg-foreground">
+            Discuter d’un projet
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link href="/realisations" className="inline-flex items-center justify-center gap-3 px-8 py-4 text-sm font-semibold text-muted-foreground hover:text-foreground">
+            Voir les réalisations
+          </Link>
+        </div>
+        <p className="mt-8 text-xs text-muted-foreground">
+          Pas de solution prédéfinie ni de promesse artificielle : d’abord le problème, puis l’architecture adaptée.
+        </p>
+      </div>
+    </section>
+  );
 }
