@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import { createMetadata } from '@/lib/metadata';
@@ -17,6 +17,13 @@ import NextTopLoader from 'nextjs-toploader';
 import './globals.css';
 
 export const metadata: Metadata = createMetadata();
+
+// Nécessaire pour que env(safe-area-inset-*) vaille autre chose que 0 sur iOS.
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+};
 
 export default function RootLayout({
   children,
@@ -53,7 +60,7 @@ export default function RootLayout({
             shadow="0 0 10px #e11d48,0 0 5px #e11d48"
           />
           <ConditionalWrapper excludePaths={['/admin', '/dashboard']}>
-            <header className="border-b border-border sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+            <header className="border-b border-border sticky top-0 z-50 pt-safe bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
               <div className="mx-auto w-full max-w-[1400px] px-6 lg:px-12 py-3 sm:py-4 flex items-center justify-between">
                 <div className="hidden lg:flex items-center justify-between w-full">
                   <Logo size="md" variant="default" />
@@ -74,7 +81,7 @@ export default function RootLayout({
               </div>
             </header>
           </ConditionalWrapper>
-          <div className="flex-1 pb-16 lg:pb-0">{children}</div>
+          <div className="flex-1 pb-safe-16 lg:pb-0">{children}</div>
           <ConditionalWrapper excludePaths={['/admin', '/dashboard']}>
             <BottomNav />
             <Footer />

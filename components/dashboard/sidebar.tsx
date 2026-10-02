@@ -55,7 +55,7 @@ export function DashboardSidebar() {
   return (
     <>
       {/* Mobile Bottom Nav */}
-      <nav aria-label="Navigation tableau de bord mobile" className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-sm">
+      <nav aria-label="Navigation tableau de bord mobile" className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-sm pb-safe">
         <div className="flex items-center justify-around p-2 bg-background/60 backdrop-blur-xl border border-foreground/10 rounded-full shadow-2xl">
           {navItems.map(item => {
             const isActive = pathname === item.href;
@@ -111,7 +111,7 @@ export function DashboardSidebar() {
       {/* Sidebar (Desktop Only) */}
       <aside
         className={cn(
-          'hidden lg:flex fixed lg:sticky top-0 left-0 z-40 h-screen w-64 bg-background border-r border-border',
+          'hidden lg:flex fixed lg:sticky top-0 left-0 z-40 h-dvh w-64 bg-background border-r border-border',
           'flex-col'
         )}
       >

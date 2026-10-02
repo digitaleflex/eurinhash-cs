@@ -2,8 +2,10 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 
-export async function GET(request: Request) {
+export async function PATCH(request: Request) {
   try {
+    // La session est vérifiée avant toute validation : un appel anonyme doit
+    // toujours répondre 401, jamais 400.
     const session = await auth.api.getSession({
       headers: request.headers,
     });
@@ -12,55 +14,12 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: 'Non autorisé' }, { status: 401 });
     }
 
-    const user = session.user;
-
-    // Fetch all counts and accounts in parallel to optimize request time
-    const [accounts, sessionsCount, messagesCount] = await Promise.all([
-      prisma.account.findMany({
-        where: { userId: user.id },
-      }),
-      prisma.session.count({
-        where: { userId: user.id },
-      }),
-      prisma.contactMessage.count({
-        where: { userId: user.id },
-      }),
-    ]);
-
-
-    return NextResponse.json({
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      emailVerified: user.emailVerified,
-      image: user.image,
-      createdAt: user.createdAt,
-      accounts: accounts.map((acc: { providerId: string }) => ({
-        provider: acc.providerId,
-      })),
-      sessionsCount,
-      messagesCount,
-    });
-  } catch (error) {
-    console.error('Dashboard API Error (GET):', error);
-    return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 });
-  }
-}
-
-export async function PATCH(request: Request) {
-  try {
+    // Seuls id, email et role sont acceptés implicitement : le corps ne peut pas
+    // changer l'identité ni le rôle, l'update cible toujours la session.
     const { name } = await request.json();
 
     if (!name || name.trim().length < 2) {
       return NextResponse.json({ error: 'Nom invalide' }, { status: 400 });
-    }
-
-    const session = await auth.api.getSession({
-      headers: request.headers,
-    });
-
-    if (!session) {
-      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 });
     }
 
     const updatedUser = await prisma.user.update({

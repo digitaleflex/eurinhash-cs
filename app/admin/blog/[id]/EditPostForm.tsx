@@ -154,7 +154,7 @@ export default function EditPostForm({ post }: EditPostFormProps) {
 
         {/* Sidebar Settings */}
         <div className="space-y-6">
-          <Card className="border-border/60 bg-card/50 shadow-sm sticky top-24">
+          <Card className="border-border/60 bg-card/50 shadow-sm sticky top-[calc(7rem+env(safe-area-inset-top))]">
             <CardHeader>
               <CardTitle className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
                 Paramètres de publication

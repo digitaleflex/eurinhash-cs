@@ -61,7 +61,7 @@ export function MobileMenuContent() {
           animate={{ x: 0 }}
           exit={{ x: '100%' }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed right-0 top-0 h-full w-full sm:w-[400px] z-[70] bg-background border-l border-foreground/10 shadow-2xl"
+          className="fixed right-0 top-0 h-full px-safe pt-safe pb-safe w-full sm:w-[400px] z-[70] bg-background border-l border-foreground/10 shadow-2xl"
           role="dialog"
           aria-modal="true"
           aria-label="Menu de navigation"

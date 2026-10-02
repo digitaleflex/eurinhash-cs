@@ -25,7 +25,9 @@ export default async function EventRegistrationsPage({
     where: { id },
     include: {
       registrations: {
-        include: { user: true },
+        // Le tableau et le CSV n'ont besoin que de ces champs : on ne sérialise
+        // pas le compte utilisateur complet vers le client.
+        select: { createdAt: true, user: { select: { name: true, email: true } } },
         orderBy: { createdAt: 'desc' },
       },
     },

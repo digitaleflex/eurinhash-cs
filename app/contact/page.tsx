@@ -1,4 +1,3 @@
-'use client';
 
 import React from 'react';
 import { Mail, Linkedin, MessageSquare, ArrowRight, MapPin, Shield, HelpCircle, Loader2 } from 'lucide-react';

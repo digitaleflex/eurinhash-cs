@@ -1,4 +1,3 @@
-'use client';
 
 import { Users, Target, ArrowRight } from 'lucide-react';
 import Link from 'next/link';

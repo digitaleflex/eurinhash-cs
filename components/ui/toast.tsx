@@ -256,6 +256,8 @@ function ToastViewPort() {
         flexDirection: 'column-reverse',
         gap: '0.5rem',
         padding: '1rem',
+        paddingBottom: 'calc(1rem + env(safe-area-inset-bottom))',
+        paddingInline: 'calc(1rem + env(safe-area-inset-left))',
         pointerEvents: 'none',
         zIndex: 2147483647,
         maxWidth: '100%',
