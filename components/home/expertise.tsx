@@ -1,122 +1,72 @@
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, BrainCircuit, Cloud, ShieldCheck } from 'lucide-react';
 
 const items = [
-    {
-        id: '01',
-        title: 'Audit & Sécurité',
-        description: 'Identifier les points de rupture et les failles de sécurité avant qu\'ils ne freinent votre activité. Un diagnostic complet pour protéger vos actifs.',
-        details: ['Sécurisation active', 'Analyse de risques', 'Plan de continuité'],
-        href: '/contact?subject=Audit de Résilience'
-    },
-    {
-        id: '02',
-        title: 'Architecture & Cloud',
-        description: 'Bâtir des infrastructures capables d\'absorber votre croissance. Nous concevons des systèmes robustes, flexibles et totalement sous votre contrôle.',
-        details: ['Cloud Haute Disponibilité', 'Optimisation SaaS', 'Liberté Technologique'],
-        href: '/contact?subject=Architecture de Système'
-    },
-    {
-        id: '03',
-        title: 'Conseil & Stratégie CTO',
-        description: 'Un allié technique pour piloter vos choix critiques. Recrutement d\'élite, choix des outils et culture de l\'excellence pour vos équipes.',
-        details: ['Leadership Technique', 'Audit de Talents', 'Accompagnement Décisionnel'],
-        href: '/contact?subject=Accompagnement CTO'
-    }
+  {
+    id: '01',
+    title: 'Architecture logicielle',
+    description: 'Structurer un produit ou un système autour de contraintes explicites, de responsabilités claires et de choix techniques maintenables.',
+    details: ['Architecture', 'TypeScript / Next.js', 'PostgreSQL'],
+    href: '/services/architecture',
+    icon: Cloud,
+  },
+  {
+    id: '02',
+    title: 'IA appliquée',
+    description: 'Intégrer l’IA là où elle améliore réellement un produit, un processus ou une décision, sans ajouter une couche technologique inutile.',
+    details: ['Agents', 'Automatisation', 'Intégration de modèles'],
+    href: '/services',
+    icon: BrainCircuit,
+  },
+  {
+    id: '03',
+    title: 'Cybersécurité & Cloud',
+    description: 'Réduire les risques techniques et construire des environnements déployables, observables et plus simples à maintenir.',
+    details: ['Sécurité', 'Infrastructure', 'DevOps'],
+    href: '/services/audit',
+    icon: ShieldCheck,
+  },
 ];
 
 export default function Expertise() {
-    return (
-        <section className="py-24 sm:py-40 bg-background border-t border-foreground/5">
-            <div className="mx-auto max-w-6xl px-4 sm:px-8">
+  return (
+    <section className="border-t border-foreground/5 bg-background py-24 sm:py-32">
+      <div className="mx-auto max-w-6xl px-4 sm:px-8">
+        <div className="mb-16 max-w-3xl">
+          <span className="mb-6 block font-mono text-[10px] font-bold tracking-[0.16em] text-accent uppercase">
+            Expertise
+          </span>
+          <h2 className="text-4xl font-black tracking-tight sm:text-5xl">
+            L’architecture commence par le problème, pas par la technologie.
+          </h2>
+        </div>
 
-                <div className="flex items-center gap-6 mb-24">
-                    <span className="font-mono text-[10px] text-accent/80 tracking-widest uppercase font-bold">Solutions Stratégiques</span>
-                    <div className="h-px flex-1 bg-foreground/5" />
-                    <span className="font-mono text-[10px] text-foreground/20 uppercase">03 piliers · systèmes</span>
+        <div className="grid border border-foreground/10 md:grid-cols-3">
+          {items.map((item) => (
+            <article key={item.id} className="group relative flex flex-col border-b border-foreground/10 p-8 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0 sm:p-10">
+              <div className="mb-10 flex items-center justify-between">
+                <item.icon className="h-7 w-7 text-accent" aria-hidden="true" />
+                <span className="font-mono text-[9px] tracking-widest text-muted-foreground">0{item.id}</span>
+              </div>
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold tracking-tight group-hover:text-accent">{item.title}</h3>
+                <p className="mt-5 text-sm leading-relaxed text-muted-foreground sm:text-base">{item.description}</p>
+              </div>
+              <div className="mt-8 border-t border-foreground/5 pt-6">
+                <div className="flex flex-wrap gap-x-5 gap-y-2">
+                  {item.details.map((detail) => (
+                    <span key={detail} className="font-mono text-[9px] tracking-wide text-muted-foreground uppercase">{detail}</span>
+                  ))}
                 </div>
-
-                <div className="grid md:grid-cols-3 gap-px bg-foreground/5 border border-foreground/5 mb-24 relative overflow-hidden">
-                    {/* Decorative Grid Line */}
-                    <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
-                    
-                    {items.map((item) => (
-                        <div key={item.id} className="group bg-background p-10 sm:p-12 flex flex-col gap-10 hover:bg-foreground/[0.025] transition-all duration-500 relative">
-                             {/* Technical Header */}
-                             <div className="flex items-center justify-between">
-                                <div className="font-mono text-[10px] text-foreground/20 tracking-widest uppercase">
-                                    noeud_arch :: {item.id}
-                                </div>
-                                <div className="w-1.5 h-1.5 bg-foreground/5 group-hover:bg-accent transition-colors rounded-sm" />
-                             </div>
-                             
-                             {/* Barre accent au hover */}
-                             <div className="absolute top-0 left-0 h-0.5 w-full bg-accent origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-                            
-                            <div className="space-y-6 flex-1 relative">
-                                <h3 className="text-2xl font-bold tracking-tight text-foreground group-hover:text-accent transition-colors duration-300">
-                                    {item.title}
-                                </h3>
-                                <p className="text-muted-foreground leading-relaxed text-sm sm:text-base font-normal">
-                                    {item.description}
-                                </p>
-                            </div>
-
-                            <div className="flex flex-wrap gap-x-6 gap-y-3 pt-6 border-t border-foreground/5">
-                                {item.details.map((detail, i) => (
-                                    <div key={i} className="flex items-center gap-2 group/tag">
-                                        <div className="w-0.5 h-3 bg-accent/20 group-hover/tag:bg-accent transition-all duration-300" />
-                                        <span className="font-mono text-[9px] text-foreground/40 tracking-tight group-hover/tag:text-foreground/60 transition-colors uppercase">
-                                            {detail}
-                                        </span>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <Link 
-                                href={item.href}
-                                className="mt-4 inline-flex items-center gap-3 text-[10px] font-bold text-accent uppercase tracking-widest hover:gap-4 transition-all duration-300"
-                            >
-                                Explorer le service <ArrowRight className="w-3 h-3" />
-                            </Link>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Bloc transversal - System Report Style */}
-                <div className="bg-foreground text-background p-10 sm:p-14 flex flex-col md:flex-row items-center justify-between gap-12 group relative overflow-hidden border-l-4 border-accent">
-                    <div className="space-y-4 text-center md:text-left relative z-10">
-                        <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
-                            <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-                            <span className="font-mono text-[10px] text-accent uppercase font-bold">État du Protocole : Optimal</span>
-                        </div>
-                        <h4 className="text-2xl sm:text-3xl font-black tracking-tighter text-background leading-none">
-                            Disponibilité & Souveraineté <br className="hidden sm:block" /> Digitale Sans Compromis.
-                        </h4>
-                    </div>
-                    
-                    <div className="grid grid-cols-2 gap-8 md:gap-16 font-mono text-xs relative z-10">
-                        <div className="flex flex-col gap-2">
-                            <span className="text-background/30 text-[9px] uppercase font-bold">Norme_ISO</span>
-                            <span className="text-background font-black tracking-tighter text-lg underline decoration-accent/30 decoration-2 underline-offset-4">CONFORME_27001</span>
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <span className="text-background/30 text-[9px] uppercase font-bold">Architecture</span>
-                            <span className="text-background font-black tracking-tighter text-lg underline decoration-accent/30 decoration-2 underline-offset-4">SOUVERAINETÉ_DÉCOUPLÉE</span>
-                        </div>
-                    </div>
-
-                    {/* Background architectural details */}
-                    <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none translate-x-1/4 translate-y-1/4 rotate-12">
-                        <svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="10" y="10" width="280" height="280" stroke="white" strokeWidth="0.5" strokeDasharray="5 5" />
-                            <circle cx="150" cy="150" r="100" stroke="white" strokeWidth="0.5" />
-                            <line x1="150" y1="0" x2="150" y2="300" stroke="white" strokeWidth="0.5" />
-                            <line x1="0" y1="150" x2="300" y2="150" stroke="white" strokeWidth="0.5" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+                <Link href={item.href} className="mt-6 inline-flex items-center gap-2 text-xs font-bold text-accent">
+                  Explorer
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
