@@ -1,8 +1,6 @@
-import prismaApi from '@/lib/prisma-api';
+import prisma from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import EditPostForm from './EditPostForm';
-
-const prisma = prismaApi;
 
 export default async function EditPostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
