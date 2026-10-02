@@ -16,8 +16,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { DashboardSearch } from '@/components/dashboard/search';
 import { UserActions } from '@/components/admin/UserActions';
-import prismaApi from '@/lib/prisma-api';
-const prisma = prismaApi;
+import prisma from '@/lib/prisma';
 
 interface AdminUsersPageProps {
   searchParams: Promise<{ q?: string }>;

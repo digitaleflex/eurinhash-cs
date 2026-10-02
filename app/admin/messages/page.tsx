@@ -12,9 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { DashboardSearch } from '@/components/dashboard/search';
 import { MessageActions } from '@/components/admin/MessageActions';
-import prismaApi from '@/lib/prisma-api';
-
-const prisma = prismaApi;
+import prisma from '@/lib/prisma';
 
 interface AdminMessagesPageProps {
   searchParams: Promise<{ q?: string }>;

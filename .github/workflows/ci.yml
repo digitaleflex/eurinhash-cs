@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [new, foundation/20-20-reset, prod]
+  pull_request:
+    branches: [new, foundation/20-20-reset, prod]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: runner
+          POSTGRES_PASSWORD: runner
+          POSTGRES_DB: eurinhash
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U runner"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: pnpm db:generate
+
+      - name: Push Prisma schema
+        run: pnpm db:push -- --skip-generate
+        env:
+          DATABASE_URL: postgresql://runner:runner@localhost:5432/eurinhash
+          DATABASE_URL_UNPOOLED: postgresql://runner:runner@localhost:5432/eurinhash
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm type-check
+
+      - name: Tests
+        run: pnpm test:ci
+
+      - name: Build
+        run: pnpm build
+        env:
+          DATABASE_URL: postgresql://runner:runner@localhost:5432/eurinhash
+          DATABASE_URL_UNPOOLED: postgresql://runner:runner@localhost:5432/eurinhash
+          BETTER_AUTH_SECRET: ci-build-secret
+          BETTER_AUTH_URL: http://localhost:3000
+          RESEND_API_KEY: re_ci_placeholder

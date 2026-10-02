@@ -13,14 +13,12 @@ import {
 } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
-import prismaApi from '@/lib/prisma-api';
+import prisma from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { RegisterButton } from '@/components/events/RegisterButton';
 import { Countdown } from '@/components/events/Countdown';
 // import type { PrismaClient } from '@prisma/client';
-
-const prisma = prismaApi;
 
 export const metadata: Metadata = {
   title: 'Événements & Webinaires - Eurin Hash',

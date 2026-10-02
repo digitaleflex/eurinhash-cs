@@ -14,11 +14,10 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import prismaApi from '@/lib/prisma-api';
+import prisma from '@/lib/prisma';
 import Link from 'next/link';
 import { RegistrationsChart } from '@/components/admin/RegistrationsChart';
 
-const prisma = prismaApi;
 
 export default async function AdminPage() {
   const sevenDaysAgo = new Date();

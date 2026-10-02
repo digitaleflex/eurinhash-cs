@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server';
-import prismaApi from '@/lib/prisma-api';
+import prisma from '@/lib/prisma';
 import { auth } from '@/lib/auth';
-
-const prisma = prismaApi;
 
 export async function GET(request: Request) {
   try {

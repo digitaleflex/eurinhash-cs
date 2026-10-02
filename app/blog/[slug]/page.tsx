@@ -1,8 +1,6 @@
 import { Metadata } from 'next';
-import prismaApi from '@/lib/prisma-api';
+import prisma from '@/lib/prisma';
 import { notFound } from 'next/navigation';
-
-const prisma = prismaApi;
 
 // Génération dynamique des métadonnées pour le SEO
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {

@@ -1,12 +1,11 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import prismaApi from '@/lib/prisma-api';
+import prisma from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { sendAdminReply } from '@/lib/mail';
 
-const prisma = prismaApi;
 
 async function checkAdmin() {
   const session = await auth.api.getSession({

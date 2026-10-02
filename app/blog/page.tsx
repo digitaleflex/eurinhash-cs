@@ -1,16 +1,14 @@
-import prismaApi from '@/lib/prisma-api';
+import prisma from '@/lib/prisma';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 
-const prisma = prismaApi;
-
 export const metadata = {
-  title: 'Blog Tech | Eurin Hash CS',
-  description: 'Exploration approfondie de l\'architecture logicielle, du cloud et de la cybersécurité.',
+  title: 'Insights | Architecture, IA & Cybersécurité',
+  description: 'Analyses d’Eurin Hash sur l’architecture logicielle, l’IA appliquée, la cybersécurité, le cloud et les décisions techniques.',
 };
 
 export default async function BlogPage() {
-  const posts = await prismaApi.post.findMany({
+  const posts = await prisma.post.findMany({
     where: { published: true },
     orderBy: { createdAt: 'desc' },
     include: { category: true },

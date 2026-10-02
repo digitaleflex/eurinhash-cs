@@ -16,8 +16,8 @@ const prismaClientSingleton = () => {
     throw new Error('DATABASE_URL is not set in environment variables');
   }
 
-  // En développement local (Node.js), on utilise le pilote natif de Prisma.
-  if (isDev) {
+  // En développement local ou hors de Neon (self-hosted, CI), on utilise le pilote natif de Prisma.
+  if (isDev || !/neon\.tech|neon\.build/i.test(connectionString)) {
     return new PrismaClient({
       datasourceUrl: connectionString,
       log: ['error', 'warn'],
@@ -35,7 +35,6 @@ const prismaClientSingleton = () => {
 };
 
 declare global {
-  // eslint-disable-next-line no-var
   var prismaGlobal: ReturnType<typeof prismaClientSingleton> | undefined;
 }
 

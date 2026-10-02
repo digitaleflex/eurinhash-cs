@@ -1,29 +1,15 @@
 import type { MetadataRoute } from 'next';
-import { siteConfig } from '@/lib/metadata';
+
+const baseUrl = 'https://eurinhash.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = [
-    '',
-    '/services',
-    '/services/audit',
-    '/services/architecture',
-    '/services/cto',
-    '/services/mentorat',
-    '/realisations',
-    '/blog',
-    '/evenements',
-    '/ressources',
-    '/contact',
-    '/legal/mentions-legales',
-    '/legal/politique-confidentialite',
-    '/legal/cgv',
-    '/legal/cookies',
+  const now = new Date();
+  return [
+    { url: baseUrl, lastModified: now, changeFrequency: 'monthly', priority: 1 },
+    { url: `${baseUrl}/services`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/realisations`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${baseUrl}/a-propos`, lastModified: now, changeFrequency: 'yearly', priority: 0.7 },
+    { url: `${baseUrl}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: 'yearly', priority: 0.7 },
   ];
-
-  return routes.map(route => ({
-    url: `${siteConfig.url}${route}`,
-    lastModified: new Date(),
-    changeFrequency: route === '' ? 'weekly' : 'monthly',
-    priority: route === '' ? 1 : 0.8,
-  }));
 }

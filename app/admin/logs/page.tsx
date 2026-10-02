@@ -9,9 +9,8 @@ import {
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import prismaApi from '@/lib/prisma-api';
+import prisma from '@/lib/prisma';
 
-const prisma = prismaApi;
 
 export default async function AdminLogsPage() {
   const logs = await (prisma as any).auditLog.findMany({

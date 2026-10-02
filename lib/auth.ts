@@ -64,7 +64,7 @@ export const auth = betterAuth({
         } : {}),
     },
     plugins: [
-        admin() as any,
+        admin(),
         emailOTP({
             async sendVerificationOTP({ email, otp, type }) {
                 const subject = type === "sign-in" ? "Votre code de connexion" : "Vérifiez votre email";

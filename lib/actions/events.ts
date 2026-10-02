@@ -1,34 +1,43 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-import prismaApi from '@/lib/prisma-api';
-import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
-import { sendMail, sendEventConfirmation } from '@/lib/mail';
-
 import { after } from 'next/server';
+import { revalidatePath } from 'next/cache';
+import prisma from '@/lib/prisma';
+import { sendMail, sendEventConfirmation } from '@/lib/mail';
+import { requireAdmin } from '@/lib/authorization';
+import { z } from 'zod';
 
-const prisma = prismaApi;
 
-export async function createEvent(data: {
-  title: string;
-  description: string;
-  date: Date;
-  type: string;
-  platform: string;
-  eventUrl: string;
-  registrationLink?: string;
-  thumbnail?: string;
-  isFeatured?: boolean;
-}) {
+const EventInputSchema = z.object({
+  title: z.string().trim().min(1).max(160),
+  description: z.string().trim().min(1).max(20_000),
+  date: z.coerce.date(),
+  type: z.string().trim().min(1).max(80),
+  platform: z.string().trim().min(1).max(80),
+  eventUrl: z.string().url().max(2048),
+  registrationLink: z.string().url().max(2048).optional().or(z.literal('')),
+  thumbnail: z.string().url().max(2048).optional().or(z.literal('')),
+  isFeatured: z.boolean().optional(),
+});
+
+const EventUpdateSchema = EventInputSchema.partial();
+
+export async function createEvent(input: z.input<typeof EventInputSchema>) {
+  await requireAdmin();
+  const data = EventInputSchema.parse(input);
   const slug = data.title
     .toLowerCase()
-    .replaceAll(' ', '-')
-    .replace(/[^\w-]+/g, '');
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^\p{L}\p{N}-]+/gu, '')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
 
   const event = await prisma.event.create({
     data: {
       ...data,
+      registrationLink: data.registrationLink || null,
+      thumbnail: data.thumbnail || null,
       slug,
     },
   });
@@ -41,10 +50,22 @@ export async function createEvent(data: {
   return event;
 }
 
-export async function updateEvent(id: string, data: any) {
+export async function updateEvent(
+  id: string,
+  input: z.input<typeof EventUpdateSchema>,
+) {
+  await requireAdmin();
+  const safeId = z.string().min(1).max(128).parse(id);
+  const data = EventUpdateSchema.parse(input);
+
   const event = await prisma.event.update({
-    where: { id },
-    data,
+    where: { id: safeId },
+    data: {
+      ...data,
+      registrationLink:
+        data.registrationLink === '' ? null : data.registrationLink,
+      thumbnail: data.thumbnail === '' ? null : data.thumbnail,
+    },
   });
 
   after(() => {
@@ -56,21 +77,19 @@ export async function updateEvent(id: string, data: any) {
 }
 
 export async function registerForEvent(eventId: string) {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  const { auth } = await import('@/lib/auth');
+  const { headers } = await import('next/headers');
+  const userSession = await auth.api.getSession({ headers: await headers() });
 
-  if (!session) {
+  if (!userSession) {
     throw new Error('Vous devez être connecté pour vous inscrire.');
   }
 
-  const userId = session.user.id;
+  const userId = userSession.user.id;
+  const safeEventId = z.string().min(1).max(128).parse(eventId);
 
-  // Check if already registered
   const existing = await prisma.eventRegistration.findUnique({
-    where: {
-      userId_eventId: { userId, eventId }
-    }
+    where: { userId_eventId: { userId, eventId: safeEventId } },
   });
 
   if (existing) {
@@ -78,30 +97,26 @@ export async function registerForEvent(eventId: string) {
   }
 
   const registration = await prisma.eventRegistration.create({
-    data: { userId, eventId },
-    include: {
-      event: true,
-      user: true,
-    }
+    data: { userId, eventId: safeEventId },
+    include: { event: true, user: true },
   });
 
-  // Background tasks: email and revalidation
   after(async () => {
     try {
       await sendEventConfirmation({
-        to: session.user.email,
-        userName: session.user.name || 'Invité',
+        to: userSession.user.email,
+        userName: userSession.user.name || 'Invité',
         eventTitle: registration.event.title,
-        eventDate: new Date(registration.event.date).toLocaleDateString('fr-FR', { 
-          day: '2-digit', 
-          month: 'long', 
+        eventDate: new Date(registration.event.date).toLocaleDateString('fr-FR', {
+          day: '2-digit',
+          month: 'long',
           year: 'numeric',
           hour: '2-digit',
-          minute: '2-digit'
+          minute: '2-digit',
         }),
         eventUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/evenements/${registration.event.slug}`,
       });
-      
+
       revalidatePath('/evenements');
       revalidatePath('/dashboard');
     } catch (error) {
@@ -112,50 +127,28 @@ export async function registerForEvent(eventId: string) {
   return { success: true, registration };
 }
 
-
-
 export async function sendEventReminders(eventId: string) {
+  await requireAdmin();
+  const safeEventId = z.string().min(1).max(128).parse(eventId);
+
   const event = await prisma.event.findUnique({
-    where: { id: eventId },
-    include: {
-      registrations: {
-        include: { user: true }
-      }
-    }
+    where: { id: safeEventId },
+    include: { registrations: { include: { user: true } } },
   });
 
   if (!event) throw new Error('Événement introuvable');
 
-  // We return immediately and process emails in the background
   after(async () => {
     await Promise.all(
-      event.registrations.map((reg: any) =>
+      event.registrations.map((reg) =>
         sendMail({
           to: reg.user.email,
           subject: `Rappel : ${event.title} approche !`,
-          html: `
-            <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-              <h2 style="color: #000; font-weight: 900; text-transform: uppercase;">Prêt pour le Live ?</h2>
-              <p>Bonjour ${reg.user.name},</p>
-              <p>Ceci est un rappel pour l'événement <strong>${event.title}</strong> qui aura lieu prochainement.</p>
-              <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; margin: 20px 0;">
-                <p style="margin: 0; font-size: 14px;">📅 <strong>Date :</strong> ${new Date(event.date).toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' })}</p>
-                <p style="margin: 5px 0 0 0; font-size: 14px;">🔗 <strong>Lien Direct :</strong> <a href="${event.eventUrl}">${event.platform}</a></p>
-              </div>
-              <p>Nous avons hâte de vous y retrouver !</p>
-              <p style="margin-top: 30px; border-top: 1px solid #eee; pt: 20px; font-size: 11px; color: #888;">
-                Vous recevez ce mail car vous vous êtes inscrit à cet événement sur Eurin Hash.
-              </p>
-            </div>
-          `,
-        })
-      )
+          html: `<p>Bonjour ${reg.user.name},</p><p>Rappel pour l'événement <strong>${event.title}</strong>.</p>`,
+        }),
+      ),
     );
   });
 
-  return {
-    success: true,
-    message: 'Les rappels sont en cours d\'envoi.'
-  };
+  return { success: true, message: "Les rappels sont en cours d'envoi." };
 }
-

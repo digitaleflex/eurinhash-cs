@@ -31,9 +31,13 @@ export function middleware(request: NextRequest) {
 
   // Get the origin from the request
   const origin = request.headers.get('origin') || '';
-  const isTrustedOrigin = TRUSTED_ORIGINS.some(
-    trusted => origin === trusted || origin.startsWith(trusted)
-  );
+  const isTrustedOrigin = TRUSTED_ORIGINS.some((trusted) => {
+    try {
+      return new URL(origin).origin === new URL(trusted).origin;
+    } catch {
+      return false;
+    }
+  });
 
   // Headers de Sécurité (Standard EHAF) - Updated for OAuth
   const isDev = process.env.NODE_ENV === 'development';
