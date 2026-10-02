@@ -29,9 +29,9 @@ const prismaClientSingleton = () => {
   const adapter = new PrismaNeon(pool);
 
   return new PrismaClient({
-    adapter: adapter,
+    adapter,
     log: ['error'],
-  } as any);
+  });
 };
 
 declare global {

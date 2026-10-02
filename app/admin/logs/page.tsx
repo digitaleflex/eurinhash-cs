@@ -13,7 +13,7 @@ import prisma from '@/lib/prisma';
 
 
 export default async function AdminLogsPage() {
-  const logs = await (prisma as any).auditLog.findMany({
+  const logs = await prisma.auditLog.findMany({
     take: 50,
     orderBy: { createdAt: 'desc' },
     include: {
@@ -48,7 +48,7 @@ export default async function AdminLogsPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-border/20">
-              {logs.map((log: any) => (
+              {logs.map((log) => (
                 <tr
                   key={log.id}
                   className="group hover:bg-accent/[0.02] transition-colors duration-200"

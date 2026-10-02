@@ -83,7 +83,7 @@ export const auth = betterAuth({
                     `,
                 });
             },
-        }) as any,
+        }),
     ],
     trustedOrigins: uniqueTrustedOrigins,
     // Session configuration

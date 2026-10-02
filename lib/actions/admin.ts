@@ -3,8 +3,17 @@
 import { revalidatePath } from 'next/cache';
 import prisma from '@/lib/prisma';
 import { sendAdminReply } from '@/lib/mail';
-import { ContactMessageStatus } from '@prisma/client';
+import { ContactMessageStatus, Prisma } from '@prisma/client';
 import { requireAdmin } from '@/lib/authorization';
+
+// Les erreurs Prisma exposent des noms de tables et de contraintes : on ne
+// renvoie jamais leur texte brut au navigateur.
+function toErrorMessage(error: unknown): string {
+  if (error instanceof Prisma.PrismaClientKnownRequestError) {
+    return error.code === 'P2002' ? 'Cette ressource existe déjà' : 'Erreur de base de données';
+  }
+  return error instanceof Error ? error.message : 'Erreur inconnue';
+}
 
 
 async function checkAdmin() {
@@ -26,8 +35,8 @@ export async function updateUserRole(userId: string, role: 'user' | 'admin') {
 
     revalidatePath('/admin/users');
     return { success: true, user };
-  } catch (error: any) {
-    return { success: false, error: error.message };
+  } catch (error) {
+    return { success: false, error: toErrorMessage(error) };
   }
 }
 
@@ -58,8 +67,8 @@ export async function banUser(userId: string, reason: string, expiresAt?: Date) 
 
     revalidatePath('/admin/users');
     return { success: true };
-  } catch (error: any) {
-    return { success: false, error: error.message };
+  } catch (error) {
+    return { success: false, error: toErrorMessage(error) };
   }
 }
 
@@ -78,8 +87,8 @@ export async function unbanUser(userId: string) {
 
     revalidatePath('/admin/users');
     return { success: true };
-  } catch (error: any) {
-    return { success: false, error: error.message };
+  } catch (error) {
+    return { success: false, error: toErrorMessage(error) };
   }
 }
 
@@ -97,8 +106,8 @@ export async function updateMessageStatus(
 
     revalidatePath('/admin/messages');
     return { success: true, message };
-  } catch (error: any) {
-    return { success: false, error: error.message };
+  } catch (error) {
+    return { success: false, error: toErrorMessage(error) };
   }
 }
 
@@ -112,8 +121,8 @@ export async function deleteMessage(messageId: string) {
 
     revalidatePath('/admin/messages');
     return { success: true };
-  } catch (error: any) {
-    return { success: false, error: error.message };
+  } catch (error) {
+    return { success: false, error: toErrorMessage(error) };
   }
 }
 
@@ -148,8 +157,8 @@ export async function replyToMessage(
 
     revalidatePath('/admin/messages');
     return { success: true };
-  } catch (error: any) {
-    return { success: false, error: error.message };
+  } catch (error) {
+    return { success: false, error: toErrorMessage(error) };
   }
 }
 
@@ -164,7 +173,7 @@ export async function deleteEventAdmin(eventId: string) {
     revalidatePath('/admin/evenements');
     revalidatePath('/evenements');
     return { success: true };
-  } catch (error: any) {
-    return { success: false, error: error.message };
+  } catch (error) {
+    return { success: false, error: toErrorMessage(error) };
   }
 }

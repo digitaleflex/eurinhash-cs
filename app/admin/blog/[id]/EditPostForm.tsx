@@ -1,5 +1,6 @@
 'use client';
 
+import type { Prisma } from '@prisma/client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -12,8 +13,10 @@ import Link from 'next/link';
 import Editor from '@/components/blog/Editor';
 import { updatePost, deletePost } from '../actions';
 
+export type EditablePost = Prisma.PostGetPayload<{ include: { category: true } }>;
+
 interface EditPostFormProps {
-  post: any;
+  post: EditablePost;
 }
 
 export default function EditPostForm({ post }: EditPostFormProps) {

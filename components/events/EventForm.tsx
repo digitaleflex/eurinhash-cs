@@ -6,9 +6,10 @@ import { createEvent, updateEvent } from '@/lib/actions/events';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Save, X } from 'lucide-react';
+import type { Event } from '@prisma/client';
 
 interface EventFormProps {
-  initialData?: any;
+  initialData?: Event;
 }
 
 export function EventForm({ initialData }: EventFormProps) {
@@ -144,7 +145,7 @@ export function EventForm({ initialData }: EventFormProps) {
               </div>
               <input
                 name="thumbnail"
-                defaultValue={initialData?.thumbnail}
+                defaultValue={initialData?.thumbnail ?? undefined}
                 onChange={(e) => setThumbnailUrl(e.target.value)}
                 className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-all"
                 placeholder="https://images.unsplash.com/photo-..."

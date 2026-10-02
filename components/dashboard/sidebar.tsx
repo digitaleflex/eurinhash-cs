@@ -84,7 +84,7 @@ export function DashboardSidebar() {
           })}
           
           {/* Mobile Admin Icon if applicable */}
-          {(session?.user as any)?.role === 'admin' && (
+          {(session?.user as { role?: string } | undefined)?.role === 'admin' && (
             <Link
               href="/admin"
               className={cn(
@@ -155,7 +155,7 @@ export function DashboardSidebar() {
             })}
 
             {/* Admin Section */}
-            {(session?.user as any)?.role === 'admin' && (
+            {(session?.user as { role?: string } | undefined)?.role === 'admin' && (
               <div className="pt-10">
                 <p className="text-[9px] font-black text-muted-foreground/40 uppercase mb-4 px-4"> 
                    Protocoles d'Accès 

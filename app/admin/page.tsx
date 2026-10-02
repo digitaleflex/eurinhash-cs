@@ -11,6 +11,7 @@ import {
   Bell,
   Activity
 } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -39,7 +40,7 @@ export default async function AdminPage() {
     prisma.contactMessage.count(),
     prisma.event.count(),
     prisma.eventRegistration.count(),
-    (prisma as any).post.count(),
+    prisma.post.count(),
     prisma.contactMessage.findMany({
       take: 5,
       orderBy: { createdAt: 'desc' },
@@ -59,16 +60,16 @@ export default async function AdminPage() {
         event: true,
       }
     }),
-    (prisma as any).post.findMany({
+    prisma.post.findMany({
       take: 5,
       orderBy: { createdAt: 'desc' },
     })
   ]);
 
   const recentActivity = [
-    ...recentMessages.map((m: any) => ({ id: m.id, type: 'message', title: `Message: ${m.subject || 'Nouveau contact'}`, user: m.name, date: m.createdAt })),
-    ...registrationsLast7Days_detailed.map((r: any) => ({ id: r.id, type: 'registration', title: `Inscription: ${r.event.title}`, user: r.user.name || r.user.email, date: r.createdAt })),
-    ...recentPosts.map((p: any) => ({ id: p.id, type: 'post', title: `Article: ${p.title}`, user: 'Admin', date: p.createdAt })),
+    ...recentMessages.map((m) => ({ id: m.id, type: 'message', title: `Message: ${m.subject || 'Nouveau contact'}`, user: m.name, date: m.createdAt })),
+    ...registrationsLast7Days_detailed.map((r) => ({ id: r.id, type: 'registration', title: `Inscription: ${r.event.title}`, user: r.user.name || r.user.email, date: r.createdAt })),
+    ...recentPosts.map((p) => ({ id: p.id, type: 'post', title: `Article: ${p.title}`, user: 'Admin', date: p.createdAt })),
   ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 8);
 
   const chartData = Array.from({ length: 7 }).map((_, i) => {
@@ -145,7 +146,7 @@ export default async function AdminPage() {
             </CardHeader>
             <CardContent className="p-0">
               <div className="divide-y divide-border/40">
-                {recentActivity.map((activity: any) => (
+                {recentActivity.map((activity) => (
                   <div key={activity.id} className="flex items-center justify-between p-4 hover:bg-accent/5 transition-colors">
                     <div className="flex items-center gap-3">
                       <div className={`h-2 w-2 rounded-full ${
@@ -181,7 +182,7 @@ export default async function AdminPage() {
             </CardHeader>
             <CardContent className="pt-6">
               <div className="space-y-6">
-                {recentMessages.map((msg: any) => (
+                {recentMessages.map((msg) => (
                   <div key={msg.id} className="flex items-start gap-4 group">
                     <div className="h-8 w-8 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
                       <Mail className="h-4 w-4 text-accent" />
@@ -217,7 +218,17 @@ export default async function AdminPage() {
   );
 }
 
-function StatCard({ title, value, icon: Icon, trend, description, href, highlight }: any) {
+interface StatCardProps {
+  title: string;
+  value: number;
+  icon: LucideIcon;
+  description: string;
+  href: string;
+  trend?: string;
+  highlight?: boolean;
+}
+
+function StatCard({ title, value, icon: Icon, trend, description, href, highlight }: StatCardProps) {
   return (
     <Link href={href}>
       <Card className="border-border/50 bg-card transition-all hover:border-accent/40 shadow-sm overflow-hidden relative group h-full">
@@ -234,7 +245,9 @@ function StatCard({ title, value, icon: Icon, trend, description, href, highligh
           </div>
           <div className="flex items-center justify-between mt-2">
             <span className="text-[10px] text-muted-foreground font-medium uppercase tracking-wider">{description}</span>
-            <Badge variant="outline" className={`text-[9px] font-bold py-0 ${highlight ? 'border-accent bg-accent/10 text-accent' : 'border-accent/20 text-accent'}`}>{trend}</Badge>
+            {trend && (
+              <Badge variant="outline" className={`text-[9px] font-bold py-0 ${highlight ? 'border-accent bg-accent/10 text-accent' : 'border-accent/20 text-accent'}`}>{trend}</Badge>
+            )}
           </div>
         </CardContent>
       </Card>

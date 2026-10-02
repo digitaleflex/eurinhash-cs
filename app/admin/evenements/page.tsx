@@ -23,7 +23,7 @@ interface AdminEventsPageProps {
   searchParams: Promise<{ q?: string }>;
 }
 
-const platformIcons: Record<string, any> = {
+const platformIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   YouTube: Youtube,
   TikTok: Video, // Replace with TikTok icon if available in your lucide version or generic Video
   'Google Meet': Video,
@@ -37,6 +37,8 @@ export default async function AdminEventsPage({
   const { q } = await searchParams;
 
   const events = await prisma.event.findMany({
+    // Le _count est indispensable : sans lui, le compteur d'inscrits affiche 0.
+    include: { _count: { select: { registrations: true } } },
     where: {
       ...(q
         ? {
@@ -95,7 +97,7 @@ export default async function AdminEventsPage({
               </tr>
             </thead>
             <tbody className="divide-y divide-border/20">
-              {events.map((event: any) => {
+              {events.map((event) => {
                 const Icon = platformIcons[event.platform] || ExternalLink;
                 return (
                   <tr
@@ -160,7 +162,7 @@ export default async function AdminEventsPage({
                           variant="secondary"
                           className="text-[10px] font-bold bg-accent/10 text-accent border-none cursor-pointer"
                         >
-                          {(event as any)._count?.registrations || 0} inscrits
+                          {event._count.registrations} inscrits
                         </Badge>
                       </Link>
                     </td>

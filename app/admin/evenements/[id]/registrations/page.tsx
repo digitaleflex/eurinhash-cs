@@ -27,7 +27,7 @@ export default async function EventRegistrationsPage({
       registrations: {
         // Le tableau et le CSV n'ont besoin que de ces champs : on ne sérialise
         // pas le compte utilisateur complet vers le client.
-        select: { createdAt: true, user: { select: { name: true, email: true } } },
+        select: { id: true, createdAt: true, user: { select: { name: true, email: true } } },
         orderBy: { createdAt: 'desc' },
       },
     },
@@ -82,7 +82,7 @@ export default async function EventRegistrationsPage({
               </tr>
             </thead>
             <tbody className="divide-y divide-border/20">
-              {event.registrations.map((reg: any) => (
+              {event.registrations.map((reg) => (
                 <tr
                   key={reg.id}
                   className="group hover:bg-accent/[0.02] transition-colors duration-200"

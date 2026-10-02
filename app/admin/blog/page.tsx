@@ -76,7 +76,7 @@ export default async function BlogListPage({
         </CardHeader>
         <CardContent className="p-0">
           <div className="divide-y divide-border/40">
-            {posts.map((post: any) => (
+            {posts.map((post) => (
               <div
                 key={post.id}
                 className="flex flex-col sm:flex-row sm:items-center justify-between p-4 hover:bg-accent/5 transition-colors group"

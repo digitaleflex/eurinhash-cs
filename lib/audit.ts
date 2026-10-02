@@ -1,3 +1,4 @@
+import type { Prisma } from '@prisma/client';
 import prisma from './prisma';
 
 
@@ -13,11 +14,11 @@ export async function createAuditLog({
   level?: LogLevel;
   action: string;
   message: string;
-  metadata?: any;
+  metadata?: Prisma.InputJsonValue;
   userId?: string;
 }) {
   try {
-    return await (prisma as any).auditLog.create({
+    return await prisma.auditLog.create({
       data: {
         level,
         action,

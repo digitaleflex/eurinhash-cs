@@ -195,7 +195,7 @@ export default function Editor({ content, onChange, placeholder }: EditorProps) 
       }),
     ],
     content: content,
-    onUpdate: ({ editor }: { editor: any }) => {
+    onUpdate: ({ editor }) => {
       onChange(editor.getHTML());
     },
     editorProps: {
