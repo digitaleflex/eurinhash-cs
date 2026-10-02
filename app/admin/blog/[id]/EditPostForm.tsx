@@ -1,5 +1,6 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import type { Prisma } from '@prisma/client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -10,7 +11,12 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Save, ArrowLeft, Eye, Plus, Trash2 } from 'lucide-react';
 import Link from 'next/link';
-import Editor from '@/components/blog/Editor';
+// tiptap + prosemirror pèsent environ 136 KB gzip : l'éditeur est chargé après
+// hydratation plutôt que dans le First Load JS.
+const Editor = dynamic(() => import('@/components/blog/Editor'), {
+  ssr: false,
+  loading: () => <div className="h-64 animate-pulse rounded border border-border bg-muted/20" aria-hidden />,
+});
 import { updatePost, deletePost } from '../actions';
 
 export type EditablePost = Prisma.PostGetPayload<{ include: { category: true } }>;

@@ -15,9 +15,18 @@ import type { LucideIcon } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import dynamic from 'next/dynamic';
 import prisma from '@/lib/prisma';
 import Link from 'next/link';
-import { RegistrationsChart } from '@/components/admin/RegistrationsChart';
+// recharts pese environ 99 KB gzip : on ne le charge qu'apres hydratation du
+// dashboard, hors First Load JS.
+const RegistrationsChart = dynamic(
+  () => import('@/components/admin/RegistrationsChart').then((mod) => mod.RegistrationsChart),
+  {
+    ssr: false,
+    loading: () => <div className="h-64 animate-pulse rounded bg-muted/20" aria-hidden />,
+  }
+);
 
 
 export default async function AdminPage() {

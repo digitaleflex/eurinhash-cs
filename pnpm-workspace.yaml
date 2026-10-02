@@ -2,6 +2,12 @@
 # Prisma engines are generated explicitly via `pnpm db:generate`,
 # and sharp/unrs-resolver binaries are provided by the runtime.
 overrides:
+  # @tiptap/pm@3.31.4 résout prosemirror-view 1.42.6 / model 1.25.12 alors que les
+  # autres paquets prosemirror restent sur 1.41.8 / 1.25.4 : deux versions de la
+  # même bibliothèque dans le bundle de l'éditeur (~24 KB gzip en double).
+  "prosemirror-view": "1.42.6"
+  "prosemirror-model": "1.25.12"
+
   sharp: ">=0.35.0"
   nanoid: ">=3.3.16"
   browserslist: ">=4.28.7"
