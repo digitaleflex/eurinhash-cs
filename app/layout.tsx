@@ -55,7 +55,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               </div>
             </header>
           </ConditionalWrapper>
-          <main className="flex-1 pb-16 lg:pb-0">{children}</main>
+          <div className="flex-1 pb-16 lg:pb-0">{children}</div>
           <ConditionalWrapper excludePaths={['/admin', '/dashboard']}><BottomNav /><Footer /></ConditionalWrapper>
         </ThemeProvider>
         <Analytics />

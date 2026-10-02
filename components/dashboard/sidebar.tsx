@@ -55,7 +55,7 @@ export function DashboardSidebar() {
   return (
     <>
       {/* Mobile Bottom Nav */}
-      <nav className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-sm">
+      <nav aria-label="Navigation tableau de bord mobile" className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-sm">
         <div className="flex items-center justify-around p-2 bg-background/60 backdrop-blur-xl border border-foreground/10 rounded-full shadow-2xl">
           {navItems.map(item => {
             const isActive = pathname === item.href;
@@ -118,7 +118,7 @@ export function DashboardSidebar() {
         <div className="flex flex-col h-full bg-background pt-8">
 
           {/* Navigation */}
-          <nav className="flex-1 px-3 space-y-1">
+          <nav aria-label="Navigation tableau de bord" className="flex-1 px-3 space-y-1">
             <div className="px-4 pb-6">
                <div className="flex items-center gap-2 mb-2">
                   <div className="w-1.5 h-1.5 bg-accent rounded-full" />

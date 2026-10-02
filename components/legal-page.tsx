@@ -46,7 +46,7 @@ export function LegalPage({
               transition={{ duration: 0.5 }}
               className="mb-12 border-b border-foreground/5 pb-12"
             >
-              <nav className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-muted-foreground mb-6">
+              <nav aria-label="Fil d'Ariane" className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-muted-foreground mb-6">
                 <Link href="/" className="hover:text-accent transition-colors">Accueil</Link>
                 <ChevronRight className="w-3 h-3" />
                 <span className="text-foreground/40">Espace Légal</span>
@@ -103,7 +103,7 @@ export function LegalPage({
                         <div className="w-1 h-1 rounded-full bg-accent animate-pulse" />
                     </h3>
                     
-                    <nav className="space-y-4">
+                    <nav aria-label="Table des matières" className="space-y-4">
                         {toc.map((item, idx) => (
                         <Link
                             key={item.id}
