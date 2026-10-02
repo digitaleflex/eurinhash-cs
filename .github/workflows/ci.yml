@@ -4,7 +4,7 @@ on:
   push:
     branches: [main, new, foundation/20-20-reset, prod]
   pull_request:
-    branches: [new, foundation/20-20-reset, prod]
+    branches: [main, new, foundation/20-20-reset, prod]
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
@@ -48,11 +48,14 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
+      - name: Validate Prisma schema
+        run: pnpm prisma validate
+
       - name: Generate Prisma client
         run: pnpm db:generate
 
-      - name: Push Prisma schema
-        run: pnpm db:push -- --skip-generate
+      - name: Deploy Prisma migrations
+        run: pnpm prisma migrate deploy
         env:
           DATABASE_URL: postgresql://runner:runner@localhost:5432/eurinhash
           DATABASE_URL_UNPOOLED: postgresql://runner:runner@localhost:5432/eurinhash
