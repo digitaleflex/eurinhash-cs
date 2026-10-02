@@ -13,6 +13,7 @@ const customJestConfig = {
   modulePathIgnorePatterns: ['<rootDir>/.kilo/'],
   collectCoverageFrom: [
     'app/**/*.{js,jsx,ts,tsx}',
+    'middleware.ts',
     'components/**/*.{js,jsx,ts,tsx}',
     'lib/**/*.{js,jsx,ts,tsx}',
     '!**/*.d.ts',
