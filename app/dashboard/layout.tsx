@@ -1,13 +1,12 @@
-'use client';
-
-import * as React from 'react';
+import type { ReactNode } from 'react';
 import { DashboardSidebar } from '@/components/dashboard/sidebar';
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export const metadata = {
+  title: 'Tableau de bord',
+  robots: { index: false, follow: false },
+};
+
+export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen bg-background">
       <DashboardSidebar />

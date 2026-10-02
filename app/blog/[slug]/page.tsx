@@ -4,10 +4,14 @@ import { sanitizeBlogHtml } from '@/lib/sanitize';
 import { notFound } from 'next/navigation';
 
 // Génération dynamique des métadonnées pour le SEO
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await params;
-  const post = await (prisma as any).post.findUnique({
-    where: { slug },
+  const post = await prisma.post.findFirst({
+    where: { slug, published: true, publishedAt: { not: null } },
   });
 
   if (!post) return { title: 'Article non trouvé' };
@@ -15,6 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: post.seoTitle || post.title,
     description: post.seoDescription || post.excerpt,
+    alternates: { canonical: `/blog/${slug}` },
     openGraph: {
       title: post.title,
       description: post.excerpt,
@@ -31,9 +36,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
-  const post = await (prisma as any).post.findUnique({
+  const post = await prisma.post.findUnique({
     where: { slug },
     include: {
       author: true,
@@ -65,7 +74,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      
+
       <article className="prose prose-invert lg:prose-xl max-w-none">
         <header className="mb-12 not-prose">
           <div className="flex items-center gap-2 mb-4">
@@ -86,16 +95,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </header>
 
         {post.thumbnail && (
-          <img 
-            src={post.thumbnail} 
-            alt={post.title} 
+          <img
+            src={post.thumbnail}
+            alt={post.title}
             className="w-full aspect-video object-cover rounded-2xl mb-12 shadow-2xl"
           />
         )}
 
-        <div 
+        <div
           className="content-area"
-          dangerouslySetInnerHTML={{ __html: sanitizeBlogHtml(post.content) }} 
+          dangerouslySetInnerHTML={{ __html: sanitizeBlogHtml(post.content) }}
         />
       </article>
     </main>

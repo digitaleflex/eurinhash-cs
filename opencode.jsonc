@@ -1,0 +1,50 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "formatter": true,
+  "compaction": {
+    "auto": true,
+    "keep": { "tokens": 20000 }
+  },
+  "tool_output": {
+    "max_lines": 2000,
+    "max_bytes": 51200
+  },
+  "worktree": {
+    "directory": ".opencode/worktrees"
+  },
+  "skills": [".opencode/skills"],
+  "references": {
+    "project-docs": {
+      "path": "docs",
+      "description": "Documentation produit, architecture et décisions du site eurinhash.com"
+    }
+  },
+  "permissions": [
+    { "action": "*", "resource": "*", "effect": "allow" },
+    { "action": "edit", "resource": "**/.env*", "effect": "deny" },
+    { "action": "edit", "resource": "**/secrets/**", "effect": "deny" },
+    { "action": "shell", "resource": "git push origin main*", "effect": "deny" },
+    { "action": "shell", "resource": "git push origin prod*", "effect": "deny" },
+    { "action": "shell", "resource": "git push --force*", "effect": "deny" },
+    { "action": "shell", "resource": "rm -rf *", "effect": "deny" }
+  ],
+  "agents": {
+    "reviewer": {
+      "description": "Revue sceptique en lecture seule : bugs, régressions, sécurité, tests manquants",
+      "mode": "subagent",
+      "system": "Tu es un mainteneur sceptique. Ne modifie aucun fichier. Passe le diff en revue : correctesse, régressions, sécurité, duplication, abstraction inutile, tests manquants. Classe les constats par gravité avec chemins de fichiers et numéros de ligne. Termine par les limites connues.",
+      "permissions": [{ "action": "edit", "resource": "*", "effect": "deny" }]
+    },
+    "qa-runner": {
+      "description": "Exécute la chaîne de validation pnpm et rapporte les échecs avec leur cause racine",
+      "mode": "subagent",
+      "system": "Exécute dans le dépôt : pnpm install --frozen-lockfile, pnpm db:generate, pnpm lint, pnpm type-check, pnpm test:ci, pnpm build. Si une étape échoue, isole la cause racine exacte (fichier, message) et propose le correctif minimal. Ne modifie le code que si le correctif est évident et de moins de 10 lignes, sinon rapporte seulement."
+    },
+    "perf-auditor": {
+      "description": "Audit performance web : bundle JS, coût des dépendances, Core Web Vitals",
+      "mode": "subagent",
+      "system": "Analyse le bundle Next.js et les dépendances : poids par route, libraries heaviest, images non optimisées, polices, third-party scripts. Produit un rapport chiffré trié par gain estimé. Ne modifie aucun fichier.",
+      "permissions": [{ "action": "edit", "resource": "*", "effect": "deny" }]
+    }
+  }
+}

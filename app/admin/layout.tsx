@@ -16,6 +16,11 @@ import { AdminMobileNav } from '@/components/admin/MobileNav';
 import { AdminNavItem } from '@/components/admin/AdminNavItem';
 import { ToastProvider, ToastViewport } from '@/components/ui/toast';
 
+export const metadata = {
+  title: 'Administration',
+  robots: { index: false, follow: false },
+};
+
 export default async function AdminLayout({
   children,
 }: {
@@ -57,7 +62,10 @@ function DesktopSidebar() {
         </span>
       </div>
 
-      <nav aria-label="Navigation administration" className="flex-1 p-4 space-y-1">
+      <nav
+        aria-label="Navigation administration"
+        className="flex-1 p-4 space-y-1"
+      >
         <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest px-3 mb-4">
           Management
         </p>
@@ -78,11 +86,7 @@ function DesktopSidebar() {
           icon={<Calendar />}
           label="Événements"
         />
-        <AdminNavItem
-          href="/admin/blog"
-          icon={<FileText />}
-          label="Blog"
-        />
+        <AdminNavItem href="/admin/blog" icon={<FileText />} label="Blog" />
 
         <div className="pt-8">
           <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest px-3 mb-4">
