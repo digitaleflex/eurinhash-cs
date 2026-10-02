@@ -2,19 +2,16 @@
 
 import { revalidatePath } from 'next/cache';
 import prisma from '@/lib/prisma';
-import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
 import { sendAdminReply } from '@/lib/mail';
+import { requireAdmin } from '@/lib/authorization';
 
 
 async function checkAdmin() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-  if (!session || (session.user as any).role !== 'admin') {
+  try {
+    return await requireAdmin();
+  } catch {
     throw new Error('Accès refusé - Administrateur requis');
   }
-  return session;
 }
 
 export async function updateUserRole(userId: string, role: 'user' | 'admin') {

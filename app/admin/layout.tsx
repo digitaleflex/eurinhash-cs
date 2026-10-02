@@ -10,8 +10,7 @@ import {
 } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { redirect } from 'next/navigation';
-import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
+import { requireAdmin } from '@/lib/authorization';
 import Link from 'next/link';
 import { AdminMobileNav } from '@/components/admin/MobileNav';
 import { AdminNavItem } from '@/components/admin/AdminNavItem';
@@ -22,11 +21,10 @@ export default async function AdminLayout({
 }: {
   children: ReactNode;
 }) {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!session || (session.user as any).role !== 'admin') {
+  let session;
+  try {
+    session = await requireAdmin();
+  } catch {
     redirect('/dashboard');
   }
 

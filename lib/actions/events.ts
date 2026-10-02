@@ -77,15 +77,12 @@ export async function updateEvent(
 }
 
 export async function registerForEvent(eventId: string) {
-  const { auth } = await import('@/lib/auth');
-  const { headers } = await import('next/headers');
-  const userSession = await auth.api.getSession({ headers: await headers() });
-
-  if (!userSession) {
+  const { requireUser } = await import('@/lib/authorization');
+  const user = await requireUser().catch(() => {
     throw new Error('Vous devez être connecté pour vous inscrire.');
-  }
+  });
 
-  const userId = userSession.user.id;
+  const userId = user.id;
   const safeEventId = z.string().min(1).max(128).parse(eventId);
 
   const existing = await prisma.eventRegistration.findUnique({
@@ -104,8 +101,8 @@ export async function registerForEvent(eventId: string) {
   after(async () => {
     try {
       await sendEventConfirmation({
-        to: userSession.user.email,
-        userName: userSession.user.name || 'Invité',
+        to: user.email,
+        userName: user.name || 'Invité',
         eventTitle: registration.event.title,
         eventDate: new Date(registration.event.date).toLocaleDateString('fr-FR', {
           day: '2-digit',
