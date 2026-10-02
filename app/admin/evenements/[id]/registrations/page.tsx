@@ -3,14 +3,13 @@ import {
   Calendar,
 } from 'lucide-react';
 import { Card } from '@/components/ui/card';
-import prismaApi from '@/lib/prisma-api';
+import prisma from '@/lib/prisma';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { RelaunchButton } from '@/components/events/RelaunchButton';
+import { ExportCSVButton } from '@/components/events/ExportCSVButton';
 import { Badge } from '@/components/ui/badge';
 
-
-const prisma = prismaApi;
 
 interface EventRegistrationsPageProps {
   readonly params: Promise<{ id: string }>;
@@ -57,10 +56,16 @@ export default async function EventRegistrationsPage({
           </p>
         </div>
 
-        <RelaunchButton
-          eventId={event.id}
-          participantCount={event.registrations.length}
-        />
+        <div className="flex items-center gap-3">
+          <ExportCSVButton 
+            data={event.registrations} 
+            filename={`inscriptions-${event.slug}`} 
+          />
+          <RelaunchButton
+            eventId={event.id}
+            participantCount={event.registrations.length}
+          />
+        </div>
       </div>
 
       <Card className="border-border/60 bg-card/30 overflow-hidden shadow-sm">

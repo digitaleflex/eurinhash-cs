@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { EventForm } from '@/components/events/EventForm';
-import prismaApi from '@/lib/prisma-api';
+import prisma from '@/lib/prisma';
 import { notFound } from 'next/navigation';
-
-const prisma = prismaApi;
 
 interface EditEventPageProps {
   params: Promise<{ id: string }>;

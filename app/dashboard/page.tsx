@@ -4,9 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import prismaApi from '@/lib/prisma-api';
-
-const prisma = prismaApi;
+import prisma from '@/lib/prisma';
 
 export default async function DashboardPage() {
   const session = await auth.api.getSession({

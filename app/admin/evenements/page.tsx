@@ -16,10 +16,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { DashboardSearch } from '@/components/dashboard/search';
 import { DeleteEventButton } from '@/components/admin/DeleteEventButton';
-import prismaApi from '@/lib/prisma-api';
+import prisma from '@/lib/prisma';
 import Link from 'next/link';
-
-const prisma = prismaApi;
 
 interface AdminEventsPageProps {
   searchParams: Promise<{ q?: string }>;
@@ -54,7 +52,10 @@ export default async function AdminEventsPage({
   });
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500 pb-10">
+    <div 
+      className="space-y-8 animate-in fade-in duration-500 pb-10"
+      suppressHydrationWarning
+    >
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-black tracking-tight uppercase">

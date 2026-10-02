@@ -1,49 +1,36 @@
-'use client';
-
-import { ShieldCheck, Zap, Search, ArrowRight } from 'lucide-react';
+import { ArrowRight, Search, ShieldCheck, Zap } from 'lucide-react';
 import Link from 'next/link';
+
+const steps = [
+  { icon: Search, title: 'Diagnostic', desc: 'Analyse ciblée de l’architecture, des flux, de l’infrastructure et des points de risque pertinents.' },
+  { icon: ShieldCheck, title: 'Risques', desc: 'Constats priorisés selon leur impact, leur probabilité et les contraintes du système.' },
+  { icon: Zap, title: 'Plan d’action', desc: 'Recommandations concrètes, ordonnées par priorité et reliées aux éléments observés.' },
+];
 
 export default function AuditServicePage() {
   return (
-    <main className="min-h-screen bg-background pt-32 pb-40">
+    <main className="min-h-screen bg-background pb-40 pt-32">
       <div className="mx-auto max-w-4xl px-4 sm:px-8">
-        <span className="font-mono text-xs text-accent tracking-widest uppercase block mb-6">Service · Stratégie</span>
-        <h1 className="text-5xl sm:text-7xl font-black tracking-tighter leading-[0.9] mb-12">
-            Audit de<br />
-            <span className="text-foreground/20 font-light italic">Résilience.</span>
-        </h1>
-        
-        <div className="grid gap-12 mt-20">
-          <div className="prose prose-invert max-w-none">
-            <p className="text-xl text-muted-foreground leading-relaxed">
-                Votre système est-il prêt à passer à l'échelle ? En 5 jours, nous identifions les points 
-                de rupture critiques, les failles de sécurité et les poches de dette technique.
-            </p>
-          </div>
+        <span className="font-mono text-xs tracking-[0.16em] text-accent uppercase">Service · Audit</span>
+        <h1 className="mt-6 text-5xl font-black leading-[0.94] tracking-tight sm:text-7xl">Clarifier un système existant.</h1>
+        <p className="mt-8 max-w-3xl text-xl leading-relaxed text-muted-foreground">
+          Une intervention d’analyse pour comprendre les points de fragilité, les risques et les priorités avant d’engager des changements importants.
+        </p>
 
-          <div className="grid sm:grid-cols-3 gap-8 mt-12">
-            {[
-                { icon: Search, title: 'Diagnostic', desc: 'Scan profond de votre stack et de vos processus.' },
-                { icon: ShieldCheck, title: 'Risques', desc: 'Identification des vulnérabilités de continuité.' },
-                { icon: Zap, title: 'Plan d\'Action', desc: 'Livrable direct avec priorités d\'exécution.' }
-            ].map((item, i) => (
-                <div key={i} className="space-y-4">
-                    <item.icon className="w-8 h-8 text-accent" />
-                    <h3 className="text-lg font-bold">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
-                </div>
-            ))}
-          </div>
+        <div className="mt-20 grid gap-10 sm:grid-cols-3">
+          {steps.map((step) => (
+            <div key={step.title} className="border-t border-foreground/10 pt-6">
+              <step.icon className="h-7 w-7 text-accent" aria-hidden="true" />
+              <h2 className="mt-6 font-bold">{step.title}</h2>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
+            </div>
+          ))}
+        </div>
 
-          <div className="mt-16 p-10 bg-foreground text-background">
-            <h2 className="text-2xl font-bold mb-6">Prêt pour un diagnostic ?</h2>
-            <p className="mb-10 text-background/70">
-                Ne construisez pas sur des sables mouvants. Sécurisez vos fondations techniques maintenant.
-            </p>
-            <Link href="/contact" className="inline-flex items-center gap-3 bg-accent text-white px-8 py-4 text-sm font-bold hover:bg-white hover:text-black transition-all group">
-                Réserver mon audit <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
+        <div className="mt-20 border border-foreground/10 p-8 sm:p-10">
+          <h2 className="text-2xl font-bold">Ce que vous recevez</h2>
+          <p className="mt-4 leading-relaxed text-muted-foreground">Un état des lieux documenté, les risques identifiés, les priorités de correction et les recommandations nécessaires au contexte. Aucun résultat n’est présenté comme garanti avant vérification.</p>
+          <Link href="/contact?subject=Audit" className="mt-8 inline-flex items-center gap-2 bg-foreground px-6 py-3 text-sm font-bold text-background hover:bg-accent">Discuter d’un audit <ArrowRight className="h-4 w-4" /></Link>
         </div>
       </div>
     </main>

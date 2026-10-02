@@ -8,15 +8,21 @@ import { sendMail } from "./mail";
 const prismaForAuth = prisma;
 
 
-let AUTH_BASE_URL =
-    process.env.BETTER_AUTH_URL ||
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    "http://localhost:3000";
-
-// Ensure the URL starts with a protocol (http/https)
-if (AUTH_BASE_URL && !AUTH_BASE_URL.startsWith("http")) {
-    AUTH_BASE_URL = `https://${AUTH_BASE_URL}`;
+function normalizeBaseUrl(raw: string | undefined): string {
+    if (!raw) return "http://localhost:3000";
+    // Strip any surrounding quotes that may have slipped in from env vars
+    const trimmed = raw.trim().replace(/^["']|["']$/g, "");
+    if (!trimmed) return "http://localhost:3000";
+    // Ensure the URL starts with a valid protocol
+    if (!trimmed.startsWith("http://") && !trimmed.startsWith("https://")) {
+        return `https://${trimmed}`;
+    }
+    return trimmed;
 }
+
+const AUTH_BASE_URL = normalizeBaseUrl(
+    process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_SITE_URL
+);
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
@@ -58,7 +64,7 @@ export const auth = betterAuth({
         } : {}),
     },
     plugins: [
-        admin() as any,
+        admin(),
         emailOTP({
             async sendVerificationOTP({ email, otp, type }) {
                 const subject = type === "sign-in" ? "Votre code de connexion" : "Vérifiez votre email";

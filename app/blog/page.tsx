@@ -1,42 +1,75 @@
-import type { Metadata } from 'next';
+import prisma from '@/lib/prisma';
 import Link from 'next/link';
-import { Newspaper, ArrowRight } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 
-export const metadata: Metadata = {
-  title: 'Blog & Veille Technologique - Eurin Hash',
-  description: 'Articles de fond, études de cas et veille technologique pour rester à la pointe.',
+export const metadata = {
+  title: 'Insights | Architecture, IA & Cybersécurité',
+  description: 'Analyses d’Eurin Hash sur l’architecture logicielle, l’IA appliquée, la cybersécurité, le cloud et les décisions techniques.',
 };
 
-export default function BlogPage() {
-  return (
-    <main className="min-h-screen bg-background pt-32 pb-40">
-      <div className="mx-auto max-w-5xl px-4 sm:px-8">
-        <header className="mb-24 space-y-8">
-          <span className="font-mono text-xs text-accent tracking-widest font-bold block uppercase">
-            Savoir · Blog & Veille
-          </span>
-          <h1 className="text-5xl sm:text-7xl font-black tracking-tighter leading-[0.9] text-foreground">
-            Analyses &<br />
-            <span className="text-foreground/20 font-light italic">Perspectives Tech.</span>
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
-            Articles de fond, études de cas et veille technologique pour rester à la pointe.
-          </p>
-        </header>
+export default async function BlogPage() {
+  const posts = await prisma.post.findMany({
+    where: { published: true },
+    orderBy: { createdAt: 'desc' },
+    include: { category: true },
+  });
 
-        <div className="grid gap-12">
-          <div className="p-10 border border-foreground/5 bg-foreground/[0.01] flex flex-col items-center justify-center text-center space-y-6">
-            <Newspaper className="w-12 h-12 text-accent/20" />
-            <div className="space-y-2">
-              <h2 className="text-2xl font-bold tracking-tight">En cours de rédaction</h2>
-              <p className="text-muted-foreground">Le labo EHAF prépare des dossiers exclusifs sur la résilience cloud.</p>
-            </div>
-            <Link href="/contact?subject=Blog" className="inline-flex items-center gap-2 text-sm font-bold text-accent group">
-              S'abonner à la veille par email <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
+  return (
+    <div className="max-w-7xl mx-auto px-4 py-20">
+      <header className="mb-20 text-center">
+        <h1 className="text-6xl font-black uppercase tracking-tighter mb-4">
+          Insights <span className="text-accent">Techniques</span>
+        </h1>
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          Analyses, tutoriels et réflexions sur les infrastructures de demain.
+        </p>
+      </header>
+
+      <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post: any) => (
+          <Link href={`/blog/${post.slug}`} key={post.id} className="group">
+            <Card className="border-none bg-transparent overflow-hidden h-full">
+              <div className="aspect-video relative overflow-hidden rounded-2xl mb-6 bg-muted">
+                {post.thumbnail ? (
+                  <img 
+                    src={post.thumbnail} 
+                    alt={post.title} 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+                    Eurin Hash Insights
+                  </div>
+                )}
+                <div className="absolute top-4 left-4">
+                  <span className="bg-background/80 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border border-border/50">
+                    {post.category?.name || 'Tech'}
+                  </span>
+                </div>
+              </div>
+              <CardContent className="p-0">
+                <h2 className="text-2xl font-bold mb-3 group-hover:text-accent transition-colors leading-tight">
+                  {post.title}
+                </h2>
+                <p className="text-muted-foreground line-clamp-3 text-sm leading-relaxed mb-4">
+                  {post.excerpt}
+                </p>
+                <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                  <span>{new Date(post.createdAt).toLocaleDateString('fr-FR')}</span>
+                  <span>•</span>
+                  <span>{post.readingTime} min lecture</span>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
+        ))}
       </div>
-    </main>
+
+      {posts.length === 0 && (
+        <div className="text-center py-40 border-2 border-dashed border-border rounded-3xl">
+          <p className="text-muted-foreground italic">En cours de rédaction...</p>
+        </div>
+      )}
+    </div>
   );
 }

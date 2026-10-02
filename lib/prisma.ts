@@ -7,24 +7,34 @@ import ws from 'ws';
 neonConfig.webSocketConstructor = ws;
 
 const prismaClientSingleton = () => {
-  const connectionString = process.env.DATABASE_URL;
+  const isDev = process.env.NODE_ENV === 'development';
+  const connectionString = (isDev 
+    ? (process.env.DATABASE_URL_UNPOOLED || process.env.DATABASE_URL) 
+    : (process.env.DATABASE_URL || process.env.DATABASE_URL_UNPOOLED))?.trim();
   
   if (!connectionString) {
-    throw new Error('DATABASE_URL is not set');
+    throw new Error('DATABASE_URL is not set in environment variables');
   }
 
-  // Utilisation de l'adapter Neon pour des performances optimales en serverless
+  // En développement local ou hors de Neon (self-hosted, CI), on utilise le pilote natif de Prisma.
+  if (isDev || !/neon\.tech|neon\.build/i.test(connectionString)) {
+    return new PrismaClient({
+      datasourceUrl: connectionString,
+      log: ['error', 'warn'],
+    });
+  }
+
+  // En production (Vercel Edge/Serverless), on utilise l'adaptateur Neon Serverless via WebSockets.
   const pool = new Pool({ connectionString });
-  const adapter = new PrismaNeon(pool as any);
+  const adapter = new PrismaNeon(pool);
 
   return new PrismaClient({
-    adapter,
-    log: process.env.NODE_ENV === 'development' ? ['error', 'warn'] : ['error'],
-  });
+    adapter: adapter,
+    log: ['error'],
+  } as any);
 };
 
 declare global {
-  // eslint-disable-next-line no-var
   var prismaGlobal: ReturnType<typeof prismaClientSingleton> | undefined;
 }
 
