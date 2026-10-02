@@ -23,6 +23,7 @@ const nextConfig: NextConfig = {
 
   // Packages externes pour les composants serveur
   serverExternalPackages: ['@prisma/client', 'ws', '@neondatabase/serverless'],
+  transpilePackages: ['htmlparser2', 'domhandler', 'domutils', 'dom-serializer', 'entities', 'domelementtype'],
 };
 
 export default nextConfig;

@@ -7,10 +7,27 @@ import prisma from '@/lib/prisma';
 import { sendMail, sendContactNotification, sendContactAcknowledgement } from '@/lib/mail';
 import { ContactSchema } from '@/lib/validation';
 import { logger } from '@/lib/logger';
+import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
 
 export async function POST(request: NextRequest) {
   try {
+    // Limite anti-flood keyée par IP (fenêtre glissante serveur)
+    const ip = getClientIp(request.headers);
+    const rate = checkRateLimit(`contact:${ip}`);
+    if (!rate.allowed) {
+      return NextResponse.json(
+        { error: 'Trop de requêtes. Réessayez plus tard.' },
+        { status: 429, headers: { 'Retry-After': String(rate.retryAfterSeconds) } }
+      );
+    }
+
     const body = await request.json();
+
+    // Honeypot anti-bot : champ invisible côté utilisateur légitime.
+    // Rempli → bot : on fait semblant de traiter, aucun effet de bord.
+    if (typeof body?.website === 'string' && body.website.length > 0) {
+      return NextResponse.json({ success: true, message: 'Message transmis avec succès.' });
+    }
 
     // Validation avec Zod
     const result = ContactSchema.safeParse(body);

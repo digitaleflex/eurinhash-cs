@@ -12,7 +12,6 @@
     "*.css": "tailwindcss"
   },
   "prisma.pinToPrisma6": true,
-  "snyk.advanced.autoSelectOrganization": true,
   "WillLuke.nextjs.addTypesOnSave": true,
   "WillLuke.nextjs.hasPrompted": true
 }
