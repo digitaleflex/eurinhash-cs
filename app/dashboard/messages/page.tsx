@@ -5,11 +5,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import prismaApi from '@/lib/prisma-api';
+import prisma from '@/lib/prisma';
 import { DashboardSearch } from '@/components/dashboard/search';
 import { MessageItem } from './message-item';
-
-const prisma = prismaApi;
 
 interface MessagesPageProps {
   readonly searchParams: Promise<{ q?: string }>;
