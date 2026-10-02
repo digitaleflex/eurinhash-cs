@@ -1,41 +1,32 @@
 'use server';
 
 import prismaApi from '@/lib/prisma-api';
-import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { createAuditLog } from '@/lib/audit';
+import { requireAdmin } from '@/lib/authorization';
+import { BlogPostSchema } from '@/lib/validation';
+import { z } from 'zod';
 
 const prisma = prismaApi;
 
 export async function createPost(formData: FormData) {
-  const session = (await auth.api.getSession({
-    headers: await headers(),
-  })) as any;
+  const session = await requireAdmin();
+  const input = BlogPostSchema.parse({
+    title: formData.get('title'),
+    slug: formData.get('slug'),
+    excerpt: formData.get('excerpt'),
+    content: formData.get('content'),
+    published: formData.get('published') === 'true',
+    thumbnail: formData.get('thumbnail') || '',
+  });
 
-  if (!session || session.user.role !== 'admin') {
-    throw new Error('Non autorisé');
-  }
-
-  const title = formData.get('title') as string;
-  const slug = formData.get('slug') as string;
-  const excerpt = formData.get('excerpt') as string;
-  const content = formData.get('content') as string;
-  const published = formData.get('published') === 'true';
-
-  const thumbnail = formData.get('thumbnail') as string;
-
-  await (prisma as any).post.create({
+  await prisma.post.create({
     data: {
-      title,
-      slug,
-      excerpt,
-      content,
-      published,
-      thumbnail,
+      ...input,
+      thumbnail: input.thumbnail || null,
       authorId: session.user.id,
-      readingTime: Math.ceil(content.split(' ').length / 200),
+      readingTime: Math.ceil(input.content.split(/\s+/).length / 200),
     },
   });
 
@@ -52,31 +43,23 @@ export async function createPost(formData: FormData) {
 }
 
 export async function updatePost(id: string, formData: FormData) {
-  const session = (await auth.api.getSession({
-    headers: await headers(),
-  })) as any;
+  const session = await requireAdmin();
+  const safeId = z.string().trim().min(1).max(128).parse(id);
+  const input = BlogPostSchema.parse({
+    title: formData.get('title'),
+    slug: formData.get('slug'),
+    excerpt: formData.get('excerpt'),
+    content: formData.get('content'),
+    published: formData.get('published') === 'true',
+    thumbnail: formData.get('thumbnail') || '',
+  });
 
-  if (!session || session.user.role !== 'admin') {
-    throw new Error('Non autorisé');
-  }
-
-  const title = formData.get('title') as string;
-  const slug = formData.get('slug') as string;
-  const excerpt = formData.get('excerpt') as string;
-  const content = formData.get('content') as string;
-  const published = formData.get('published') === 'true';
-  const thumbnail = formData.get('thumbnail') as string;
-
-  await (prisma as any).post.update({
-    where: { id },
+  await prisma.post.update({
+    where: { id: safeId },
     data: {
-      title,
-      slug,
-      excerpt,
-      content,
-      published,
-      thumbnail,
-      readingTime: Math.ceil(content.split(' ').length / 200),
+      ...input,
+      thumbnail: input.thumbnail || null,
+      readingTime: Math.ceil(input.content.split(/\s+/).length / 200),
     },
   });
 
@@ -95,16 +78,11 @@ export async function updatePost(id: string, formData: FormData) {
 }
 
 export async function deletePost(id: string) {
-  const session = (await auth.api.getSession({
-    headers: await headers(),
-  })) as any;
+  const session = await requireAdmin();
+  const safeId = z.string().trim().min(1).max(128).parse(id);
 
-  if (!session || session.user.role !== 'admin') {
-    throw new Error('Non autorisé');
-  }
-
-  await (prisma as any).post.delete({
-    where: { id },
+  await prisma.post.delete({
+    where: { id: safeId },
   });
 
   await createAuditLog({
