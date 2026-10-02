@@ -15,7 +15,7 @@ export default async function BlogPage() {
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-20">
+    <main className="max-w-7xl mx-auto px-4 py-20">
       <header className="mb-20 text-center">
         <h1 className="text-6xl font-black uppercase tracking-tighter mb-4">
           Insights <span className="text-accent">Techniques</span>
@@ -70,6 +70,6 @@ export default async function BlogPage() {
           <p className="text-muted-foreground italic">En cours de rédaction...</p>
         </div>
       )}
-    </div>
+    </main>
   );
 }

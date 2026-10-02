@@ -55,7 +55,7 @@ export function AdminMobileNav() {
             </span>
           </div>
 
-          <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
+          <nav aria-label="Navigation admin mobile" className="flex-1 p-4 space-y-1 overflow-y-auto">
             <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest px-3 mb-4">
               Management
             </p>

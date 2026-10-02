@@ -57,7 +57,7 @@ function DesktopSidebar() {
         </span>
       </div>
 
-      <nav className="flex-1 p-4 space-y-1">
+      <nav aria-label="Navigation administration" className="flex-1 p-4 space-y-1">
         <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest px-3 mb-4">
           Management
         </p>

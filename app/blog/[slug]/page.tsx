@@ -60,7 +60,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-20">
+    <main className="max-w-4xl mx-auto px-4 py-20">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -98,6 +98,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           dangerouslySetInnerHTML={{ __html: sanitizeBlogHtml(post.content) }} 
         />
       </article>
-    </div>
+    </main>
   );
 }

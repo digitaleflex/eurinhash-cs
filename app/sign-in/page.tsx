@@ -107,6 +107,7 @@ export default function SignInPage() {
   };
 
   return (
+    <main>
     <AuthCard
       title={step === 'email' ? "Se connecter à Eurin Hash" : "Vérifiez votre email"}
       description={step === 'email' ? "Entrez votre email pour continuer" : `Nous avons envoyé un code à ${emailValue}`}
@@ -218,5 +219,6 @@ export default function SignInPage() {
         </div>
       </div>
     </AuthCard>
+    </main>
   );
 }
