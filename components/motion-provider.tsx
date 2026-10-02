@@ -1,6 +1,7 @@
 'use client';
 
 import { MotionConfig } from 'framer-motion';
+import { duration, ease } from '@/lib/motion';
 import type { ReactNode } from 'react';
 
 /**
@@ -13,7 +14,7 @@ import type { ReactNode } from 'react';
  */
 export function MotionProvider({ children }: { children: ReactNode }) {
   return (
-    <MotionConfig reducedMotion="user" transition={{ duration: 0.2 }}>
+    <MotionConfig reducedMotion="user" transition={{ duration: duration.fast, ease: ease.out }}>
       {children}
     </MotionConfig>
   );

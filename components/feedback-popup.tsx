@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, X, Mail, Clock, MessageSquare } from 'lucide-react';
+import { spring } from '@/lib/motion';
 
 interface FeedbackPopupProps {
   isOpen: boolean;
@@ -54,7 +55,7 @@ export function FeedbackPopup({
             initial={{ opacity: 0, scale: 0.8, y: 50 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 50 }}
-            transition={{ type: 'spring', duration: 0.5 }}
+            transition={spring.soft}
             className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/50 backdrop-blur-sm"
             onClick={onClose}
           >
@@ -85,7 +86,7 @@ export function FeedbackPopup({
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+                  transition={{ ...spring.soft, delay: 0.1 }}
                   className="mx-auto w-12 h-12 sm:w-16 sm:h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mb-4 sm:mb-6"
                 >
                   <CheckCircle className="w-6 h-6 sm:w-8 sm:h-8 text-green-500" />
@@ -159,7 +160,7 @@ export function FeedbackPopup({
           initial={{ opacity: 0, scale: 0.8, y: 50 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 50 }}
-          transition={{ type: 'spring', duration: 0.5 }}
+          transition={spring.soft}
           className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/50 backdrop-blur-sm"
           onClick={onClose}
         >
@@ -190,7 +191,7 @@ export function FeedbackPopup({
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+                transition={{ ...spring.soft, delay: 0.1 }}
                 className="mx-auto w-12 h-12 sm:w-16 sm:h-16 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mb-4 sm:mb-6"
               >
                 <X className="w-6 h-6 sm:w-8 sm:h-8 text-red-500" />

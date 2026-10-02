@@ -19,6 +19,7 @@ import {
   LayoutGrid,
   Globe,
 } from 'lucide-react';
+import { spring } from '@/lib/motion';
 
 
 const navItems = [
@@ -74,7 +75,7 @@ export function DashboardSidebar() {
                   <motion.div
                     layoutId="activeTab"
                     className="absolute inset-0 bg-accent/10 rounded-full -z-10"
-                    transition={{ type: 'spring', bounce: 0.3, duration: 0.6 }}
+                    transition={spring.snappy}
                   />
                 )}
                 <Icon className={cn("w-5 h-5", isActive && "animate-in zoom-in-75")} />

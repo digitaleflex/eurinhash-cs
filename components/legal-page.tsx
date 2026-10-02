@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, ArrowUp, Calendar } from 'lucide-react';
+import { duration, ease } from '@/lib/motion';
 
 type TocItem = { id: string; label: string };
 
@@ -23,7 +24,10 @@ export function LegalPage({
   children,
 }: LegalPageProps) {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Le scroll animé n'est pas couvert par la media query CSS : on respecte
+    // donc la préférence système ici aussi.
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
   };
 
   return (
@@ -43,7 +47,7 @@ export function LegalPage({
             <motion.header
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: duration.slow, ease: ease.out }}
               className="mb-12 border-b border-foreground/5 pb-12"
             >
               <nav aria-label="Fil d'Ariane" className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-muted-foreground mb-6">
@@ -72,7 +76,7 @@ export function LegalPage({
             <motion.article
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: duration.slow, ease: ease.out, delay: 0.1 }}
               className="prose prose-neutral dark:prose-invert max-w-none 
                 prose-headings:font-semibold prose-headings:tracking-tight
                 prose-h2:text-xl prose-h2:border-b prose-h2:border-foreground/5 prose-h2:pb-4 prose-h2:mt-12 prose-h2:font-bold
@@ -93,7 +97,7 @@ export function LegalPage({
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
+                  transition={{ duration: duration.slow, ease: ease.out, delay: 0.2 }}
                   className="p-8 rounded-2xl border border-foreground/5 bg-foreground/[0.015] backdrop-blur-xl relative group overflow-hidden"
                 >
                     <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 blur-3xl -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-700" />

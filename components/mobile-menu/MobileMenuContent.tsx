@@ -8,6 +8,7 @@ import { X, ArrowRight, ChevronDown, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useMobileMenu } from './MobileMenuProvider';
 import { useSession } from '@/lib/auth-clients';
+import { duration, ease, stagger } from '@/lib/motion';
 
 type NavChild = {
   href: string;
@@ -60,7 +61,7 @@ export function MobileMenuContent() {
           initial={{ x: '100%' }}
           animate={{ x: 0 }}
           exit={{ x: '100%' }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: duration.base, ease: ease.out }}
           className="fixed right-0 top-0 h-full px-safe pt-safe pb-safe w-full sm:w-[400px] z-[70] bg-background border-l border-foreground/10 shadow-2xl"
           role="dialog"
           aria-modal="true"
@@ -114,7 +115,7 @@ export function MobileMenuContent() {
                     key={item.href}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                    transition={{ duration: duration.base, ease: ease.out, delay: stagger(index) }}
                   >
                     {hasChildren ? (
                       /* Accordion Item */
@@ -155,7 +156,7 @@ export function MobileMenuContent() {
                               initial={{ height: 0, opacity: 0 }}
                               animate={{ height: 'auto', opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.4, ease: "circOut" }}
+                              transition={{ duration: duration.base, ease: ease.inOut }}
                               className="overflow-hidden bg-foreground/[0.02]"
                             >
                               <div className="p-3 space-y-1">

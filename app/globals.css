@@ -168,16 +168,11 @@
   background-size: 200px 100%;
 }
 
-/* Optimisations de performance */
-.gpu-accelerated {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
-
 /*
- * Préférence système : les animations et transitions sont désactivées.
- * On conserve indispensable, car les éléments animés restent alors dans leur
- * état final (sinon du contenu resterait invisible).
+ * Préférence système : animations et transitions sont neutralisées.
+ * On conserve `indispensable` (et non `none`) pour que la transition se termine
+ * immédiatement : les éléments animés restent dans leur état final, sinon du
+ * contenu resterait invisible.
  */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -195,6 +190,11 @@
   .animate-pulse,
   .animate-ping,
   .animate-bounce {
+    animation: none !important;
+  }
+
+  /* Une entrée qui ne se joue plus doit tout de même se terminer sur son état final. */
+  .animate-in {
     animation: none !important;
     opacity: 1;
   }
