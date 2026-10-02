@@ -78,13 +78,9 @@ export async function updateEvent(
 }
 
 export async function registerForEvent(eventId: string) {
-  const session = await requireAdmin().catch(async () => null);
-  // Registration is intentionally user-facing; authenticate without requiring admin.
-  const userSession = session ?? await (async () => {
-    const { auth } = await import('@/lib/auth');
-    const { headers } = await import('next/headers');
-    return auth.api.getSession({ headers: await headers() });
-  })();
+  const { auth } = await import('@/lib/auth');
+  const { headers } = await import('next/headers');
+  const userSession = await auth.api.getSession({ headers: await headers() });
 
   if (!userSession) {
     throw new Error('Vous devez être connecté pour vous inscrire.');
