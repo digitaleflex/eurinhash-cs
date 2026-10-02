@@ -93,10 +93,20 @@ export async function registerForEvent(eventId: string) {
     return { success: false, message: 'Déjà inscrit' };
   }
 
-  const registration = await prisma.eventRegistration.create({
-    data: { userId, eventId: safeEventId },
-    include: { event: true, user: true },
-  });
+  const registration = await prisma.eventRegistration
+    .create({
+      data: { userId, eventId: safeEventId },
+      include: { event: true, user: true },
+    })
+    .catch((error: { code?: string }) => {
+      // Unique constraint race: another request registered first.
+      if (error?.code === 'P2002') return null;
+      throw error;
+    });
+
+  if (!registration) {
+    return { success: false, message: 'Déjà inscrit' };
+  }
 
   after(async () => {
     try {
@@ -137,13 +147,20 @@ export async function sendEventReminders(eventId: string) {
 
   after(async () => {
     await Promise.all(
-      event.registrations.map((reg) =>
-        sendMail({
+      event.registrations.map(async (reg) => {
+        // Idempotency: only send to registrations not yet reminded (atomic claim).
+        const claimed = await prisma.eventRegistration.updateMany({
+          where: { id: reg.id, reminderSentAt: null },
+          data: { reminderSentAt: new Date() },
+        });
+        if (claimed.count === 0) return;
+
+        await sendMail({
           to: reg.user.email,
           subject: `Rappel : ${event.title} approche !`,
           html: `<p>Bonjour ${reg.user.name},</p><p>Rappel pour l'événement <strong>${event.title}</strong>.</p>`,
-        }),
-      ),
+        });
+      }),
     );
   });
 
