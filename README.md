@@ -31,7 +31,7 @@ Construit avec **Next.js 15**, **TypeScript**, **PostgreSQL** et **Tailwind CSS*
 ### Prérequis
 
 - Node.js 18+ (recommandé v20+)
-- npm ou pnpm
+- pnpm
 - Une base de données PostgreSQL (locale ou cloud)
 - Une clé API Resend
 
@@ -47,7 +47,7 @@ cd eurinhash-cs
 2. **Installer les dépendances**
 
 ```bash
-npm install
+pnpm install
 ```
 
 3. **Configuration de l'environnement**
@@ -84,10 +84,10 @@ CACHE_TTL_DEFAULT=300000
 
 ```bash
 # Générer le client Prisma
-npm run db:generate
+pnpm db:generate
 
 # Pousser le schéma vers la DB (développement)
-npm run db:push
+pnpm db:push
 ```
 
 Si la base contenait déjà l’ancien schéma NextAuth-style (colonnes `provider`, `sessionToken`, etc.), il faut soit une migration SQL manuelle, soit repartir sur une base vide en dev (`db push` après sauvegarde).
@@ -95,19 +95,19 @@ Si la base contenait déjà l’ancien schéma NextAuth-style (colonnes `provide
 5. **Démarrer le serveur**
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 Le site sera accessible sur [http://localhost:3000](http://localhost:3000) (voir `package.json` pour le port).
 
 ## 📜 Scripts disponibles
 
-- `npm run dev` : Démarre le serveur de développement (port 3000).
-- `npm run build` : Compile l'application pour la production.
-- `npm run start` : Démarre le serveur de production.
-- `npm run lint` : Vérifie le code avec ESLint.
-- `npm run db:studio` : Ouvre Prisma Studio pour visualiser les données.
-- `npm run db:push` : Synchronise le schéma Prisma avec la base de données.
+- `pnpm dev` : Démarre le serveur de développement (port 3000).
+- `pnpm build` : Compile l'application pour la production.
+- `pnpm start` : Démarre le serveur de production.
+- `pnpm lint` : Vérifie le code avec ESLint.
+- `pnpm db:studio` : Ouvre Prisma Studio pour visualiser les données.
+- `pnpm db:push` : Synchronise le schéma Prisma avec la base de données.
 
 ## 📁 Structure du projet
 
