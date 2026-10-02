@@ -26,6 +26,7 @@ export async function createPost(formData: FormData) {
       thumbnail: input.thumbnail || null,
       authorId: session.user.id,
       readingTime: Math.ceil(input.content.split(/\s+/).length / 200),
+      publishedAt: input.published ? new Date() : null,
     },
   });
 
@@ -53,12 +54,17 @@ export async function updatePost(id: string, formData: FormData) {
     thumbnail: formData.get('thumbnail') || '',
   });
 
+  const existing = await prisma.post.findUnique({ where: { id: safeId } });
+  if (!existing) throw new Error('Article introuvable');
+
   await prisma.post.update({
     where: { id: safeId },
     data: {
       ...input,
       thumbnail: input.thumbnail || null,
       readingTime: Math.ceil(input.content.split(/\s+/).length / 200),
+      // Keep the first publication date when still published; clear on unpublish.
+      publishedAt: input.published ? (existing.publishedAt ?? new Date()) : null,
     },
   });
 
