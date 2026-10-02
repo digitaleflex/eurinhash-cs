@@ -33,6 +33,7 @@ model User {
   posts         Post[]
   comments      Comment[]
   auditLogs     AuditLog[]
+  contactMessages ContactMessage[]
 
   @@map("users")
 }
@@ -93,8 +94,12 @@ model ContactMessage {
   subject   String?
   message   String
   status    ContactMessageStatus @default(new)
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([userId])
 
   @@map("contact_messages")
 }
