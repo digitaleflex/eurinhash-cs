@@ -48,3 +48,8 @@ jobs:
 
       - name: Build
         run: pnpm build
+        env:
+          DATABASE_URL: postgresql://user:password@localhost:5432/db
+          DATABASE_URL_UNPOOLED: postgresql://user:password@localhost:5432/db
+          BETTER_AUTH_SECRET: ci-build-secret
+          BETTER_AUTH_URL: http://localhost:3000
