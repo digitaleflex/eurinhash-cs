@@ -21,7 +21,7 @@ import { Countdown } from '@/components/events/Countdown';
 // import type { PrismaClient } from '@prisma/client';
 
 export const metadata: Metadata = {
-  title: 'Événements & Webinaires - Eurin Hash',
+  title: 'Événements & Webinaires',
   description: 'Participez en direct à nos sessions techniques et découvrez les coulisses de l\'architecture moderne.',
 };
 

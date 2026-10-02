@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 export const revalidate = 86400; // Revalider toutes les 24 heures (ISR)
 
 export const metadata: Metadata = {
-  title: 'Gestion des cookies - Eurin Hash',
+  title: 'Gestion des cookies',
   description: 'Politique de gestion des cookies du site eurinhash.com - État actuel et contrôle par l\'utilisateur.',
   robots: {
     index: true,

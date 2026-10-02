@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { GraduationCap, Code2, ShieldAlert, Cloud, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Programme de Mentorat - Eurin Hash',
+  title: 'Programme de Mentorat',
   description: 'Formation d\'élite et mentorat pratique en programmation, cybersécurité et cloud computing pour les talents émergents.',
 };
 

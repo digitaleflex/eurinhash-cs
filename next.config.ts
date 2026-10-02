@@ -1,29 +1,32 @@
 import type { NextConfig } from 'next';
-import { SITE_CONFIG } from './lib/config';
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
-    formats: (SITE_CONFIG.images.formats || ['image/webp']) as any,
-    minimumCacheTTL: SITE_CONFIG.images.minimumCacheTTL,
-    deviceSizes: SITE_CONFIG.images.deviceSizes,
-    imageSizes: SITE_CONFIG.images.imageSizes,
-    qualities: SITE_CONFIG.images.qualities,
-    loader: 'default',
-    unoptimized: false,
+    // AVIF d'abord : plus léger que le WebP, le navigateur retombe automatiquement.
+    formats: ['image/avif', 'image/webp'],
+    // Les chemins d'images ne sont pas content-hashés : une valeur d'un an sert
+    // des transformations périmées après remplacement du fichier source.
+    minimumCacheTTL: 86400,
   },
 
-  // Simplification pour éviter les erreurs de worker sur Windows
   experimental: {
     scrollRestoration: true,
   },
-  typescript: {
-    ignoreBuildErrors: false, // On garde les erreurs TS pour la sécurité, sauf si vraiment bloquant
-  },
 
-  // Packages externes pour les composants serveur
-  serverExternalPackages: ['@prisma/client', 'ws', '@neondatabase/serverless'],
-  transpilePackages: ['htmlparser2', 'domhandler', 'domutils', 'dom-serializer', 'entities', 'domelementtype'],
+  // Packages externes pour les composants serveur (pilotes réseau non bundlables)
+  serverExternalPackages: ['ws', '@neondatabase/serverless'],
+
+  // sanitize-html et ses dépendances htmlparser2 sont publiés en ESM : sans
+  // transpilation, Jest et les bundles serveur échouent à les charger.
+  transpilePackages: [
+    'sanitize-html',
+    'htmlparser2',
+    'domhandler',
+    'domutils',
+    'dom-serializer',
+    'entities',
+    'domelementtype',
+  ],
 };
 
 export default nextConfig;

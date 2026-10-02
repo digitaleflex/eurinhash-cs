@@ -4,7 +4,7 @@ import { Download, ArrowRight } from 'lucide-react';
 
 
 export const metadata: Metadata = {
-  title: 'Ressources Gratuites - Eurin Hash',
+  title: 'Ressources Gratuites',
   description: 'Téléchargez nos Blueprints et Guides exclusifs pour accélérer vos projets.',
 };
 

@@ -103,7 +103,6 @@ export default async function BlogPostPage({
         )}
 
         <div
-          className="content-area"
           dangerouslySetInnerHTML={{ __html: sanitizeBlogHtml(post.content) }}
         />
       </article>

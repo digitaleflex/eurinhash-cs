@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 export const revalidate = 86400; // Revalider toutes les 24 heures (ISR)
 
 export const metadata: Metadata = {
-  title: 'CGV - Eurin Hash | Conditions Générales de Vente',
+  title: 'CGV - Conditions Générales de Vente',
   description: 'Conditions Générales de Vente des prestations de E-FLEX - Devis, délais, paiement et propriété intellectuelle.',
   robots: {
     index: true,

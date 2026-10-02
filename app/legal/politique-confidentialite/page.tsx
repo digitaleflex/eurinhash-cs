@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 export const revalidate = 86400; // Revalider toutes les 24 heures (ISR)
 
 export const metadata: Metadata = {
-  title: 'Politique de confidentialité - Eurin Hash',
+  title: 'Politique de confidentialité',
   description: 'Politique de confidentialité du site eurinhash.com - Collecte, utilisation et protection de vos données personnelles.',
   robots: {
     index: true,

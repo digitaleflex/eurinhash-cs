@@ -39,7 +39,6 @@ export function Logo({
         height={40}
         className="hidden dark:block h-auto w-auto"
         style={{ maxHeight: sizeClasses[size] * 1.5 }}
-        priority
       />
     </div>
   );

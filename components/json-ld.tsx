@@ -1,17 +1,15 @@
-import { Organization, WithContext } from 'schema-dts';
+import type { Organization, WebSite, WithContext } from 'schema-dts';
+import { siteConfig } from '@/lib/metadata';
 
 export function JsonLd() {
   const organizationSchema: WithContext<Organization> = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Eurinhash',
-    url: 'https://eurinhash.com',
-    logo: 'https://eurinhash.com/logo.png',
-    sameAs: [
-      'https://linkedin.com/company/eurinhash',
-      'https://github.com/eurinhash',
-    ],
-    description: 'Expertise en architecture logicielle, cloud et transformation digitale.',
+    name: siteConfig.name,
+    url: siteConfig.url,
+    logo: `${siteConfig.url}/logo.png`,
+    sameAs: [siteConfig.links.linkedin, siteConfig.links.github],
+    description: siteConfig.description,
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: '+229-01-51-07-05-55',
@@ -20,16 +18,11 @@ export function JsonLd() {
     },
   };
 
-  const websiteSchema: any = {
+  const websiteSchema: WithContext<WebSite> = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Eurinhash',
-    url: 'https://eurinhash.com',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: 'https://eurinhash.com/search?q={search_term_string}',
-      'query-input': 'required name=search_term_string',
-    },
+    name: siteConfig.name,
+    url: siteConfig.url,
   };
 
   return (
