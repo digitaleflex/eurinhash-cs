@@ -6,7 +6,6 @@ const nextConfig: NextConfig = {
   images: {
     formats: (SITE_CONFIG.images.formats || ['image/webp']) as any,
     minimumCacheTTL: SITE_CONFIG.images.minimumCacheTTL,
-    dangerouslyAllowSVG: true,
     deviceSizes: SITE_CONFIG.images.deviceSizes,
     imageSizes: SITE_CONFIG.images.imageSizes,
     qualities: SITE_CONFIG.images.qualities,
@@ -19,9 +18,9 @@ const nextConfig: NextConfig = {
     scrollRestoration: true,
   },
 
-  // Suppression des erreurs de build bloquantes
+  // ESLint remains a build-time quality gate.
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
   },
   typescript: {
     ignoreBuildErrors: false, // On garde les erreurs TS pour la sécurité, sauf si vraiment bloquant
