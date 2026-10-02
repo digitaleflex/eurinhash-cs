@@ -33,7 +33,7 @@ export async function createPost(formData: FormData) {
   await createAuditLog({
     level: 'info',
     action: 'BLOG_CREATE',
-    message: `Article créé : ${title}`,
+    message: `Article créé : ${input.title}`,
     userId: session.user.id,
   });
 
@@ -66,14 +66,14 @@ export async function updatePost(id: string, formData: FormData) {
   await createAuditLog({
     level: 'info',
     action: 'BLOG_UPDATE',
-    message: `Article mis à jour : ${title}`,
+    message: `Article mis à jour : ${input.title}`,
     userId: session.user.id,
   });
 
   revalidatePath('/admin/blog');
-  revalidatePath(`/admin/blog/${id}`);
+  revalidatePath(`/admin/blog/${safeId}`);
   revalidatePath('/blog');
-  revalidatePath(`/blog/${slug}`);
+  revalidatePath(`/blog/${input.slug}`);
   redirect('/admin/blog');
 }
 
