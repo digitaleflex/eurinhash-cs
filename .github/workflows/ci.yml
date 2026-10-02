@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [new, foundation/20-20-reset, prod]
+    branches: [main, new, foundation/20-20-reset, prod]
   pull_request:
     branches: [new, foundation/20-20-reset, prod]
 

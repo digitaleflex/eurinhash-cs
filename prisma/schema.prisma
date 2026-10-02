@@ -246,3 +246,118 @@ enum CommentStatus {
   approved
   spam
 }
+
+
+// ===========================================
+// CONTENT HUB — PROJECTS / CASE STUDIES
+// ===========================================
+
+enum ProjectStatus {
+  DRAFT
+  REVIEW
+  PUBLISHED
+  ARCHIVED
+}
+
+enum ProjectSectionType {
+  CONTEXT
+  PROBLEM
+  OBJECTIVES
+  CONSTRAINTS
+  ARCHITECTURE
+  DECISIONS
+  IMPLEMENTATION
+  RESULTS
+  LEARNINGS
+  EVIDENCE
+  CUSTOM
+}
+
+model Project {
+  id            String        @id @default(cuid())
+  slug          String        @unique
+  title         String
+  excerpt       String?
+  description   String?
+  client        String?
+  category      String?
+  role          String?
+  status        ProjectStatus @default(DRAFT)
+  featured      Boolean       @default(false)
+  sortOrder     Int           @default(0)
+  publishedAt   DateTime?
+  startedAt     DateTime?
+  completedAt   DateTime?
+  repositoryUrl String?
+  demoUrl       String?
+  websiteUrl    String?
+  coverMediaId  String?
+  coverMedia    Media?        @relation("ProjectCover", fields: [coverMediaId], references: [id], onDelete: SetNull)
+  sections      ProjectSection[]
+  media         ProjectMedia[]
+  seo           SeoMetadata?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([status])
+  @@index([status, publishedAt])
+  @@index([featured, sortOrder])
+  @@index([category])
+}
+
+model ProjectSection {
+  id        String            @id @default(cuid())
+  projectId String
+  project   Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  type      ProjectSectionType
+  title     String?
+  content   String            @db.Text
+  sortOrder Int               @default(0)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  @@index([projectId, sortOrder])
+  @@index([projectId, type])
+}
+
+model Media {
+  id            String         @id @default(cuid())
+  url           String
+  filename      String
+  mimeType      String
+  size          Int?
+  alt           String?
+  caption       String?
+  width         Int?
+  height        Int?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  coverProjects Project[]      @relation("ProjectCover")
+  projects      ProjectMedia[]
+}
+
+model ProjectMedia {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  mediaId   String
+  media     Media   @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  sortOrder Int      @default(0)
+  caption   String?
+  createdAt DateTime @default(now())
+
+  @@unique([projectId, mediaId])
+  @@index([projectId, sortOrder])
+}
+
+model SeoMetadata {
+  id           String   @id @default(cuid())
+  title        String?
+  description  String?
+  ogImage      String?
+  canonicalUrl String?
+  projectId    String?  @unique
+  project      Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
