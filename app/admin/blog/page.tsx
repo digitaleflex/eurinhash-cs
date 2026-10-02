@@ -1,4 +1,4 @@
-import prismaApi from '@/lib/prisma-api';
+import prisma from '@/lib/prisma';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -13,8 +13,6 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import BlogActions from './BlogActions';
-
-const prisma = prismaApi;
 
 export default async function BlogListPage() {
   const posts = await (prisma as any).post.findMany({
