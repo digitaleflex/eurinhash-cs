@@ -5,6 +5,7 @@
 This repository is the personal digital identity of Eurin Hash.
 
 The website exists to:
+
 1. communicate identity and positioning;
 2. demonstrate credible work and engineering decisions;
 3. publish a small body of first-hand writing;
@@ -37,12 +38,15 @@ Public user accounts, social interactions, generic dashboards and speculative CR
 Keep a database model only when a demonstrated feature requires persistence.
 
 Current candidates:
+
 - User — admin authentication
 - Post — editorial content
 - Event — only while events are an active publishing need
 - ContactMessage — contact workflow
 
 Models for comments, public profiles, social reactions, generic analytics, or speculative platform features require an explicit product decision before being retained.
+
+Application of this rule per content type: `content-storage-adr.md`.
 
 ## Engineering rules
 
