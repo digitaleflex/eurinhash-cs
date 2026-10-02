@@ -17,14 +17,7 @@ import { MobileMenu } from '@/components/mobile-menu/MobileMenu';
 import NextTopLoader from 'nextjs-toploader';
 import './globals.css';
 
-export const metadata: Metadata = {
-  title: {
-    default: 'Eurin Hash — Software Architect · Digital Entrepreneur',
-    template: '%s | Eurin Hash',
-  },
-  description:
-    'Eurin Hash conçoit, construit et sécurise des systèmes numériques fiables à l’intersection de l’architecture logicielle, de l’IA appliquée et de la cybersécurité.',
-};
+export const metadata: Metadata = createMetadata();
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
