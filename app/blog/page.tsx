@@ -8,7 +8,7 @@ export const metadata = {
 };
 
 export default async function BlogPage() {
-  const posts = await prismaApi.post.findMany({
+  const posts = await prisma.post.findMany({
     where: { published: true },
     orderBy: { createdAt: 'desc' },
     include: { category: true },

@@ -1,6 +1,6 @@
 'use server';
 
-import prismaApi from '@/lib/prisma-api';
+import prisma from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { createAuditLog } from '@/lib/audit';
@@ -8,7 +8,6 @@ import { requireAdmin } from '@/lib/authorization';
 import { BlogPostSchema } from '@/lib/validation';
 import { z } from 'zod';
 
-const prisma = prismaApi;
 
 export async function createPost(formData: FormData) {
   const session = await requireAdmin();

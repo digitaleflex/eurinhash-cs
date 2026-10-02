@@ -1,6 +1,5 @@
-import prismaApi from './prisma-api';
+import prisma from './prisma';
 
-const prisma = prismaApi;
 
 export type LogLevel = 'info' | 'warn' | 'error' | 'critical';
 

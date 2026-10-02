@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
     const { name, email, subject, message } = result.data;
 
     // Sauvegarde en base de données via Prisma Accelerate
-    const prismaClient = prismaApi as any;
+    const prismaClient = prisma;
     await prismaClient.contactMessage.create({
       data: {
         name: name.trim(),
@@ -36,7 +36,6 @@ export async function POST(request: NextRequest) {
         subject: subject?.trim() || 'Sans objet',
         message: message.trim(),
       },
-      cacheStrategy: { swr: 60, ttl: 60 },
     });
 
     // Envoi des emails en arrière-plan (non-bloquant pour la réponse)

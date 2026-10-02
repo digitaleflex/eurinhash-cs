@@ -2,12 +2,11 @@
 
 import { after } from 'next/server';
 import { revalidatePath } from 'next/cache';
-import prismaApi from '@/lib/prisma-api';
+import prisma from '@/lib/prisma';
 import { sendMail, sendEventConfirmation } from '@/lib/mail';
 import { requireAdmin } from '@/lib/authorization';
 import { z } from 'zod';
 
-const prisma = prismaApi;
 
 const EventInputSchema = z.object({
   title: z.string().trim().min(1).max(160),
