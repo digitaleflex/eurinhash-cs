@@ -1,150 +1,113 @@
 'use client';
 
 import React from 'react';
-import { Mail, Linkedin, MessageSquare, ArrowRight, MapPin, Shield, Clock, UserCheck, HelpCircle, Loader2 } from 'lucide-react';
+import { Mail, Linkedin, MessageSquare, ArrowRight, MapPin, Shield, HelpCircle, Loader2 } from 'lucide-react';
 import { ContactForm } from '@/components/contact-form';
 
-
 const trustSignals = [
-  { icon: Clock, title: 'Réponse sous 24h', desc: 'Délai maximum garanti pour toute demande technique.' },
-  { icon: UserCheck, title: 'Expert Direct', desc: 'Pas de commercial. Vous parlez directement à l\'architecte.' },
-  { icon: Shield, title: 'NDA / Confidentialité', desc: 'Vos données et vos idées sont sécurisées dès le premier contact.' },
+  { title: 'Contexte d’abord', desc: 'Le premier échange sert à comprendre le problème, les contraintes et l’objectif.' },
+  { title: 'Échange direct', desc: 'Vous échangez directement avec la personne qui analyse le sujet.' },
+  { title: 'Confidentialité', desc: 'Les informations sensibles ne sont utilisées que dans le cadre nécessaire au traitement de votre demande.' },
 ];
 
 const channels = [
-  { icon: Mail, label: 'Email Professionnel', value: 'contact@eurinhash.com', href: 'mailto:contact@eurinhash.com' },
-  { icon: MessageSquare, label: 'WhatsApp direct', value: '+229 01 62 26 52 46', href: 'https://wa.me/2290162265246' },
+  { icon: Mail, label: 'Email professionnel', value: 'contact@eurinhash.com', href: 'mailto:contact@eurinhash.com' },
+  { icon: MessageSquare, label: 'WhatsApp', value: '+229 01 62 26 52 46', href: 'https://wa.me/2290162265246' },
   { icon: Linkedin, label: 'LinkedIn', value: 'Eurin Almeida', href: 'https://www.linkedin.com/in/eurindalemeida/' },
 ];
 
 const faqs = [
-  { q: 'Quels sont vos délais pour un audit ?', a: 'Un audit complet de 5 jours peut généralement démarrer sous 2 semaines.' },
-  { q: 'Travaillez-vous sur des projets existants ?', a: 'Oui, nous intervenons souvent pour stabiliser des systèmes déjà en production.' },
-  { q: 'Proposez-vous du développement pur ?', a: 'Nous nous concentrons sur l\'architecture et la structure, mais nous pouvons recommander des partenaires pour l\'exécution.' },
+  { q: 'Que faut-il fournir pour commencer ?', a: 'Un contexte court, le problème rencontré, l’objectif recherché et, si possible, les principales contraintes.' },
+  { q: 'Travaillez-vous sur des systèmes existants ?', a: 'Oui. Une intervention peut commencer par l’analyse d’un système existant avant toute recommandation.' },
+  { q: 'Que se passe-t-il après l’envoi ?', a: 'La demande est examinée pour déterminer si le sujet correspond à une intervention pertinente et quelle serait la prochaine étape.' },
 ];
 
 export default function ContactPage() {
   return (
-    <main className="bg-background text-foreground min-h-screen pt-28 pb-40">
+    <main className="min-h-screen bg-background pb-40 pt-28 text-foreground">
       <div className="mx-auto max-w-6xl px-4 sm:px-8">
-
-        {/* Header Stratégique */}
-        <header className="mb-24 space-y-8 max-w-3xl">
-          <span className="font-mono text-xs text-accent tracking-widest font-bold block uppercase">
-            Point de Contact Unique
-          </span>
-          <h1 className="text-5xl sm:text-7xl font-black tracking-tighter leading-[0.9] text-foreground">
-            Lançons une<br />
-            <span className="text-foreground/20 font-light italic">discussion utile.</span>
+        <header className="mb-20 max-w-3xl space-y-6">
+          <span className="block font-mono text-xs font-bold tracking-[0.16em] text-accent uppercase">Contact</span>
+          <h1 className="text-5xl font-black leading-[0.94] tracking-tight sm:text-7xl">
+            Parlons du problème
+            <br />
+            <span className="text-foreground/25">à résoudre.</span>
           </h1>
-          <p className="text-xl text-muted-foreground leading-relaxed font-normal">
-            Que ce soit pour un audit critique, une refonte d'architecture ou un projet de mentorat,
-            votre demande est traitée avec la plus haute priorité.
+          <p className="text-xl leading-relaxed text-muted-foreground">
+            Décrivez le contexte, ce qui bloque aujourd’hui et ce que vous cherchez à accomplir. Le premier échange sert à clarifier le sujet avant de définir une solution.
           </p>
         </header>
 
-        {/* Filtre de Confiance */}
-        <div className="grid sm:grid-cols-3 gap-8 mb-24 py-12 border-y border-foreground/5">
+        <div className="mb-20 grid border-y border-foreground/5 py-10 sm:grid-cols-3">
           {trustSignals.map((signal) => (
-            <div key={signal.title} className="flex gap-5 items-start">
-              <signal.icon className="w-6 h-6 text-accent shrink-0 mt-1" />
-              <div>
-                <h3 className="font-bold text-sm mb-1">{signal.title}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">{signal.desc}</p>
-              </div>
+            <div key={signal.title} className="border-b border-foreground/5 py-5 last:border-0 sm:border-b-0 sm:border-r sm:px-8 sm:first:pl-0 sm:last:border-r-0 sm:last:pr-0">
+              <h2 className="text-sm font-bold">{signal.title}</h2>
+              <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{signal.desc}</p>
             </div>
           ))}
         </div>
 
-
-        <div className="grid lg:grid-cols-[1.6fr_1fr] gap-20 items-start">
-
-          {/* Formulaire & FAQ */}
-          <div className="space-y-24">
+        <div className="grid items-start gap-16 lg:grid-cols-[1.5fr_1fr]">
+          <div className="space-y-20">
             <section>
-              <div className="flex items-center gap-4 mb-10">
-                <h2 className="text-2xl font-black tracking-tight">Transmission Sécurisée</h2>
+              <div className="mb-8 flex items-center gap-4">
+                <h2 className="text-2xl font-black tracking-tight">Décrire le projet</h2>
                 <div className="h-px flex-1 bg-foreground/5" />
               </div>
-              <div className="border border-foreground/5 p-8 sm:p-12 bg-foreground/[0.01]">
-                <React.Suspense fallback={<div className="h-64 flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-accent" /></div>}>
+              <div className="border border-foreground/10 p-8 sm:p-10">
+                <React.Suspense fallback={<div className="flex h-64 items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-accent" /></div>}>
                   <ContactForm />
                 </React.Suspense>
+                <p className="mt-6 text-xs leading-relaxed text-muted-foreground">
+                  Après l’envoi, votre demande est examinée avant qu’une prochaine étape soit proposée.
+                </p>
               </div>
             </section>
 
-            <section className="space-y-10">
-              <div className="flex items-center gap-4">
-                <HelpCircle className="w-5 h-5 text-accent" />
-                <h2 className="text-xl font-bold tracking-tight">Sujets Fréquents</h2>
+            <section>
+              <div className="mb-8 flex items-center gap-3">
+                <HelpCircle className="h-5 w-5 text-accent" aria-hidden="true" />
+                <h2 className="text-xl font-bold tracking-tight">Questions fréquentes</h2>
               </div>
-              <div className="grid gap-6">
+              <div className="grid gap-4">
                 {faqs.map((faq) => (
-                  <div key={faq.q} className="p-6 border border-foreground/5 hover:border-accent/20 transition-colors">
-                    <h4 className="font-bold text-sm mb-2">{faq.q}</h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{faq.a}</p>
+                  <div key={faq.q} className="border border-foreground/5 p-6">
+                    <h3 className="text-sm font-bold">{faq.q}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{faq.a}</p>
                   </div>
                 ))}
               </div>
-
             </section>
           </div>
 
-          {/* Sidebar Authority */}
-          <aside className="space-y-12 sticky top-32">
-
-            {/* Canaux directs */}
-            <div className="space-y-6">
-              <h3 className="text-[10px] font-mono font-bold tracking-widest uppercase text-foreground/40 border-b border-foreground/5 pb-4">
-                Connectivité Directe
-              </h3>
-              <div className="grid gap-3">
-                {channels.map((chan) => (
-                  <a
-                    key={chan.label}
-                    href={chan.href}
-                    target={chan.href.startsWith('http') ? '_blank' : undefined}
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between p-5 border border-foreground/5 hover:border-accent/40 hover:bg-foreground/[0.02] transition-all group"
-                  >
-                    <div className="flex items-center gap-5">
-
-                      <chan.icon className="w-5 h-5 text-foreground/20 group-hover:text-accent transition-colors" />
-                      <div>
-                        <span className="font-mono text-[9px] text-muted-foreground block mb-0.5 uppercase tracking-tighter">{chan.label}</span>
-                        <span className="text-sm font-bold tracking-tight">{chan.value}</span>
-                      </div>
+          <aside className="space-y-10 lg:sticky lg:top-32">
+            <div>
+              <h2 className="border-b border-foreground/5 pb-4 font-mono text-[10px] font-bold tracking-widest text-muted-foreground uppercase">Canaux</h2>
+              <div className="mt-4 grid gap-3">
+                {channels.map((channel) => (
+                  <a key={channel.label} href={channel.href} target={channel.href.startsWith('http') ? '_blank' : undefined} rel={channel.href.startsWith('http') ? 'noopener noreferrer' : undefined} className="flex items-center justify-between border border-foreground/5 p-5 hover:border-accent/30">
+                    <div className="flex items-center gap-4">
+                      <channel.icon className="h-5 w-5 text-accent" aria-hidden="true" />
+                      <div><span className="block font-mono text-[9px] uppercase text-muted-foreground">{channel.label}</span><span className="text-sm font-bold">{channel.value}</span></div>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-foreground/10 group-hover:text-accent group-hover:translate-x-1 transition-all" />
-
+                    <ArrowRight className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
                   </a>
                 ))}
               </div>
-
             </div>
 
-            {/* Mentions Légales/Confidentialité Badge */}
-            <div className="p-8 bg-foreground text-background space-y-6 relative overflow-hidden group">
-              <Shield className="absolute -bottom-4 -right-4 w-24 h-24 text-background/5 group-hover:scale-110 transition-transform duration-700" />
-              <h3 className="text-lg font-bold tracking-tight relative z-10">Protocole Privacy</h3>
-              <p className="text-xs text-background/60 leading-relaxed relative z-10">
-                Chaque échange technique est couvert par un protocole de confidentialité strict.
-                Nous pouvons signer vos accords de non-divulgation (NDA) avant toute étude de projet.
+            <div className="border border-foreground/10 bg-foreground p-7 text-background">
+              <Shield className="mb-5 h-6 w-6 text-accent" aria-hidden="true" />
+              <h2 className="text-lg font-bold">Confidentialité</h2>
+              <p className="mt-3 text-xs leading-relaxed text-background/60">
+                Si le sujet est sensible, indiquez-le dans votre demande. Les modalités de confidentialité peuvent être clarifiées avant le partage d’informations détaillées.
               </p>
             </div>
 
-            {/* Localisation */}
-            <div className="flex items-start gap-4 p-6 bg-foreground/[0.02] border border-foreground/5">
-              <MapPin className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-              <div className="space-y-1">
-                <p className="font-bold text-sm">Base Opérationnelle</p>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  Abomey-Calavi, Bénin<br />
-                  Rayonnement international (Remote Priority).
-                </p>
-              </div>
+            <div className="flex items-start gap-4 border border-foreground/5 p-6">
+              <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
+              <div><p className="text-sm font-bold">Base opérationnelle</p><p className="mt-1 text-xs leading-relaxed text-muted-foreground">Abomey-Calavi, Bénin · travail à distance possible.</p></div>
             </div>
-
           </aside>
         </div>
       </div>
