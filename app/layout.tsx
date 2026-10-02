@@ -6,6 +6,7 @@ import { NavigationWithDropdown } from '@/components/navigation-with-dropdown';
 import { Logo } from '@/components/logo';
 import { Footer } from '@/components/footer';
 import { ThemeProvider } from '@/components/theme-provider';
+import { MotionProvider } from '@/components/motion-provider';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -48,6 +49,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <MotionProvider>
           <NextTopLoader
             color="#e11d48"
             initialPosition={0.08}
@@ -86,6 +88,7 @@ export default function RootLayout({
             <BottomNav />
             <Footer />
           </ConditionalWrapper>
+          </MotionProvider>
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />
