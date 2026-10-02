@@ -1,8 +1,6 @@
-import prismaApi from '@/lib/prisma-api';
+import prisma from '@/lib/prisma';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
-
-const prisma = prismaApi;
 
 export const metadata = {
   title: 'Insights | Architecture, IA & Cybersécurité',
