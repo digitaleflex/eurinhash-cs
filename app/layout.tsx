@@ -25,7 +25,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/Icon_Logo_claire.svg" type="image/svg+xml" />
-        <link rel="manifest" href="/manifest.webmanifest" />
+        
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
         <link rel="dns-prefetch" href="//vercel.com" />
         <meta name="author" content={SITE_CONFIG.seo.author} />

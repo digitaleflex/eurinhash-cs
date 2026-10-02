@@ -77,15 +77,12 @@ export async function updateEvent(
 }
 
 export async function registerForEvent(eventId: string) {
-  const { auth } = await import('@/lib/auth');
-  const { headers } = await import('next/headers');
-  const userSession = await auth.api.getSession({ headers: await headers() });
-
-  if (!userSession) {
+  const { requireUser } = await import('@/lib/authorization');
+  const user = await requireUser().catch(() => {
     throw new Error('Vous devez être connecté pour vous inscrire.');
-  }
+  });
 
-  const userId = userSession.user.id;
+  const userId = user.id;
   const safeEventId = z.string().min(1).max(128).parse(eventId);
 
   const existing = await prisma.eventRegistration.findUnique({
@@ -96,16 +93,26 @@ export async function registerForEvent(eventId: string) {
     return { success: false, message: 'Déjà inscrit' };
   }
 
-  const registration = await prisma.eventRegistration.create({
-    data: { userId, eventId: safeEventId },
-    include: { event: true, user: true },
-  });
+  const registration = await prisma.eventRegistration
+    .create({
+      data: { userId, eventId: safeEventId },
+      include: { event: true, user: true },
+    })
+    .catch((error: { code?: string }) => {
+      // Unique constraint race: another request registered first.
+      if (error?.code === 'P2002') return null;
+      throw error;
+    });
+
+  if (!registration) {
+    return { success: false, message: 'Déjà inscrit' };
+  }
 
   after(async () => {
     try {
       await sendEventConfirmation({
-        to: userSession.user.email,
-        userName: userSession.user.name || 'Invité',
+        to: user.email,
+        userName: user.name || 'Invité',
         eventTitle: registration.event.title,
         eventDate: new Date(registration.event.date).toLocaleDateString('fr-FR', {
           day: '2-digit',
@@ -140,13 +147,20 @@ export async function sendEventReminders(eventId: string) {
 
   after(async () => {
     await Promise.all(
-      event.registrations.map((reg) =>
-        sendMail({
+      event.registrations.map(async (reg) => {
+        // Idempotency: only send to registrations not yet reminded (atomic claim).
+        const claimed = await prisma.eventRegistration.updateMany({
+          where: { id: reg.id, reminderSentAt: null },
+          data: { reminderSentAt: new Date() },
+        });
+        if (claimed.count === 0) return;
+
+        await sendMail({
           to: reg.user.email,
           subject: `Rappel : ${event.title} approche !`,
           html: `<p>Bonjour ${reg.user.name},</p><p>Rappel pour l'événement <strong>${event.title}</strong>.</p>`,
-        }),
-      ),
+        });
+      }),
     );
   });
 

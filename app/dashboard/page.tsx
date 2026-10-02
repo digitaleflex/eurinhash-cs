@@ -19,7 +19,7 @@ export default async function DashboardPage() {
 
   // Fetch real stats directly on server
   const messagesCount = await prisma.contactMessage.count({
-    where: { email: user.email },
+    where: { userId: user.id },
   });
 
   return (

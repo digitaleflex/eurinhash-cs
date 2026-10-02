@@ -41,7 +41,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     },
   });
 
-  if (!post || !post.published) {
+  if (!post || !post.published || !post.publishedAt) {
     notFound();
   }
 

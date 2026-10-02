@@ -1,7 +1,6 @@
 import { put } from '@vercel/blob';
 import { NextResponse } from 'next/server';
-import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
+import { requireAdmin } from '@/lib/authorization';
 import { randomUUID } from 'node:crypto';
 
 const MAX_UPLOAD_BYTES = 5 * 1024 * 1024;
@@ -13,9 +12,10 @@ const MIME_TO_EXTENSION = {
 } as const;
 
 export async function POST(request: Request): Promise<NextResponse> {
-  const session = await auth.api.getSession({ headers: await headers() });
-
-  if (!session || session.user.role !== 'admin') {
+  let session;
+  try {
+    session = await requireAdmin();
+  } catch {
     return NextResponse.json({ error: 'Non autorisé' }, { status: 403 });
   }
 

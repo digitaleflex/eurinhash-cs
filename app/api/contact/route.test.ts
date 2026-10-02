@@ -12,6 +12,11 @@ jest.mock('@/lib/prisma', () => ({
   default: { contactMessage: { create: (...args: unknown[]) => createMock(...args) } },
 }));
 
+const mockGetCurrentUser = jest.fn();
+jest.mock('@/lib/authorization', () => ({
+  getCurrentUser: (...args: unknown[]) => mockGetCurrentUser(...args),
+}));
+
 const notificationMock = jest.fn();
 jest.mock('@/lib/mail', () => ({
   sendMail: jest.fn(),
@@ -55,6 +60,24 @@ describe('POST /api/contact', () => {
     expect(res.status).toBe(200);
     expect(createMock).toHaveBeenCalledTimes(1);
     expect(notificationMock).toHaveBeenCalledTimes(1);
+  });
+
+  it('lie le message à l\'utilisateur connecté', async () => {
+    mockGetCurrentUser.mockResolvedValue({ id: 'u1' });
+    const res = await POST(req(validBody));
+    expect(res.status).toBe(200);
+    expect(createMock).toHaveBeenCalledWith(
+      expect.objectContaining({ data: expect.objectContaining({ userId: 'u1' }) })
+    );
+  });
+
+  it('fonctionne sans utilisateur authentifié', async () => {
+    mockGetCurrentUser.mockRejectedValue(new Error('no session'));
+    const res = await POST(req(validBody));
+    expect(res.status).toBe(200);
+    expect(createMock).toHaveBeenCalledWith(
+      expect.objectContaining({ data: expect.objectContaining({ userId: null }) })
+    );
   });
 
   it('rejette un honeypot rempli sans effet de bord', async () => {

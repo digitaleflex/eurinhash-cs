@@ -33,6 +33,7 @@ model User {
   posts         Post[]
   comments      Comment[]
   auditLogs     AuditLog[]
+  contactMessages ContactMessage[]
 
   @@map("users")
 }
@@ -92,9 +93,13 @@ model ContactMessage {
   email     String
   subject   String?
   message   String
-  status    String   @default("new")
+  status    ContactMessageStatus @default(new)
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([userId])
 
   @@map("contact_messages")
 }
@@ -111,7 +116,7 @@ model Event {
   registrationLink String?
   thumbnail        String?
   isFeatured       Boolean             @default(false)
-  status           String              @default("upcoming") // "upcoming", "past", "canceled"
+  status           EventStatus         @default(upcoming)
   createdAt        DateTime            @default(now())
   updatedAt        DateTime            @updatedAt
   registrations    EventRegistration[]
@@ -123,6 +128,7 @@ model EventRegistration {
   id        String   @id @default(cuid())
   userId    String
   eventId   String
+  reminderSentAt DateTime?
   createdAt DateTime @default(now())
 
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -194,7 +200,7 @@ model Tag {
 model Comment {
   id        String   @id @default(cuid())
   content   String   @db.Text
-  status    String   @default("pending") // "pending", "approved", "spam"
+  status    CommentStatus @default(pending)
   postId    String
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   userId    String
@@ -220,4 +226,23 @@ model AuditLog {
   @@index([level])
   @@index([userId])
   @@map("audit_logs")
+}
+
+enum ContactMessageStatus {
+  new
+  read
+  replied
+  archived
+}
+
+enum EventStatus {
+  upcoming
+  past
+  canceled
+}
+
+enum CommentStatus {
+  pending
+  approved
+  spam
 }

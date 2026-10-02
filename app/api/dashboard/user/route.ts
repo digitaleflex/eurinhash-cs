@@ -23,7 +23,7 @@ export async function GET(request: Request) {
         where: { userId: user.id },
       }),
       prisma.contactMessage.count({
-        where: { email: user.email },
+        where: { userId: user.id },
       }),
     ]);
 
