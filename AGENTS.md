@@ -26,9 +26,12 @@ pnpm test:ci
 
 ## Base de données
 
-- Toute modification de `prisma/schema.prisma` exige une migration dans `prisma/migrations/<timestamp>_<nom>/migration.sql`.
-- Les migrations doivent préserver les données (`ALTER ... TYPE ... USING` plutôt que `DROP COLUMN`).
-- La synchronisation d'un environnement de dev se fait avec `pnpm db:push` (la CI utilise `db push`).
+- **Source de vérité : `prisma/schema.prisma`. Synchronisation : `pnpm db:push`.**
+- **Ne jamais exécuter `prisma migrate deploy`** : aucune migration n'a jamais été appliquée,
+  l'historique ne couvre que 2 des 12 modèles et il n'est pas rejouable. Voir
+  `prisma/migrations/README.md`.
+- Une modification de schéma doit préserver les données (`ALTER ... TYPE ... USING` plutôt que
+  `DROP COLUMN`) ; `db:push` peut demander `--accept-data-loss`, ce qui doit être justifié.
 
 ## Auth & autorisation
 
