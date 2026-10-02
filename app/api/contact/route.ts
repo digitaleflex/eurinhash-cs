@@ -3,7 +3,7 @@ import { NextRequest, NextResponse, after } from 'next/server';
 // Edge Runtime disabled for Prisma compatibility
 // export const runtime = 'edge';
 
-import prismaApi from '@/lib/prisma-api';
+import prisma from '@/lib/prisma';
 import { sendMail, sendContactNotification, sendContactAcknowledgement } from '@/lib/mail';
 import { ContactSchema } from '@/lib/validation';
 import { logger } from '@/lib/logger';
