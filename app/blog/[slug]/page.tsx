@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import prisma from '@/lib/prisma';
+import { sanitizeBlogHtml } from '@/lib/sanitize';
 import { notFound } from 'next/navigation';
 
 // Génération dynamique des métadonnées pour le SEO
@@ -94,7 +95,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         <div 
           className="content-area"
-          dangerouslySetInnerHTML={{ __html: post.content }} 
+          dangerouslySetInnerHTML={{ __html: sanitizeBlogHtml(post.content) }} 
         />
       </article>
     </div>
