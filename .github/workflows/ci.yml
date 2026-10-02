@@ -53,3 +53,4 @@ jobs:
           DATABASE_URL_UNPOOLED: postgresql://user:password@localhost:5432/db
           BETTER_AUTH_SECRET: ci-build-secret
           BETTER_AUTH_URL: http://localhost:3000
+          RESEND_API_KEY: re_ci_placeholder
