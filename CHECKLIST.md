@@ -5,10 +5,10 @@
 > Snapshot initial : 2026-10-02  
 > Repository : `digitaleflex/eurinhash-cs`  
 > Branche de référence : `main`
->
-> Principe : **Finish → Stabilize → Secure → Validate → Polish → Release**.
->
-> Une case ne passe à `[x]` qu'avec une preuve vérifiable : commit, PR, CI, test, audit, capture ou résultat reproductible.
+
+Principe : **Finish → Stabilize → Secure → Validate → Polish → Release**.
+
+Une case ne passe à `[x]` qu'avec une preuve vérifiable : commit, PR, CI, test, audit, capture ou résultat reproductible.
 
 ## 0. Règles de release
 
@@ -121,11 +121,10 @@
 - [x] #21 — validation issue closed.
 - [x] #15 — authorization issue closed.
 - [x] #16 — upload issue closed.
-- [ ] Revalider ces protections dans le parcours Content Hub complet.
-- [ ] Tests négatifs de sécurité.
-- [ ] Audit des permissions admin.
-- [ ] Audit des uploads.
-- [ ] Audit des logs et erreurs.
+- [ ] Revalider ces protections dans le parcours Content Hub complet — #96.
+- [ ] Tests négatifs de sécurité — #96.
+- [ ] Audit des permissions admin — #94/#96.
+- [ ] Audit des uploads — #81/#96.
 - [ ] Vérifier dépendances et vulnérabilités avant release.
 
 ## 10. UX / accessibility / mobile
@@ -179,16 +178,16 @@
 
 ## 14. Production infrastructure
 
-- [ ] Variables d'environnement de production vérifiées.
-- [ ] Base PostgreSQL de production vérifiée.
-- [ ] Migration de production testée sur une base disposable.
-- [ ] Backup PostgreSQL configuré et restauration testée.
-- [ ] HTTPS/DNS vérifiés.
-- [ ] Monitoring/logging vérifiés.
-- [ ] Procédure rollback documentée.
-- [ ] Procédure de récupération documentée.
-- [ ] Upload/storage de production vérifié.
-- [ ] Domaine canonique vérifié.
+- [ ] Variables d'environnement de production vérifiées — #95.
+- [ ] Base PostgreSQL de production vérifiée — #95.
+- [ ] Migration de production testée sur une base disposable — #93.
+- [ ] Backup PostgreSQL configuré et restauration testée — #95.
+- [ ] HTTPS/DNS vérifiés — #95.
+- [ ] Monitoring/logging vérifiés — #95.
+- [ ] Procédure rollback documentée — #95.
+- [ ] Procédure de récupération documentée — #95.
+- [ ] Upload/storage de production vérifié — #95.
+- [ ] Domaine canonique vérifié — #95.
 
 ## 15. Content & legal
 
@@ -205,22 +204,22 @@
 
 ## 16. Release QA
 
-- [ ] Checkout propre + installation frozen réussie.
-- [ ] Prisma validate/generate réussi.
-- [ ] Migration deploy réussie sur DB disposable.
-- [ ] Lint OK.
-- [ ] Typecheck OK.
-- [ ] Tests OK.
-- [ ] Build OK.
-- [ ] Smoke test des routes publiques.
-- [ ] Smoke test login/admin.
-- [ ] Smoke test création → publication → affichage d'un contenu.
-- [ ] Smoke test upload média.
-- [ ] Smoke test SEO/sitemap.
-- [ ] Test responsive.
-- [ ] Test accessibilité.
-- [ ] Vérification erreurs console.
-- [ ] Vérification logs production.
+- [ ] Checkout propre + installation frozen réussie — #93.
+- [ ] Prisma validate/generate réussi — #93.
+- [ ] Migration deploy réussie sur DB disposable — #93.
+- [ ] Lint OK — #93.
+- [ ] Typecheck OK — #93.
+- [ ] Tests OK — #93.
+- [ ] Build OK — #93.
+- [ ] Smoke test des routes publiques — #97.
+- [ ] Smoke test login/admin — #97.
+- [ ] Smoke test création → publication → affichage d'un contenu — #97.
+- [ ] Smoke test upload média — #97.
+- [ ] Smoke test SEO/sitemap — #97.
+- [ ] Test responsive — #97.
+- [ ] Test accessibilité — #97.
+- [ ] Vérification erreurs console — #97.
+- [ ] Vérification logs production — #95/#97.
 
 ## 17. Release gate
 
@@ -240,8 +239,10 @@ La release est autorisée uniquement lorsque :
 
 **Status : NOT READY FOR PUBLIC RELEASE**
 
-Le chemin restant prioritaire est :
+Chemin prioritaire :
 
-`#90 → #78 → #79/#80/#81 → #82 → #83 → sécurité → QA → production → release`
+`#90 → #93 → #94 → #79/#80/#81 → #82 → #83 → #96 → #95 → #97`
+
+Chantiers UX/motion (#35, #46–#55, #67) sont parallèles mais ne doivent pas masquer les gates techniques et de release.
 
 Ne pas fermer une étape sans preuve vérifiable dans GitHub.
