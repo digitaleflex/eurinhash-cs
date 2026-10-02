@@ -17,11 +17,6 @@ const nextConfig: NextConfig = {
   experimental: {
     scrollRestoration: true,
   },
-
-  // Keep build unblockable until the dedicated CI/lint cleanup is complete.
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   typescript: {
     ignoreBuildErrors: false, // On garde les erreurs TS pour la sécurité, sauf si vraiment bloquant
   },
