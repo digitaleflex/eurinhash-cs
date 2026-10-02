@@ -12,7 +12,7 @@ export function JsonLd() {
     description: siteConfig.description,
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+229-01-51-07-05-55',
+      telephone: '+229 01 62 26 52 46',
       contactType: 'customer service',
       availableLanguage: ['French', 'English'],
     },

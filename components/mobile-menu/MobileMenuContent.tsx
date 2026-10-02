@@ -30,10 +30,10 @@ const navigationItems: NavItem[] = [
     label: 'Services',
     description: 'Expertise & Accompagnement',
     children: [
-      { href: '/services/audit', label: 'Audit de Résilience', description: 'Analyse 360° en 5 jours' },
-      { href: '/services/architecture', label: 'Architecture de Système', description: 'Conception haute performance' },
+      { href: '/services/audit', label: 'Audit de Résilience', description: 'Audit technique' },
+      { href: '/services/architecture', label: 'Architecture de Système', description: 'Architecture applicative' },
       { href: '/services/cto', label: 'Accompagnement CTO', description: 'Suivi stratégique long terme' },
-      { href: '/services/mentorat', label: 'Programme de Mentorat', description: 'Formation d\'élite et mentorat' },
+      { href: '/services/mentorat', label: 'Programme de Mentorat', description: 'Mentorat pratique' },
     ]
   },
   { href: '/evenements', label: 'Événements', description: 'Lives & Conférences' },

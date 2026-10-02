@@ -37,7 +37,7 @@ export const ContactAcknowledgementEmail = ({
             Ceci est un accusé de réception automatique. Nous vous confirmons la bonne réception de votre message concernant : <span style={highlight}>"{subject}"</span>.
           </Text>
           <Text style={paragraph}>
-            Votre demande est en cours d'analyse par notre équipe technique. Nous reviendrons vers vous avec une réponse détaillée sous un délai de **24 heures ouvrées**.
+            Votre demande est en cours d'analyse. Vous avez échangé directement avec la personne qui réalise le travail : la réponse arrivera dès que l'analyse sera terminée.
           </Text>
           
           <Section style={btnContainer}>
@@ -50,7 +50,7 @@ export const ContactAcknowledgementEmail = ({
           
           <Text style={footer}>
             <strong>Eurin Hash CS</strong><br />
-            Expertise Full Stack & Solutions Cloud Souveraines
+            Architecture logicielle, IA appliquée et cybersécurité
           </Text>
         </Section>
       </Container>

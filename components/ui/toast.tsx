@@ -287,7 +287,7 @@ function ToastViewPort() {
               }}
             >
               <div
-                data-state="open"
+                data-state={toast.open ? 'open' : 'closed'}
                 style={{
                   backgroundColor: 'hsl(var(--background))',
                   border: '1px solid hsl(var(--border))',
@@ -298,8 +298,8 @@ function ToastViewPort() {
                   fontSize: '0.875rem',
                   lineHeight: '1.25',
                   color: 'hsl(var(--foreground))',
-                  opacity: 0,
-                  transform: 'translateX(100%)',
+                  opacity: toast.open ? 1 : 0,
+                  transform: toast.open ? 'translateX(0)' : 'translateX(100%)',
                   transition:
                     'color 0.1s ease, background-color 0.1s ease, opacity 0.15s ease, transform 0.15s ease',
                   willChange: 'color, background-color, opacity, transform',

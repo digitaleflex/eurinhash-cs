@@ -121,7 +121,7 @@ export async function registerForEvent(eventId: string) {
           hour: '2-digit',
           minute: '2-digit',
         }),
-        eventUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/evenements/${registration.event.slug}`,
+        eventUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/evenements`,
       });
 
       revalidatePath('/evenements');

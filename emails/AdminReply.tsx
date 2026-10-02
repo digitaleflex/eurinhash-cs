@@ -55,7 +55,7 @@ export const AdminReplyEmail = ({
           <Text style={signature}>
             Cordialement,<br />
             <strong>Eurin Hash</strong><br />
-            Expert Full Stack & Cloud
+            Software Architect · Digital Entrepreneur
           </Text>
         </Section>
         <Section style={footerSection}>

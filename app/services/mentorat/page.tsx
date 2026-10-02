@@ -4,7 +4,7 @@ import { GraduationCap, Code2, ShieldAlert, Cloud, ArrowRight, CheckCircle2 } fr
 
 export const metadata: Metadata = {
   title: 'Programme de Mentorat',
-  description: 'Formation d\'élite et mentorat pratique en programmation, cybersécurité et cloud computing pour les talents émergents.',
+  description: 'Mentorat pratique en programmation, cybersécurité et cloud computing, fondé sur des projets réels.',
 };
 
 function MentoratPageContent() {
@@ -19,8 +19,8 @@ function MentoratPageContent() {
 
         <div className="grid gap-16 mt-20">
           <p className="text-xl text-muted-foreground leading-relaxed">
-            Nous détectons et formons les hauts potentiels techniques. Un accompagnement rigoureux,
-            basé sur la pratique réelle et les standards de l'industrie (EHAF).
+            Un accompagnement rigoureux,
+            basé sur des projets réels et sur la pratique quotidienne.
           </p>
 
           {/* Pillars of Mentorship */}
@@ -43,8 +43,8 @@ function MentoratPageContent() {
             <div className="grid gap-8">
               {[
                 { title: 'Pratique Réelle', desc: 'Pas de théorie abstraite. Vous travaillez sur des environnements et des projets qui simulent des cas réels.' },
-                { title: 'Sélection au Mérite', desc: 'Une intégration basée sur la motivation et la capacité d\'apprentissage, au sein de notre communauté.' },
-                { title: 'Certification EHAF', desc: 'Une reconnaissance de vos compétences par Eurin Hash, validant votre capacité à intégrer des projets complexes.' }
+                { title: 'Sur mesure', desc: 'Le programme s\'ajuste à votre niveau, votre contexte technique et vos objectifs professionnels.' },
+                { title: 'Revue de code commentée', desc: 'Chaque livrable est relu et commenté, avec les points à consolider et les ressources pour continuer.' }
               ].map((item, i) => (
                 <div key={i} className="flex gap-6 items-start">
                   <CheckCircle2 className="w-6 h-6 text-accent shrink-0 mt-1" />
@@ -63,8 +63,8 @@ function MentoratPageContent() {
             </div>
             <h2 className="text-2xl font-bold mb-4">Prêt à franchir un palier technique ?</h2>
             <p className="mb-10 text-white/80 max-w-lg">
-              Le mentorat n'est pas ouvert à tous. Nous cherchons la discipline et la passion.
-              Si vous vous sentez prêt pour l'excellence, postulez.
+              Le mentorat demande de la régularité : le programme avance au rythme de chaque participant.
+              Si le programme vous parle, envoyez votre contexte.
             </p>
             <Link href="/contact?subject=Mentorat" className="inline-flex items-center gap-3 bg-white text-accent px-8 py-4 text-sm font-bold hover:bg-foreground hover:text-white transition-all">
               Postuler au programme <ArrowRight className="w-4 h-4" />

@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Save, ArrowLeft, Eye, Plus } from 'lucide-react';
+import { Save, ArrowLeft, Plus } from 'lucide-react';
 import Link from 'next/link';
 import Editor from '@/components/blog/Editor';
 import { createPost } from '../actions';
@@ -83,11 +83,6 @@ export default function NewPostPage() {
               Créez un nouvel article technique pour Eurin Hash Blog.
             </p>
           </div>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button variant="outline" className="gap-2">
-            <Eye className="h-4 w-4" /> Prévisualiser
-          </Button>
         </div>
       </div>
 

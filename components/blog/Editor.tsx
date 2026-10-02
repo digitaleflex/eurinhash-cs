@@ -75,7 +75,7 @@ const MenuBar = ({ editor }: { editor: TiptapEditor | null }) => {
         accept="image/*"
         onChange={addImage}
       />
-      <Button
+      <Button type="button"
         variant="ghost"
         size="sm"
         onClick={() => document.getElementById('image-upload')?.click()}
@@ -83,7 +83,7 @@ const MenuBar = ({ editor }: { editor: TiptapEditor | null }) => {
         <ImageIcon className="h-4 w-4" />
       </Button>
       <div className="w-px h-6 bg-border mx-1 self-center" />
-      <Button
+      <Button type="button"
         variant="ghost"
         size="sm"
         onClick={() => editor.chain().focus().toggleBold().run()}
@@ -91,7 +91,7 @@ const MenuBar = ({ editor }: { editor: TiptapEditor | null }) => {
       >
         <Bold className="h-4 w-4" />
       </Button>
-      <Button
+      <Button type="button"
         variant="ghost"
         size="sm"
         onClick={() => editor.chain().focus().toggleItalic().run()}
@@ -99,7 +99,7 @@ const MenuBar = ({ editor }: { editor: TiptapEditor | null }) => {
       >
         <Italic className="h-4 w-4" />
       </Button>
-      <Button
+      <Button type="button"
         variant="ghost"
         size="sm"
         onClick={() => editor.chain().focus().toggleUnderline().run()}
@@ -108,7 +108,7 @@ const MenuBar = ({ editor }: { editor: TiptapEditor | null }) => {
         <UnderlineIcon className="h-4 w-4" />
       </Button>
       <div className="w-px h-6 bg-border mx-1 self-center" />
-      <Button
+      <Button type="button"
         variant="ghost"
         size="sm"
         onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
@@ -116,7 +116,7 @@ const MenuBar = ({ editor }: { editor: TiptapEditor | null }) => {
       >
         <Heading1 className="h-4 w-4" />
       </Button>
-      <Button
+      <Button type="button"
         variant="ghost"
         size="sm"
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
@@ -125,7 +125,7 @@ const MenuBar = ({ editor }: { editor: TiptapEditor | null }) => {
         <Heading2 className="h-4 w-4" />
       </Button>
       <div className="w-px h-6 bg-border mx-1 self-center" />
-      <Button
+      <Button type="button"
         variant="ghost"
         size="sm"
         onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -133,7 +133,7 @@ const MenuBar = ({ editor }: { editor: TiptapEditor | null }) => {
       >
         <List className="h-4 w-4" />
       </Button>
-      <Button
+      <Button type="button"
         variant="ghost"
         size="sm"
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
@@ -142,7 +142,7 @@ const MenuBar = ({ editor }: { editor: TiptapEditor | null }) => {
         <ListOrdered className="h-4 w-4" />
       </Button>
       <div className="w-px h-6 bg-border mx-1 self-center" />
-      <Button
+      <Button type="button"
         variant="ghost"
         size="sm"
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
@@ -150,7 +150,7 @@ const MenuBar = ({ editor }: { editor: TiptapEditor | null }) => {
       >
         <Code className="h-4 w-4" />
       </Button>
-      <Button
+      <Button type="button"
         variant="ghost"
         size="sm"
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
@@ -158,18 +158,18 @@ const MenuBar = ({ editor }: { editor: TiptapEditor | null }) => {
       >
         <Quote className="h-4 w-4" />
       </Button>
-      <Button variant="ghost" size="sm" onClick={addLink}>
+      <Button type="button" variant="ghost" size="sm" onClick={addLink}>
         <LinkIcon className="h-4 w-4" />
       </Button>
       <div className="w-px h-6 bg-border mx-1 self-center" />
-      <Button
+      <Button type="button"
         variant="ghost"
         size="sm"
         onClick={() => editor.chain().focus().undo().run()}
       >
         <Undo className="h-4 w-4" />
       </Button>
-      <Button
+      <Button type="button"
         variant="ghost"
         size="sm"
         onClick={() => editor.chain().focus().redo().run()}

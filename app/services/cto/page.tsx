@@ -16,7 +16,7 @@ export default function CTOServicePage() {
         <div className="grid gap-12 mt-20">
           <p className="text-xl text-muted-foreground leading-relaxed">
               Un partenaire stratégique pour guider votre direction technique. 
-              Prise de décision, recrutement d'élite et culture de l'excellence.
+              Prise de décision, recrutement ciblé et culture de l'ingénierie.
           </p>
 
           <div className="grid sm:grid-cols-2 gap-8 mt-12 text-background">
@@ -34,7 +34,7 @@ export default function CTOServicePage() {
 
           <div className="mt-16 pt-16 border-t border-foreground/5">
             <Link href="/contact" className="inline-flex items-center gap-3 text-sm font-bold text-foreground hover:text-accent transition-colors group">
-                Prendre rendez-vous avec un expert <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                Demander un échange <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </div>

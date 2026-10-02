@@ -62,7 +62,7 @@ export default async function EvenementsPage() {
             <span className="text-foreground/10 font-light italic">Webinaires.</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed mx-auto sm:mx-0">
-            Sessions techniques d'élite, analyses d'architecture et partages d'expertise en direct.
+            Sessions techniques, analyses d'architecture et retours d'expérience en direct.
           </p>
         </header>
 

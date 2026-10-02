@@ -1,6 +1,6 @@
 # Portfolio Eurin Hash
 
-Portfolio professionnel d'Eurin Hash - Développeur Full Stack & Expert Cloud.
+Identité numérique personnelle d'Eurin Hash — Software Architect · Digital Entrepreneur.
 Construit avec **Next.js 15**, **TypeScript**, **PostgreSQL** et **Tailwind CSS**.
 
 ![Aperçu](public/og-image.jpg)
@@ -114,7 +114,7 @@ Le site sera accessible sur [http://localhost:3000](http://localhost:3000) (voir
 ```
 ├── app/                    # Pages et routes (App Router)
 │   ├── api/               # Routes API (ex: /api/contact)
-│   ├── projects/          # Page Projets
+│   ├── realisations/      # Réalisations et études de cas
 │   ├── layout.tsx         # Layout principal (SEO, Fonts, Providers)
 │   └── page.tsx           # Page d'accueil
 ├── components/            # Composants React
@@ -144,7 +144,7 @@ Le projet est conçu pour être déployé sur **Vercel**.
 
 - Website: [eurinhash.com](https://eurinhash.com)
 - Email: [contact@eurinhash.com](mailto:contact@eurinhash.com)
-- LinkedIn: [linkedin.com/in/eurinalmeida](https://linkedin.com/in/eurinalmeida)
+- LinkedIn: [linkedin.com/in/eurindalemeida](https://linkedin.com/in/eurindalemeida/)
 - GitHub: [github.com/digitaleflex](https://github.com/digitaleflex)
 
 ---

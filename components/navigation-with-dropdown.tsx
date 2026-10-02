@@ -34,12 +34,12 @@ const navigationItems: NavItem[] = [
             {
                 label: 'Audit de Résilience',
                 href: '/services/audit',
-                description: 'Analyse 360° en 5 jours',
+                description: 'Audit technique de votre existant',
             },
             {
                 label: 'Architecture de Système',
                 href: '/services/architecture',
-                description: 'Conception haute performance',
+                description: 'Architecture applicative',
             },
             {
                 label: 'Accompagnement CTO',
@@ -49,7 +49,7 @@ const navigationItems: NavItem[] = [
             {
                 label: 'Programme de Mentorat',
                 href: '/services/mentorat',
-                description: 'Formation d\'élite et mentorat pour les talents en programmation et cloud.',
+                description: 'Mentorat pratique en programmation, cybersécurité et cloud.',
             },
         ],
     },

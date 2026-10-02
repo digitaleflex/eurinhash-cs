@@ -125,7 +125,7 @@ export function FeedbackPopup({
                   </div>
                   <div className="flex items-center justify-center space-x-2 sm:space-x-3 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                     <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
-                    <span>Réponse sous 24h</span>
+                    <span>Réponse personnalisée</span>
                   </div>
                   <div className="flex items-center justify-center space-x-2 sm:space-x-3 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                     <MessageSquare className="w-3 h-3 sm:w-4 sm:h-4" />

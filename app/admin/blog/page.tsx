@@ -14,8 +14,22 @@ import {
 import Link from 'next/link';
 import BlogActions from './BlogActions';
 
-export default async function BlogListPage() {
-  const posts = await (prisma as any).post.findMany({
+export default async function BlogListPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}) {
+  const { q } = await searchParams;
+
+  const posts = await prisma.post.findMany({
+    where: q
+      ? {
+          OR: [
+            { title: { contains: q, mode: 'insensitive' } },
+            { excerpt: { contains: q, mode: 'insensitive' } },
+          ],
+        }
+      : undefined,
     orderBy: { createdAt: 'desc' },
     include: {
       category: true,
@@ -48,14 +62,16 @@ export default async function BlogListPage() {
             <CardTitle className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
               Tous les articles ({posts.length})
             </CardTitle>
-            <div className="relative w-64 hidden sm:block">
+            <form className="relative w-64 hidden sm:block">
               <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
               <input
-                type="text"
+                type="search"
+                name="q"
+                defaultValue={q ?? ''}
                 placeholder="Rechercher..."
                 className="w-full bg-background border border-input rounded-md pl-8 pr-4 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-accent"
               />
-            </div>
+            </form>
           </div>
         </CardHeader>
         <CardContent className="p-0">

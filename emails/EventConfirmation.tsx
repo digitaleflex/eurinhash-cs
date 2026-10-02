@@ -45,17 +45,17 @@ export const EventConfirmationEmail = ({
             <Text style={eventDetailText}>📅 Date : {eventDate}</Text>
           </Section>
           <Text style={paragraph}>
-            Nous sommes ravis de vous compter parmi nous. Vous pouvez accéder aux détails de l'événement et aux ressources via le bouton ci-dessous :
+            Votre inscription est enregistrée. Le détail de l'événement est disponible sur la page événements :
           </Text>
           <Section style={btnContainer}>
             <Button style={button} href={eventUrl}>
-              Accéder à l'événement
+              Voir la page événements
             </Button>
           </Section>
           <Text style={paragraph}>
             À très bientôt,
             <br />
-            L'équipe Eurin Hash
+            Eurin Hash
           </Text>
         </Section>
         <Hr style={hr} />

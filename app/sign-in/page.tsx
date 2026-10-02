@@ -29,6 +29,17 @@ type OTPFormData = z.infer<typeof OTPSchema>;
 
 export default function SignInPage() {
   const router = useRouter();
+
+  // Le middleware redirige vers /sign-in?callbackUrl=... : on ne suit que des
+  // chemins internes, sinon on retombe sur le tableau de bord.
+  const [callbackUrl, setCallbackUrl] = React.useState('/dashboard');
+
+  React.useEffect(() => {
+    const requestedUrl = new URLSearchParams(window.location.search).get('callbackUrl');
+    if (requestedUrl?.startsWith('/') && !requestedUrl.startsWith('//')) {
+      setCallbackUrl(requestedUrl);
+    }
+  }, []);
   const [step, setStep] = React.useState<'email' | 'otp'>('email');
   const [emailValue, setEmailValue] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(false);
@@ -81,7 +92,7 @@ export default function SignInPage() {
       if (signInError) {
         setError(signInError.message || 'Code incorrect ou expiré');
       } else {
-        router.push('/dashboard');
+        router.push(callbackUrl);
         router.refresh();
       }
     } catch (err) {
@@ -98,7 +109,7 @@ export default function SignInPage() {
     try {
       await authClient.signIn.social({
         provider: 'google',
-        callbackURL: '/dashboard',
+        callbackURL: callbackUrl,
       });
     } catch (err) {
       setError('Erreur lors de la connexion Google');

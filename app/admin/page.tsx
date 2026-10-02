@@ -110,9 +110,9 @@ export default async function AdminPage() {
 
       {/* --- KPI GRID --- */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard title="Communauté" value={totalUsers} icon={Users} trend="+12%" description="Utilisateurs totaux" href="/admin/users" />
-        <StatCard title="Inscriptions" value={totalRegistrations} icon={BookmarkCheck} trend="En hausse" description="Total participations" href="/admin/evenements" />
-        <StatCard title="Contenu" value={totalPosts} icon={FileText} trend="Expertise" description="Articles publiés" href="/admin/blog" />
+        <StatCard title="Utilisateurs" value={totalUsers} icon={Users} description="Comptes enregistrés" href="/admin/users" />
+        <StatCard title="Inscriptions" value={totalRegistrations} icon={BookmarkCheck} description="Total participations" href="/admin/evenements" />
+        <StatCard title="Contenu" value={totalPosts} icon={FileText} description="Articles publiés" href="/admin/blog" />
         <StatCard title="Messages" value={unreadMessagesCount} icon={MessageSquare} trend={unreadMessagesCount > 0 ? "Action requise" : "À jour"} description="Messages non lus" href="/admin/messages" highlight={unreadMessagesCount > 0} />
       </div>
 

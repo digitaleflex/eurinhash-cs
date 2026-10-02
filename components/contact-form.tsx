@@ -29,6 +29,11 @@ export function ContactForm() {
       onSubmit={handleSubmit}
       className="space-y-4 sm:space-y-6"
     >
+      {/* Piège anti-robot : invisible pour un humain, jamais rempli par un bot qui ignore le CSS */}
+      <div aria-hidden="true" className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden">
+        <label htmlFor="website">Ne pas remplir</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" defaultValue="" />
+      </div>
       <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2">
         <div className="relative group">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-muted-foreground/70 group-focus-within:text-accent transition-colors">

@@ -10,7 +10,7 @@ export function Footer() {
           <div className="space-y-6 md:col-span-2">
             <Logo size="md" />
             <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
-              Ingénierie systémique et architectures numériques souveraines.
+              Ingénierie systémique et architectures numériques explicables.
               Une infrastructure pensée pour la résilience et le contrôle.
             </p>
             <Link
