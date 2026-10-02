@@ -3,15 +3,13 @@ import {
   Calendar,
 } from 'lucide-react';
 import { Card } from '@/components/ui/card';
-import prismaApi from '@/lib/prisma-api';
+import prisma from '@/lib/prisma';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { RelaunchButton } from '@/components/events/RelaunchButton';
 import { ExportCSVButton } from '@/components/events/ExportCSVButton';
 import { Badge } from '@/components/ui/badge';
 
-
-const prisma = prismaApi;
 
 interface EventRegistrationsPageProps {
   readonly params: Promise<{ id: string }>;
