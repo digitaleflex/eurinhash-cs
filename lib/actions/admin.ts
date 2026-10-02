@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import prisma from '@/lib/prisma';
 import { sendAdminReply } from '@/lib/mail';
+import { ContactMessageStatus } from '@prisma/client';
 import { requireAdmin } from '@/lib/authorization';
 
 
@@ -84,7 +85,7 @@ export async function unbanUser(userId: string) {
 
 export async function updateMessageStatus(
   messageId: string,
-  status: 'new' | 'read' | 'archived'
+  status: ContactMessageStatus
 ) {
   try {
     await checkAdmin();

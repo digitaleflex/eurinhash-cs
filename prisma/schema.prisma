@@ -92,7 +92,7 @@ model ContactMessage {
   email     String
   subject   String?
   message   String
-  status    String   @default("new")
+  status    ContactMessageStatus @default(new)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -111,7 +111,7 @@ model Event {
   registrationLink String?
   thumbnail        String?
   isFeatured       Boolean             @default(false)
-  status           String              @default("upcoming") // "upcoming", "past", "canceled"
+  status           EventStatus         @default(upcoming)
   createdAt        DateTime            @default(now())
   updatedAt        DateTime            @updatedAt
   registrations    EventRegistration[]
@@ -194,7 +194,7 @@ model Tag {
 model Comment {
   id        String   @id @default(cuid())
   content   String   @db.Text
-  status    String   @default("pending") // "pending", "approved", "spam"
+  status    CommentStatus @default(pending)
   postId    String
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   userId    String
@@ -220,4 +220,23 @@ model AuditLog {
   @@index([level])
   @@index([userId])
   @@map("audit_logs")
+}
+
+enum ContactMessageStatus {
+  new
+  read
+  replied
+  archived
+}
+
+enum EventStatus {
+  upcoming
+  past
+  canceled
+}
+
+enum CommentStatus {
+  pending
+  approved
+  spam
 }
