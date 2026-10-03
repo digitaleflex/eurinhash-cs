@@ -32,6 +32,7 @@ export function EventForm({ initialData }: EventFormProps) {
       registrationLink: formData.get('registrationLink') as string || undefined,
       thumbnail: formData.get('thumbnail') as string || undefined,
       isFeatured: formData.get('isFeatured') === 'on',
+      status: (formData.get('status') || 'upcoming') as Event['status'],
     };
 
     try {
@@ -155,6 +156,25 @@ export function EventForm({ initialData }: EventFormProps) {
                   <img src={thumbnailUrl} alt="Preview" className="w-full h-full object-cover" />
                 </div>
               )}
+            </div>
+
+            <div className="space-y-2 pt-2">
+              <label htmlFor="status" className="text-sm font-bold text-foreground">
+                Statut de l'événement
+              </label>
+              <select
+                id="status"
+                name="status"
+                defaultValue={initialData?.status ?? 'upcoming'}
+                className="w-full bg-background border border-border rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-accent/20 focus:border-accent outline-none transition-all"
+              >
+                <option value="upcoming">À venir</option>
+                <option value="past">Passé</option>
+                <option value="canceled">Annulé</option>
+              </select>
+              <p className="text-xs text-muted-foreground">
+                Un événement « à venir » reste mis en avant sur la page publique et alimente le compte à rebours.
+              </p>
             </div>
 
             <div className="flex items-center gap-3 pt-2">

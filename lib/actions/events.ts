@@ -6,6 +6,7 @@ import prisma from '@/lib/prisma';
 import { sendMail, sendEventConfirmation } from '@/lib/mail';
 import { requireAdmin } from '@/lib/authorization';
 import { z } from 'zod';
+import type { EventStatus } from '@prisma/client';
 
 
 const EventInputSchema = z.object({
@@ -18,6 +19,9 @@ const EventInputSchema = z.object({
   registrationLink: z.string().url().max(2048).optional().or(z.literal('')),
   thumbnail: z.string().url().max(2048).optional().or(z.literal('')),
   isFeatured: z.boolean().optional(),
+  // Sans ce champ, un événement restait 'upcoming' pour toujours et la page
+  // publique pouvait mettre en avant un événement déjà passé.
+  status: z.enum(['upcoming', 'past', 'canceled']).optional(),
 });
 
 const EventUpdateSchema = EventInputSchema.partial();
