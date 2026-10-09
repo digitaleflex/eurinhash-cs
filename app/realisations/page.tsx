@@ -1,4 +1,4 @@
-import { ArrowRight, Globe, ShieldCheck, Layers3 } from 'lucide-react';
+import { ArrowRight, Globe, ShieldCheck, Layers3, UserRound } from 'lucide-react';
 import Link from 'next/link';
 
 const cases = [
@@ -35,6 +35,18 @@ const cases = [
     result: 'Architecture et décisions documentées ; les résultats quantitatifs sont réservés aux données réellement disponibles.',
     href: '/contact?subject=Produit%20numérique',
   },
+  {
+    icon: UserRound,
+    type: 'Produit personnel · Full Stack',
+    title: 'eurinhash.com — Portfolio professionnel et back-office',
+    context: 'Une vitrine personnelle seule ne permettait pas de gérer facilement la publication de contenus, les événements et les échanges professionnels.',
+    objective: 'Créer une plateforme réunissant présentation professionnelle, blog, contact et administration dans une application maintenable.',
+    constraints: 'Garder les parcours publics simples, protéger les opérations administratives, structurer les données et ne pas revendiquer de résultats non mesurés.',
+    decisions: 'Next.js App Router et TypeScript, PostgreSQL avec Prisma, Better Auth, intégration email et stockage des médias ; contrôles de release et limites opérationnelles documentés.',
+    result: 'Code et fonctionnalités documentés dans le dépôt. La validation exhaustive des parcours, les tests récents de CI, la restauration et les métriques de production restent à confirmer.',
+    href: 'https://github.com/digitaleflex/eurinhash-cs',
+    external: true,
+  },
 ];
 
 export default function RealisationsPage() {
@@ -61,7 +73,7 @@ export default function RealisationsPage() {
                   <item.icon className="h-5 w-5" aria-hidden="true" />
                   <span className="font-mono text-[10px] font-bold tracking-widest uppercase">{item.type}</span>
                 </div>
-                <span className="font-mono text-[9px] tracking-widest text-muted-foreground">CASE-0{index + 1}</span>
+                <span className="font-mono text-[9px] tracking-widest text-muted-foreground">CASE-{String(index + 1).padStart(2, '0')}</span>
               </div>
 
               <h2 className="mt-8 max-w-3xl text-3xl font-black tracking-tight sm:text-4xl">{item.title}</h2>
@@ -74,8 +86,8 @@ export default function RealisationsPage() {
                 <div><span className="font-mono text-[9px] tracking-widest text-accent uppercase">Résultat / état</span><p className="mt-2 text-sm font-semibold leading-relaxed">{item.result}</p></div>
               </div>
 
-              <Link href={item.href} className="inline-flex items-center gap-2 text-xs font-bold text-accent">
-                Discuter d’un besoin similaire
+              <Link href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noopener noreferrer' : undefined} className="inline-flex items-center gap-2 text-xs font-bold text-accent">
+                {item.external ? 'Consulter le dépôt du projet' : 'Discuter d’un besoin similaire'}
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </article>
