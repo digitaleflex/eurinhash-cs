@@ -25,7 +25,7 @@ jobs:
         ports:
           - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U runner"
+          --health-cmd "pg_isready -U runner -d eurinhash"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -50,9 +50,15 @@ jobs:
 
       - name: Validate Prisma schema
         run: pnpm prisma validate
+        env:
+          DATABASE_URL: postgresql://runner:runner@localhost:5432/eurinhash
+          DATABASE_URL_UNPOOLED: postgresql://runner:runner@localhost:5432/eurinhash
 
       - name: Generate Prisma client
         run: pnpm db:generate
+        env:
+          DATABASE_URL: postgresql://runner:runner@localhost:5432/eurinhash
+          DATABASE_URL_UNPOOLED: postgresql://runner:runner@localhost:5432/eurinhash
 
       - name: Deploy Prisma migrations
         run: pnpm prisma migrate deploy
