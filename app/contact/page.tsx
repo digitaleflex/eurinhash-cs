@@ -1,11 +1,11 @@
 'use client';
 
-import { MessageSquare, ArrowRight, MapPin, Shield, HelpCircle } from 'lucide-react';
+import { MessageSquare, ArrowRight, Shield, HelpCircle } from 'lucide-react';
 
 const trustSignals = [
   { title: 'Contexte d’abord', desc: 'Le premier échange sert à comprendre le problème, les contraintes et l’objectif.' },
   { title: 'Échange direct', desc: 'Vous échangez directement avec la personne qui analyse le sujet.' },
-  { title: 'Vous gardez le contrôle', desc: 'WhatsApp s’ouvre avec un message prérempli. Vous le relisez et choisissez de l’envoyer.' },
+  { title: 'Confidentialité', desc: 'Aucun numéro de téléphone ni e-mail personnel n’est affiché sur cette page.' },
 ];
 
 const channels = [
@@ -61,7 +61,7 @@ export default function ContactPage() {
                   className="mt-8 inline-flex items-center justify-center gap-3 rounded-full bg-accent px-7 py-4 text-base font-semibold text-white transition hover:opacity-90"
                 >
                   <MessageSquare className="h-5 w-5" aria-hidden="true" />
-                  Me contacter sur WhatsApp
+                  Me contacter sur LinkedIn
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </a>
                 <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
@@ -106,14 +106,10 @@ export default function ContactPage() {
               <Shield className="mb-5 h-6 w-6 text-accent" aria-hidden="true" />
               <h2 className="text-lg font-bold">Envoi maîtrisé</h2>
               <p className="mt-3 text-xs leading-relaxed text-background/60">
-                Votre message est ouvert dans WhatsApp. Évitez d’y inclure des mots de passe ou des informations confidentielles inutiles.
+                Aucun numéro de téléphone ni e-mail personnel n’est publié ici. Les échanges se poursuivent sur LinkedIn selon les paramètres de confidentialité de votre compte.
               </p>
             </div>
 
-            <div className="flex items-start gap-4 border border-foreground/5 p-6">
-              <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
-              <div><p className="text-sm font-bold">Base opérationnelle</p><p className="mt-1 text-xs leading-relaxed text-muted-foreground">Abomey-Calavi, Bénin · travail à distance possible.</p></div>
-            </div>
           </aside>
         </div>
       </div>
