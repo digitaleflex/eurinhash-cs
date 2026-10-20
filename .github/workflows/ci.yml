@@ -15,6 +15,65 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
+    # Variables required by prisma validate/generate and next build.
+    # Defined at job level so every step sees the same, reproducible environment.
+    env:
+      DATABASE_URL: postgresql://runner:runner@localhost:5432/eurinhash
+      DATABASE_URL_UNPOOLED: postgresql://runner:runner@localhost:5432/eurinhash
+      BETTER_AUTH_SECRET: ci-build-secret
+      BETTER_AUTH_URL: http://localhost:3000
+      RESEND_API_KEY: re_ci_placeholder
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate Prisma schema
+        run: pnpm prisma validate
+
+      - name: Generate Prisma client
+        run: pnpm db:generate
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm type-check
+
+      - name: Tests
+        run: pnpm test:ci
+
+      - name: Build
+        run: pnpm build
+
+  # Migration history is currently inconsistent with schema.prisma (migrations
+  # reference tables no migration creates — tracked by the dedicated issue
+  # "Réparer l'historique de migrations Prisma"). Kept as its own job so a broken
+  # history is reported separately and never blocks the lint/types/tests/build
+  # signal. This job is expected to be red until that issue is resolved.
+  migrations:
+    name: Migrations (known broken)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      DATABASE_URL: postgresql://runner:runner@localhost:5432/eurinhash
+      DATABASE_URL_UNPOOLED: postgresql://runner:runner@localhost:5432/eurinhash
+
     services:
       postgres:
         image: postgres:16
@@ -48,34 +107,5 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
-      - name: Validate Prisma schema
-        run: pnpm prisma validate
-
-      - name: Generate Prisma client
-        run: pnpm db:generate
-
-      - name: Deploy Prisma migrations
+      - name: Deploy Prisma migrations on a fresh database
         run: pnpm prisma migrate deploy
-        env:
-          DATABASE_URL: postgresql://runner:runner@localhost:5432/eurinhash
-          DATABASE_URL_UNPOOLED: postgresql://runner:runner@localhost:5432/eurinhash
-
-      - name: Lint
-        run: pnpm lint
-
-      - name: Typecheck
-        run: pnpm type-check
-
-      - name: Tests
-        run: pnpm test:ci
-
-      - name: Build
-        run: pnpm build
-        env:
-          DATABASE_URL: postgresql://runner:runner@localhost:5432/eurinhash
-          DATABASE_URL_UNPOOLED: postgresql://runner:runner@localhost:5432/eurinhash
-          BETTER_AUTH_SECRET: ci-build-secret
-          BETTER_AUTH_URL: http://localhost:3000
-          RESEND_API_KEY: re_ci_placeholder
-
-# Release gate: migration-based validation is the source of truth.
