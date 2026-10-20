@@ -15,6 +15,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
+    # Variables required by prisma validate/generate/migrate and next build.
+    # Defined at job level so every step sees the same, reproducible environment.
+    env:
+      DATABASE_URL: postgresql://runner:runner@localhost:5432/eurinhash
+      DATABASE_URL_UNPOOLED: postgresql://runner:runner@localhost:5432/eurinhash
+      BETTER_AUTH_SECRET: ci-build-secret
+      BETTER_AUTH_URL: http://localhost:3000
+      RESEND_API_KEY: re_ci_placeholder
+
     services:
       postgres:
         image: postgres:16
@@ -56,9 +65,6 @@ jobs:
 
       - name: Deploy Prisma migrations
         run: pnpm prisma migrate deploy
-        env:
-          DATABASE_URL: postgresql://runner:runner@localhost:5432/eurinhash
-          DATABASE_URL_UNPOOLED: postgresql://runner:runner@localhost:5432/eurinhash
 
       - name: Lint
         run: pnpm lint
@@ -71,11 +77,5 @@ jobs:
 
       - name: Build
         run: pnpm build
-        env:
-          DATABASE_URL: postgresql://runner:runner@localhost:5432/eurinhash
-          DATABASE_URL_UNPOOLED: postgresql://runner:runner@localhost:5432/eurinhash
-          BETTER_AUTH_SECRET: ci-build-secret
-          BETTER_AUTH_URL: http://localhost:3000
-          RESEND_API_KEY: re_ci_placeholder
 
 # Release gate: migration-based validation is the source of truth.
