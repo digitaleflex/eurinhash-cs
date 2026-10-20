@@ -52,9 +52,17 @@ Corrections appliquées (voie v3 uniquement, aucune migration entamée) :
 
 ## 3. CI (#110)
 
-La CI échouait sur `main` (run [39425284708](https://github.com/digitaleflex/eurinhash-cs/actions/runs/39425284708)) à l'étape « Validate Prisma schema » : `Environment variable not found: DATABASE_URL`, car l'env n'était défini que sur les étapes `migrate deploy` et `build`.
+Deux échecs préexistants ont été identifiés sur `main` :
 
-Correction : `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `RESEND_API_KEY` sont désormais définis au niveau du job `quality`, donc identiques pour toutes les étapes. Le déclenchement `pull_request` sur `main`/`develop` reste en place et publie un statut par étape (Prisma, lint, types, tests, build).
+1. **`DATABASE_URL` absente** — run [39425284708](https://github.com/digitaleflex/eurinhash-cs/actions/runs/39425284708) : l'étape « Validate Prisma schema » échouait avec `P1012: Environment variable not found: DATABASE_URL`, car l'env n'était défini que sur les étapes `migrate deploy` et `build`. Corrigé : `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `RESEND_API_KEY` sont désormais définis au niveau du job.
+2. **Historique de migrations incohérent** (défaut de dépôt, non introduit par cette branche) — `prisma migrate deploy` sur une base vierge échoue : `20261002120000_add_status_enums` modifie les tables `events` et `comments`, `20261002123000` écrit dans `posts`, `20261002130000` référence `users`, `20261002140000` modifie `event_registrations`, alors qu'aucune migration ne crée ces tables. Les migrations ne créent que `contact_messages` et `project_requests` (cette dernière n'existe même plus dans `schema.prisma`). L'historique ne peut donc pas produire le schéma actuel.
+
+Conséquence sur la CI : le workflow est scindé en deux jobs.
+
+- `quality` (lint, types, tests, build, `prisma validate` + `prisma generate`, sans Postgres) : c'est le statut à surveiller pour les régressions de code ; il est vert sur cette branche.
+- `migrations` (Postgres 16, `prisma migrate deploy` sur base vierge, nommé « Migrations (known broken) ») : reste rouge tant que l'historique n'est pas réparé. Il est volontairement isolé pour qu'un historique cassé ne masque plus le statut lint/types/tests/build.
+
+La réparation (squash en une migration de baseline générée depuis `schema.prisma`, puis `prisma migrate resolve` sur la base de production) touche le déploiement : elle est suivie par une issue dédiée et n'est pas incluse ici.
 
 ## 4. Tests restaurés
 
