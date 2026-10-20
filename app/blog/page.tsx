@@ -30,7 +30,6 @@ export default function BlogPage() {
               <article className="h-full overflow-hidden border-b border-border/60 pb-6">
                 <div className="mb-6 flex aspect-video items-center justify-center overflow-hidden rounded-2xl bg-muted">
                   {post.thumbnail ? (
-                    // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={post.thumbnail}
                       alt={post.title}

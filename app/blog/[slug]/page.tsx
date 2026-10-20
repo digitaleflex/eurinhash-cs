@@ -79,7 +79,6 @@ export default async function BlogPostPage({ params }: PageProps) {
         </header>
 
         {post.thumbnail && (
-          // eslint-disable-next-line @next/next/no-img-element
           <img
             src={post.thumbnail}
             alt={post.title}
