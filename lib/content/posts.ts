@@ -1,14 +1,4 @@
-/**
- * Articles publics versionnés dans Git.
- *
- * Avant de retirer la base de production, exporter les articles publiés depuis
- * la base existante vers ce format. Ne pas inventer de contenu ni supprimer
- * les enregistrements d'origine pendant la migration.
- */
-export type PostSection =
-  | { type: "paragraph"; text: string }
-  | { type: "heading"; text: string }
-  | { type: "list"; items: string[] };
+import postData from "./posts.json";
 
 export type StaticPost = {
   slug: string;
@@ -20,15 +10,14 @@ export type StaticPost = {
   thumbnail?: string;
   seoTitle?: string;
   seoDescription?: string;
-  sections: PostSection[];
+  contentHtml: string;
 };
 
 /**
- * Les articles historiques doivent être exportés depuis la base avant la mise
- * en production de cette migration. Tableau laissé vide volontairement :
- * aucune donnée de production n'a été disponible pour être migrée fidèlement.
+ * Generated from the existing database by `pnpm content:export`.
+ * Export the current production data before deploying this static migration.
  */
-export const posts: StaticPost[] = [];
+export const posts = postData as StaticPost[];
 
 export function getPublishedPost(slug: string): StaticPost | undefined {
   return posts.find((post) => post.slug === slug);
