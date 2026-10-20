@@ -15,6 +15,7 @@ Le dépôt sert un portfolio personnel public. Il ne doit plus exposer de compte
 - Composants de page d'accueil non utilisés et catalogue Better Auth copié par erreur dans `llms.txt`.
 - Éditeur riche de blog utilisé uniquement par l'administration.
 - Liens de navigation vers la page Événements.
+- Page Ressources vide (aucun document téléchargeable disponible) et liens de navigation associés.
 
 ## Conservé volontairement pour la transition
 
@@ -28,10 +29,11 @@ Le dépôt sert un portfolio personnel public. Il ne doit plus exposer de compte
 1. Exporter et relire les articles publiés avant de déployer.
 2. Décider si les messages de contact existants doivent être exportés/archivés et migrer le formulaire hors DB si l'on veut réellement retirer Prisma.
 3. Auditer les références restantes à Better Auth, Prisma, Neon, Resend, Blob et aux composants inutilisés.
-4. Retirer les dépendances seulement après suppression de tous les imports et scripts qui les utilisent.
-5. Exécuter installation verrouillée, lint, type-check, tests et build en CI.
-6. Vérifier les routes, le sitemap, les variables d'environnement et le formulaire de contact.
-7. Ne pas merger ni déployer avant validation.
+4. Supprimer les dépendances uniquement après génération du lockfile et validation de la compilation.
+5. Retirer les dépendances seulement après suppression de tous les imports et scripts qui les utilisent.
+6. Exécuter installation verrouillée, lint, type-check, tests et build en CI.
+7. Vérifier les routes, le sitemap, les variables d'environnement et le formulaire de contact.
+8. Ne pas merger ni déployer avant validation.
 
 ## État
 
