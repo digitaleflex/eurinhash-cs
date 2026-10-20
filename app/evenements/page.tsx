@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ComponentType } from "react";
 import Link from "next/link";
 import { Calendar, ExternalLink, Globe, Video, Youtube } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
     "Lives, webinaires et sessions techniques autour de l’architecture logicielle, du cloud et de la cybersécurité.",
 };
 
-const platformIcons = {
+const platformIcons: Record<string, ComponentType<{ className?: string }>> = {
   YouTube: Youtube,
   TikTok: Video,
   "Google Meet": Video,
