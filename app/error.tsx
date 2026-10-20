@@ -102,7 +102,7 @@ export default function Error({
             className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors"
           >
             <Mail className="h-4 w-4" />
-            contact@eurinhash.com
+            Ouvrir la page de contact
           </Link>
         </div>
       </div>
