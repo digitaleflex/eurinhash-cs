@@ -70,9 +70,8 @@ export default function CookiesPage() {
 
       <h2 id="contact">Contact</h2>
       <p>
-        Pour toute question relative à l’utilisation future des cookies, vous
-        pouvez nous écrire à :{' '}
-        <a href="mailto:contact@eurinhash.com">contact@eurinhash.com</a>.
+        Pour toute question relative aux cookies, veuillez utiliser la{' '}
+        <a href="/contact">page de contact</a>.
       </p>
 
     </LegalPage>
