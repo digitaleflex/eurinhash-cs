@@ -1,5 +1,12 @@
 import { ArrowRight, Globe, ShieldCheck, Layers3, UserRound } from 'lucide-react';
 import Link from 'next/link';
+import { createPageMetadata } from '@/lib/metadata';
+
+export const metadata = createPageMetadata({
+  title: 'Réalisations',
+  description: 'Études de cas : contexte, contraintes, décisions d’architecture et état réellement livré.',
+  path: '/realisations',
+});
 
 const cases = [
   {

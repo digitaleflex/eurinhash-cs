@@ -1,17 +1,15 @@
 import { LegalPage } from '@/components/legal-page';
 
 import type { Metadata } from 'next';
+import { createPageMetadata } from '@/lib/metadata';
 
 export const revalidate = 86400; // Revalider toutes les 24 heures (ISR)
 
-export const metadata: Metadata = {
-  title: 'Mentions légales - Eurin Hash',
+export const metadata: Metadata = createPageMetadata({
+  title: 'Mentions légales',
   description: 'Mentions légales du site eurinhash.com - Informations sur l\'éditeur, l\'hébergement et la propriété intellectuelle.',
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+  path: '/legal/mentions-legales',
+});
 
 export default function MentionsLegalesPage() {
   return (

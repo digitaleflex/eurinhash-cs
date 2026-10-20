@@ -1,7 +1,12 @@
-'use client';
-
 import { Users, Target, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { createPageMetadata } from '@/lib/metadata';
+
+export const metadata = createPageMetadata({
+  title: 'Accompagnement CTO',
+  description: 'Un accompagnement technique pour aligner les décisions, les standards de qualité et la trajectoire technique du produit.',
+  path: '/services/cto',
+});
 
 export default function CTOServicePage() {
   return (

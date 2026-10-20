@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPublishedPost, posts } from "@/lib/content/posts";
+import { formatPublishedDate, toPublishedDateString, toPublishedISOString } from "@/lib/content/dates";
+import { createPageMetadata, siteConfig } from "@/lib/metadata";
 import { sanitizeBlogHtml } from "@/lib/sanitize";
 
 type PageProps = { params: Promise<{ slug: string }> };
@@ -14,25 +16,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const post = getPublishedPost(slug);
 
-  if (!post) return { title: "Article non trouvé" };
+  if (!post) {
+    return { title: "Article non trouvé", robots: { index: false, follow: false } };
+  }
 
-  return {
+  return createPageMetadata({
     title: post.seoTitle || post.title,
     description: post.seoDescription || post.excerpt,
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      images: post.thumbnail ? [post.thumbnail] : [],
-      type: "article",
-      publishedTime: new Date(post.publishedAt).toISOString(),
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.excerpt,
-      images: post.thumbnail ? [post.thumbnail] : [],
-    },
-  };
+    path: `/blog/${post.slug}`,
+    type: "article",
+    publishedTime: toPublishedISOString(post.publishedAt),
+    image: post.thumbnail ? { url: post.thumbnail, alt: post.title } : undefined,
+  });
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
@@ -41,14 +36,18 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   if (!post) notFound();
 
+  const postUrl = new URL(`/blog/${post.slug}`, siteConfig.url).toString();
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "TechArticle",
     headline: post.title,
     description: post.excerpt,
-    image: post.thumbnail,
-    datePublished: new Date(post.publishedAt).toISOString(),
-    author: { "@type": "Person", name: "Eurin Hash" },
+    url: postUrl,
+    mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
+    image: new URL(post.thumbnail ?? siteConfig.ogImage, siteConfig.url).toString(),
+    datePublished: toPublishedISOString(post.publishedAt),
+    inLanguage: "fr-FR",
+    author: { "@type": "Person", name: siteConfig.name, url: siteConfig.url },
   };
 
   return (
@@ -73,8 +72,8 @@ export default async function BlogPostPage({ params }: PageProps) {
           <p className="border-l-4 border-accent pl-6 text-xl italic leading-relaxed text-muted-foreground">
             {post.excerpt}
           </p>
-          <time className="mt-5 block text-sm text-muted-foreground" dateTime={post.publishedAt}>
-            Publié le {new Date(post.publishedAt).toLocaleDateString("fr-FR")}
+          <time className="mt-5 block text-sm text-muted-foreground" dateTime={toPublishedDateString(post.publishedAt)}>
+            Publié le {formatPublishedDate(post.publishedAt)}
           </time>
         </header>
 

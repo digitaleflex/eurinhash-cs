@@ -1,5 +1,10 @@
 // Constantes de configuration du site
 export const SITE_CONFIG = {
+  // URL publique de production. Ne pas utiliser NEXT_PUBLIC_SITE_URL :
+  // la valeur locale vaut http://localhost:3000 et ne doit pas fuiter dans
+  // les canonicals, le sitemap ni les données structurées.
+  url: 'https://eurinhash.com',
+
   // Configuration des images
   images: {
     // Qualités configurées pour éviter les warnings Next.js 16

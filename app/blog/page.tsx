@@ -1,11 +1,14 @@
 import Link from "next/link";
 import { posts } from "@/lib/content/posts";
+import { formatPublishedDate, toPublishedDateString } from "@/lib/content/dates";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata = {
-  title: "Insights | Architecture, IA & Cybersécurité",
+export const metadata = createPageMetadata({
+  title: "Insights — architecture, IA & cybersécurité",
   description:
     "Analyses d’Eurin Hash sur l’architecture logicielle, l’IA appliquée, la cybersécurité, le cloud et les décisions techniques.",
-};
+  path: "/blog",
+});
 
 export default function BlogPage() {
   const sortedPosts = [...posts].sort(
@@ -49,8 +52,8 @@ export default function BlogPage() {
                   {post.excerpt}
                 </p>
                 <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-                  <time dateTime={post.publishedAt}>
-                    {new Date(post.publishedAt).toLocaleDateString("fr-FR")}
+                  <time dateTime={toPublishedDateString(post.publishedAt)}>
+                    {formatPublishedDate(post.publishedAt)}
                   </time>
                   <span aria-hidden="true">•</span>
                   <span>{post.readingTime} min de lecture</span>

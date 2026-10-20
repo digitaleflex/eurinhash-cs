@@ -1,5 +1,12 @@
 import { ArrowRight, Search, Layers, BrainCircuit, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
+import { createPageMetadata } from '@/lib/metadata';
+
+export const metadata = createPageMetadata({
+  title: 'Services',
+  description: 'Audit, architecture, accompagnement technique et mentorat : des interventions construites à partir du contexte et des contraintes du système.',
+  path: '/services',
+});
 
 const services = [
   {

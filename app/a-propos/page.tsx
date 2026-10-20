@@ -1,11 +1,13 @@
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { createPageMetadata } from '@/lib/metadata';
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: 'À propos',
   description: 'Parcours et positionnement professionnel d’Eurin Hash, software architect et entrepreneur numérique.',
-};
+  path: '/a-propos',
+});
 
 export default function AboutPage() {
   return (

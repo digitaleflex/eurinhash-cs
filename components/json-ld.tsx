@@ -1,42 +1,47 @@
-import { Organization, WithContext } from 'schema-dts';
+import { Person, WebSite, WithContext } from 'schema-dts';
+import { siteConfig } from '@/lib/metadata';
 
+/**
+ * Données structurées limitées à ce que le site affiche réellement :
+ * identité personnelle, coordonnées publiques et profils liés depuis le
+ * footer / la page contact. Aucune organisation, aucun profil ni aucun
+ * numéro qui ne soit visible sur le site.
+ */
 export function JsonLd() {
-  const organizationSchema: WithContext<Organization> = {
+  const personId = `${siteConfig.url}/#person`;
+
+  const personSchema: WithContext<Person> = {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Eurinhash',
-    url: 'https://eurinhash.com',
-    logo: 'https://eurinhash.com/eurinhash_web_logo_fondclair.png',
-    sameAs: [
-      'https://linkedin.com/company/eurinhash',
-      'https://github.com/eurinhash',
-    ],
-    description: 'Expertise en architecture logicielle, cloud et transformation digitale.',
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '+229-01-51-07-05-55',
-      contactType: 'customer service',
-      availableLanguage: ['French', 'English'],
+    '@id': personId,
+    '@type': 'Person',
+    name: siteConfig.name,
+    url: siteConfig.url,
+    image: `${siteConfig.url}${siteConfig.ogImage}`,
+    jobTitle: 'Architecte logiciel et entrepreneur numérique',
+    description: siteConfig.description,
+    email: `mailto:${siteConfig.links.email}`,
+    telephone: '+2290162265246',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Abomey-Calavi',
+      addressCountry: 'BJ',
     },
+    sameAs: [siteConfig.links.linkedin, siteConfig.links.github],
   };
 
-  const websiteSchema: any = {
+  const websiteSchema: WithContext<WebSite> = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Eurinhash',
-    url: 'https://eurinhash.com',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: 'https://eurinhash.com/search?q={search_term_string}',
-      'query-input': 'required name=search_term_string',
-    },
+    name: siteConfig.name,
+    url: siteConfig.url,
+    inLanguage: 'fr-FR',
   };
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
       />
       <script
         type="application/ld+json"

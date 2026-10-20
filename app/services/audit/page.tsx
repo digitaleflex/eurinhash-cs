@@ -1,5 +1,12 @@
 import { ArrowRight, Search, ShieldCheck, Zap } from 'lucide-react';
 import Link from 'next/link';
+import { createPageMetadata } from '@/lib/metadata';
+
+export const metadata = createPageMetadata({
+  title: 'Audit technique',
+  description: 'Analyser un système existant, documenter les risques et prioriser les corrections avant d’engager des changements importants.',
+  path: '/services/audit',
+});
 
 const steps = [
   { icon: Search, title: 'Diagnostic', desc: 'Analyse ciblée de l’architecture, des flux, de l’infrastructure et des points de risque pertinents.' },

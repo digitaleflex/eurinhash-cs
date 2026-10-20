@@ -1,16 +1,14 @@
 import { LegalPage } from '@/components/legal-page';
 import type { Metadata } from 'next';
+import { createPageMetadata } from '@/lib/metadata';
 
 export const revalidate = 86400; // Revalider toutes les 24 heures (ISR)
 
-export const metadata: Metadata = {
-  title: 'Gestion des cookies - Eurin Hash',
+export const metadata: Metadata = createPageMetadata({
+  title: 'Gestion des cookies',
   description: 'Politique de gestion des cookies du site eurinhash.com - État actuel et contrôle par l\'utilisateur.',
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+  path: '/legal/cookies',
+});
 
 export default function CookiesPage() {
   return (
