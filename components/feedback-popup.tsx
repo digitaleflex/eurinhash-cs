@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle, X, Mail, Clock, MessageSquare } from 'lucide-react';
+import { CheckCircle, X, Clock, MessageSquare } from 'lucide-react';
 
 interface FeedbackPopupProps {
   isOpen: boolean;
