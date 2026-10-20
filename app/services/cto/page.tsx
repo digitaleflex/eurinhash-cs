@@ -5,36 +5,33 @@ import Link from 'next/link';
 
 export default function CTOServicePage() {
   return (
-    <main className="min-h-screen bg-background pt-32 pb-40">
+    <main className="min-h-screen bg-background pb-40 pt-32">
       <div className="mx-auto max-w-4xl px-4 sm:px-8">
-        <span className="font-mono text-xs text-accent tracking-widest uppercase block mb-6">Service · Accompagnement</span>
-        <h1 className="text-5xl sm:text-7xl font-black tracking-tighter leading-[0.9] mb-12">
-            Accompagnement<br />
-            <span className="text-foreground/20 font-light italic">CTO On-Demand.</span>
+        <span className="mb-6 block text-sm font-semibold text-accent">Service · Conseil technique</span>
+        <h1 className="mb-8 text-5xl font-black leading-[0.98] tracking-tight sm:text-7xl">
+          Prendre de meilleures
+          <br />
+          <span className="text-foreground/30">décisions techniques.</span>
         </h1>
-        
-        <div className="grid gap-12 mt-20">
-          <p className="text-xl text-muted-foreground leading-relaxed">
-              Un partenaire stratégique pour guider votre direction technique. 
-              Prise de décision, recrutement d'élite et culture de l'excellence.
+        <div className="mt-12 grid gap-8">
+          <p className="text-xl leading-relaxed text-muted-foreground">
+            Vous dirigez un projet ou une équipe et devez faire des choix techniques importants ? Je peux vous aider à comparer les options, anticiper les difficultés et établir un plan réaliste, sans devoir recruter immédiatement un responsable technique à temps plein.
           </p>
-
-          <div className="grid sm:grid-cols-2 gap-8 mt-12 text-background">
-            <div className="p-8 bg-foreground">
-                <Target className="w-8 h-8 mb-6 text-accent" />
-                <h3 className="text-lg font-bold mb-2">Vision Tech</h3>
-                <p className="text-sm opacity-70">Alignement de votre roadmap technique avec vos objectifs business.</p>
+          <div className="mt-6 grid gap-8 sm:grid-cols-2">
+            <div className="bg-foreground p-8 text-background">
+              <Target className="mb-6 h-8 w-8 text-accent" aria-hidden="true" />
+              <h2 className="mb-2 text-lg font-bold">Choisir une direction</h2>
+              <p className="text-sm leading-relaxed text-background/70">Relier les décisions techniques aux objectifs du projet, aux délais et au budget disponible.</p>
             </div>
-            <div className="p-8 bg-accent">
-                <Users className="w-8 h-8 mb-6 text-white" />
-                <h3 className="text-lg font-bold mb-2 text-white">Scale Culture</h3>
-                <p className="text-sm text-white/80">Mise en place de standards de qualité et mentorat des leads.</p>
+            <div className="bg-accent p-8 text-white">
+              <Users className="mb-6 h-8 w-8" aria-hidden="true" />
+              <h2 className="mb-2 text-lg font-bold">Aider l’équipe à avancer</h2>
+              <p className="text-sm leading-relaxed text-white/85">Clarifier les priorités, améliorer les pratiques de travail et accompagner les personnes qui construisent le produit.</p>
             </div>
           </div>
-
-          <div className="mt-16 pt-16 border-t border-foreground/5">
-            <Link href="/contact" className="inline-flex items-center gap-3 text-sm font-bold text-foreground hover:text-accent transition-colors group">
-                Prendre rendez-vous avec un expert <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <div className="mt-8 border-t border-foreground/5 pt-10">
+            <Link href="/contact?subject=Conseil%20technique" className="group inline-flex items-center gap-3 text-sm font-bold text-foreground transition-colors hover:text-accent">
+              Discuter de votre situation <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </Link>
           </div>
         </div>
