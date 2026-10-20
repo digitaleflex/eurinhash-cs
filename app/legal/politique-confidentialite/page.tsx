@@ -44,8 +44,9 @@ export default function PolitiqueConfidentialitePage() {
       </p>
       <ul>
         <li>
-          Informations transmises via le formulaire de contact : nom, adresse
-          email, sujet, message.
+          Les informations que vous choisissez de transmettre en ouvrant une
+          conversation WhatsApp depuis la page de contact. Le site ne comporte
+          plus de formulaire qui enregistre les demandes dans sa propre base.
         </li>
         <li>
           Données techniques : adresse IP, type de navigateur, pages
@@ -58,11 +59,10 @@ export default function PolitiqueConfidentialitePage() {
 
       <h2 id="finalites">Finalités du traitement</h2>
       <p>
-        Les données personnelles collectées sont utilisées exclusivement pour
-        :
+        Les données que vous choisissez de partager sont utilisées pour :
       </p>
       <ul>
-        <li>Répondre aux demandes envoyées via le formulaire de contact.</li>
+        <li>Répondre aux demandes que vous envoyez volontairement via WhatsApp.</li>
         <li>Assurer le suivi administratif ou commercial si nécessaire.</li>
         <li>Améliorer la qualité du site et des services proposés.</li>
       </ul>
@@ -102,9 +102,10 @@ export default function PolitiqueConfidentialitePage() {
         <li>Droit d’opposition ou de limitation du traitement.</li>
       </ul>
       <p>
-        Pour exercer vos droits, vous pouvez adresser une demande à l'adresse
-        suivante :{' '}
-        <a href="mailto:contact@eurinhash.com">contact@eurinhash.com</a>.
+        Pour exercer vos droits, vous pouvez adresser une demande via la{' '}
+        <a href="/contact">page de contact</a>. Les échanges ouverts dans
+        WhatsApp sont également soumis aux conditions et à la politique de
+        confidentialité de WhatsApp.
       </p>
 
 
