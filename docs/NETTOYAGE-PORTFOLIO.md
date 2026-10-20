@@ -11,6 +11,8 @@ Le dépôt sert un portfolio personnel public. Il ne doit plus exposer de compte
 - Endpoint d'upload média destiné à l'administration.
 - API dashboard utilisateur.
 - Gestion CRUD et inscriptions aux événements.
+- Composants orphelins d'administration, d'authentification et de dashboard.
+- Composants de page d'accueil non utilisés et catalogue Better Auth copié par erreur dans `llms.txt`.
 - Éditeur riche de blog utilisé uniquement par l'administration.
 - Liens de navigation vers la page Événements.
 
@@ -18,7 +20,7 @@ Le dépôt sert un portfolio personnel public. Il ne doit plus exposer de compte
 
 - Prisma et la base de données : ne pas retirer avant l'export et la vérification des contenus existants.
 - Endpoint de contact, validation, anti-spam, notification et accusé de réception.
-- Script d'export des articles et événements, à exécuter dans un environnement possédant l'accès DB.
+- Script d'export des articles publiés, à exécuter dans un environnement possédant l'accès DB.
 - Blog statique, avec données à exporter avant une mise en production.
 
 ## Prochaines vérifications obligatoires
@@ -33,4 +35,4 @@ Le dépôt sert un portfolio personnel public. Il ne doit plus exposer de compte
 
 ## État
 
-Les routes hors périmètre ont été retirées de cette branche. Le nettoyage des dépendances et la suppression de la base restent bloqués par l'export de contenu et la vérification du parcours de contact. Le build n'est pas encore confirmé.
+Les routes hors périmètre et les principaux composants orphelins ont été retirés de cette branche. Le nettoyage des dépendances et la suppression de la base restent bloqués par l'export de contenu et la vérification du parcours de contact. Le build n'est pas encore confirmé.
