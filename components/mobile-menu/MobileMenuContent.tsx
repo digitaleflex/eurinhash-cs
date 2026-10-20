@@ -36,7 +36,6 @@ const navigationItems: NavItem[] = [
     ]
   },
   { href: '/blog', label: 'Blog', description: 'Veille & Analyses' },
-  { href: '/ressources', label: 'Ressources', description: 'Guides & eBooks' },
   { href: '/contact', label: 'Contact', description: 'Interaction directe' },
 ];
 
