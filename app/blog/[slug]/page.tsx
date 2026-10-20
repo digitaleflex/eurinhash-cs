@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const post = getPublishedPost(slug);
 
-  if (!post) return { title: "Article non trouvé" };
+  if (!post) return { title: "Article introuvable | Eurin Hash" };
 
   return {
     title: post.seoTitle || post.title,
@@ -60,7 +60,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       <article className="prose prose-invert max-w-none lg:prose-xl">
         <header className="not-prose mb-12">
           <Link href="/blog" className="text-sm font-semibold text-accent hover:underline">
-            ← Tous les insights
+            ← Tous les articles
           </Link>
           <div className="mb-4 mt-8 flex items-center gap-2">
             <span className="text-xs font-bold uppercase tracking-widest text-accent">
