@@ -46,20 +46,12 @@ export async function POST(request: NextRequest) {
 
     // Sauvegarde en base de données
     const prismaClient = prisma;
-    let currentUserId: string | null = null;
-    try {
-      const { getCurrentUser } = await import('@/lib/authorization');
-      currentUserId = (await getCurrentUser())?.id ?? null;
-    } catch {
-      currentUserId = null;
-    }
     await prismaClient.contactMessage.create({
       data: {
         name: name.trim(),
         email: email.trim().toLowerCase(),
         subject: subject?.trim() || 'Sans objet',
         message: message.trim(),
-        userId: currentUserId,
       },
     });
 

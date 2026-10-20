@@ -4,10 +4,9 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { X, ArrowRight, ChevronDown, User } from 'lucide-react';
+import { X, ArrowRight, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useMobileMenu } from './MobileMenuProvider';
-import { useSession } from '@/lib/auth-clients';
 
 type NavChild = {
   href: string;
@@ -36,9 +35,7 @@ const navigationItems: NavItem[] = [
       { href: '/services/mentorat', label: 'Programme de Mentorat', description: 'Formation d\'élite et mentorat' },
     ]
   },
-  { href: '/evenements', label: 'Événements', description: 'Lives & Conférences' },
   { href: '/blog', label: 'Blog', description: 'Veille & Analyses' },
-  { href: '/ressources', label: 'Ressources', description: 'Guides & eBooks' },
   { href: '/contact', label: 'Contact', description: 'Interaction directe' },
 ];
 
@@ -46,7 +43,6 @@ export function MobileMenuContent() {
   const { isOpen, closeMenu } = useMobileMenu();
   const pathname = usePathname();
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
-  const { data: session, isPending } = useSession();
 
   const toggleAccordion = (href: string) => {
     setOpenAccordion(openAccordion === href ? null : href);
@@ -84,26 +80,6 @@ export function MobileMenuContent() {
 
             {/* Navigation */}
             <nav className="flex-1 p-4 sm:p-6 space-y-3 overflow-y-auto custom-scrollbar" role="navigation" aria-label="Navigation mobile">
-              {!isPending && !session && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mb-6"
-                >
-                  <Link
-                    href="/sign-in"
-                    onClick={closeMenu}
-                    className="flex items-center justify-between w-full bg-accent text-white p-5 rounded-xl shadow-lg shadow-accent/20 group"
-                  >
-                    <div className="flex flex-col gap-1">
-                      <span className="text-lg font-black tracking-tight">Se connecter</span>
-                      <span className="text-[10px] opacity-80 font-bold uppercase tracking-widest">Accéder à votre espace</span>
-                    </div>
-                    <User className="w-6 h-6 transition-transform group-hover:scale-110" />
-                  </Link>
-                </motion.div>
-              )}
-
               {navigationItems.map((item, index) => {
                 const isActive = pathname && (pathname === item.href || pathname.startsWith(item.href + '/'));
                 const hasChildren = item.children && item.children.length > 0;
@@ -216,21 +192,9 @@ export function MobileMenuContent() {
               })}
             </nav>
 
-            {/* CTA / Auth en bas du menu */}
+            {/* CTA en bas du menu */}
             <div className="p-6 border-t border-foreground/5 bg-foreground/[0.01] space-y-3">
-              {!isPending && session && (
-                <Link
-                  href="/dashboard/profil"
-                  onClick={closeMenu}
-                  className="flex items-center justify-between w-full bg-background border border-foreground/10 px-6 py-5 text-sm font-bold uppercase tracking-widest transition-all hover:bg-foreground/5 hover:border-accent group"
-                >
-                  <div className="flex items-center gap-3">
-                    <User className="w-5 h-5 text-accent" />
-                    <span className="text-foreground">{session.user?.name || 'Mon Compte'}</span>
-                  </div>
-                  <ArrowRight className="w-4 h-4 text-muted-foreground transition-transform group-hover:translate-x-1" />
-                </Link>
-              )}
+
               <Link
                 href="/contact"
                 onClick={closeMenu}

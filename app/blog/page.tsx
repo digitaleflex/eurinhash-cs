@@ -1,73 +1,70 @@
-import prisma from '@/lib/prisma';
-import Link from 'next/link';
-import { Card, CardContent } from '@/components/ui/card';
+import Link from "next/link";
+import { posts } from "@/lib/content/posts";
 
 export const metadata = {
-  title: 'Insights | Architecture, IA & Cybersécurité',
-  description: 'Analyses d’Eurin Hash sur l’architecture logicielle, l’IA appliquée, la cybersécurité, le cloud et les décisions techniques.',
+  title: "Insights | Architecture, IA & Cybersécurité",
+  description:
+    "Analyses d’Eurin Hash sur l’architecture logicielle, l’IA appliquée, la cybersécurité, le cloud et les décisions techniques.",
 };
 
-export default async function BlogPage() {
-  const posts = await prisma.post.findMany({
-    where: { published: true, publishedAt: { not: null } },
-    orderBy: { createdAt: 'desc' },
-    include: { category: true },
-  });
+export default function BlogPage() {
+  const sortedPosts = [...posts].sort(
+    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+  );
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-20">
+    <main className="mx-auto max-w-7xl px-4 py-20">
       <header className="mb-20 text-center">
-        <h1 className="text-6xl font-black uppercase tracking-tighter mb-4">
+        <h1 className="mb-4 text-6xl font-black uppercase tracking-tighter">
           Insights <span className="text-accent">Techniques</span>
         </h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+        <p className="mx-auto max-w-2xl text-xl text-muted-foreground">
           Analyses, tutoriels et réflexions sur les infrastructures de demain.
         </p>
       </header>
 
-      <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
-        {posts.map((post: any) => (
-          <Link href={`/blog/${post.slug}`} key={post.id} className="group">
-            <Card className="border-none bg-transparent overflow-hidden h-full">
-              <div className="aspect-video relative overflow-hidden rounded-2xl mb-6 bg-muted">
-                {post.thumbnail ? (
-                  <img 
-                    src={post.thumbnail} 
-                    alt={post.title} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                    Eurin Hash Insights
-                  </div>
-                )}
-                <div className="absolute top-4 left-4">
-                  <span className="bg-background/80 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border border-border/50">
-                    {post.category?.name || 'Tech'}
-                  </span>
+      {sortedPosts.length > 0 ? (
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+          {sortedPosts.map((post) => (
+            <Link href={`/blog/${post.slug}`} key={post.slug} className="group">
+              <article className="h-full overflow-hidden border-b border-border/60 pb-6">
+                <div className="mb-6 flex aspect-video items-center justify-center overflow-hidden rounded-2xl bg-muted">
+                  {post.thumbnail ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={post.thumbnail}
+                      alt={post.title}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  ) : (
+                    <span className="text-sm text-muted-foreground">Eurin Hash Insights</span>
+                  )}
                 </div>
-              </div>
-              <CardContent className="p-0">
-                <h2 className="text-2xl font-bold mb-3 group-hover:text-accent transition-colors leading-tight">
+                <span className="text-xs font-bold uppercase tracking-widest text-accent">
+                  {post.category}
+                </span>
+                <h2 className="mb-3 mt-2 text-2xl font-bold leading-tight transition-colors group-hover:text-accent">
                   {post.title}
                 </h2>
-                <p className="text-muted-foreground line-clamp-3 text-sm leading-relaxed mb-4">
+                <p className="mb-4 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
                   {post.excerpt}
                 </p>
                 <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-                  <span>{new Date(post.createdAt).toLocaleDateString('fr-FR')}</span>
-                  <span>•</span>
-                  <span>{post.readingTime} min lecture</span>
+                  <time dateTime={post.publishedAt}>
+                    {new Date(post.publishedAt).toLocaleDateString("fr-FR")}
+                  </time>
+                  <span aria-hidden="true">•</span>
+                  <span>{post.readingTime} min de lecture</span>
                 </div>
-              </CardContent>
-            </Card>
-          </Link>
-        ))}
-      </div>
-
-      {posts.length === 0 && (
-        <div className="text-center py-40 border-2 border-dashed border-border rounded-3xl">
-          <p className="text-muted-foreground italic">En cours de rédaction...</p>
+              </article>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <div className="rounded-3xl border-2 border-dashed border-border px-6 py-24 text-center">
+          <p className="text-muted-foreground">
+            Les prochains articles sont en préparation. Revenez bientôt.
+          </p>
         </div>
       )}
     </main>

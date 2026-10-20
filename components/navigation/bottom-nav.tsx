@@ -3,14 +3,12 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
-import { Home, Briefcase, Zap, Newspaper, MessageSquare, User, LogIn } from 'lucide-react';
+import { Home, Briefcase, Zap, Newspaper, MessageSquare } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useSession } from '@/lib/auth-clients';
 import { useState } from 'react';
 
 export function BottomNav() {
   const pathname = usePathname();
-  const { data: session, isPending } = useSession();
   const [isVisible, setIsVisible] = useState(true);
   const { scrollY } = useScroll();
 
@@ -28,10 +26,7 @@ export function BottomNav() {
     { href: '/realisations', label: 'Projets', icon: Briefcase },
     { href: '/services', label: 'Services', icon: Zap },
     { href: '/blog', label: 'Blog', icon: Newspaper },
-    // Si connecté, on montre Profil, sinon Connexion
-    (!isPending && session) 
-      ? { href: '/dashboard/profil', label: 'Profil', icon: User }
-      : { href: '/sign-in', label: 'Connexion', icon: LogIn },
+    { href: '/contact', label: 'Contact', icon: MessageSquare },
   ];
 
   return (
@@ -61,14 +56,7 @@ export function BottomNav() {
                       ? "bg-accent text-white scale-110 shadow-lg shadow-accent/25" 
                       : "text-muted-foreground group-hover:text-foreground group-hover:bg-foreground/5"
                   )}>
-                    {/* On affiche l'image de l'utilisateur si c'est l'onglet Profil et qu'il y en a une */}
-                    {item.label === 'Profil' && session?.user?.image ? (
-                      <div className="w-5 h-5 rounded-full overflow-hidden ring-1 ring-white/20">
-                        <img src={session.user.image} alt="Profil" className="w-full h-full object-cover" />
-                      </div>
-                    ) : (
-                      <Icon className="w-5 h-5" />
-                    )}
+                    <Icon className="w-5 h-5" />
                   </div>
                   <span className={cn(
                     "text-[10px] font-bold uppercase tracking-[0.1em] transition-all duration-300",
