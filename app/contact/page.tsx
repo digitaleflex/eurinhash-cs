@@ -1,8 +1,6 @@
 'use client';
 
-import React from 'react';
-import { Mail, Linkedin, MessageSquare, ArrowRight, MapPin, Shield, HelpCircle, Loader2 } from 'lucide-react';
-import { ContactForm } from '@/components/contact-form';
+import { Mail, Linkedin, MessageSquare, ArrowRight, MapPin, Shield, HelpCircle } from 'lucide-react';
 
 const trustSignals = [
   { title: 'Contexte d’abord', desc: 'Le premier échange sert à comprendre le problème, les contraintes et l’objectif.' },
@@ -55,11 +53,21 @@ export default function ContactPage() {
                 <div className="h-px flex-1 bg-foreground/5" />
               </div>
               <div className="border border-foreground/10 p-8 sm:p-10">
-                <React.Suspense fallback={<div className="flex h-64 items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-accent" /></div>}>
-                  <ContactForm />
-                </React.Suspense>
-                <p className="mt-6 text-xs leading-relaxed text-muted-foreground">
-                  Aucun message n’est enregistré sur ce site. Vous devez confirmer l’envoi dans WhatsApp.
+                <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
+                  Pas de formulaire à remplir : contactez-moi directement sur WhatsApp. Un message de départ sera prérempli ; vous pourrez le modifier avant de l’envoyer.
+                </p>
+                <a
+                  href="https://wa.me/2290162265246?text=Bonjour%20Eurin%2C%20je%20vous%20contacte%20depuis%20votre%20portfolio.%20J%E2%80%99aimerais%20%C3%A9changer%20avec%20vous%20au%20sujet%20d%E2%80%99un%20projet."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 inline-flex items-center justify-center gap-3 rounded-full bg-accent px-7 py-4 text-base font-semibold text-white transition hover:opacity-90"
+                >
+                  <MessageSquare className="h-5 w-5" aria-hidden="true" />
+                  Me contacter sur WhatsApp
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+                <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
+                  Le site ne stocke aucun message de contact. L’envoi est confirmé par vous directement dans WhatsApp.
                 </p>
               </div>
             </section>
