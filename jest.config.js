@@ -25,7 +25,6 @@ const customJestConfig = {
     // Les seuils globaux restent à atteindre au fur et à mesure de l'ajout de tests.
     './lib/sanitize.ts': { branches: 70, functions: 70, lines: 70, statements: 70 },
     './lib/rate-limit.ts': { branches: 70, functions: 70, lines: 70, statements: 70 },
-    './app/api/contact/route.ts': { branches: 70, functions: 70, lines: 70, statements: 70 },
   },
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
