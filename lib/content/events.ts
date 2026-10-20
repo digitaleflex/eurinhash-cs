@@ -1,16 +1,12 @@
-/**
- * Événements publics versionnés dans Git.
- *
- * Exporter d'abord les événements utiles de la base existante vers ce format.
- * Les inscriptions individuelles ne font pas partie du portfolio public V1.
- */
+import eventData from "./events.json";
+
 export type StaticEvent = {
   slug: string;
   title: string;
   description: string;
   date: string;
-  type: "Live" | "Webinaire" | "Conférence" | "Autre";
-  platform: "YouTube" | "TikTok" | "Google Meet" | "Substack" | "Autre";
+  type: string;
+  platform: string;
   eventUrl?: string;
   registrationLink?: string;
   thumbnail?: string;
@@ -18,7 +14,7 @@ export type StaticEvent = {
 };
 
 /**
- * Pas d'événements inventés : renseigner ce tableau après export et vérification
- * des événements historiques/futurs existants.
+ * Generated from the existing database by `pnpm content:export`.
+ * Individual registrations are intentionally not migrated into the public site.
  */
-export const events: StaticEvent[] = [];
+export const events = eventData as StaticEvent[];
