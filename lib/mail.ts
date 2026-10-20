@@ -88,7 +88,7 @@ export const sendContactNotification = async (data: {
     );
 
     return await sendMail({
-      to: process.env.RESEND_FROM_EMAIL || 'contact@eurinhash.com',
+      to: process.env.CONTACT_EMAIL || process.env.RESEND_FROM_EMAIL || '',
       subject: `[CONTACT] ${data.name} : ${data.subject}`,
       html,
     });
