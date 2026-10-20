@@ -31,7 +31,7 @@
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
     "db:backup": "tsx scripts/backup.ts",
-    "content:export": "tsx scripts/export-public-content.ts"
+    "content:export": "pnpm dlx tsx scripts/export-public-content.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
