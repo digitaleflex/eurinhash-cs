@@ -1,6 +1,6 @@
 'use client';
 
-import { Mail, Linkedin, MessageSquare, ArrowRight, MapPin, Shield, HelpCircle } from 'lucide-react';
+import { MessageSquare, ArrowRight, MapPin, Shield, HelpCircle } from 'lucide-react';
 
 const trustSignals = [
   { title: 'Contexte d’abord', desc: 'Le premier échange sert à comprendre le problème, les contraintes et l’objectif.' },
@@ -9,9 +9,7 @@ const trustSignals = [
 ];
 
 const channels = [
-  { icon: Mail, label: 'Email professionnel', value: 'contact@eurinhash.com', href: 'mailto:contact@eurinhash.com' },
-  { icon: MessageSquare, label: 'WhatsApp', value: '+229 01 62 26 52 46', href: 'https://wa.me/2290162265246' },
-  { icon: Linkedin, label: 'LinkedIn', value: 'Eurin Almeida', href: 'https://www.linkedin.com/in/eurindalemeida/' },
+  { icon: MessageSquare, label: 'WhatsApp', value: '+229 01 62 26 52 46', href: 'https://wa.me/2290162265246?text=Bonjour%20Eurin%2C%20je%20vous%20contacte%20depuis%20votre%20portfolio.' },
 ];
 
 const faqs = [
