@@ -3,56 +3,56 @@ import Link from 'next/link';
 
 const services = [
   {
-    title: 'Clarifier un système existant',
+    title: 'Comprendre ce qui bloque',
     href: '/services/audit',
     icon: Search,
-    problem: 'Vous avez un système difficile à maintenir, des risques techniques mal compris ou des décisions qui se sont accumulées sans architecture claire.',
-    intervention: 'Audit ciblé de l’architecture, des flux, de l’infrastructure et des points de risque.',
-    deliverable: 'Constats documentés, priorités, risques, recommandations et plan d’action.',
-    benefit: 'Savoir quoi corriger maintenant, quoi préserver et quoi ne pas complexifier.',
+    problem: 'Votre application est difficile à modifier, vous rencontrez des problèmes récurrents ou vous ne savez pas quelles améliorations traiter en premier.',
+    intervention: 'J’examine le fonctionnement du système, son organisation, son hébergement et les principaux points de risque.',
+    deliverable: 'Un rapport clair qui présente les constats, les priorités et les prochaines actions recommandées.',
+    benefit: 'Vous savez quoi corriger, quoi garder et par où commencer.',
   },
   {
-    title: 'Concevoir une architecture',
+    title: 'Préparer ou améliorer un projet',
     href: '/services/architecture',
     icon: Layers,
-    problem: 'Vous devez lancer, faire évoluer ou restructurer un produit numérique sans créer une dette technique disproportionnée.',
-    intervention: 'Conception de l’architecture logicielle et infrastructurelle à partir des contraintes produit et opérationnelles.',
-    deliverable: 'Architecture cible, décisions techniques, limites, choix d’outils et trajectoire d’implémentation.',
-    benefit: 'Une base technique compréhensible et adaptée au stade réel du produit.',
+    problem: 'Vous voulez créer un produit numérique ou faire évoluer un logiciel existant sans rendre sa maintenance trop difficile.',
+    intervention: 'Nous clarifions les besoins et les contraintes avant de choisir comment organiser le logiciel, les données et l’infrastructure.',
+    deliverable: 'Un plan technique, les principaux choix expliqués et des étapes concrètes pour avancer.',
+    benefit: 'Une base adaptée à votre projet, sans complexité inutile.',
   },
   {
-    title: 'Intégrer l’IA avec discernement',
+    title: 'Trouver un usage utile de l’IA',
     href: '/services',
     icon: BrainCircuit,
-    problem: 'Vous identifiez un potentiel d’automatisation ou d’IA mais ne savez pas où elle crée réellement de la valeur.',
-    intervention: 'Cadrage du cas d’usage, choix du modèle ou de l’agent, intégration et validation.',
-    deliverable: 'Prototype ou intégration ciblée, critères de validation et limites connues.',
-    benefit: 'Une utilisation de l’IA reliée à un problème concret plutôt qu’à un effet de mode.',
+    problem: 'Vous souhaitez utiliser l’intelligence artificielle, mais vous ne savez pas quelle tâche elle pourrait réellement améliorer.',
+    intervention: 'Nous choisissons un cas d’usage précis, construisons une première version si c’est pertinent, puis vérifions son utilité et ses limites.',
+    deliverable: 'Une recommandation ou un prototype avec des critères pour juger le résultat.',
+    benefit: 'Décider sur la base d’un besoin réel, pas d’un effet de mode.',
   },
   {
-    title: 'Sécuriser une infrastructure',
+    title: 'Mieux protéger un système',
     href: '/services/audit',
     icon: ShieldCheck,
-    problem: 'Vous devez réduire l’exposition d’un système et comprendre ses risques avant qu’ils ne deviennent des incidents.',
-    intervention: 'Analyse de surface, configuration, accès, déploiement et mesures de protection pertinentes au contexte.',
-    deliverable: 'Constats, priorisation des risques et recommandations de remédiation.',
-    benefit: 'Une vision plus claire des risques et des actions réellement prioritaires.',
+    problem: 'Vous voulez comprendre les faiblesses possibles de votre application ou de votre infrastructure et réduire les risques.',
+    intervention: 'J’examine, dans un périmètre autorisé, les accès, les réglages importants et les points d’exposition pertinents.',
+    deliverable: 'Des constats expliqués, classés par priorité, avec des mesures de correction proposées.',
+    benefit: 'Vous comprenez les principaux risques et les actions à mener en premier.',
   },
 ];
 
 export default function ServicesPage() {
   return (
-    <main className="min-h-screen bg-background pt-32 pb-40">
+    <main className="min-h-screen bg-background pb-40 pt-32">
       <div className="mx-auto max-w-6xl px-4 sm:px-8">
-        <header className="mb-20 max-w-3xl">
-          <span className="mb-6 block font-mono text-xs tracking-[0.16em] text-accent uppercase">Services</span>
-          <h1 className="text-5xl font-black leading-[0.94] tracking-tight sm:text-7xl">
-            Résoudre le bon problème
+        <header className="mb-16 max-w-3xl">
+          <span className="mb-6 block text-sm font-semibold text-accent">Services</span>
+          <h1 className="text-5xl font-black leading-[0.98] tracking-tight sm:text-7xl">
+            Des problèmes concrets.
             <br />
-            <span className="text-foreground/25">avant de construire.</span>
+            <span className="text-foreground/30">Des solutions adaptées.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Chaque intervention part du contexte, des contraintes et du résultat attendu. La technologie vient ensuite, comme moyen d’exécution.
+            Je vous aide à comprendre ce qui ne fonctionne pas, à faire des choix éclairés et à avancer avec un plan clair. Vous n’avez pas besoin de connaître les termes techniques pour expliquer votre besoin.
           </p>
         </header>
 
@@ -61,24 +61,24 @@ export default function ServicesPage() {
             <Link key={service.title} href={service.href} className="group border-b border-foreground/10 p-8 last:border-b-0 md:nth-[2n+1]:border-r sm:p-10">
               <div className="flex items-start justify-between gap-6">
                 <service.icon className="h-8 w-8 text-accent" aria-hidden="true" />
-                <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-accent" />
+                <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-accent" aria-hidden="true" />
               </div>
-              <h2 className="mt-10 text-2xl font-bold tracking-tight group-hover:text-accent">{service.title}</h2>
+              <h2 className="mt-8 text-2xl font-bold tracking-tight group-hover:text-accent">{service.title}</h2>
               <div className="mt-8 space-y-6">
                 <div>
-                  <span className="font-mono text-[9px] tracking-widest text-muted-foreground uppercase">Pour quel problème</span>
+                  <h3 className="text-sm font-semibold">Le problème</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{service.problem}</p>
                 </div>
                 <div>
-                  <span className="font-mono text-[9px] tracking-widest text-muted-foreground uppercase">Intervention</span>
+                  <h3 className="text-sm font-semibold">Comment je peux aider</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{service.intervention}</p>
                 </div>
                 <div>
-                  <span className="font-mono text-[9px] tracking-widest text-muted-foreground uppercase">Livrable</span>
+                  <h3 className="text-sm font-semibold">Ce que vous recevez</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{service.deliverable}</p>
                 </div>
                 <div className="border-t border-foreground/5 pt-5">
-                  <span className="font-mono text-[9px] tracking-widest text-accent uppercase">Valeur</span>
+                  <h3 className="text-sm font-semibold text-accent">Le bénéfice</h3>
                   <p className="mt-2 text-sm font-semibold leading-relaxed">{service.benefit}</p>
                 </div>
               </div>
@@ -87,13 +87,12 @@ export default function ServicesPage() {
         </div>
 
         <div className="mt-16 border border-foreground/10 p-8 sm:p-10">
-          <h2 className="text-2xl font-bold tracking-tight">Un besoin qui ne correspond pas exactement à ces formats ?</h2>
+          <h2 className="text-2xl font-bold tracking-tight">Vous ne savez pas quelle offre choisir ?</h2>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            Décrivez le contexte et l’objectif. Le premier échange sert à déterminer si une intervention est pertinente et sous quelle forme.
+            Décrivez simplement votre situation, ce que vous souhaitez obtenir et ce qui vous pose problème. Nous verrons ensemble si je peux vous aider et quelle serait la prochaine étape.
           </p>
           <Link href="/contact" className="mt-7 inline-flex items-center gap-2 bg-foreground px-6 py-3 text-sm font-bold text-background hover:bg-accent">
-            Discuter d’un besoin
-            <ArrowRight className="h-4 w-4" />
+            Expliquer mon besoin <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
       </div>
