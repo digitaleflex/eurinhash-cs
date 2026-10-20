@@ -59,3 +59,14 @@ Le dépôt n'est pas encore une base de portfolio sans authentification. La docu
 - Fichiers modifiés : `components/navigation-with-dropdown.tsx`, `components/navigation/bottom-nav.tsx`, `components/mobile-menu/MobileMenuContent.tsx`.
 
 Cette tranche retire uniquement les points d'entrée de l'authentification dans la navigation. **Elle ne supprime pas encore Better Auth ni les routes privées** : `/sign-in`, `/dashboard`, `/admin` et les API associées restent dans le dépôt et doivent rester protégées jusqu'à leur retrait complet. Aucun déploiement n'a été effectué. Les tests automatisés restent à exécuter.
+
+### Deuxième tranche appliquée : blog et événements sans requêtes Prisma
+
+- `app/blog/page.tsx` lit désormais un catalogue local versionné dans `lib/content/posts.json`.
+- `app/blog/[slug]/page.tsx` lit le même catalogue, génère les paramètres statiques et conserve la sanitisation du HTML éditorial.
+- `app/evenements/page.tsx` lit un catalogue local dans `lib/content/events.json` ; les inscriptions individuelles et la session utilisateur ne sont plus requises pour afficher les événements.
+- `scripts/export-public-content.ts` et la commande `pnpm content:export` ont été ajoutés pour exporter les articles publiés et les événements non annulés depuis la base existante.
+
+**Attention avant déploiement :** les fichiers JSON sont volontairement vides à ce stade. Les contenus réels n'ont pas été exportés car aucun accès à la base de production n'a été utilisé dans cette session. Lancer l'export avec les variables d'environnement appropriées, vérifier les fichiers JSON générés, les committer, puis seulement valider la bascule. Les données originales restent dans la base ; aucun enregistrement n'a été supprimé.
+
+La commande d'export requiert une connexion à la base existante. Ne pas lancer la suppression de Prisma, Neon ou des tables tant que le nombre d'articles et d'événements exportés n'a pas été vérifié.
