@@ -58,11 +58,6 @@ const navigationItems: NavItem[] = [
         description: 'Veille & Analyses',
     },
     {
-        label: 'Ressources',
-        href: '/ressources',
-        description: 'Guides & eBooks',
-    },
-    {
         label: 'Contact',
         href: '/contact',
         isCTA: true,
