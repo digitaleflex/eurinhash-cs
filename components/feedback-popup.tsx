@@ -98,7 +98,7 @@ export function FeedbackPopup({
                   transition={{ delay: 0.3 }}
                   className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2"
                 >
-                  Message envoyé !
+                  WhatsApp est prêt
                 </motion.h3>
 
                 {/* Description */}
@@ -108,8 +108,7 @@ export function FeedbackPopup({
                   transition={{ delay: 0.4 }}
                   className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4 sm:mb-6 leading-relaxed"
                 >
-                  Votre message a été transmis avec succès. Je vous répondrai
-                  dans les plus brefs délais.
+                  WhatsApp s’est ouvert avec votre message prérempli. Relisez-le, puis appuyez sur Envoyer dans WhatsApp pour me le transmettre.
                 </motion.p>
 
                 {/* Features */}
@@ -120,16 +119,16 @@ export function FeedbackPopup({
                   className="space-y-2 sm:space-y-3"
                 >
                   <div className="flex items-center justify-center space-x-2 sm:space-x-3 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-                    <Mail className="w-3 h-3 sm:w-4 sm:h-4" />
-                    <span>Confirmation par email</span>
+                    <MessageSquare className="w-3 h-3 sm:w-4 sm:h-4" />
+                    <span>Message prérempli dans WhatsApp</span>
+                  </div>
+                  <div className="flex items-center justify-center space-x-2 sm:space-x-3 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+                    <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4" />
+                    <span>Envoi à confirmer dans WhatsApp</span>
                   </div>
                   <div className="flex items-center justify-center space-x-2 sm:space-x-3 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                     <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
-                    <span>Réponse sous 24h</span>
-                  </div>
-                  <div className="flex items-center justify-center space-x-2 sm:space-x-3 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-                    <MessageSquare className="w-3 h-3 sm:w-4 sm:h-4" />
-                    <span>Suivi personnalisé</span>
+                    <span>Échange direct</span>
                   </div>
                 </motion.div>
 
