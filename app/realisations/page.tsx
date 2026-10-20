@@ -13,6 +13,8 @@ const cases = [
     constraints: 'Infrastructure existante, ressources limitées et nécessité de préserver les services en place.',
     decisions: 'Conteneurisation, reverse proxy, automatisation des déploiements et documentation des flux.',
     result: 'État documenté dans les livrables du projet ; les métriques de disponibilité ou de coût ne sont pas affichées lorsqu’elles n’ont pas été mesurées.',
+    repoUrl: 'https://github.com/digitaleflex/WPOpsX',
+    liveUrl: null,
     href: '/contact?subject=Architecture',
   },
   {
@@ -25,6 +27,8 @@ const cases = [
     constraints: 'Contexte réel, périmètre d’audit défini et nécessité de distinguer les constats vérifiés des hypothèses.',
     decisions: 'Analyse ciblée, validation des constats, correction des faiblesses pertinentes et vérification post-remédiation.',
     result: 'Les résultats sont présentés selon les éléments effectivement vérifiés, sans promesse de risque nul.',
+    repoUrl: 'https://github.com/digitaleflex/joinhashcode',
+    liveUrl: null,
     href: '/contact?subject=Cybersécurité',
   },
   {
@@ -37,6 +41,8 @@ const cases = [
     constraints: 'Périmètre évolutif, priorités produit et nécessité de garder une base maintenable.',
     decisions: 'Découpage du domaine, choix de la persistance, frontières serveur/client et validation des flux critiques.',
     result: 'Architecture et décisions documentées ; les résultats quantitatifs sont réservés aux données réellement disponibles.',
+    repoUrl: 'https://github.com/digitaleflex/hashcode_reboot',
+    liveUrl: 'https://reboot.joinhashcode.com',
     href: '/contact?subject=Produit%20numérique',
   },
   {
@@ -49,6 +55,8 @@ const cases = [
     constraints: 'Rendre les informations faciles à trouver, limiter les fonctionnalités à ce qui est utile et ne pas annoncer de résultats qui n’ont pas été mesurés.',
     decisions: 'Pages publiques avec Next.js et TypeScript, contenu préparé pour être publié depuis des fichiers versionnés, formulaire de contact et métadonnées pour les moteurs de recherche.',
     result: 'Le nettoyage du site est en cours. Le build, les tests et la récupération des anciens articles doivent encore être vérifiés avant la publication.',
+    repoUrl: 'https://github.com/digitaleflex/eurinhash-cs',
+    liveUrl: 'https://eurinhash.com',
     href: 'https://github.com/digitaleflex/eurinhash-cs',
     external: true,
   },
@@ -95,10 +103,24 @@ export default function RealisationsPage() {
                 <div><span className="font-mono text-[9px] tracking-widest text-accent uppercase">Résultat / état</span><p className="mt-2 text-sm font-semibold leading-relaxed">{item.result}</p></div>
               </div>
 
-              <Link href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noopener noreferrer' : undefined} className="inline-flex items-center gap-2 text-xs font-bold text-accent">
-                {item.external ? 'Consulter le dépôt du projet' : 'Discuter d’un besoin similaire'}
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                {item.repoUrl ? (
+                  <Link href={item.repoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-foreground/15 px-4 py-3 text-xs font-bold transition-colors hover:border-accent hover:text-accent">
+                    Code source
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                ) : null}
+                {item.liveUrl ? (
+                  <Link href={item.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-accent px-4 py-3 text-xs font-bold text-background transition-opacity hover:opacity-85">
+                    Voir le site
+                    <Globe className="h-3.5 w-3.5" />
+                  </Link>
+                ) : null}
+                <Link href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noopener noreferrer' : undefined} className="inline-flex items-center gap-2 px-2 py-3 text-xs font-bold text-muted-foreground hover:text-accent">
+                  {item.external ? 'Dépôt du portfolio' : 'Discuter d’un besoin similaire'}
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
             </article>
           ))}
         </div>
