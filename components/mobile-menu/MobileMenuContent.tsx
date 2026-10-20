@@ -22,21 +22,21 @@ type NavItem = {
 };
 
 const navigationItems: NavItem[] = [
-  { href: '/', label: 'Accueil', description: 'Valeur & Introduction' },
-  { href: '/realisations', label: 'Réalisations', description: 'Études de cas & Impact' },
+  { href: '/', label: 'Accueil', description: 'Découvrir mon travail' },
+  { href: '/a-propos', label: 'À propos', description: 'Mon parcours et ma façon de travailler' },
+  { href: '/realisations', label: 'Projets', description: 'Ce que j’ai conçu et réalisé' },
   {
     href: '/services',
     label: 'Services',
-    description: 'Expertise & Accompagnement',
+    description: 'Comment je peux vous aider',
     children: [
-      { href: '/services/audit', label: 'Audit de Résilience', description: 'Analyse 360° en 5 jours' },
-      { href: '/services/architecture', label: 'Architecture de Système', description: 'Conception haute performance' },
-      { href: '/services/cto', label: 'Accompagnement CTO', description: 'Suivi stratégique long terme' },
-      { href: '/services/mentorat', label: 'Programme de Mentorat', description: 'Formation d\'élite et mentorat' },
-    ]
+      { href: '/services/audit', label: 'Faire le point sur un système', description: 'Comprendre les problèmes et les priorités' },
+      { href: '/services/architecture', label: 'Concevoir un projet numérique', description: 'Préparer une base solide pour votre projet' },
+      { href: '/services/cto', label: 'Conseil technique', description: 'Prendre les bonnes décisions techniques' },
+      { href: '/services/mentorat', label: 'Mentorat', description: 'Progresser avec un accompagnement individuel' },
+    ],
   },
-  { href: '/blog', label: 'Blog', description: 'Veille & Analyses' },
-  { href: '/contact', label: 'Contact', description: 'Interaction directe' },
+  { href: '/blog', label: 'Articles', description: 'Mes idées, analyses et retours d’expérience' },
 ];
 
 export function MobileMenuContent() {
@@ -48,7 +48,6 @@ export function MobileMenuContent() {
     setOpenAccordion(openAccordion === href ? null : href);
   };
 
-
   return (
     <AnimatePresence>
       {isOpen && (
@@ -56,135 +55,109 @@ export function MobileMenuContent() {
           initial={{ x: '100%' }}
           animate={{ x: 0 }}
           exit={{ x: '100%' }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed right-0 top-0 h-full w-full sm:w-[400px] z-[70] bg-background border-l border-foreground/10 shadow-2xl"
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed right-0 top-0 z-[70] h-full w-full border-l border-foreground/10 bg-background shadow-2xl sm:w-[400px]"
           role="dialog"
           aria-modal="true"
           aria-label="Menu de navigation"
         >
-          <div className="flex flex-col h-full bg-background overflow-hidden">
-            {/* Header du menu */}
-            <div className="flex items-center justify-between p-6 sm:p-8 border-b border-foreground/5 bg-foreground/[0.02]">
+          <div className="flex h-full flex-col overflow-hidden bg-background">
+            <div className="flex items-center justify-between border-b border-foreground/5 p-6 sm:p-8">
               <div className="flex flex-col">
-                <h2 className="text-xl font-bold tracking-tight text-foreground">Navigation</h2>
-                <span className="font-mono text-[10px] text-accent tracking-[.2em] uppercase font-bold">Eurin Hash CS</span>
+                <h2 className="text-xl font-bold text-foreground">Menu</h2>
+                <span className="mt-1 text-xs text-muted-foreground">EURINHASH · Site personnel</span>
               </div>
               <button
+                type="button"
                 onClick={closeMenu}
-                className="group relative p-3 bg-foreground text-background transition-all duration-300 hover:bg-accent hover:text-white rounded-full"
+                className="rounded-full bg-foreground p-3 text-background transition-colors hover:bg-accent hover:text-white"
                 aria-label="Fermer le menu"
               >
-                <X className="h-6 w-6 transition-transform duration-300 group-hover:rotate-90" />
+                <X className="h-5 w-5" />
               </button>
             </div>
 
-            {/* Navigation */}
-            <nav className="flex-1 p-4 sm:p-6 space-y-3 overflow-y-auto custom-scrollbar" role="navigation" aria-label="Navigation mobile">
+            <nav className="flex-1 space-y-2 overflow-y-auto p-4 sm:p-6" aria-label="Navigation mobile">
               {navigationItems.map((item, index) => {
-                const isActive = pathname && (pathname === item.href || pathname.startsWith(item.href + '/'));
-                const hasChildren = item.children && item.children.length > 0;
+                const isActive = Boolean(pathname && (
+                  pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href + '/'))
+                ));
+                const hasChildren = Boolean(item.children?.length);
                 const isAccordionOpen = openAccordion === item.href;
 
                 return (
                   <motion.div
                     key={item.href}
-                    initial={{ opacity: 0, x: 20 }}
+                    initial={{ opacity: 0, x: 12 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                    transition={{ duration: 0.2, delay: index * 0.03 }}
                   >
                     {hasChildren ? (
-                      /* Accordion Item */
-                      <div className="border border-foreground/5 bg-foreground/[0.01] rounded-lg overflow-hidden">
+                      <div className="overflow-hidden border border-foreground/10">
                         <button
+                          type="button"
                           onClick={() => toggleAccordion(item.href)}
                           className={cn(
-                            'group w-full flex flex-col gap-1 p-5 transition-all duration-300',
-                            isActive
-                              ? 'bg-accent/5'
-                              : 'hover:bg-foreground/[0.03]'
+                            'flex w-full items-center justify-between gap-4 p-4 text-left',
+                            isActive ? 'bg-accent/5' : 'hover:bg-foreground/[0.03]'
                           )}
                           aria-expanded={isAccordionOpen}
                         >
-                          <div className="flex items-center justify-between">
-                            <span className={cn(
-                              "text-xl font-black tracking-tighter transition-colors",
-                              isActive ? "text-accent" : "text-foreground"
-                            )}>
+                          <span className="flex flex-col gap-1">
+                            <span className={cn('text-base font-semibold', isActive ? 'text-accent' : 'text-foreground')}>
                               {item.label}
                             </span>
-                            <ChevronDown
-                              className={cn(
-                                "w-5 h-5 text-muted-foreground transition-transform duration-500",
-                                isAccordionOpen && "rotate-180 text-accent"
-                              )}
-                            />
-                          </div>
-                          <span className="font-mono text-[9px] text-muted-foreground tracking-[.2em] font-bold">
-                            {item.description}
+                            {item.description && <span className="text-sm text-muted-foreground">{item.description}</span>}
                           </span>
+                          <ChevronDown className={cn('h-4 w-4 shrink-0 text-muted-foreground transition-transform', isAccordionOpen && 'rotate-180')} />
                         </button>
-
-                        {/* Accordion Content */}
                         <AnimatePresence>
                           {isAccordionOpen && (
                             <motion.div
                               initial={{ height: 0, opacity: 0 }}
                               animate={{ height: 'auto', opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.4, ease: "circOut" }}
-                              className="overflow-hidden bg-foreground/[0.02]"
+                              transition={{ duration: 0.2 }}
+                              className="overflow-hidden"
                             >
-                              <div className="p-3 space-y-1">
-                                {item.children?.map((child) => {
-                                  const isChildActive = pathname === child.href;
-                                  return (
-                                    <Link
-                                      key={child.href}
-                                      href={child.href}
-                                      onClick={closeMenu}
-                                      className={cn(
-                                        "flex flex-col gap-1 p-4 rounded-md transition-all duration-200 border border-transparent",
-                                        isChildActive
-                                          ? "bg-accent/10 border-accent/20 text-accent"
-                                          : "text-muted-foreground hover:bg-foreground/[0.03] hover:text-foreground"
-                                      )}
-                                    >
-                                      <span className="text-sm font-bold">{child.label}</span>
-                                      {child.description && (
-                                        <span className="text-[10px] text-muted-foreground/70">
-                                          {child.description}
-                                        </span>
-                                      )}
-                                    </Link>
-                                  );
-                                })}
+                              <div className="space-y-1 border-t border-foreground/10 p-2">
+                                {item.children?.map((child) => (
+                                  <Link
+                                    key={child.href}
+                                    href={child.href}
+                                    onClick={closeMenu}
+                                    className={cn(
+                                      'flex flex-col gap-1 p-3 text-sm',
+                                      pathname === child.href
+                                        ? 'bg-accent/10 text-accent'
+                                        : 'text-muted-foreground hover:bg-foreground/[0.03] hover:text-foreground'
+                                    )}
+                                  >
+                                    <span className="font-medium">{child.label}</span>
+                                    {child.description && <span className="text-xs text-muted-foreground">{child.description}</span>}
+                                  </Link>
+                                ))}
                               </div>
                             </motion.div>
                           )}
                         </AnimatePresence>
                       </div>
                     ) : (
-                      /* Simple Link */
                       <Link
                         href={item.href}
                         onClick={closeMenu}
                         className={cn(
-                          'group flex flex-col gap-1 p-5 transition-all duration-300 border rounded-lg',
+                          'flex flex-col gap-1 border p-4 transition-colors',
                           isActive
-                            ? 'bg-accent/5 border-accent/20 border-l-4 border-l-accent pl-7'
-                            : 'bg-foreground/[0.01] border-foreground/5 hover:bg-foreground/[0.03] hover:border-foreground/10'
+                            ? 'border-accent/20 bg-accent/5'
+                            : 'border-foreground/10 hover:bg-foreground/[0.03]'
                         )}
                         aria-current={isActive ? 'page' : undefined}
                       >
-                        <span className={cn(
-                          "text-xl font-black tracking-tighter transition-colors",
-                          isActive ? "text-accent" : "text-foreground group-hover:text-accent"
-                        )}>
+                        <span className={cn('text-base font-semibold', isActive ? 'text-accent' : 'text-foreground')}>
                           {item.label}
                         </span>
-                        <span className="font-mono text-[9px] text-muted-foreground tracking-[.2em] font-bold uppercase">
-                          {item.description}
-                        </span>
+                        {item.description && <span className="text-sm text-muted-foreground">{item.description}</span>}
                       </Link>
                     )}
                   </motion.div>
@@ -192,17 +165,14 @@ export function MobileMenuContent() {
               })}
             </nav>
 
-            {/* CTA en bas du menu */}
-            <div className="p-6 border-t border-foreground/5 bg-foreground/[0.01] space-y-3">
-
+            <div className="space-y-2 border-t border-foreground/10 p-4 sm:p-6">
               <Link
                 href="/contact"
                 onClick={closeMenu}
-                className="flex items-center justify-center gap-3 w-full bg-foreground text-background px-6 py-5 text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:bg-accent hover:text-white"
-                aria-label="Réserver un audit"
+                className="flex w-full items-center justify-center gap-2 bg-accent px-5 py-4 text-sm font-semibold text-white transition-colors hover:bg-accent/90"
               >
-                <span>Réserver un audit</span>
-                <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                Parlons de votre projet
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
           </div>
