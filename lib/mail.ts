@@ -83,12 +83,18 @@ export const sendContactNotification = async (data: {
   message: string;
 }) => {
   try {
+    const recipient = process.env.CONTACT_EMAIL || process.env.RESEND_FROM_EMAIL;
+    if (!recipient) {
+      logger.error('CONTACT_EMAIL or RESEND_FROM_EMAIL is not configured');
+      return { success: false, error: 'Missing contact recipient configuration' };
+    }
+
     const html = await render(
       React.createElement(ContactNotificationEmail, data)
     );
 
     return await sendMail({
-      to: process.env.CONTACT_EMAIL || process.env.RESEND_FROM_EMAIL || '',
+      to: recipient,
       subject: `[CONTACT] ${data.name} : ${data.subject}`,
       html,
     });
