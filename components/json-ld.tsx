@@ -12,12 +12,6 @@ export function JsonLd() {
       'https://github.com/eurinhash',
     ],
     description: 'Expertise en architecture logicielle, cloud et transformation digitale.',
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '+229-01-51-07-05-55',
-      contactType: 'customer service',
-      availableLanguage: ['French', 'English'],
-    },
   };
 
   const websiteSchema: any = {
