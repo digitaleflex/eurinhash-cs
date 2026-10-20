@@ -1,79 +1,59 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { GraduationCap, Code2, ShieldAlert, Cloud, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { GraduationCap, Code2, ShieldAlert, Cloud, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Programme de Mentorat - Eurin Hash',
-  description: 'Formation d\'élite et mentorat pratique en programmation, cybersécurité et cloud computing pour les talents émergents.',
+  title: 'Mentorat technique | Eurin Hash',
+  description: 'Un accompagnement individuel pour progresser en programmation, cybersécurité ou cloud grâce à la pratique et à des retours concrets.',
 };
 
-function MentoratPageContent() {
+export default function MentoratPage() {
+  const topics = [
+    { icon: Code2, title: 'Programmation', desc: 'Mieux organiser son code, comprendre les bases et construire des projets utiles.' },
+    { icon: ShieldAlert, title: 'Cybersécurité', desc: 'Apprendre les bonnes pratiques de sécurité dans des environnements autorisés.' },
+    { icon: Cloud, title: 'Cloud et déploiement', desc: 'Comprendre comment publier, configurer et maintenir une application.' },
+  ];
+
   return (
-    <main className="min-h-screen bg-background pt-32 pb-40">
+    <main className="min-h-screen bg-background pb-40 pt-32">
       <div className="mx-auto max-w-4xl px-4 sm:px-8">
-        <span className="font-mono text-xs text-accent tracking-widest uppercase block mb-6">Service · Formation d'Élite</span>
-        <h1 className="text-5xl sm:text-7xl font-black tracking-tighter leading-[0.9] mb-12">
-          Programme de<br />
-          <span className="text-foreground/20 font-light italic">Mentorat.</span>
+        <span className="mb-6 block text-sm font-semibold text-accent">Service · Mentorat individuel</span>
+        <h1 className="mb-8 text-5xl font-black leading-[0.98] tracking-tight sm:text-7xl">
+          Progresser avec
+          <br />
+          <span className="text-foreground/30">un accompagnement concret.</span>
         </h1>
-
-        <div className="grid gap-16 mt-20">
-          <p className="text-xl text-muted-foreground leading-relaxed">
-            Nous détectons et formons les hauts potentiels techniques. Un accompagnement rigoureux,
-            basé sur la pratique réelle et les standards de l'industrie (EHAF).
+        <p className="mt-8 text-xl leading-relaxed text-muted-foreground">
+          Le mentorat permet de travailler sur vos objectifs, de débloquer des difficultés et de progresser à votre rythme. Nous partons de votre niveau actuel et de ce que vous souhaitez apprendre.
+        </p>
+        <div className="mt-16 grid gap-6 sm:grid-cols-3">
+          {topics.map((topic) => (
+            <article key={topic.title} className="space-y-4 border border-foreground/10 p-7">
+              <topic.icon className="h-8 w-8 text-accent" aria-hidden="true" />
+              <h2 className="text-lg font-bold">{topic.title}</h2>
+              <p className="text-sm leading-relaxed text-muted-foreground">{topic.desc}</p>
+            </article>
+          ))}
+        </div>
+        <section className="mt-16 space-y-6">
+          <h2 className="text-3xl font-bold tracking-tight">Comment se déroule le mentorat ?</h2>
+          <ol className="space-y-4 text-muted-foreground">
+            <li><strong className="text-foreground">1. Définir un objectif.</strong> Nous identifions ce que vous voulez savoir faire.</li>
+            <li><strong className="text-foreground">2. Pratiquer.</strong> Vous avancez sur des exercices ou un projet adapté à votre niveau.</li>
+            <li><strong className="text-foreground">3. Recevoir des retours.</strong> Nous examinons votre travail et décidons des prochaines étapes.</li>
+          </ol>
+        </section>
+        <div className="relative mt-16 overflow-hidden bg-accent p-8 text-white sm:p-10">
+          <GraduationCap className="mb-5 h-10 w-10" aria-hidden="true" />
+          <h2 className="mb-4 text-2xl font-bold">Vous souhaitez progresser sur un sujet précis ?</h2>
+          <p className="mb-8 max-w-lg text-white/85">
+            Présentez votre niveau actuel, votre objectif et le temps que vous pouvez consacrer à l’apprentissage. Nous verrons si un accompagnement individuel est adapté.
           </p>
-
-          {/* Pillars of Mentorship */}
-          <div className="grid sm:grid-cols-3 gap-8">
-            {[
-              { icon: Code2, title: 'Programmation', desc: 'Architecture logicielle, Clean Code et algorithmique appliquée.' },
-              { icon: ShieldAlert, title: 'Cybersécurité', desc: 'Hacking éthique, protection des données et audit de vulnérabilité.' },
-              { icon: Cloud, title: 'Cloud Computing', desc: 'Déploiement Docker, orchestration et infrastructure-as-code.' }
-            ].map((theme, i) => (
-              <div key={i} className="p-8 border border-foreground/5 bg-foreground/[0.02] space-y-4 hover:border-accent/40 transition-all">
-                <theme.icon className="w-8 h-8 text-accent" />
-                <h3 className="text-lg font-bold tracking-tight">{theme.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{theme.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="space-y-12 mt-8">
-            <h2 className="text-3xl font-black tracking-tighter">Pourquoi ce programme ?</h2>
-            <div className="grid gap-8">
-              {[
-                { title: 'Pratique Réelle', desc: 'Pas de théorie abstraite. Vous travaillez sur des environnements et des projets qui simulent des cas réels.' },
-                { title: 'Sélection au Mérite', desc: 'Une intégration basée sur la motivation et la capacité d\'apprentissage, au sein de notre communauté.' },
-                { title: 'Certification EHAF', desc: 'Une reconnaissance de vos compétences par Eurin Hash, validant votre capacité à intégrer des projets complexes.' }
-              ].map((item, i) => (
-                <div key={i} className="flex gap-6 items-start">
-                  <CheckCircle2 className="w-6 h-6 text-accent shrink-0 mt-1" />
-                  <div>
-                    <h4 className="text-lg font-bold mb-1">{item.title}</h4>
-                    <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-16 p-10 bg-accent text-white relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform">
-              <GraduationCap className="w-32 h-32" />
-            </div>
-            <h2 className="text-2xl font-bold mb-4">Prêt à franchir un palier technique ?</h2>
-            <p className="mb-10 text-white/80 max-w-lg">
-              Le mentorat n'est pas ouvert à tous. Nous cherchons la discipline et la passion.
-              Si vous vous sentez prêt pour l'excellence, postulez.
-            </p>
-            <Link href="/contact?subject=Mentorat" className="inline-flex items-center gap-3 bg-white text-accent px-8 py-4 text-sm font-bold hover:bg-foreground hover:text-white transition-all">
-              Postuler au programme <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
+          <Link href="/contact?subject=Mentorat" className="inline-flex items-center gap-3 bg-white px-8 py-4 text-sm font-bold text-accent transition-colors hover:bg-foreground hover:text-white">
+            Parler du mentorat <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
         </div>
       </div>
     </main>
   );
 }
-
-export default MentoratPageContent;
