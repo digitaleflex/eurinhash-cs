@@ -9,13 +9,13 @@ const trustSignals = [
 ];
 
 const channels = [
-  { icon: MessageSquare, label: 'WhatsApp', value: 'Écrire en privé', href: 'https://wa.me/2290162265246?text=Bonjour%20Eurin%2C%20je%20vous%20contacte%20depuis%20votre%20portfolio.' },
+  { icon: MessageSquare, label: 'Message privé', value: 'Me contacter sur LinkedIn', href: 'https://www.linkedin.com/in/eurindalmeida/' },
 ];
 
 const faqs = [
   { q: 'Que faut-il fournir pour commencer ?', a: 'Un contexte court, le problème rencontré, l’objectif recherché et, si possible, les principales contraintes.' },
   { q: 'Travaillez-vous sur des systèmes existants ?', a: 'Oui. Une intervention peut commencer par l’analyse d’un système existant avant toute recommandation.' },
-  { q: 'Que se passe-t-il après le clic ?', a: 'WhatsApp s’ouvre avec votre message prérempli. Relisez-le, puis appuyez sur Envoyer pour me le transmettre.' },
+  { q: 'Que se passe-t-il après le clic ?', a: 'Vous pouvez m’envoyer un message privé depuis mon profil LinkedIn.' },
 ];
 
 export default function ContactPage() {
@@ -30,7 +30,7 @@ export default function ContactPage() {
             <span className="text-foreground/25">à résoudre.</span>
           </h1>
           <p className="text-xl leading-relaxed text-muted-foreground">
-            Décrivez votre projet ou votre besoin en m’écrivant directement sur WhatsApp, sans passer par un formulaire.
+            Pour préserver la confidentialité de vos coordonnées personnelles, utilisez la messagerie LinkedIn. Aucun numéro de téléphone ni e-mail personnel n’est affiché sur cette page.
           </p>
         </header>
 
@@ -52,10 +52,10 @@ export default function ContactPage() {
               </div>
               <div className="border border-foreground/10 p-8 sm:p-10">
                 <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
-                  Pas de formulaire à remplir : contactez-moi directement sur WhatsApp. Un message de départ sera prérempli ; vous pourrez le modifier avant de l’envoyer.
+                  Pas de formulaire à remplir : ouvrez mon profil LinkedIn et envoyez-moi un message privé.
                 </p>
                 <a
-                  href="https://wa.me/2290162265246?text=Bonjour%20Eurin%2C%20je%20vous%20contacte%20depuis%20votre%20portfolio.%20J%E2%80%99aimerais%20%C3%A9changer%20avec%20vous%20au%20sujet%20d%E2%80%99un%20projet."
+                  href="https://www.linkedin.com/in/eurindalmeida/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-8 inline-flex items-center justify-center gap-3 rounded-full bg-accent px-7 py-4 text-base font-semibold text-white transition hover:opacity-90"
@@ -65,7 +65,7 @@ export default function ContactPage() {
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </a>
                 <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
-                  Le site ne stocke aucun message de contact. L’envoi est confirmé par vous directement dans WhatsApp.
+                  Le site ne collecte ni n’enregistre de message. La prise de contact se fait directement dans la messagerie LinkedIn.
                 </p>
               </div>
             </section>
