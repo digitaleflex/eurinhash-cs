@@ -9,7 +9,7 @@ const trustSignals = [
 ];
 
 const channels = [
-  { icon: MessageSquare, label: 'WhatsApp', value: '+229 01 62 26 52 46', href: 'https://wa.me/2290162265246?text=Bonjour%20Eurin%2C%20je%20vous%20contacte%20depuis%20votre%20portfolio.' },
+  { icon: MessageSquare, label: 'WhatsApp', value: 'Écrire en privé', href: 'https://wa.me/2290162265246?text=Bonjour%20Eurin%2C%20je%20vous%20contacte%20depuis%20votre%20portfolio.' },
 ];
 
 const faqs = [
