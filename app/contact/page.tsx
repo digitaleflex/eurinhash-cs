@@ -7,7 +7,7 @@ import { ContactForm } from '@/components/contact-form';
 const trustSignals = [
   { title: 'Contexte d’abord', desc: 'Le premier échange sert à comprendre le problème, les contraintes et l’objectif.' },
   { title: 'Échange direct', desc: 'Vous échangez directement avec la personne qui analyse le sujet.' },
-  { title: 'Confidentialité', desc: 'Les informations sensibles ne sont utilisées que dans le cadre nécessaire au traitement de votre demande.' },
+  { title: 'Vous gardez le contrôle', desc: 'WhatsApp s’ouvre avec un message prérempli. Vous le relisez et choisissez de l’envoyer.' },
 ];
 
 const channels = [
@@ -19,7 +19,7 @@ const channels = [
 const faqs = [
   { q: 'Que faut-il fournir pour commencer ?', a: 'Un contexte court, le problème rencontré, l’objectif recherché et, si possible, les principales contraintes.' },
   { q: 'Travaillez-vous sur des systèmes existants ?', a: 'Oui. Une intervention peut commencer par l’analyse d’un système existant avant toute recommandation.' },
-  { q: 'Que se passe-t-il après l’envoi ?', a: 'La demande est examinée pour déterminer si le sujet correspond à une intervention pertinente et quelle serait la prochaine étape.' },
+  { q: 'Que se passe-t-il après le clic ?', a: 'WhatsApp s’ouvre avec votre message prérempli. Relisez-le, puis appuyez sur Envoyer pour me le transmettre.' },
 ];
 
 export default function ContactPage() {
@@ -34,7 +34,7 @@ export default function ContactPage() {
             <span className="text-foreground/25">à résoudre.</span>
           </h1>
           <p className="text-xl leading-relaxed text-muted-foreground">
-            Décrivez le contexte, ce qui bloque aujourd’hui et ce que vous cherchez à accomplir. Le premier échange sert à clarifier le sujet avant de définir une solution.
+            Décrivez votre projet ou votre besoin. Le formulaire prépare un message WhatsApp que vous pourrez relire et m’envoyer directement.
           </p>
         </header>
 
@@ -51,7 +51,7 @@ export default function ContactPage() {
           <div className="space-y-20">
             <section>
               <div className="mb-8 flex items-center gap-4">
-                <h2 className="text-2xl font-black tracking-tight">Décrire le projet</h2>
+                <h2 className="text-2xl font-black tracking-tight">Préparer votre message</h2>
                 <div className="h-px flex-1 bg-foreground/5" />
               </div>
               <div className="border border-foreground/10 p-8 sm:p-10">
@@ -59,7 +59,7 @@ export default function ContactPage() {
                   <ContactForm />
                 </React.Suspense>
                 <p className="mt-6 text-xs leading-relaxed text-muted-foreground">
-                  Après l’envoi, votre demande est examinée avant qu’une prochaine étape soit proposée.
+                  Aucun message n’est enregistré sur ce site. Vous devez confirmer l’envoi dans WhatsApp.
                 </p>
               </div>
             </section>
@@ -98,9 +98,9 @@ export default function ContactPage() {
 
             <div className="border border-foreground/10 bg-foreground p-7 text-background">
               <Shield className="mb-5 h-6 w-6 text-accent" aria-hidden="true" />
-              <h2 className="text-lg font-bold">Confidentialité</h2>
+              <h2 className="text-lg font-bold">Envoi maîtrisé</h2>
               <p className="mt-3 text-xs leading-relaxed text-background/60">
-                Si le sujet est sensible, indiquez-le dans votre demande. Les modalités de confidentialité peuvent être clarifiées avant le partage d’informations détaillées.
+                Votre message est ouvert dans WhatsApp. Évitez d’y inclure des mots de passe ou des informations confidentielles inutiles.
               </p>
             </div>
 
