@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPublishedPost, posts } from "@/lib/content/posts";
+import { sanitizeBlogHtml } from "@/lib/sanitize";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -86,21 +87,10 @@ export default async function BlogPostPage({ params }: PageProps) {
           />
         )}
 
-        <div className="content-area space-y-6">
-          {post.sections.map((section, index) => {
-            if (section.type === "heading") {
-              return <h2 key={index}>{section.text}</h2>;
-            }
-            if (section.type === "list") {
-              return (
-                <ul key={index}>
-                  {section.items.map((item) => <li key={item}>{item}</li>)}
-                </ul>
-              );
-            }
-            return <p key={index}>{section.text}</p>;
-          })}
-        </div>
+        <div
+          className="content-area"
+          dangerouslySetInnerHTML={{ __html: sanitizeBlogHtml(post.contentHtml) }}
+        />
       </article>
     </main>
   );
