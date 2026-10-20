@@ -18,6 +18,9 @@ export const ContactSchema = z.object({
     .string()
     .min(contact.validation.message.minLength, 'Le message est trop court')
     .max(contact.validation.message.maxLength, 'Le message est trop long'),
+  website: z
+    .string()
+    .max(1, '').optional(),
 });
 
 export type ContactFormData = z.infer<typeof ContactSchema>;

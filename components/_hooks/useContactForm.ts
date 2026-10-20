@@ -12,6 +12,7 @@ export function useContactForm() {
     email: '',
     subject: '',
     message: '',
+    website: '',
   });
 
   // Pre-fill subject from URL search params
@@ -85,7 +86,7 @@ export function useContactForm() {
 
       // Succès
       setIsSubmitted(true);
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', subject: '', message: '', website: '' });
       setFeedbackType('success');
       setFeedbackMessage('Message transmis avec succès au protocole EHAF.');
       setShowFeedback(true);

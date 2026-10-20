@@ -142,6 +142,19 @@ export function ContactForm() {
         )}
       </div>
 
+      {/* Honeypot spam protection */}
+      <input
+        type="text"
+        name="website"
+        id="website"
+        value={formData.website || ''}
+        onChange={e => handleInputChange('website', e.target.value)}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute -left-[9999px]"
+      />
+
       <button
         type="submit"
         disabled={isSubmitting}
