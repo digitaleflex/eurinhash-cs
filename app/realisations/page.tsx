@@ -1,9 +1,11 @@
 import { ArrowRight, Globe, ShieldCheck, Layers3, UserRound } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const cases = [
   {
     icon: Globe,
+    cover: '/images/projects/cloud-devops.svg',
     type: 'Architecture & Infrastructure',
     title: 'Structurer une infrastructure déployable',
     context: 'Un système devait gagner en clarté et en reproductibilité alors que plusieurs opérations restaient manuelles.',
@@ -15,6 +17,7 @@ const cases = [
   },
   {
     icon: ShieldCheck,
+    cover: '/images/projects/joinhashcode.svg',
     type: 'Cybersécurité',
     title: 'Analyser et corriger une surface d’exposition',
     context: 'Un système existant présentait des points de sécurité nécessitant une analyse et une remédiation.',
@@ -26,6 +29,7 @@ const cases = [
   },
   {
     icon: Layers3,
+    cover: '/images/projects/hashcode-reboot.svg',
     type: 'Produit & Systèmes',
     title: 'Passer d’un besoin métier à une architecture',
     context: 'Un produit numérique devait transformer plusieurs besoins fonctionnels en un système cohérent.',
@@ -37,6 +41,7 @@ const cases = [
   },
   {
     icon: UserRound,
+    cover: '/images/projects/eurinhash-portfolio.svg',
     type: 'Produit personnel · Full Stack',
     title: 'eurinhash.com — Portfolio professionnel',
     context: 'Le site devait présenter le parcours, les projets et les publications d’Eurin, tout en facilitant les prises de contact.',
@@ -74,6 +79,10 @@ export default function RealisationsPage() {
                   <span className="font-mono text-[10px] font-bold tracking-widest uppercase">{item.type}</span>
                 </div>
                 <span className="font-mono text-[9px] tracking-widest text-muted-foreground">CASE-{String(index + 1).padStart(2, '0')}</span>
+              </div>
+
+              <div className="mt-8 overflow-hidden border border-foreground/10 bg-[#05090c]">
+                <Image src={item.cover} alt={`Couverture visuelle : ${item.type}`} width={900} height={360} className="h-auto w-full" priority={index === 0} />
               </div>
 
               <h2 className="mt-8 max-w-3xl text-3xl font-black tracking-tight sm:text-4xl">{item.title}</h2>
