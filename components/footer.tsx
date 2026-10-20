@@ -30,7 +30,7 @@ export function Footer() {
           <div>
             <h2 className="mb-6 text-sm font-semibold text-foreground/60">Me contacter</h2>
             <ul className="space-y-4 text-sm font-medium">
-              <li><a href="mailto:contact@eurinhash.com" className="transition-colors hover:text-accent">contact@eurinhash.com</a></li>
+              <li><a href="https://wa.me/2290162265246?text=Bonjour%20Eurin%2C%20je%20vous%20contacte%20depuis%20votre%20portfolio." target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-accent">WhatsApp — écrire en privé</a></li>
               <li><a href="https://www.linkedin.com/in/eurindalemeida/" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-accent">LinkedIn</a></li>
               <li><a href="https://github.com/digitaleflex" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-accent">GitHub</a></li>
             </ul>
