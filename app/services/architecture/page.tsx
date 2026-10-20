@@ -1,5 +1,12 @@
 import { ArrowRight, Layers, Server } from 'lucide-react';
 import Link from 'next/link';
+import { createPageMetadata } from '@/lib/metadata';
+
+export const metadata = createPageMetadata({
+  title: 'Architecture logicielle',
+  description: 'Concevoir les frontières, la persistance, les flux et l’infrastructure d’un produit à partir de ses contraintes réelles.',
+  path: '/services/architecture',
+});
 
 export default function ArchitectureServicePage() {
   return (

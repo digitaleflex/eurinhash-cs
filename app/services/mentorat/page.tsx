@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { GraduationCap, Code2, ShieldAlert, Cloud, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { createPageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
-  title: 'Programme de Mentorat - Eurin Hash',
-  description: 'Formation d\'élite et mentorat pratique en programmation, cybersécurité et cloud computing pour les talents émergents.',
-};
+export const metadata: Metadata = createPageMetadata({
+  title: 'Mentorat',
+  description: 'Programme de mentorat en programmation, cybersécurité et cloud : pratique réelle et accompagnement technique.',
+  path: '/services/mentorat',
+});
 
 function MentoratPageContent() {
   return (

@@ -1,17 +1,15 @@
 import { LegalPage } from '@/components/legal-page';
 
 import type { Metadata } from 'next';
+import { createPageMetadata } from '@/lib/metadata';
 
 export const revalidate = 86400; // Revalider toutes les 24 heures (ISR)
 
-export const metadata: Metadata = {
-  title: 'Politique de confidentialité - Eurin Hash',
+export const metadata: Metadata = createPageMetadata({
+  title: 'Politique de confidentialité',
   description: 'Politique de confidentialité du site eurinhash.com - Collecte, utilisation et protection de vos données personnelles.',
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+  path: '/legal/politique-confidentialite',
+});
 
 export default function PolitiqueConfidentialitePage() {
   return (

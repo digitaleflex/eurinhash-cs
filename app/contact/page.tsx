@@ -1,8 +1,13 @@
-'use client';
-
 import React from 'react';
 import { Mail, Linkedin, MessageSquare, ArrowRight, MapPin, Shield, HelpCircle, Loader2 } from 'lucide-react';
 import { ContactForm } from '@/components/contact-form';
+import { createPageMetadata } from '@/lib/metadata';
+
+export const metadata = createPageMetadata({
+  title: 'Contact',
+  description: 'Décrire un contexte, un blocage ou un objectif : le premier échange sert à clarifier le sujet avant de définir une solution.',
+  path: '/contact',
+});
 
 const trustSignals = [
   { title: 'Contexte d’abord', desc: 'Le premier échange sert à comprendre le problème, les contraintes et l’objectif.' },
