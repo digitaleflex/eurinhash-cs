@@ -40,10 +40,8 @@ export default function MentionsLegalesPage() {
         <br />
         <strong>Adresse :</strong> Abomey-Calavi, Bénin
         <br />
-        <strong>Email :</strong>{' '}
-        <a href="mailto:contact@eurinhash.com">contact@eurinhash.com</a>
-        <br />
-        <strong>Téléphone :</strong> +229 01 62 26 52 46
+        <strong>Contact :</strong>{' '}
+        <a href="/contact">utiliser la page de contact</a>
       </p>
 
       <h2 id="hebergement">Hébergement</h2>
@@ -91,8 +89,8 @@ export default function MentionsLegalesPage() {
         Les informations collectées via le site <strong>eurinhash.com</strong>
         sont destinées uniquement à un usage interne. Conformément à la
         réglementation, vous disposez d’un droit d’accès, de rectification et
-        de suppression de vos données en adressant une demande à :{' '}
-        <a href="mailto:contact@eurinhash.com">contact@eurinhash.com</a>.
+        de suppression de vos données en passant par la{' '}
+        <a href="/contact">page de contact</a>.
       </p>
 
       <h2 id="droit">Droit applicable</h2>
