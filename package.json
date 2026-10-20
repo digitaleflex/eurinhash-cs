@@ -41,7 +41,7 @@
     "@react-email/render": "^2.0.8",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
-    "autoprefixer": "^10.4.21",
+    "autoprefixer": "^10.6.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.18",
     "geist": "^1.7.0",
