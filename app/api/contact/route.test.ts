@@ -12,11 +12,6 @@ jest.mock('@/lib/prisma', () => ({
   default: { contactMessage: { create: (...args: unknown[]) => createMock(...args) } },
 }));
 
-const mockGetCurrentUser = jest.fn();
-jest.mock('@/lib/authorization', () => ({
-  getCurrentUser: (...args: unknown[]) => mockGetCurrentUser(...args),
-}));
-
 const notificationMock = jest.fn();
 jest.mock('@/lib/mail', () => ({
   sendMail: jest.fn(),

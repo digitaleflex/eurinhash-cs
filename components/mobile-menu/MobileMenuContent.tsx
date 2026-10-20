@@ -35,7 +35,6 @@ const navigationItems: NavItem[] = [
       { href: '/services/mentorat', label: 'Programme de Mentorat', description: 'Formation d\'élite et mentorat' },
     ]
   },
-  { href: '/evenements', label: 'Événements', description: 'Lives & Conférences' },
   { href: '/blog', label: 'Blog', description: 'Veille & Analyses' },
   { href: '/ressources', label: 'Ressources', description: 'Guides & eBooks' },
   { href: '/contact', label: 'Contact', description: 'Interaction directe' },
@@ -194,7 +193,7 @@ export function MobileMenuContent() {
               })}
             </nav>
 
-            {/* CTA / Auth en bas du menu */}
+            {/* CTA en bas du menu */}
             <div className="p-6 border-t border-foreground/5 bg-foreground/[0.01] space-y-3">
 
               <Link

@@ -53,11 +53,6 @@ const navigationItems: NavItem[] = [
         ],
     },
     {
-        label: 'Événements',
-        href: '/evenements',
-        description: 'Lives & Conférences',
-    },
-    {
         label: 'Blog',
         href: '/blog',
         description: 'Veille & Analyses',
