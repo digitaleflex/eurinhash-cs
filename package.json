@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Portfolio professionnel d’Eurin Hash — Software Architect · Digital Entrepreneur",
-  "author": "Eurin Hash <contact@eurinhash.com>",
+  "author": "Eurin Hash",
   "homepage": "https://eurinhash.com",
   "packageManager": "pnpm@12.3.4",
   "scripts": {
