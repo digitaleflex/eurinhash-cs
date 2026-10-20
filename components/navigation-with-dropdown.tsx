@@ -9,8 +9,6 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 interface NavItem {
     label: string;
     href: string;
-    icon?: React.ComponentType<{ className?: string }>;
-    description?: string;
     children?: NavItem[];
     isCTA?: boolean;
 }
@@ -23,39 +21,32 @@ const navigationItems: NavItem[] = [
     {
         label: 'Réalisations',
         href: '/realisations',
-        description: 'Études de cas et impact',
     },
     {
         label: 'Services',
         href: '/services',
-        description: 'Expertise & Accompagnement',
         children: [
             {
                 label: 'Audit de Résilience',
                 href: '/services/audit',
-                description: 'Analyse 360° en 5 jours',
             },
             {
                 label: 'Architecture de Système',
                 href: '/services/architecture',
-                description: 'Conception haute performance',
             },
             {
                 label: 'Accompagnement CTO',
                 href: '/services/cto',
-                description: 'Suivi stratégique long terme',
             },
             {
                 label: 'Programme de Mentorat',
                 href: '/services/mentorat',
-                description: 'Formation d\'élite et mentorat pour les talents en programmation et cloud.',
             },
         ],
     },
     {
         label: 'Blog',
         href: '/blog',
-        description: 'Veille & Analyses',
     },
     {
         label: 'Contact',

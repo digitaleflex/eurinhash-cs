@@ -6,7 +6,7 @@ export function JsonLd() {
     '@type': 'Organization',
     name: 'Eurinhash',
     url: 'https://eurinhash.com',
-    logo: 'https://eurinhash.com/logo.png',
+    logo: 'https://eurinhash.com/eurinhash_web_logo_fondclair.png',
     sameAs: [
       'https://linkedin.com/company/eurinhash',
       'https://github.com/eurinhash',

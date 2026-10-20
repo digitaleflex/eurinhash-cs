@@ -1,6 +1,6 @@
 import postData from "./posts.json";
 
-export type StaticPost = {
+type StaticPost = {
   slug: string;
   title: string;
   excerpt: string;

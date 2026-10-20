@@ -35,15 +35,7 @@ export const SITE_CONFIG = {
 
   // Configuration du cache
   cache: {
-    defaultTtl: parseInt(process.env.CACHE_TTL_DEFAULT || '300000'), // 5 minutes
-    statsTtl: parseInt(process.env.CACHE_TTL_STATS || '600000'), // 10 minutes
-    apiTtl: parseInt(process.env.CACHE_TTL_API || '120000'), // 2 minutes
     cleanupInterval: 60 * 1000, // 1 minute
-  },
-
-  // Constantes de temps
-  time: {
-    oneMinute: 60 * 1000, // 1 minute en millisecondes
   },
 
   // Configuration des formulaires
@@ -53,43 +45,6 @@ export const SITE_CONFIG = {
         name: { minLength: 2, maxLength: 100 },
         email: { maxLength: 254 },
         message: { minLength: 10, maxLength: 2000 },
-      },
-    },
-    projectRequest: {
-      validation: {
-        name: { minLength: 2, maxLength: 100 },
-        email: { maxLength: 254 },
-        phone: { maxLength: 30 },
-        company: { maxLength: 150 },
-        position: { maxLength: 100 },
-        projectName: { minLength: 3, maxLength: 150 },
-        description: { minLength: 20, maxLength: 5000 },
-        objectives: { maxLength: 3000 },
-        requirements: { maxLength: 3000 },
-        constraints: { maxLength: 3000 },
-
-        projectType: {
-          allowedValues: ['web', 'cloud', 'consulting', 'training', 'other'],
-        },
-        budget: {
-          allowedValues: [
-            'under-100k',
-            '100k-300k',
-            '300k-500k',
-            '500k-1m',
-            '1m-plus',
-            'discuss',
-          ],
-        },
-        timeline: {
-          allowedValues: [
-            'asap',
-            '1-month',
-            '3-months',
-            '6-months',
-            'flexible',
-          ],
-        },
       },
     },
   },

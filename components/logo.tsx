@@ -3,13 +3,11 @@ import Image from 'next/image';
 
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
-  showText?: boolean;
   variant?: 'default' | 'minimal' | 'full';
 }
 
 export function Logo({
   size = 'md',
-  showText = true,
   variant = 'default',
 }: LogoProps) {
   const sizeClasses = {

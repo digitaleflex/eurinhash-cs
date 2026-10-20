@@ -4,7 +4,7 @@ import { NextRequest, NextResponse, after } from 'next/server';
 // export const runtime = 'edge';
 
 import prisma from '@/lib/prisma';
-import { sendMail, sendContactNotification, sendContactAcknowledgement } from '@/lib/mail';
+import { sendContactNotification, sendContactAcknowledgement } from '@/lib/mail';
 import { ContactSchema } from '@/lib/validation';
 import { logger } from '@/lib/logger';
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit';

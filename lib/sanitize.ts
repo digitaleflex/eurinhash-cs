@@ -3,7 +3,7 @@ import sanitizeHtml from 'sanitize-html';
 /**
  * Politique de sanitization unique pour le HTML riche stocké (TipTap).
  * Appliquée côté serveur au moment du rendu — jamais uniquement côté client.
- * N'autorise que les balises/attributs produits par components/blog/Editor.tsx.
+ * N'autorise que les balises/attributs attendus dans le contenu éditorial riche.
  */
 export function sanitizeBlogHtml(html: string): string {
   return sanitizeHtml(html, {

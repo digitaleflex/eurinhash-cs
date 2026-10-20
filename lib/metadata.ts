@@ -6,7 +6,7 @@ export const siteConfig = {
   title: 'Eurin Hash — Software Architect · Digital Entrepreneur',
   description: 'Eurin Hash conçoit, construit et sécurise des systèmes numériques fiables à l’intersection de l’architecture logicielle, de l’IA appliquée et de la cybersécurité.',
   url: 'https://eurinhash.com',
-  ogImage: 'https://eurinhash.com/og-image.jpg',
+  ogImage: 'https://eurinhash.com/eurinhash_web_logo_fondclair.png',
   links: {
     email: 'contact@eurinhash.com',
     linkedin: 'https://www.linkedin.com/in/eurindalemeida/',

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { RefreshCw, Home, AlertTriangle } from 'lucide-react';
 
 export default function GlobalError({
-  error,
+  error: _error,
   reset,
 }: {
   error: Error & { digest?: string };
