@@ -156,7 +156,7 @@ export function ContactForm() {
           ? 'Envoi...'
           : isSubmitted
             ? 'Envoyé !'
-            : 'Envoyer le message'}
+            : 'Continuer sur WhatsApp'}
       </button>
 
       {/* Feedback Popup */}
