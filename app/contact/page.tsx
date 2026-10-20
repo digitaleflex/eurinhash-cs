@@ -32,7 +32,7 @@ export default function ContactPage() {
             <span className="text-foreground/25">à résoudre.</span>
           </h1>
           <p className="text-xl leading-relaxed text-muted-foreground">
-            Décrivez votre projet ou votre besoin. Le formulaire prépare un message WhatsApp que vous pourrez relire et m’envoyer directement.
+            Décrivez votre projet ou votre besoin en m’écrivant directement sur WhatsApp, sans passer par un formulaire.
           </p>
         </header>
 
