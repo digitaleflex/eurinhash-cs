@@ -49,3 +49,13 @@ Le dépôt n'est pas encore une base de portfolio sans authentification. La docu
 - Le contenu de la base de production n'a pas été inspecté. Aucune migration destructive ni suppression de données n'est autorisée par cet audit.
 - Le lockfile doit être régénéré par pnpm ; ne pas supprimer simplement des lignes du lockfile.
 - L'audit est basé sur la lecture de fichiers ciblés et la recherche de références, pas sur un build exécuté. Les constats doivent être validés par les checks automatisés à la fin de la migration.
+
+## Avancement de la migration
+
+### Première tranche appliquée
+
+- Les menus desktop et mobile ne proposent plus Connexion, Profil, Dashboard ou Administration.
+- La navigation mobile se termine désormais par un CTA de contact, et non par un lien de compte.
+- Fichiers modifiés : `components/navigation-with-dropdown.tsx`, `components/navigation/bottom-nav.tsx`, `components/mobile-menu/MobileMenuContent.tsx`.
+
+Cette tranche retire uniquement les points d'entrée de l'authentification dans la navigation. **Elle ne supprime pas encore Better Auth ni les routes privées** : `/sign-in`, `/dashboard`, `/admin` et les API associées restent dans le dépôt et doivent rester protégées jusqu'à leur retrait complet. Aucun déploiement n'a été effectué. Les tests automatisés restent à exécuter.
